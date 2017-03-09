@@ -18,6 +18,10 @@ class Article_promo
      * @ORM\JoinColumn(nullable=false)
      */
     private $promo;
+    /**
+     * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Commentaire_article_promo", mappedBy="article_promo")
+     */
+    private $comments;
 
     /**
      * @var int
@@ -60,6 +64,7 @@ class Article_promo
     public function __construct()
     {
         $this->createdAt = time();
+        $this->comments= new ArrayCollection();
     }
 
     /**
@@ -175,11 +180,16 @@ class Article_promo
         $this->promo = $promo;
     }
 
-
-
     function __toString()
     {
         return $this->titre;
     }
 
+    /**
+     * @return ArrayCollection|Commentaire_article_promo[]
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
 }

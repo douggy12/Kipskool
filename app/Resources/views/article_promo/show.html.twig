@@ -27,7 +27,20 @@
             </tr>
         </tbody>
     </table>
+    <ul>
+        <a href="{{ path('commentaire_article_promo_new') }}">Commenter</a>
+    </ul>
+    <table>
+        {% for comment in article_promo.  %}
+            <tr>
+                <td>{{ article.titre }}</td>
+                <td>{{ article.createdAt|date("d/m/Y") }}</td>
+                <td>{{ article.texte }}</td>
+                <td>{{ article.srcFeature }}</td>
+            </tr>
 
+        {% endfor %}
+    </table>
     <ul>
         <li>
             <a href="{{ path('article_promo_index') }}">Back to the list</a>

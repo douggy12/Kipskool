@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Commentaire_article_promo
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Article_promo")
+     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Article_promo", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $article_promo;
@@ -92,4 +92,5 @@ class Commentaire_article_promo
     {
         return $this->article_promo;
     }
+
 }
