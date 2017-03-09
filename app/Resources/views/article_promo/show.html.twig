@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Article_promo</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ article_promo.id }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{{ article_promo.createdAt }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ article_promo.titre }}</td>
+            </tr>
+            <tr>
+                <th>Texte</th>
+                <td>{{ article_promo.texte }}</td>
+            </tr>
+            <tr>
+                <th>Srcfeature</th>
+                <td>{{ article_promo.srcFeature }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('article_promo_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('article_promo_edit', { 'id': article_promo.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

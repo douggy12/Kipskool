@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Commentaire_article_promo</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commentaire_article_promo.id }}</td>
+            </tr>
+            <tr>
+                <th>Texte</th>
+                <td>{{ commentaire_article_promo.texte }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('commentaire_article_promo_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('commentaire_article_promo_edit', { 'id': commentaire_article_promo.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

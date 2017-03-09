@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Article_promos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Createdat</th>
+                <th>Titre</th>
+                <th>Texte</th>
+                <th>Srcfeature</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article_promo in article_promos %}
+            <tr>
+                <td><a href="{{ path('article_promo_show', { 'id': article_promo.id }) }}">{{ article_promo.id }}</a></td>
+                <td>{{ article_promo.createdAt }}</td>
+                <td>{{ article_promo.titre }}</td>
+                <td>{{ article_promo.texte }}</td>
+                <td>{{ article_promo.srcFeature }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('article_promo_show', { 'id': article_promo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('article_promo_edit', { 'id': article_promo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('article_promo_new') }}">Create a new article_promo</a>
+        </li>
+    </ul>
+{% endblock %}
