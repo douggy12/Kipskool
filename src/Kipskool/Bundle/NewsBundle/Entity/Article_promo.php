@@ -59,7 +59,7 @@ class Article_promo
 
     public function __construct()
     {
-        $this->promo = new ArrayCollection();
+        $this->createdAt = time();
     }
 
     /**
@@ -72,19 +72,7 @@ class Article_promo
         return $this->id;
     }
 
-    /**
-     * Set createdAt
-     *
-     * @param integer $createdAt
-     *
-     * @return Article_promo
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = new \DateTime("now");
 
-        return $this;
-    }
 
     /**
      * Get createdAt
@@ -149,6 +137,7 @@ class Article_promo
      *
      * @param string $srcFeature
      *
+     *
      * @return Article_promo
      */
     public function setSrcFeature($srcFeature)
@@ -171,12 +160,22 @@ class Article_promo
     /**
      * Get promo
      *
-     * @return ArrayCollection|Promo[]
+     * @return Promo
      */
     public function getPromo()
     {
         return $this->promo;
     }
+
+    /**
+     * @param \Kipskool\Bundle\NewsBundle\Entity\Promo $promo
+     */
+    public function setPromo($promo)
+    {
+        $this->promo = $promo;
+    }
+
+
 
     function __toString()
     {

@@ -19,7 +19,27 @@
             </tr>
         </tbody>
     </table>
-        {% for article in articles %}
+    <ul>
+        <a href="{{ path('article_promo_new') }}">Ecrire un article</a>
+    </ul>
+    <table>
+    <tr>
+        <th>Titre</th>
+        <th>Crée</th>
+        <th>Texte</th>
+        <th>Source</th>
+    </tr>
+        {% for article in promo.articlesPromo %}
+            <tr>
+                <td>{{ article.titre }}</td>
+                <td>{{ article.createdAt|date("d/m/Y") }}</td>
+                <td>{{ article.texte }}</td>
+                <td>{{ article.srcFeature }}</td>
+            </tr>
+            
+        {% endfor %}
+    </table>
+
     <ul>
         <li>
             <a href="{{ path('promo_index') }}">Back to the list</a>
