@@ -1,0 +1,5 @@
+news:
+    resource: "@NewsBundle/Resources/config/routing.xml"
+    prefix:   /
+
+
