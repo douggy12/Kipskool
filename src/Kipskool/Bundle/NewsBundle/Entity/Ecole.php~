@@ -248,7 +248,4 @@ class Ecole
     {
         return $this->mail;
     }
-    public function __toString() {
-        return $this->nom;
-    }
 }

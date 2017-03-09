@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ecole</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ecole.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ ecole.nom }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ ecole.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ ecole.ville }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ ecole.pays }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ ecole.description }}</td>
+            </tr>
+            <tr>
+                <th>Link</th>
+                <td>{{ ecole.link }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ ecole.mail }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ecole_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

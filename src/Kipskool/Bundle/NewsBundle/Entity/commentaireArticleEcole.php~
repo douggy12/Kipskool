@@ -67,28 +67,5 @@ class commentaireArticleEcole
     {
         return $this->texte;
     }
-
-    /**
-     * Set articleEcole
-     *
-     * @param \Kipskool\Bundle\NewsBundle\Entity\articleEcole $articleEcole
-     *
-     * @return commentaireArticleEcole
-     */
-    public function setArticleEcole(\Kipskool\Bundle\NewsBundle\Entity\articleEcole $articleEcole)
-    {
-        $this->articleEcole = $articleEcole;
-
-        return $this;
-    }
-
-    /**
-     * Get articleEcole
-     *
-     * @return \Kipskool\Bundle\NewsBundle\Entity\articleEcole
-     */
-    public function getArticleEcole()
-    {
-        return $this->articleEcole;
-    }
 }
+

@@ -3,7 +3,6 @@
 namespace Kipskool\Bundle\NewsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * articleEcole
@@ -55,14 +54,6 @@ class articleEcole
      */
     private $srcFeature;
 
-    /**
-     * articleEcole constructor.
-     */
-    public function __construct()
-    {
-        $this->createdAt = time();
-    }
-
 
     /**
      * Get id
@@ -74,6 +65,19 @@ class articleEcole
         return $this->id;
     }
 
+    /**
+     * Set createdAt
+     *
+     * @param integer $createdAt
+     *
+     * @return articleEcole
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
 
     /**
      * Get createdAt
@@ -156,32 +160,5 @@ class articleEcole
     {
         return $this->srcFeature;
     }
+}
 
-    /**
-     * Set ecole
-     *
-     * @param \Kipskool\Bundle\NewsBundle\Entity\Ecole $ecole
-     *
-     * @return articleEcole
-     */
-    public function setEcole(\Kipskool\Bundle\NewsBundle\Entity\Ecole $ecole)
-    {
-        $this->ecole = $ecole;
-
-        return $this;
-    }
-
-    /**
-     * Get ecole
-     *
-     * @return \Kipskool\Bundle\NewsBundle\Entity\Ecole
-     */
-    public function getEcole()
-    {
-        return $this->ecole;
-    }
-
-    function __toString() {
-        return $this->titre;
-
-}}

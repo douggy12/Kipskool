@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Commentairearticleecoles list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Texte</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commentaireArticleEcole in commentaireArticleEcoles %}
+            <tr>
+                <td><a href="{{ path('commentairearticleecole_show', { 'id': commentaireArticleEcole.id }) }}">{{ commentaireArticleEcole.id }}</a></td>
+                <td>{{ commentaireArticleEcole.texte }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('commentairearticleecole_show', { 'id': commentaireArticleEcole.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('commentairearticleecole_edit', { 'id': commentaireArticleEcole.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('commentairearticleecole_new') }}">Create a new commentaireArticleEcole</a>
+        </li>
+    </ul>
+{% endblock %}
