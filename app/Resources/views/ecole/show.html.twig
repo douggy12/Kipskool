@@ -39,6 +39,24 @@
             </tr>
         </tbody>
     </table>
+    <ul>
+        <a href="{{ path('articleecole_new') }}">Ecrire un article</a>
+    </ul>
+    <table>
+        <tr>
+            <th>Titre</th>
+            <th>Extrait</th>
+            <th>Créé</th>
+
+        </tr>
+        {% for article in ecole.articles %}
+            <tr>
+                <td>{{ article.titre }}</td>
+                <td>{{ article.texte }}</td>
+                <td>{{ article.createdAt|date("d/m/Y") }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 
     <ul>
         <li>

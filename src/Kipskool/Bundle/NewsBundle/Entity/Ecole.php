@@ -2,6 +2,7 @@
 
 namespace Kipskool\Bundle\NewsBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Ecole
 {
+    /**
+     * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\articleEcole", mappedBy="ecole")
+     */
+    private $articles;
+
+
     /**
      * @var int
      *
@@ -69,6 +76,23 @@ class Ecole
      * @ORM\Column(name="mail", type="string", length=255)
      */
     private $mail;
+
+    /**
+     * Ecole constructor.
+     */
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+
+    }
+
+    /**
+     * @return ArrayCollection|articleEcole[]
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
 
 
     /**

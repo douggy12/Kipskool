@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class articleEcole
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Ecole")
+     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Ecole", inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
     private $ecole;
