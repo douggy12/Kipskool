@@ -115,7 +115,7 @@ class Promo
     /**
      * @return ArrayCollection|Article_promo[]
      */
-    public function getArticlesPromo()
+    public function getArticles_promo()
     {
         return $this->articles_promo;
     }

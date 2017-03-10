@@ -7,30 +7,33 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ articlePromo.id }}</td>
+                <td>{{ article_promo.id }}</td>
             </tr>
             <tr>
                 <th>Createdat</th>
-                <td>{{ articlePromo.createdAt }}</td>
+                <td>{{ article_promo.createdAt }}</td>
             </tr>
             <tr>
                 <th>Titre</th>
-                <td>{{ articlePromo.titre }}</td>
+                <td>{{ article_promo.titre }}</td>
             </tr>
             <tr>
                 <th>Texte</th>
-                <td>{{ articlePromo.texte }}</td>
+                <td>{{ article_promo.texte }}</td>
             </tr>
             <tr>
                 <th>Srcfeature</th>
-                <td>{{ articlePromo.srcFeature }}</td>
+                <td>{{ article_promo.srcFeature }}</td>
             </tr>
         </tbody>
     </table>
     <table>
-        {% for comment in articlePromo.comments  %}
+        {% for comment in article_promo.comments  %}
             <tr>
-                <td>{{ comment.texte }}</td>
+                <td>{{ comment.texte }}~~
+                    <a href="{{ path('commentaire_delete',{'id': promo.id, 'article_promo_id': article_promo.id, 'commentaire_article_id': comment.id }) }}">Delete</a>~
+                    <a href="{{ path('commentaire_article_promo_edit', {'id': promo.id, 'article_promo_id': article_promo.id, 'commentaire_article_id': comment.id }) }}">Edit</a></td>
+
             </tr>
 
         {% endfor %}
@@ -41,10 +44,10 @@
             <a href="{{ path('promo_show',{'id': promo.id}) }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('articlePromoEdit', {'id': promo.id, 'articlepromo_id': articlePromo.id }) }}">Edit</a>
+            <a href="{{ path('article_promo_edit', {'id': promo.id, 'article_promo_id': article_promo.id }) }}">Edit</a>
         </li>
         <li>
-            <a href="{{ path('article_promo_delete',{'id': promo.id, 'article_promo_id': articlePromo.id }) }}">Delete</a>
+            <a href="{{ path('article_promo_delete',{'id': promo.id, 'article_promo_id': article_promo.id }) }}">Delete</a>
         </li>
     </ul>
 {% endblock %}

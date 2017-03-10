@@ -2,76 +2,70 @@
 
 namespace Kipskool\Bundle\NewsBundle\Controller;
 
+use Kipskool\Bundle\NewsBundle\Entity\Article_promo;
 use Kipskool\Bundle\NewsBundle\Entity\Commentaire_article_promo;
+use Kipskool\Bundle\NewsBundle\Entity\Promo;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Commentaire_article_promo controller.
  *
- * @Route("commentaire_article_promo")
+ * @Route("ecole/promo")
  */
 class Commentaire_article_promoController extends Controller
 {
     /**
      * Displays a form to edit an existing commentaire_article_promo entity.
      *
-     * @Route("/{id}/edit", name="commentaire_article_promo_edit")
+     * @ParamConverter("Commentaire_article_promo", options={"mapping":{"commentaire_article_id":"id"}})
+     * @ParamConverter("Article_promo", options={"mapping":{"article_id":"id"}})
+     * @Route("/{id}/article/{article_promo_id}/comment/{commentaire_article_id}/edit", name="commentaire_article_promo_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Commentaire_article_promo $commentaire_article_promo)
+    public function editAction(Request $request,Promo $promo, Article_promo $article_promo, Commentaire_article_promo $commentaire_article_promo)
     {
-        $deleteForm = $this->createDeleteForm($commentaire_article_promo);
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\Commentaire_article_promoType', $commentaire_article_promo);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('commentaire_article_promo_edit', array('id' => $commentaire_article_promo->getId()));
+            return $this->redirectToRoute('article_promo_show', array(
+                'article_promo_id' => $commentaire_article_promo->getId(),
+                'id'=>$promo->getId()
+                ));
         }
 
         return $this->render('commentaire_article_promo/edit.html.twig', array(
+            'promo'=>$promo,
+            'article_promo'=>$article_promo,
             'commentaire_article_promo' => $commentaire_article_promo,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
      * Deletes a commentaire_article_promo entity.
      *
-     * @Route("/{id}", name="commentaire_article_promo_delete")
-     * @Method("DELETE")
+     * @ParamConverter("Commentaire_article_promo", options={"mapping":{"commentaire_article_id":"id"}})
+     * @ParamConverter("Article_promo", options={"mapping":{"article_id":"id"}})
+     * @Route("/{id}/article/{article_promo_id}/comment/{commentaire_article_id}/delete", name="commentaire_delete")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, Commentaire_article_promo $commentaire_article_promo)
+    public function deleteAction(Promo $promo, Article_promo $article_promo, Commentaire_article_promo $commentaire_article_promo)
     {
-        $form = $this->createDeleteForm($commentaire_article_promo);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($commentaire_article_promo);
             $em->flush();
-        }
 
-        return $this->redirectToRoute('commentaire_article_promo_index');
+        return $this->redirectToRoute('article_promo_show', array(
+            'article_promo_id'=>$article_promo->getId(),
+            'id'=>$promo->getId()
+        ));
     }
 
-    /**
-     * Creates a form to delete a commentaire_article_promo entity.
-     *
-     * @param Commentaire_article_promo $commentaire_article_promo The commentaire_article_promo entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Commentaire_article_promo $commentaire_article_promo)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('commentaire_article_promo_delete', array('id' => $commentaire_article_promo->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
 }

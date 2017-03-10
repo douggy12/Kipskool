@@ -20,7 +20,7 @@
         </tbody>
     </table>
     <ul>
-        <a href="{{ path('addArticlePromo',{'id': promo.id}) }}">Ecrire un article</a>
+        <a href="{{ path('add_article_promo',{'id': promo.id}) }}">Ecrire un article</a>
     </ul>
     <table>
     <tr>
@@ -28,9 +28,9 @@
         <th>Crée</th>
         <th>Texte</th>
     </tr>
-        {% for article in promo.articlesPromo %}
+        {% for article in promo.articles_promo %}
             <tr>
-                <td><a href="{{ path('articlePromoShow', {'id': promo.id, 'articlepromo_id': article.id }) }}">{{ article.titre }}</td>
+                <td><a href="{{ path('article_promo_show', {'id': promo.id, 'article_promo_id': article.id }) }}">{{ article.titre }}</td>
                 <td>{{ article.createdAt|date("d/m/Y") }}</td>
                 <td>{{ article.texte }}</td>
             </tr>

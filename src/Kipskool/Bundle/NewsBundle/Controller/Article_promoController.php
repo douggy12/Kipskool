@@ -20,7 +20,7 @@ class Article_promoController extends Controller
     /**
      * Creates a new article_promo entity.
      *
-     * @Route("/{id}/new", name="addArticlePromo")
+     * @Route("/{id}/new", name="add_article_promo")
      * @Method({"GET", "POST"})
      */
     public function newArtcicleAction(Request $request, Promo $promo)
@@ -47,14 +47,14 @@ class Article_promoController extends Controller
     /**
      * Finds and displays a article_promo entity.
      *
-     * @ParamConverter("articlePromo", options={"mapping":{"articlepromo_id":"id"}})
-     * @Route("/{id}/article/{articlepromo_id}", name="articlePromoShow")
+     * @ParamConverter("article_promo", options={"mapping":{"article_promo_id":"id"}})
+     * @Route("/{id}/article/{article_promo_id}", name="article_promo_show")
      * @Method({"GET", "POST"})
      */
-    public function showArticleAction(Request $request, Promo $promo, Article_promo $articlePromo)
+    public function showArticleAction(Request $request, Promo $promo, Article_promo $article_promo)
     {
         $commentaire_article_promo = new Commentaire_article_promo();
-        $commentaire_article_promo->setArticlePromo($articlePromo);
+        $commentaire_article_promo->setArticlePromo($article_promo);
         $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\Commentaire_article_promoType', $commentaire_article_promo);
         $form->handleRequest($request);
 
@@ -63,14 +63,14 @@ class Article_promoController extends Controller
             $em->persist($commentaire_article_promo);
             $em->flush($commentaire_article_promo);
 
-            return $this->redirectToRoute('articlePromoShow', array(
+            return $this->redirectToRoute('article_promo_show', array(
                 'id'=>$promo->getId(),
-                'articlepromo_id' => $articlePromo->getId()
+                'article_promo_id' => $article_promo->getId()
             ));
         }
 
         return $this->render('article_promo/show.html.twig', array(
-            'articlePromo' => $articlePromo,
+            'article_promo' => $article_promo,
             'promo'=>$promo,
             'commentaire_article_promo' => $commentaire_article_promo,
             'form' => $form->createView(),
@@ -79,8 +79,8 @@ class Article_promoController extends Controller
     /**
      * Displays a form to edit an existing article_promo entity.
      *
-     * @ParamConverter("articlePromo", options={"mapping":{"articlepromo_id":"id"}})
-     * @Route("/{id}/article/{articlepromo_id}/edit", name="articlePromoEdit")
+     * @ParamConverter("article_promo", options={"mapping":{"article_promo_id":"id"}})
+     * @Route("/{id}/article/{article_promo_id}/edit", name="article_promo_edit")
      * @Method({"GET", "POST"})
      */
     public function editArticleAction(Request $request, Promo $promo, Article_promo $articlePromo)
@@ -104,7 +104,7 @@ class Article_promoController extends Controller
     /**
      * Deletes a article_promo entity.
      *
-     * @ParamConverter("articlePromo", options={"mapping":{"article_promo_id":"id"}})
+     * @ParamConverter("article_promo", options={"mapping":{"article_promo_id":"id"}})
      * @Route("/{id}/article/{article_promo_id}/delete", name="article_promo_delete")
      * @Method("GET")
      */

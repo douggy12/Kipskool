@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Commentaire_article_promo
  *
- * @ORM\Table(name="commentaire_article_promo")
+ * @ORM\Table(name="Commentaire_article_promo")
  * @ORM\Entity(repositoryClass="Kipskool\Bundle\NewsBundle\Repository\Commentaire_article_promoRepository")
  */
 class Commentaire_article_promo
@@ -70,15 +70,15 @@ class Commentaire_article_promo
     }
 
     /**
-     * Set articlePromo
+     * Set article_promo
      *
-     * @param \Kipskool\Bundle\NewsBundle\Entity\Article_promo $articlePromo
+     * @param \Kipskool\Bundle\NewsBundle\Entity\Article_promo $article_promo
      *
      * @return Commentaire_article_promo
      */
-    public function setArticlePromo(\Kipskool\Bundle\NewsBundle\Entity\Article_promo $articlePromo)
+    public function setArticlePromo(\Kipskool\Bundle\NewsBundle\Entity\Article_promo $article_promo)
     {
-        $this->article_promo = $articlePromo;
+        $this->article_promo = $article_promo;
 
         return $this;
     }
