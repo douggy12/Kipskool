@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Article_promo controller.
  *
- * @Route("article_promo")
+ * @Route("promo")
  */
 class Article_promoController extends Controller
 {
@@ -39,8 +39,8 @@ class Article_promoController extends Controller
         }
 
         return $this->render('article_promo/new.html.twig', array(
-            'article_promo' => $article_promo,
             'promo'=>$promo,
+            'article_promo' => $article_promo,
             'form' => $form->createView(),
         ));
     }
@@ -53,6 +53,7 @@ class Article_promoController extends Controller
      */
     public function showArticleAction(Request $request, Promo $promo, Article_promo $article_promo)
     {
+        dump($article_promo);
         $commentaire_article_promo = new Commentaire_article_promo();
         $commentaire_article_promo->setArticlePromo($article_promo);
         $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\Commentaire_article_promoType', $commentaire_article_promo);
@@ -83,9 +84,9 @@ class Article_promoController extends Controller
      * @Route("/{id}/article/{article_promo_id}/edit", name="article_promo_edit")
      * @Method({"GET", "POST"})
      */
-    public function editArticleAction(Request $request, Promo $promo, Article_promo $articlePromo)
+    public function editArticleAction(Request $request, Promo $promo, Article_promo $article_promo)
     {
-        $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\Article_promoType', $articlePromo);
+        $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\Article_promoType', $article_promo);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -95,8 +96,8 @@ class Article_promoController extends Controller
         }
 
         return $this->render('article_promo/edit.html.twig', array(
-            'articlePromo' => $articlePromo,
             'promo'=>$promo,
+            'article_promo' => $article_promo,
             'edit_form' => $editForm->createView(),
         ));
     }

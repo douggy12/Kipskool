@@ -31,7 +31,7 @@
         {% for comment in article_promo.comments  %}
             <tr>
                 <td>{{ comment.texte }}~~
-                    <a href="{{ path('commentaire_delete',{'id': promo.id, 'article_promo_id': article_promo.id, 'commentaire_article_id': comment.id }) }}">Delete</a>~
+                    <a href="{{ path('commentaire_delete',{'id': promo.id, 'article_promo_id': comment.articlePromo.id, 'commentaire_article_id': comment.id}) }}">Delete</a>~
                     <a href="{{ path('commentaire_article_promo_edit', {'id': promo.id, 'article_promo_id': article_promo.id, 'commentaire_article_id': comment.id }) }}">Edit</a></td>
 
             </tr>

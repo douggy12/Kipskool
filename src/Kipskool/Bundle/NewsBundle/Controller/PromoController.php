@@ -12,14 +12,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Promo controller.
  *
- * @Route("promo")
+ * @Route("/")
  */
 class PromoController extends Controller
 {
     /**
      * Lists all promo entities.
      *
-     * @Route("/", name="promo_index")
+     * @Route("promo/", name="promo_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -70,7 +70,6 @@ class PromoController extends Controller
         $deleteForm = $this->createDeleteForm($promo);
 
         return $this->render('promo/show.html.twig', array(
-
             'promo' => $promo,
             'delete_form' => $deleteForm->createView(),
         ));

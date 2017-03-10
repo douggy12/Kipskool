@@ -84,7 +84,7 @@ class Commentaire_article_promo
     }
 
     /**
-     * Get articlePromo
+     * Get article_promo
      *
      * @return \Kipskool\Bundle\NewsBundle\Entity\Article_promo
      */

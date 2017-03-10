@@ -28,11 +28,11 @@
         <th>Crée</th>
         <th>Texte</th>
     </tr>
-        {% for article in promo.articles_promo %}
+        {% for article_promo in promo.articles_promo %}
             <tr>
-                <td><a href="{{ path('article_promo_show', {'id': promo.id, 'article_promo_id': article.id }) }}">{{ article.titre }}</td>
-                <td>{{ article.createdAt|date("d/m/Y") }}</td>
-                <td>{{ article.texte }}</td>
+                <td><a href="{{ path('article_promo_show', {'id': promo.id,'article_promo_id': article_promo.id}) }}">{{ article_promo.titre }}</td>
+                <td>{{ article_promo.createdAt|date("d/m/Y") }}</td>
+                <td>{{ article_promo.texte }}</td>
             </tr>
             
         {% endfor %}
