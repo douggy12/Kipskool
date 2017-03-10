@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Perso</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ perso.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ perso.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ perso.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ perso.titre }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ perso.mail }}</td>
+            </tr>
+            <tr>
+                <th>Born</th>
+                <td>{{ perso.born }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ perso.password }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('perso_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('perso_edit', { 'id': perso.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+
+    <ul>
+        <li>
+            <a href="{{ path('articleperso_new', { 'id' : perso.id} ) }}">Ajouter un article</a>
+        </li>
+    </ul>
+
+    <table>
+        <tr>
+            <th>créé le :</th>
+            <th>titre</th>
+            <th>texte</th>
+        </tr>
+        {% for article in perso.articles %}
+            <th>{{ article.createdAt }}</th>
+            <th>{{ article.titre }}</th>
+            <th>{{ article.texte }}</th>
+        {% endfor %}
+    </table>
+{% endblock %}

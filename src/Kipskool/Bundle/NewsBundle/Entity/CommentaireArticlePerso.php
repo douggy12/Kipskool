@@ -40,6 +40,15 @@ class CommentaireArticlePerso
      */
     private $article;
 
+    /**
+     * CommentaireArticlePerso constructor.
+
+     */
+    public function __construct()
+    {
+        $this->createdAt = time();
+    }
+
 
     /**
      * Get id
@@ -76,20 +85,6 @@ class CommentaireArticlePerso
     }
 
     /**
-     * Set createdAt
-     *
-     * @param string $createdAt
-     *
-     * @return CommentaireArticlePerso
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * Get createdAt
      *
      * @return string
@@ -98,5 +93,17 @@ class CommentaireArticlePerso
     {
         return $this->createdAt;
     }
+
+    /**
+     * @return ArticlePerso
+     */
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+
+
+
 }
 

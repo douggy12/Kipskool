@@ -67,6 +67,7 @@ class ArticlePerso
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->createdAt =time();
     }
 
 
@@ -80,29 +81,6 @@ class ArticlePerso
         return $this->id;
     }
 
-    /**
-     * Set createdAt
-     *
-     * @param integer $createdAt
-     *
-     * @return ArticlePerso
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return int
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
 
     /**
      * Set titre
@@ -199,6 +177,16 @@ class ArticlePerso
     {
         return $this->commentaires;
     }
+
+    /**
+     * @return int
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+
 
 
 
