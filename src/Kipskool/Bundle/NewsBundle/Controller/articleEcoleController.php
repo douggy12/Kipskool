@@ -12,16 +12,63 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Articleecole controller.
  *
- *
+ *@Route("ecole")
  */
 class articleEcoleController extends Controller
 {
+    /**
+     * Creates a new articleEcole entity for the active ecole.
+     *
+     * @Route("/{id}/new", name="addArticle")
+     * @Method({"GET", "POST"})
+     */
+    public function addArticle(Request $request, Ecole $ecole)
+    {
+        $articleEcole = new articleEcole();
+        $articleEcole->setEcole($ecole);
+
+        $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\articleEcoleType', $articleEcole);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($articleEcole);
+            $em->flush($articleEcole);
+
+            return $this->redirectToRoute('ecole_show', array('id' => $ecole->getId()));
+        }
+
+        return $this->render('articleecole/new.html.twig', array(
+            'articleEcole' => $articleEcole,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * Finds and displays a articleEcole entity.
+     *
+     * @ParamConverter("articleEcole", options={"mapping": {"article_id": "id"}})
+
+     * @Route("/{id}/article/{article_id}", name="articleecole_show")
+     * @Method("GET")
+     *
+     */
+    public function showArticle( Ecole $ecole, articleEcole $articleEcole)
+    {
+
+
+        return $this->render('articleecole/show.html.twig', array(
+            'articleEcole' => $articleEcole,
+            'ecole' => $ecole,
+
+        ));
+    }
 
 
     /**
      * Displays a form to edit an existing articleEcole entity.
      *
-     * @Route("ecole/{ecole_id}/article/{article_id}/edit", name="articleecole_edit")
+     * @Route("/{ecole_id}/article/{article_id}/edit", name="articleecole_edit")
      * @ParamConverter("articleEcole", options={"mapping": {"article_id": "id"}})
      * @ParamConverter("ecole", options={"mapping": {"ecole_id": "id"}})
      * @Method({"GET", "POST"})
@@ -50,7 +97,7 @@ class articleEcoleController extends Controller
      * Deletes a articleEcole entity.
      *
      * @ParamConverter("articleEcole", options={"mapping": {"article_id": "id"}})
-     * @Route("ecole/{id}/article/{article_id}/delete", name="articleecole_delete")
+     * @Route("/{id}/article/{article_id}/delete", name="articleecole_delete")
      * @Method("GET")
      */
     public function deleteAction(Request $request, Ecole $ecole, articleEcole $articleEcole)
