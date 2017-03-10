@@ -13,7 +13,7 @@ class commentaireArticleEcoleType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('texte')->add('articleEcole');
+        $builder->add('texte');
     }
     
     /**

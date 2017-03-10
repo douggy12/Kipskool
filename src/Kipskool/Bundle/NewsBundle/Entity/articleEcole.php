@@ -2,6 +2,7 @@
 
 namespace Kipskool\Bundle\NewsBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -56,12 +57,19 @@ class articleEcole
     private $srcFeature;
 
     /**
+     * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\commentaireArticleEcole", mappedBy="articleEcole", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $commentaires;
+
+    /**
      * articleEcole constructor.
      */
     public function __construct()
     {
 
         $this->createdAt = time();
+        $this->commentaires = new ArrayCollection();
     }
 
 
@@ -171,6 +179,16 @@ class articleEcole
 
         return $this;
     }
+
+    /**
+     * @return ArrayCollection|commentaireArticleEcole[]
+     */
+    public function getCommentaires()
+    {
+        return $this->commentaires;
+    }
+
+
 
     /**
      * Get ecole

@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class commentaireArticleEcole
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\articleEcole")
+     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\articleEcole", inversedBy="commentaires")
      * @ORM\JoinColumn(nullable=false)
      */
     private $articleEcole;
@@ -32,6 +32,21 @@ class commentaireArticleEcole
      * @ORM\Column(name="texte", type="string", length=255)
      */
     private $texte;
+
+    /**
+     * @var int
+     * @ORM\Column(name="createdAt", type="integer")
+     */
+    private $createdAt;
+
+    /**
+     * commentaireArticleEcole constructor.
+     * @param int $createdAt
+     */
+    public function __construct()
+    {
+        $this->createdAt = time();
+    }
 
 
     /**
@@ -67,6 +82,15 @@ class commentaireArticleEcole
     {
         return $this->texte;
     }
+
+    /**
+     * @return int
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
 
     /**
      * Set articleEcole

@@ -3,6 +3,7 @@
 namespace Kipskool\Bundle\NewsBundle\Controller;
 
 use Kipskool\Bundle\NewsBundle\Entity\articleEcole;
+use Kipskool\Bundle\NewsBundle\Entity\commentaireArticleEcole;
 use Kipskool\Bundle\NewsBundle\Entity\Ecole;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -50,16 +51,33 @@ class articleEcoleController extends Controller
      * @ParamConverter("articleEcole", options={"mapping": {"article_id": "id"}})
 
      * @Route("/{id}/article/{article_id}", name="articleecole_show")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      *
      */
-    public function showArticle( Ecole $ecole, articleEcole $articleEcole)
+    public function showArticle( Request $request, Ecole $ecole, articleEcole $articleEcole)
     {
+        $commentaireArticleEcole = new commentaireArticleEcole();
+        $commentaireArticleEcole->setArticleEcole($articleEcole);
+        $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\commentaireArticleEcoleType', $commentaireArticleEcole);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($commentaireArticleEcole);
+            $em->flush($commentaireArticleEcole);
+
+            return $this->redirectToRoute('articleecole_show', array(
+                'article_id' => $articleEcole->getId(),
+                'id' => $ecole->getId(),
+            ));
+        }
 
 
         return $this->render('articleecole/show.html.twig', array(
             'articleEcole' => $articleEcole,
             'ecole' => $ecole,
+            'commentaireArticleEcole' => $commentaireArticleEcole,
+            'form' => $form->createView(),
 
         ));
     }
@@ -100,7 +118,7 @@ class articleEcoleController extends Controller
      * @Route("/{id}/article/{article_id}/delete", name="articleecole_delete")
      * @Method("GET")
      */
-    public function deleteAction(Request $request, Ecole $ecole, articleEcole $articleEcole)
+    public function deleteAction(Ecole $ecole, articleEcole $articleEcole)
     {
 
 

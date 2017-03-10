@@ -40,4 +40,22 @@
         </li>
 
     </ul>
+
+    <table>
+        <tr>
+            <th>Posté le :</th>
+            <th>Commentaire</th>
+        </tr>
+        {% for commentaire in articleEcole.commentaires %}
+            <tr>
+                <td>{{ commentaire.createdAt|date("d/m/Y H:m:s") }}</td>
+                <td>{{ commentaire.texte }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Create" />
+    {{ form_end(form) }}
 {% endblock %}
