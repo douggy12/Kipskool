@@ -14,64 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class articleEcoleController extends Controller
 {
-    /**
-     * Lists all articleEcole entities.
-     *
-     * @Route("/", name="articleecole_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
 
-        $articleEcoles = $em->getRepository('NewsBundle:articleEcole')->findAll();
-
-        return $this->render('articleecole/index.html.twig', array(
-            'articleEcoles' => $articleEcoles,
-        ));
-    }
-
-    /**
-     * Creates a new articleEcole entity.
-     *
-     * @Route("/new", name="articleecole_new")
-     * @Method({"GET", "POST"})
-     */
-    public function newAction(Request $request)
-    {
-        $articleEcole = new Articleecole();
-        $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\articleEcoleType', $articleEcole);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($articleEcole);
-            $em->flush($articleEcole);
-
-            return $this->redirectToRoute('articleecole_show', array('id' => $articleEcole->getId()));
-        }
-
-        return $this->render('articleecole/new.html.twig', array(
-            'articleEcole' => $articleEcole,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a articleEcole entity.
-     *
-     * @Route("/{id}", name="articleecole_show")
-     * @Method("GET")
-     */
-    public function showAction(articleEcole $articleEcole)
-    {
-        $deleteForm = $this->createDeleteForm($articleEcole);
-
-        return $this->render('articleecole/show.html.twig', array(
-            'articleEcole' => $articleEcole,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
 
     /**
      * Displays a form to edit an existing articleEcole entity.

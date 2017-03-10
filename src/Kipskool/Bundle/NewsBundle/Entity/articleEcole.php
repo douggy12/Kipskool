@@ -60,6 +60,7 @@ class articleEcole
      */
     public function __construct()
     {
+
         $this->createdAt = time();
     }
 
