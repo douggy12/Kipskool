@@ -31,7 +31,7 @@ class commentaireArticleEcoleController extends Controller
      */
     public function editAction(Request $request, Ecole $ecole, articleEcole $articleEcole, commentaireArticleEcole $commentaireArticleEcole)
     {
-        $deleteForm = $this->createDeleteForm($commentaireArticleEcole);
+
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\commentaireArticleEcoleType', $commentaireArticleEcole);
         $editForm->handleRequest($request);
 
