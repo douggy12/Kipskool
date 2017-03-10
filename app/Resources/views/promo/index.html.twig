@@ -16,13 +16,10 @@
         {% for promo in promos %}
             <tr>
                 <td><a href="{{ path('promo_show', { 'id': promo.id }) }}">{{ promo.id }}</a></td>
-                <td>{{ promo.nom }}</td>
+                <td><a href="{{ path('promo_show', { 'id': promo.id }) }}">{{ promo.nom }}</td>
                 <td>{{ promo.description }}</td>
                 <td>
                     <ul>
-                        <li>
-                            <a href="{{ path('promo_show', { 'id': promo.id }) }}">show</a>
-                        </li>
                         <li>
                             <a href="{{ path('promo_edit', { 'id': promo.id }) }}">edit</a>
                         </li>

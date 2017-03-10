@@ -15,8 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Promo
 {
     /**
-     * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Article_promo", mappedBy="promo")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Article_promo", mappedBy="promo", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $articles_promo;
 

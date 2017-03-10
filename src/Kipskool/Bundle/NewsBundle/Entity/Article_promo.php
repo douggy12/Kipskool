@@ -19,7 +19,8 @@ class Article_promo
      */
     private $promo;
     /**
-     * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Commentaire_article_promo", mappedBy="article_promo")
+     * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Commentaire_article_promo", mappedBy="article_promo", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $comments;
 

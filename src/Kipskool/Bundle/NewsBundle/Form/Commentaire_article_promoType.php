@@ -13,7 +13,7 @@ class Commentaire_article_promoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('texte')->add('article_promo');
+        $builder->add('texte');
     }
     
     /**

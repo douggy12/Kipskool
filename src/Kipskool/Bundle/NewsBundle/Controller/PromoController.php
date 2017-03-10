@@ -2,7 +2,9 @@
 
 namespace Kipskool\Bundle\NewsBundle\Controller;
 
+use Kipskool\Bundle\NewsBundle\Entity\Article_promo;
 use Kipskool\Bundle\NewsBundle\Entity\Promo;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -89,7 +91,7 @@ class PromoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('promo_edit', array('id' => $promo->getId()));
+            return $this->redirectToRoute('promo_show', array('id' => $promo->getId()));
         }
 
         return $this->render('promo/edit.html.twig', array(
@@ -128,10 +130,15 @@ class PromoController extends Controller
      */
     private function createDeleteForm(Promo $promo)
     {
+
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('promo_delete', array('id' => $promo->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;
     }
+
+
+
+
 }

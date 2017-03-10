@@ -15,65 +15,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 class Commentaire_article_promoController extends Controller
 {
     /**
-     * Lists all commentaire_article_promo entities.
-     *
-     * @Route("/", name="commentaire_article_promo_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $commentaire_article_promos = $em->getRepository('NewsBundle:Commentaire_article_promo')->findAll();
-
-        return $this->render('commentaire_article_promo/index.html.twig', array(
-            'commentaire_article_promos' => $commentaire_article_promos,
-        ));
-    }
-
-    /**
-     * Creates a new commentaire_article_promo entity.
-     *
-     * @Route("/new", name="commentaire_article_promo_new")
-     * @Method({"GET", "POST"})
-     */
-    public function newAction(Request $request)
-    {
-        $commentaire_article_promo = new Commentaire_article_promo();
-        $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\Commentaire_article_promoType', $commentaire_article_promo);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($commentaire_article_promo);
-            $em->flush($commentaire_article_promo);
-
-            return $this->redirectToRoute('commentaire_article_promo_show', array('id' => $commentaire_article_promo->getId()));
-        }
-
-        return $this->render('commentaire_article_promo/new.html.twig', array(
-            'commentaire_article_promo' => $commentaire_article_promo,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a commentaire_article_promo entity.
-     *
-     * @Route("/{id}", name="commentaire_article_promo_show")
-     * @Method("GET")
-     */
-    public function showAction(Commentaire_article_promo $commentaire_article_promo)
-    {
-        $deleteForm = $this->createDeleteForm($commentaire_article_promo);
-
-        return $this->render('commentaire_article_promo/show.html.twig', array(
-            'commentaire_article_promo' => $commentaire_article_promo,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
      * Displays a form to edit an existing commentaire_article_promo entity.
      *
      * @Route("/{id}/edit", name="commentaire_article_promo_edit")

@@ -7,51 +7,44 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ article_promo.id }}</td>
+                <td>{{ articlePromo.id }}</td>
             </tr>
             <tr>
                 <th>Createdat</th>
-                <td>{{ article_promo.createdAt }}</td>
+                <td>{{ articlePromo.createdAt }}</td>
             </tr>
             <tr>
                 <th>Titre</th>
-                <td>{{ article_promo.titre }}</td>
+                <td>{{ articlePromo.titre }}</td>
             </tr>
             <tr>
                 <th>Texte</th>
-                <td>{{ article_promo.texte }}</td>
+                <td>{{ articlePromo.texte }}</td>
             </tr>
             <tr>
                 <th>Srcfeature</th>
-                <td>{{ article_promo.srcFeature }}</td>
+                <td>{{ articlePromo.srcFeature }}</td>
             </tr>
         </tbody>
     </table>
-    <ul>
-        <a href="{{ path('commentaire_article_promo_new') }}">Commenter</a>
-    </ul>
     <table>
-        {% for comment in article_promo.  %}
+        {% for comment in articlePromo.comments  %}
             <tr>
-                <td>{{ article.titre }}</td>
-                <td>{{ article.createdAt|date("d/m/Y") }}</td>
-                <td>{{ article.texte }}</td>
-                <td>{{ article.srcFeature }}</td>
+                <td>{{ comment.texte }}</td>
             </tr>
 
         {% endfor %}
     </table>
+    {% include ':commentaire_article_promo:new.html.twig' %}
     <ul>
         <li>
-            <a href="{{ path('article_promo_index') }}">Back to the list</a>
+            <a href="{{ path('promo_show',{'id': promo.id}) }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('article_promo_edit', { 'id': article_promo.id }) }}">Edit</a>
+            <a href="{{ path('articlePromoEdit', {'id': promo.id, 'articlepromo_id': articlePromo.id }) }}">Edit</a>
         </li>
         <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+            <a href="{{ path('article_promo_delete',{'id': promo.id, 'article_promo_id': articlePromo.id }) }}">Delete</a>
         </li>
     </ul>
 {% endblock %}
