@@ -3,6 +3,8 @@
 namespace Kipskool\Bundle\NewsBundle\Controller;
 
 use Kipskool\Bundle\NewsBundle\Entity\articleEcole;
+use Kipskool\Bundle\NewsBundle\Entity\Ecole;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -19,10 +21,12 @@ class articleEcoleController extends Controller
     /**
      * Displays a form to edit an existing articleEcole entity.
      *
-     * @Route("/{id}/edit", name="articleecole_edit")
+     * @Route("ecole/{ecole_id}/article/{article_id}/edit", name="articleecole_edit")
+     * @ParamConverter("articleEcole", options={"mapping": {"article_id": "id"}})
+     * @ParamConverter("ecole", options={"mapping": {"ecole_id": "id"}})
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, articleEcole $articleEcole)
+    public function editAction(Request $request, Ecole $ecole, articleEcole $articleEcole)
     {
         $deleteForm = $this->createDeleteForm($articleEcole);
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\articleEcoleType', $articleEcole);
@@ -31,11 +35,12 @@ class articleEcoleController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('articleecole_edit', array('id' => $articleEcole->getId()));
+            return $this->redirectToRoute('ecole_show', array('id' => $ecole->getId()));
         }
 
         return $this->render('articleecole/edit.html.twig', array(
             'articleEcole' => $articleEcole,
+            'ecole' => $ecole,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));

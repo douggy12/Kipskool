@@ -33,8 +33,8 @@
             <a href="{{ path('ecole_show',{'id': ecole.id }) }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('articleecole_edit', { 'id': articleEcole.id }) }}">Edit</a>
+            <a href="{{ path('articleecole_edit', { 'article_id': articleEcole.id, 'ecole_id': ecole.id }) }}">Edit</a>
         </li>
-        
+
     </ul>
 {% endblock %}

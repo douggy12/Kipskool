@@ -80,9 +80,9 @@ class EcoleController extends Controller
     /**
      * Finds and displays a articleEcole entity.
      *
-     * @ParamConverter("articleEcole", options={"mapping": {"aid": "id"}})
+     * @ParamConverter("articleEcole", options={"mapping": {"article_id": "id"}})
 
-     * @Route("/{id}/article/{aid}", name="articleecole_show")
+     * @Route("/{id}/article/{article_id}", name="articleecole_show")
      * @Method("GET")
      *
      */
