@@ -88,12 +88,12 @@ class EcoleController extends Controller
      */
     public function showArticle( Ecole $ecole, articleEcole $articleEcole)
     {
-        //$deleteForm = $this->createDeleteForm($articleEcole);
+
 
         return $this->render('articleecole/show.html.twig', array(
             'articleEcole' => $articleEcole,
             'ecole' => $ecole,
-            //'delete_form' => $deleteForm->createView(),
+
         ));
     }
 

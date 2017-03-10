@@ -28,7 +28,7 @@ class articleEcoleController extends Controller
      */
     public function editAction(Request $request, Ecole $ecole, articleEcole $articleEcole)
     {
-        $deleteForm = $this->createDeleteForm($articleEcole);
+
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\articleEcoleType', $articleEcole);
         $editForm->handleRequest($request);
 
@@ -42,43 +42,27 @@ class articleEcoleController extends Controller
             'articleEcole' => $articleEcole,
             'ecole' => $ecole,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+
         ));
     }
 
     /**
      * Deletes a articleEcole entity.
      *
-     * @Route("/{id}", name="articleecole_delete")
-     * @Method("DELETE")
+     * @ParamConverter("articleEcole", options={"mapping": {"article_id": "id"}})
+     * @Route("ecole/{id}/article/{article_id}/delete", name="articleecole_delete")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, articleEcole $articleEcole)
+    public function deleteAction(Request $request, Ecole $ecole, articleEcole $articleEcole)
     {
-        $form = $this->createDeleteForm($articleEcole);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+
+
             $em = $this->getDoctrine()->getManager();
             $em->remove($articleEcole);
             $em->flush();
-        }
 
-        return $this->redirectToRoute('articleecole_index');
-    }
 
-    /**
-     * Creates a form to delete a articleEcole entity.
-     *
-     * @param articleEcole $articleEcole The articleEcole entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(articleEcole $articleEcole)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('articleecole_delete', array('id' => $articleEcole->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
+        return $this->redirectToRoute('ecole_show', array('id' => $ecole->getId()));
     }
 }

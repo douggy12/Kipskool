@@ -10,12 +10,11 @@
 
     <ul>
         <li>
-            <a href="{{ path('ecole_show',{'id': ecole.id }) }}">Back to the list</a>
+            <a href="{{ path('articleecole_delete', { 'article_id': articleEcole.id, 'id': ecole.id}) }}">Supprimer</a>
         </li>
         <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+            <a href="{{ path('ecole_show',{'id': ecole.id }) }}">Back to the list</a>
         </li>
+
     </ul>
 {% endblock %}
