@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="63953663-afb0-46de-80bf-c6d9375e5719" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/commentairearticleecole/edit.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/commentairearticleecole/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Controller/commentaireArticleEcoleController.php" afterPath="$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Controller/commentaireArticleEcoleController.php" />
-    </list>
+    <list default="true" id="63953663-afb0-46de-80bf-c6d9375e5719" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="articleEcole.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/articleEcole.php">
+      <file leaf-file-name="Ecole.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/Ecole.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="60" column="56" lean-forward="false" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="56" />
+            <state relative-caret-position="1427">
+              <caret line="89" column="45" lean-forward="false" selection-start-line="89" selection-start-column="45" selection-end-line="89" selection-end-column="45" />
               <folding>
                 <element signature="e#53#101#0#PHP" expanded="true" />
               </folding>
@@ -44,8 +41,8 @@
       <file leaf-file-name="articleEcoleController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Controller/articleEcoleController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-494">
-              <caret line="71" column="15" lean-forward="true" selection-start-line="68" selection-start-column="12" selection-end-line="71" selection-end-column="15" />
+            <state relative-caret-position="373">
+              <caret line="68" column="34" lean-forward="true" selection-start-line="68" selection-start-column="34" selection-end-line="68" selection-end-column="34" />
               <folding>
                 <element signature="e#57#108#0#PHP" expanded="true" />
                 <element signature="e#1313#1325#0#PHP" expanded="true" />
@@ -59,17 +56,25 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="articleEcole.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/articleEcole.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="60" column="56" lean-forward="false" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="56" />
+              <folding>
+                <element signature="e#53#101#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="show.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/articleecole/show.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="458">
               <caret line="55" column="163" lean-forward="false" selection-start-line="55" selection-start-column="163" selection-end-line="55" selection-end-column="163" />
               <folding>
-                <element signature="e#799#809#0#Twig" expanded="true" />
-                <element signature="e#912#929#0#Twig" expanded="true" />
-                <element signature="e#1059#1078#0#Twig" expanded="true" />
-                <element signature="e#1564#1592#0#Twig" expanded="true" />
-                <element signature="e#1730#1760#0#Twig" expanded="true" />
+                <element signature="e#12#26#0#Twig" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -89,6 +94,40 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Perso.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/Perso.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1156">
+              <caret line="68" column="40" lean-forward="false" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="40" />
+              <folding>
+                <element signature="e#53#101#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArticlePerso.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/ArticlePerso.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="58" column="133" lean-forward="false" selection-start-line="58" selection-start-column="133" selection-end-line="58" selection-end-column="133" />
+              <folding>
+                <element signature="e#53#101#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommentaireArticlePerso.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/CommentaireArticlePerso.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="38" column="108" lean-forward="false" selection-start-line="38" selection-start-column="108" selection-end-line="38" selection-end-column="108" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="new.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/articleecole/new.html.twig">
           <provider selected="true" editor-type-id="text-editor">
@@ -103,59 +142,10 @@
         </entry>
       </file>
       <file leaf-file-name="edit.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/articleecole/edit.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="40" lean-forward="false" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="40" />
-              <folding>
-                <element signature="e#12#26#0#Twig" expanded="false" />
-                <marker date="1489153419895" expanded="true" signature="32:520" ph="{% block body ...%}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="edit.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/commentairearticleecole/edit.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
               <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-              <folding>
-                <element signature="e#12#26#0#Twig" expanded="true" />
-                <element signature="e#289#306#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EcoleController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Controller/EcoleController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="15" column="18" lean-forward="false" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="18" />
-              <folding>
-                <element signature="e#57#108#0#PHP" expanded="true" />
-                <element signature="e#788#806#1#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="commentaireArticleEcole.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/commentaireArticleEcole.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="102" column="5" lean-forward="true" selection-start-line="102" selection-start-column="5" selection-end-line="102" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="articleEcoleType.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Form/articleEcoleType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="15" column="63" lean-forward="false" selection-start-line="15" selection-start-column="63" selection-end-line="15" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -193,6 +183,9 @@
         <option value="$PROJECT_DIR$/app/Resources/views/articleecole/show.html.twig" />
         <option value="$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Controller/commentaireArticleEcoleController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/commentairearticleecole/edit.html.twig" />
+        <option value="$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/CommentaireArticlePerso.php" />
+        <option value="$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/ArticlePerso.php" />
+        <option value="$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/Perso.php" />
       </list>
     </option>
   </component>
@@ -336,14 +329,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Form" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Default" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -626,12 +611,12 @@
       <workItem from="1489048647624" duration="449000" />
       <workItem from="1489050863152" duration="102000" />
       <workItem from="1489050981238" duration="22190000" />
-      <workItem from="1489081844351" duration="21804000" />
+      <workItem from="1489081844351" duration="25364000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44545000" />
+    <option name="totallyTimeSpent" value="48105000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -644,7 +629,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20309168" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -652,7 +637,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22426869" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44312027" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -676,6 +661,14 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/commentairearticleecole/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/Ecole.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1496">
@@ -690,9 +683,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="e#7#47#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -739,6 +729,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#12#26#0#Twig" expanded="false" />
+            <element signature="e#269#280#0#Twig" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -747,18 +738,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="65" lean-forward="true" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="65" />
-          <folding />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/articleecole/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="12" lean-forward="true" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/articleecole/index.html.twig" />
     <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Controller/EcoleController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-13">
@@ -774,7 +760,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="918">
           <caret line="57" column="5" lean-forward="true" selection-start-line="33" selection-start-column="4" selection-end-line="57" selection-end-column="5" />
-          <folding />
+          <folding>
+            <element signature="e#57#108#0#PHP" expanded="true" />
+            <element signature="e#1546#1565#0#PHP" expanded="true" />
+            <element signature="e#2680#2699#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -832,7 +822,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -840,7 +829,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -880,7 +868,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -894,21 +881,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/articleecole/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="41" column="12" lean-forward="false" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/articleecole/index.html.twig" />
     <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="e#7#47#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -928,9 +905,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#7#88#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -945,24 +919,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/commentairearticleecole/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/Ecole.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="89" column="45" lean-forward="false" selection-start-line="89" selection-start-column="45" selection-end-line="89" selection-end-column="45" />
-          <folding>
-            <element signature="e#53#101#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/commentairearticleecole/show.html.twig" />
     <entry file="file://$PROJECT_DIR$/app/Resources/views/commentairearticleecole/new.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1000,20 +957,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/articleEcole.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="60" column="56" lean-forward="false" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="56" />
-          <folding>
-            <element signature="e#53#101#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/commentaireArticleEcole.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
-          <caret line="102" column="5" lean-forward="true" selection-start-line="102" selection-start-column="5" selection-end-line="102" selection-end-column="5" />
+          <caret line="102" column="5" lean-forward="false" selection-start-line="102" selection-start-column="5" selection-end-line="102" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1024,7 +971,7 @@
           <caret line="15" column="40" lean-forward="false" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="40" />
           <folding>
             <element signature="e#12#26#0#Twig" expanded="false" />
-            <marker date="1489153419895" expanded="true" signature="32:520" ph="{% block body ...%}" />
+            <marker date="1489155859810" expanded="true" signature="32:520" ph="{% block body ...%}" />
           </folding>
         </state>
       </provider>
@@ -1040,10 +987,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/articleecole/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="55" column="163" lean-forward="false" selection-start-line="55" selection-start-column="163" selection-end-line="55" selection-end-column="163" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/commentairearticleecole/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Controller/articleEcoleController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-494">
-          <caret line="71" column="15" lean-forward="true" selection-start-line="68" selection-start-column="12" selection-end-line="71" selection-end-column="15" />
+        <state relative-caret-position="373">
+          <caret line="68" column="34" lean-forward="true" selection-start-line="68" selection-start-column="34" selection-end-line="68" selection-end-column="34" />
           <folding>
             <element signature="e#57#108#0#PHP" expanded="true" />
             <element signature="e#1313#1325#0#PHP" expanded="true" />
@@ -1052,20 +1017,6 @@
             <element signature="e#2641#2670#0#PHP" expanded="true" />
             <element signature="e#3654#3666#0#PHP" expanded="true" />
             <element signature="e#4415#4427#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/articleecole/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="55" column="163" lean-forward="false" selection-start-line="55" selection-start-column="163" selection-end-line="55" selection-end-column="163" />
-          <folding>
-            <element signature="e#799#809#0#Twig" expanded="true" />
-            <element signature="e#912#929#0#Twig" expanded="true" />
-            <element signature="e#1059#1078#0#Twig" expanded="true" />
-            <element signature="e#1564#1592#0#Twig" expanded="true" />
-            <element signature="e#1730#1760#0#Twig" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1082,13 +1033,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/commentairearticleecole/edit.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/Ecole.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+        <state relative-caret-position="1427">
+          <caret line="89" column="45" lean-forward="false" selection-start-line="89" selection-start-column="45" selection-end-line="89" selection-end-column="45" />
           <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="e#289#306#0#Twig" expanded="true" />
+            <element signature="e#53#101#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/CommentaireArticlePerso.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="38" column="108" lean-forward="false" selection-start-line="38" selection-start-column="108" selection-end-line="38" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/articleEcole.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="60" column="56" lean-forward="false" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="56" />
+          <folding>
+            <element signature="e#53#101#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/ArticlePerso.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="58" column="133" lean-forward="false" selection-start-line="58" selection-start-column="133" selection-end-line="58" selection-end-column="133" />
+          <folding>
+            <element signature="e#53#101#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Kipskool/Bundle/NewsBundle/Entity/Perso.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1156">
+          <caret line="68" column="40" lean-forward="false" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="40" />
+          <folding>
+            <element signature="e#53#101#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
