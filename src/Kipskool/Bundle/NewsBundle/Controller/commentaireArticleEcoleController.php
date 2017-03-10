@@ -24,10 +24,12 @@ class commentaireArticleEcoleController extends Controller
     /**
      * Displays a form to edit an existing commentaireArticleEcole entity.
      *
-     * @Route("/{id}/edit", name="commentairearticleecole_edit")
+     * @Route("/{id}/article/{article_id}/commentaire/{comment_id}/edit", name="commentairearticleecole_edit")
+     * @ParamConverter("articleEcole", options={"mapping":{"article_id" : "id"}})
+     * @ParamConverter("commentaireArticleEcole", options={"mapping":{"comment_id" : "id"}})
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, commentaireArticleEcole $commentaireArticleEcole)
+    public function editAction(Request $request, Ecole $ecole, articleEcole $articleEcole, commentaireArticleEcole $commentaireArticleEcole)
     {
         $deleteForm = $this->createDeleteForm($commentaireArticleEcole);
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\commentaireArticleEcoleType', $commentaireArticleEcole);
@@ -36,49 +38,44 @@ class commentaireArticleEcoleController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('commentairearticleecole_edit', array('id' => $commentaireArticleEcole->getId()));
+            return $this->redirectToRoute('articleecole_show', array(
+                'article_id' => $articleEcole->getId(),
+                'id' => $ecole->getId(),
+            ));
         }
 
         return $this->render('commentairearticleecole/edit.html.twig', array(
+            'ecole' => $ecole,
+            'articleEcole' => $articleEcole,
             'commentaireArticleEcole' => $commentaireArticleEcole,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+
         ));
     }
 
     /**
      * Deletes a commentaireArticleEcole entity.
      *
-     * @Route("/{id}", name="commentairearticleecole_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/article/{article_id}/commentaire/{comment_id}/delete", name="commentairearticleecole_delete")
+     * @ParamConverter("articleEcole", options={"mapping":{"article_id" : "id"}})
+     * @ParamConverter("commentaireArticleEcole", options={"mapping":{"comment_id" : "id"}})
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, commentaireArticleEcole $commentaireArticleEcole)
+    public function deleteAction(Ecole $ecole, articleEcole $articleEcole, commentaireArticleEcole $commentaireArticleEcole)
     {
-        $form = $this->createDeleteForm($commentaireArticleEcole);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+
+
             $em = $this->getDoctrine()->getManager();
             $em->remove($commentaireArticleEcole);
             $em->flush();
-        }
 
-        return $this->redirectToRoute('commentairearticleecole_index');
+
+        return $this->redirectToRoute('articleecole_show', array(
+            'id' => $ecole->getId(),
+            'article_id' => $articleEcole->getId()
+        ));
     }
 
-    /**
-     * Creates a form to delete a commentaireArticleEcole entity.
-     *
-     * @param commentaireArticleEcole $commentaireArticleEcole The commentaireArticleEcole entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(commentaireArticleEcole $commentaireArticleEcole)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('commentairearticleecole_delete', array('id' => $commentaireArticleEcole->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
+
 }
