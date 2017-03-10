@@ -21,7 +21,7 @@ class Commentaire_article_promoController extends Controller
     /**
      * Displays a form to edit an existing commentaire_article_promo entity.
      *
-     * @ParamConverter("Commentaire_article_promo", options={"mapping":{"commentaire_article_id":"id"}})
+     * @ParamConverter("commentaire_article_promo", options={"mapping":{"commentaire_article_id":"id"}})
      * @ParamConverter("Article_promo", options={"mapping":{"article_id":"id"}})
      * @Route("/{id}/article/{article_promo_id}/comment/{commentaire_article_id}/edit", name="commentaire_article_promo_edit")
      * @Method({"GET", "POST"})
@@ -35,7 +35,7 @@ class Commentaire_article_promoController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('article_promo_show', array(
-                'article_promo_id' => $commentaire_article_promo->getId(),
+                'article_promo_id' => $article_promo->getId(),
                 'id'=>$promo->getId()
                 ));
         }
@@ -51,7 +51,7 @@ class Commentaire_article_promoController extends Controller
     /**
      * Deletes a commentaire_article_promo entity.
      *
-     * @ParamConverter("Commentaire_article_promo", options={"mapping":{"commentaire_article_id":"id"}})
+     * @ParamConverter("commentaire_article_promo", options={"mapping":{"commentaire_article_id":"id"}})
      * @ParamConverter("Article_promo", options={"mapping":{"article_id":"id"}})
      * @Route("/{id}/article/{article_promo_id}/comment/{commentaire_article_id}/delete", name="commentaire_delete")
      * @Method("GET")
