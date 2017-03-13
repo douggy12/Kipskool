@@ -4,6 +4,7 @@ namespace Kipskool\Bundle\NewsBundle\Controller;
 
 use Kipskool\Bundle\NewsBundle\Entity\Article_promo;
 use Kipskool\Bundle\NewsBundle\Entity\Commentaire_article_promo;
+use Kipskool\Bundle\NewsBundle\Entity\Ecole;
 use Kipskool\Bundle\NewsBundle\Entity\Promo;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,6 +20,7 @@ class Article_promoController extends Controller
 {
     /**
      * Creates a new article_promo entity.
+     *
      *
      * @Route("/{id}/new", name="add_article_promo")
      * @Method({"GET", "POST"})
@@ -41,6 +43,7 @@ class Article_promoController extends Controller
         }
 
         return $this->render('article_promo/new.html.twig', array(
+            'ecole' => $ecole,
             'promo'=>$promo,
             'article_promo' => $article_promo,
             'form' => $form->createView(),

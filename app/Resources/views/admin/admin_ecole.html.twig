@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1>{{ ecole.nom }}</h1>
+    <table>
+{% for article in ecole.articles %}
+    <tr>
+        <td>{{ article.titre }}~~</td>
+        <td>{{ article.texte }}~~</td>
+        <td>{{ article.createdAt|date("d/m/Y") }}</td>
+    </tr>
+{% endfor %}
+    </table>
+
+
+{% endblock %}
