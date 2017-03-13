@@ -14,11 +14,18 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Promo
 {
+
     /**
      * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Article_promo", mappedBy="promo", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $articles_promo;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Ecole", inversedBy="promos")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ecole;
 
     /**
      * @var int
@@ -120,6 +127,21 @@ class Promo
         return $this->articles_promo;
     }
 
+    /**
+     * @return \Kipskool\Bundle\NewsBundle\Entity\Ecole
+     */
+    public function getEcole()
+    {
+        return $this->ecole;
+    }
+
+    /**
+     * @param \Kipskool\Bundle\NewsBundle\Entity\Ecole $ecole
+     */
+    public function setEcole(\Kipskool\Bundle\NewsBundle\Entity\Ecole $ecole)
+    {
+        $this->ecole = $ecole;
+    }
 
 
 

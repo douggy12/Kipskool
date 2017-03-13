@@ -57,6 +57,23 @@
             </tr>
         {% endfor %}
     </table>
+    <ul>
+        <li>
+            <a href="{{ path('promo_new', {'ecole_id': ecole.id}) }}">Create a new promo</a>
+        </li>
+    </ul>
+    <table>
+        <tr>
+            <th>Promo</th>
+            <th>Description</th>
+        </tr>
+        {% for promo in ecole.promos %}
+            <tr>
+                <td><a href="{{ path('promo_show', {'ecole_id': ecole.id, 'id': promo.id}) }}">{{ promo.nom }}</a></td>
+                <td>{{ promo.description }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 
     <ul>
         <li>
