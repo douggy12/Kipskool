@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Articleperso controller.
- *
+ * @ParamConverter("articlePerso", options={"mapping": {"article_id" : "id"}})
  * @Route("perso")
  */
 class ArticlePersoController extends Controller
