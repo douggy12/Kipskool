@@ -18,6 +18,7 @@ class Article_promo
      * @ORM\JoinColumn(nullable=false)
      */
     private $promo;
+
     /**
      * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Commentaire_article_promo", mappedBy="article_promo", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")

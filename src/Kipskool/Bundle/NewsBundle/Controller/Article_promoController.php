@@ -23,7 +23,7 @@ class Article_promoController extends Controller
      * @Route("/{id}/new", name="add_article_promo")
      * @Method({"GET", "POST"})
      */
-    public function newArtcicleAction(Request $request, Promo $promo)
+    public function newArtcicleAction(Request $request, Promo $promo, Ecole $ecole)
     {
         $article_promo = new Article_promo();
         $article_promo->setPromo($promo);
@@ -35,7 +35,9 @@ class Article_promoController extends Controller
             $em->persist($article_promo);
             $em->flush($article_promo);
 
-            return $this->redirectToRoute('promo_show', array('id' => $promo->getId()));
+            return $this->redirectToRoute('promo_show', array(
+                'ecole_id'=>$ecole->getId(),
+                'id' => $promo->getId()));
         }
 
         return $this->render('article_promo/new.html.twig', array(
