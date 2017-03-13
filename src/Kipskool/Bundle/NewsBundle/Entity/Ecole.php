@@ -17,7 +17,11 @@ class Ecole
      * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\articleEcole", mappedBy="ecole")
      */
     private $articles;
-
+    /**
+     * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Promo", mappedBy="ecole", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $promos;
 
     /**
      * @var int
@@ -83,7 +87,7 @@ class Ecole
     public function __construct()
     {
         $this->articles = new ArrayCollection();
-
+        $this->promos = new ArrayCollection();
     }
 
     /**
@@ -94,6 +98,15 @@ class Ecole
         return $this->articles;
     }
 
+
+
+    /**
+     * @return mixed
+     */
+    public function getPromos()
+    {
+        return $this->promos;
+    }
 
     /**
      * Get id
