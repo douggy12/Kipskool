@@ -3,6 +3,7 @@
 namespace Kipskool\Bundle\NewsBundle\Controller;
 
 use Kipskool\Bundle\NewsBundle\Entity\Perso;
+use Kipskool\Bundle\NewsBundle\Entity\Promo;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -15,32 +16,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class PersoController extends Controller
 {
-    /**
-     * Lists all perso entities.
-     *
-     * @Route("/", name="perso_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $persos = $em->getRepository('NewsBundle:Perso')->findAll();
-
-        return $this->render('perso/index.html.twig', array(
-            'persos' => $persos,
-        ));
-    }
-
-    /**
+     /**
      * Creates a new perso entity.
-     *
-     * @Route("/new", name="perso_new")
+     * @ParamConverter("promo", options={"mapping" : {"promo_id" : "id"}})
+     * @Route("/new_perso/promo/{promo_id}", name="perso_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Promo $promo)
     {
         $perso = new Perso();
+        $perso->setPromo($promo);
         $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\PersoType', $perso);
         $form->handleRequest($request);
 
@@ -49,10 +34,14 @@ class PersoController extends Controller
             $em->persist($perso);
             $em->flush($perso);
 
-            return $this->redirectToRoute('perso_show', array('perso_id' => $perso->getId()));
+            return $this->redirectToRoute('perso_show', array(
+                'perso_id' => $perso->getId(),
+                'promo_id' => $perso->getPromo()->getId()
+            ));
         }
 
         return $this->render('perso/new.html.twig', array(
+            'promo' => $promo,
             'perso' => $perso,
             'form' => $form->createView(),
         ));
@@ -69,6 +58,7 @@ class PersoController extends Controller
 
 
         return $this->render('perso/show.html.twig', array(
+            'promo' => $perso->getPromo(),
             'perso' => $perso,
 
         ));

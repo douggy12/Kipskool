@@ -50,9 +50,16 @@ class Promo
      */
     private $description;
 
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Perso", mappedBy="promo", cascade={"remove"})
+     */
+    private $persos;
+
 
     public function __construct()
     {
+        $this->persos = new ArrayCollection();
         $this->articles_promo = new ArrayCollection();
     }
 
@@ -142,6 +149,15 @@ class Promo
     {
         $this->ecole = $ecole;
     }
+
+    /**
+     * @return ArrayCollection|Perso[]
+     */
+    public function getPersos()
+    {
+        return $this->persos;
+    }
+
 
 
 
