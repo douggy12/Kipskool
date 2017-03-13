@@ -2,9 +2,9 @@
 
 namespace Kipskool\Bundle\NewsBundle\Controller;
 
-use Kipskool\Bundle\NewsBundle\Entity\ArticlePerso;
+
 use Kipskool\Bundle\NewsBundle\Entity\CommentaireArticlePerso;
-use Kipskool\Bundle\NewsBundle\Entity\Perso;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -12,9 +12,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 
 /**
  * Commentairearticleperso controller.
- * @ParamConverter("articlePerso", options={"mapping" : {"article_id" : "id"}})
- * @ParamConverter("commentaireArticlePerso", options={"mapping" : {"comment_id" : "id"}})
- * @Route("perso/{id}/article/{article_id}/comment/")
+ * @ParamConverter("commentaireArticlePerso", options={"mapping" : {"commentaire_article_perso_id" : "id"}})
+ * @Route("perso_comment/")
  */
 class CommentaireArticlePersoController extends Controller
 {
@@ -22,10 +21,10 @@ class CommentaireArticlePersoController extends Controller
     /**
      * Displays a form to edit an existing commentaireArticlePerso entity.
      *
-     * @Route("/{comment_id}/edit", name="commentairearticleperso_edit")
+     * @Route("/{commentaire_article_perso_id}/edit", name="commentairearticleperso_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Perso $perso, ArticlePerso $articlePerso, CommentaireArticlePerso $commentaireArticlePerso)
+    public function editAction(Request $request, CommentaireArticlePerso $commentaireArticlePerso)
     {
 
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\CommentaireArticlePersoType', $commentaireArticlePerso);
@@ -35,15 +34,15 @@ class CommentaireArticlePersoController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('articleperso_show', array(
-                'id' => $perso->getId(),
-                'article_id' => $articlePerso->getId()
+                'perso_id' => $commentaireArticlePerso->getArticle()->getPerso()->getId(),
+                'article_id' => $commentaireArticlePerso->getArticle()->getId()
 
             ));
         }
 
         return $this->render('commentairearticleperso/edit.html.twig', array(
-            'perso' => $perso,
-            'articlePerso' => $articlePerso,
+            'perso' => $commentaireArticlePerso->getArticle()->getPerso(),
+            'articlePerso' => $commentaireArticlePerso->getArticle(),
             'commentaireArticlePerso' => $commentaireArticlePerso,
             'edit_form' => $editForm->createView()
         ));
@@ -52,10 +51,10 @@ class CommentaireArticlePersoController extends Controller
     /**
      * Deletes a commentaireArticlePerso entity.
      *
-     * @Route("/{comment_id}/delete", name="commentairearticleperso_delete")
+     * @Route("/{commentaire_article_perso_id}/delete", name="commentairearticleperso_delete")
      * @Method("GET")
      */
-    public function deleteAction(Perso $perso, ArticlePerso $articlePerso,CommentaireArticlePerso $commentaireArticlePerso)
+    public function deleteAction(CommentaireArticlePerso $commentaireArticlePerso)
     {
 
             $em = $this->getDoctrine()->getManager();
@@ -64,24 +63,9 @@ class CommentaireArticlePersoController extends Controller
 
 
         return $this->redirectToRoute('articleperso_show', array(
-            'id' => $perso->getId(),
-            'article_id' => $articlePerso->getId()
+            'perso_id' => $commentaireArticlePerso->getArticle()->getPerso()->getId(),
+            'article_id' => $commentaireArticlePerso->getArticle()->getId()
         ));
     }
 
-    /**
-     * Creates a form to delete a commentaireArticlePerso entity.
-     *
-     * @param CommentaireArticlePerso $commentaireArticlePerso The commentaireArticlePerso entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(CommentaireArticlePerso $commentaireArticlePerso)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('commentairearticleperso_delete', array('id' => $commentaireArticlePerso->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
 }

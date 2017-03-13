@@ -30,13 +30,13 @@
 
     <ul>
         <li>
-            <a href="{{ path('perso_show', {"id" : perso.id}) }}">Back to the list</a>
+            <a href="{{ path('perso_show', {"perso_id" : perso.id}) }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('articleperso_edit', {'article_id': article.id, 'id': perso.id}) }}">Edit</a>
+            <a href="{{ path('articleperso_edit', {'article_id': article.id, 'perso_id': perso.id}) }}">Edit</a>
         </li>
         <li>
-            <a href="{{ path('articleperso_delete', {'article_id': article.id, 'id': perso.id}) }}">Supprimer</a>
+            <a href="{{ path('articleperso_delete', {'article_id': article.id, 'perso_id': perso.id}) }}">Supprimer</a>
         </li>
 
     </ul>
@@ -56,8 +56,8 @@
                 <td>{{ commentaire.createdAt|date('d-m-Y H:m') }}</td>
                 <td>{{ commentaire.texte }}</td>
                 <td>
-                    <a href="{{ path('commentairearticleperso_edit', {'article_id': article.id, 'comment_id': commentaire.id, 'id': perso.id}) }}">Editer</a>
-                    <a href="{{ path('commentairearticleperso_delete', {'article_id': article.id, 'comment_id': commentaire.id, 'id': perso.id}) }}">Supprimer</a>
+                    <a href="{{ path('commentairearticleperso_edit', {'article_id': article.id, 'commentaire_article_perso_id': commentaire.id, 'perso_id': perso.id}) }}">Editer</a>
+                    <a href="{{ path('commentairearticleperso_delete', {'article_id': article.id, 'commentaire_article_perso_id': commentaire.id, 'perso_id': perso.id}) }}">Supprimer</a>
                 </td>
             </tr>
         {% endfor %}

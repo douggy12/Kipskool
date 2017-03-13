@@ -13,8 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Articleperso controller.
- * @ParamConverter("articlePerso", options={"mapping": {"article_id" : "id"}})
- * @Route("perso")
+ * @ParamConverter("articlePerso", options={"mapping": {"article_perso_id" : "id"}})
+ * @Route("article_perso")
  */
 class ArticlePersoController extends Controller
 {
@@ -22,7 +22,7 @@ class ArticlePersoController extends Controller
     /**
      * Creates a new articlePerso entity.
      *
-     * @Route("/{id}/addarticle", name="articleperso_new")
+     * @Route("/article_perso_new/perso/{perso_id}", name="articleperso_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request, Perso $perso)
@@ -37,7 +37,7 @@ class ArticlePersoController extends Controller
             $em->persist($articlePerso);
             $em->flush($articlePerso);
 
-            return $this->redirectToRoute('perso_show', array('id' => $perso->getId()));
+            return $this->redirectToRoute('perso_show', array('perso_id' => $perso->getId()));
         }
 
         return $this->render('articleperso/new.html.twig', array(
@@ -49,10 +49,10 @@ class ArticlePersoController extends Controller
     /**
      * Finds and displays a articlePerso entity.
      *
-     * @Route("/{id}/article/{article_id}", name="articleperso_show")
+     * @Route("/{article_perso_id}", name="articleperso_show")
      * @Method({"GET", "POST"})
      */
-    public function showAction(Request $request, Perso $perso, ArticlePerso $articlePerso)
+    public function showAction(Request $request, ArticlePerso $articlePerso)
     {
         $commentaireArticlePerso = new CommentaireArticlePerso();
         $commentaireArticlePerso->setArticle($articlePerso);
@@ -65,14 +65,14 @@ class ArticlePersoController extends Controller
             $em->flush($commentaireArticlePerso);
 
             return $this->redirectToRoute('articleperso_show', array(
-                'id' => $perso->getId(),
-                'article_id' => $articlePerso->getId()
+                'id_perso' => $articlePerso->getPerso()->getId(),
+                'article_perso_id' => $articlePerso->getId()
             ));
         }
 
         return $this->render('articleperso/show.html.twig', array(
             'article' => $articlePerso,
-            'perso' => $perso,
+            'perso' => $articlePerso->getPerso(),
             'commentaireArticlePerso' => $commentaireArticlePerso,
             'edit_form' => $form->createView(),
 
@@ -83,11 +83,11 @@ class ArticlePersoController extends Controller
      * Displays a form to edit an existing articlePerso entity.
      *
 
-     * @Route("/{id}/article/{article_id}/edit", name="articleperso_edit")
+     * @Route("/{article_perso_id}/edit", name="articleperso_edit")
      *
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Perso $perso, ArticlePerso $articlePerso)
+    public function editAction(Request $request, ArticlePerso $articlePerso)
     {
 
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\ArticlePersoType', $articlePerso);
@@ -96,12 +96,12 @@ class ArticlePersoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('perso_show', array('id' => $perso->getId()));
+            return $this->redirectToRoute('perso_show', array('perso_id' => $articlePerso->getPerso()->getId()));
         }
 
         return $this->render('articleperso/edit.html.twig', array(
             'article' => $articlePerso,
-            'perso' => $perso,
+            'perso' => $articlePerso->getPerso(),
             'edit_form' => $editForm->createView(),
 
         ));
@@ -110,10 +110,10 @@ class ArticlePersoController extends Controller
     /**
      * Deletes a articlePerso entity.
      *
-     * @Route("/{id}/article/{article_id}/delete", name="articleperso_delete")
+     * @Route("/{article_perso_id}/delete", name="articleperso_delete")
      * @Method("GET")
      */
-    public function deleteAction(Perso $perso, ArticlePerso $articlePerso)
+    public function deleteAction(ArticlePerso $articlePerso)
     {
 
 
@@ -124,23 +124,9 @@ class ArticlePersoController extends Controller
 
 
         return $this->redirectToRoute('perso_show', array(
-            "perso" => $perso->getId()
+            "perso" => $articlePerso->getPerso()->getId()
         ));
     }
 
-    /**
-     * Creates a form to delete a articlePerso entity.
-     *
-     * @param ArticlePerso $articlePerso The articlePerso entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(ArticlePerso $articlePerso)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('articleperso_delete', array('id' => $articlePerso->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
+
 }

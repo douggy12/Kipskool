@@ -4,7 +4,7 @@ namespace Kipskool\Bundle\NewsBundle\Controller;
 
 use Kipskool\Bundle\NewsBundle\Entity\articleEcole;
 use Kipskool\Bundle\NewsBundle\Entity\commentaireArticleEcole;
-use Kipskool\Bundle\NewsBundle\Entity\Ecole;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -12,8 +12,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 
 /**
  * Commentairearticleecole controller.
- *
- * @Route("ecole")
+ * @ParamConverter("commentaireArticleEcole", options={"mapping" : {"commentaire_article_ecole_id" : "id"})
+ * @Route("ecole_comment")
  */
 class commentaireArticleEcoleController extends Controller
 {
@@ -24,12 +24,10 @@ class commentaireArticleEcoleController extends Controller
     /**
      * Displays a form to edit an existing commentaireArticleEcole entity.
      *
-     * @Route("/{id}/article/{article_id}/commentaire/{comment_id}/edit", name="commentairearticleecole_edit")
-     * @ParamConverter("articleEcole", options={"mapping":{"article_id" : "id"}})
-     * @ParamConverter("commentaireArticleEcole", options={"mapping":{"comment_id" : "id"}})
+     * @Route("{commentaire_article_id}/edit", name="commentairearticleecole_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Ecole $ecole, articleEcole $articleEcole, commentaireArticleEcole $commentaireArticleEcole)
+    public function editAction(Request $request, commentaireArticleEcole $commentaireArticleEcole)
     {
 
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\commentaireArticleEcoleType', $commentaireArticleEcole);
@@ -39,14 +37,14 @@ class commentaireArticleEcoleController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('articleecole_show', array(
-                'article_id' => $articleEcole->getId(),
-                'id' => $ecole->getId(),
+                'article_id' => $commentaireArticleEcole->getArticleEcole()->getId(),
+                'ecole_id' => $commentaireArticleEcole->getArticleEcole()->getEcole()->getId(),
             ));
         }
 
         return $this->render('commentairearticleecole/edit.html.twig', array(
-            'ecole' => $ecole,
-            'articleEcole' => $articleEcole,
+            'ecole' => $commentaireArticleEcole->getArticleEcole()->getEcole(),
+            'articleEcole' => $commentaireArticleEcole->getArticleEcole(),
             'commentaireArticleEcole' => $commentaireArticleEcole,
             'edit_form' => $editForm->createView(),
 
@@ -56,12 +54,10 @@ class commentaireArticleEcoleController extends Controller
     /**
      * Deletes a commentaireArticleEcole entity.
      *
-     * @Route("/{id}/article/{article_id}/commentaire/{comment_id}/delete", name="commentairearticleecole_delete")
-     * @ParamConverter("articleEcole", options={"mapping":{"article_id" : "id"}})
-     * @ParamConverter("commentaireArticleEcole", options={"mapping":{"comment_id" : "id"}})
+     * @Route("/{commentaire_article_ecole_id}/delete", name="commentairearticleecole_delete")
      * @Method("GET")
      */
-    public function deleteAction(Ecole $ecole, articleEcole $articleEcole, commentaireArticleEcole $commentaireArticleEcole)
+    public function deleteAction(commentaireArticleEcole $commentaireArticleEcole)
     {
 
 
@@ -72,8 +68,8 @@ class commentaireArticleEcoleController extends Controller
 
 
         return $this->redirectToRoute('articleecole_show', array(
-            'id' => $ecole->getId(),
-            'article_id' => $articleEcole->getId()
+            'ecole_id' => $commentaireArticleEcole->getArticleEcole()->getEcole()->getId(),
+            'article_id' => $commentaireArticleEcole->getArticleEcole()->getId()
         ));
     }
 

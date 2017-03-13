@@ -19,7 +19,7 @@
         <tbody>
         {% for perso in persos %}
             <tr>
-                <td><a href="{{ path('perso_show', { 'id': perso.id }) }}">{{ perso.id }}</a></td>
+                <td><a href="{{ path('perso_show', { 'perso_id': perso.id }) }}">{{ perso.id }}</a></td>
                 <td>{{ perso.nom }}</td>
                 <td>{{ perso.prenom }}</td>
                 <td>{{ perso.titre }}</td>
@@ -29,10 +29,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('perso_show', { 'id': perso.id }) }}">show</a>
+                            <a href="{{ path('perso_show', { 'perso_id': perso.id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('perso_edit', { 'id': perso.id }) }}">edit</a>
+                            <a href="{{ path('perso_edit', { 'perso_id': perso.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>

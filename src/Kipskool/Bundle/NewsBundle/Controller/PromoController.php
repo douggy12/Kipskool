@@ -2,18 +2,19 @@
 
 namespace Kipskool\Bundle\NewsBundle\Controller;
 
-use Kipskool\Bundle\NewsBundle\Entity\Article_promo;
+
 use Kipskool\Bundle\NewsBundle\Entity\Ecole;
 use Kipskool\Bundle\NewsBundle\Entity\Promo;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Promo controller.
- *
- * @Route("/")
+ * @ParamConverter("promo", options={"mapping" : {"promo_id" : "id"})
+ * @Route("/promo/")
  */
 class PromoController extends Controller
 {
@@ -21,7 +22,7 @@ class PromoController extends Controller
      * Creates a new promo entity.
      *
      * @ParamConverter("ecole", options={"mapping":{"ecole_id":"id"}})
-     * @Route("ecole/{ecole_id}/promo/new", name="promo_new")
+     * @Route("new_promo/ecole/{ecole_id}", name="promo_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request, Ecole $ecole)
@@ -38,7 +39,7 @@ class PromoController extends Controller
 
             return $this->redirectToRoute('promo_show', array(
                 'ecole_id'=>$ecole->getId(),
-                'id' => $promo->getId()
+                'promo_id' => $promo->getId()
                 ));
         }
 
@@ -52,26 +53,24 @@ class PromoController extends Controller
     /**
      * Finds and displays a promo entity.
      *
-     * @ParamConverter("ecole", options={"mapping":{"ecole_id":"id"}})
-     * @Route("ecole/{ecole_id}/promo/{id}", name="promo_show")
+     * @Route("{promo_id}", name="promo_show")
      * @Method("GET")
      */
-    public function showAction(Ecole $ecole, Promo $promo)
+    public function showAction(Promo $promo)
     {
         return $this->render('promo/show.html.twig', array(
             'promo' => $promo,
-            'ecole' => $ecole,
+            'ecole' => $promo->getEcole(),
         ));
     }
 
     /**
      * Displays a form to edit an existing promo entity.
      *
-     * @ParamConverter("ecole", options={"mapping":{"ecole_id":"id"}})
-     * @Route("ecole/{ecole_id}/promo/{id}/edit", name="promo_edit")
+     * @Route("{promo_id}/edit", name="promo_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Promo $promo, Ecole $ecole)
+    public function editAction(Request $request, Promo $promo)
     {
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\PromoType', $promo);
         $editForm->handleRequest($request);
@@ -80,14 +79,14 @@ class PromoController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('promo_show', array(
-                'ecole_id' => $ecole->getId(),
-                'id' => $promo->getId()
+                'ecole_id' => $promo->getEcole()->getId(),
+                'promo_id' => $promo->getId()
             ));
         }
 
         return $this->render('promo/edit.html.twig', array(
             'promo' => $promo,
-            'ecole' =>$ecole,
+            'ecole' =>$promo->getEcole(),
             'edit_form' => $editForm->createView(),
         ));
     }
@@ -95,11 +94,10 @@ class PromoController extends Controller
     /**
      * Deletes a promo entity.
      *
-     * @ParamConverter("ecole", options={"mapping":{"ecole_id":"id"}})
-     * @Route("ecole/{ecole_id}/promo/{id}/delete", name="promo_delete")
+     * @Route("{promo_id}/delete", name="promo_delete")
      * @Method("GET")
      */
-    public function deleteAction(Ecole $ecole, Promo $promo)
+    public function deleteAction(Promo $promo)
     {
         dump($promo);
             $em = $this->getDoctrine()->getManager();
@@ -108,7 +106,7 @@ class PromoController extends Controller
 
 
         return $this->redirectToRoute('ecole_show', array(
-            'id'=> $ecole->getId()
+            'ecole_id'=> $promo->getEcole()->getId()
         ));
     }
 
