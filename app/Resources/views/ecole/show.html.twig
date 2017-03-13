@@ -57,7 +57,11 @@
             </tr>
         {% endfor %}
     </table>
-
+    <ul>
+        <li>
+            <a href="{{ path('promo_new', {'ecole_id': ecole.id}) }}">Create a new promo</a>
+        </li>
+    </ul>
     <table>
         <tr>
             <th>Promo</th>

@@ -18,31 +18,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 class PromoController extends Controller
 {
     /**
-     * Lists all promo entities.
-     *
-     * @Route("promo/", name="promo_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $promos = $em->getRepository('NewsBundle:Promo')->findAll();
-
-        return $this->render('promo/index.html.twig', array(
-            'promos' => $promos,
-        ));
-    }
-
-    /**
      * Creates a new promo entity.
      *
-     * @Route("/new", name="promo_new")
+     * @ParamConverter("ecole", options={"mapping":{"ecole_id":"id"}})
+     * @Route("ecole/{ecole_id}/promo/new", name="promo_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Ecole $ecole)
     {
         $promo = new Promo();
+        $promo->setEcole($ecole);
         $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\PromoType', $promo);
         $form->handleRequest($request);
 
@@ -51,10 +36,14 @@ class PromoController extends Controller
             $em->persist($promo);
             $em->flush($promo);
 
-            return $this->redirectToRoute('promo_show', array('id' => $promo->getId()));
+            return $this->redirectToRoute('promo_show', array(
+                'ecole_id'=>$ecole->getId(),
+                'id' => $promo->getId()
+                ));
         }
 
         return $this->render('promo/new.html.twig', array(
+            'ecole' => $ecole,
             'promo' => $promo,
             'form' => $form->createView(),
         ));
@@ -69,76 +58,61 @@ class PromoController extends Controller
      */
     public function showAction(Ecole $ecole, Promo $promo)
     {
-        $deleteForm = $this->createDeleteForm($promo);
-
         return $this->render('promo/show.html.twig', array(
             'promo' => $promo,
             'ecole' => $ecole,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
      * Displays a form to edit an existing promo entity.
      *
-     * @Route("/{id}/edit", name="promo_edit")
+     * @ParamConverter("ecole", options={"mapping":{"ecole_id":"id"}})
+     * @Route("ecole/{ecole_id}/promo/{id}/edit", name="promo_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Promo $promo)
+    public function editAction(Request $request, Promo $promo, Ecole $ecole)
     {
-        $deleteForm = $this->createDeleteForm($promo);
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\PromoType', $promo);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('promo_show', array('id' => $promo->getId()));
+            return $this->redirectToRoute('promo_show', array(
+                'ecole_id' => $ecole->getId(),
+                'id' => $promo->getId()
+            ));
         }
 
         return $this->render('promo/edit.html.twig', array(
             'promo' => $promo,
+            'ecole' =>$ecole,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
      * Deletes a promo entity.
      *
-     * @Route("/{id}", name="promo_delete")
-     * @Method("DELETE")
+     * @ParamConverter("ecole", options={"mapping":{"ecole_id":"id"}})
+     * @Route("ecole/{ecole_id}/promo/{id}/delete", name="promo_delete")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, Promo $promo)
+    public function deleteAction(Ecole $ecole, Promo $promo)
     {
-        $form = $this->createDeleteForm($promo);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        dump($promo);
             $em = $this->getDoctrine()->getManager();
             $em->remove($promo);
             $em->flush();
-        }
 
-        return $this->redirectToRoute('promo_index');
+
+        return $this->redirectToRoute('ecole_show', array(
+            'id'=> $ecole->getId()
+        ));
     }
 
-    /**
-     * Creates a form to delete a promo entity.
-     *
-     * @param Promo $promo The promo entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Promo $promo)
-    {
 
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('promo_delete', array('id' => $promo->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
 
 
 

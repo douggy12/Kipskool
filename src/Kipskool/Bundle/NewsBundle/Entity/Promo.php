@@ -20,8 +20,10 @@ class Promo
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $articles_promo;
+
     /**
      * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Ecole", inversedBy="promos")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $ecole;
 

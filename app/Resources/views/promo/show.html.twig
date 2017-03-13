@@ -20,7 +20,7 @@
         </tbody>
     </table>
     <ul>
-        <a href="{{ path('add_article_promo',{'id': promo.id}) }}">Ecrire un article</a>
+        <a href="{{ path('add_article_promo', {'id': promo.id}) }}">Ecrire un article</a>
     </ul>
     <table>
     <tr>
@@ -30,7 +30,7 @@
     </tr>
         {% for article_promo in promo.articles_promo %}
             <tr>
-                <td><a href="{{ path('article_promo_show', {'id': promo.id,'article_promo_id': article_promo.id}) }}">{{ article_promo.titre }}</td>
+                <td><a href="{{ path('article_promo_show', {'id': promo.id,'article_promo_id': article_promo.id}) }}">{{ article_promo.titre }}</td> 
                 <td>{{ article_promo.createdAt|date("d/m/Y") }}</td>
                 <td>{{ article_promo.texte }}</td>
             </tr>
@@ -43,12 +43,9 @@
             <a href="{{ path('ecole_show', {'id': ecole.id}) }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('promo_edit', { 'id': promo.id }) }}">Edit</a>
+            <a href="{{ path('promo_edit', {'ecole_id': ecole.id, 'id': promo.id}) }}">Edit</a>
         </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+        <li><a href="{{ path('promo_delete', {'ecole_id': ecole.id, 'id': promo.id}) }}">Delete</a>
         </li>
     </ul>
 {% endblock %}
