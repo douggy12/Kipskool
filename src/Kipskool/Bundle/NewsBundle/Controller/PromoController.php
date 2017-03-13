@@ -3,6 +3,7 @@
 namespace Kipskool\Bundle\NewsBundle\Controller;
 
 use Kipskool\Bundle\NewsBundle\Entity\Article_promo;
+use Kipskool\Bundle\NewsBundle\Entity\Ecole;
 use Kipskool\Bundle\NewsBundle\Entity\Promo;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -62,15 +63,17 @@ class PromoController extends Controller
     /**
      * Finds and displays a promo entity.
      *
-     * @Route("/{id}", name="promo_show")
+     * @ParamConverter("ecole", options={"mapping":{"ecole_id":"id"}})
+     * @Route("ecole/{ecole_id}/promo/{id}", name="promo_show")
      * @Method("GET")
      */
-    public function showAction(Promo $promo)
+    public function showAction(Ecole $ecole, Promo $promo)
     {
         $deleteForm = $this->createDeleteForm($promo);
 
         return $this->render('promo/show.html.twig', array(
             'promo' => $promo,
+            'ecole' => $ecole,
             'delete_form' => $deleteForm->createView(),
         ));
     }
