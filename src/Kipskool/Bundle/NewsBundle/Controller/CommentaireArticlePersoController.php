@@ -2,120 +2,71 @@
 
 namespace Kipskool\Bundle\NewsBundle\Controller;
 
+use Kipskool\Bundle\NewsBundle\Entity\ArticlePerso;
 use Kipskool\Bundle\NewsBundle\Entity\CommentaireArticlePerso;
+use Kipskool\Bundle\NewsBundle\Entity\Perso;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Commentairearticleperso controller.
- *
- * @Route("commentairearticleperso")
+ * @ParamConverter("articlePerso", options={"mapping" : {"article_id" : "id"}})
+ * @ParamConverter("commentaireArticlePerso", options={"mapping" : {"comment_id" : "id"}})
+ * @Route("perso/{id}/article/{article_id}/comment/")
  */
 class CommentaireArticlePersoController extends Controller
 {
-    /**
-     * Lists all commentaireArticlePerso entities.
-     *
-     * @Route("/", name="commentairearticleperso_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $commentaireArticlePersos = $em->getRepository('NewsBundle:CommentaireArticlePerso')->findAll();
-
-        return $this->render('commentairearticleperso/index.html.twig', array(
-            'commentaireArticlePersos' => $commentaireArticlePersos,
-        ));
-    }
-
-    /**
-     * Creates a new commentaireArticlePerso entity.
-     *
-     * @Route("/new", name="commentairearticleperso_new")
-     * @Method({"GET", "POST"})
-     */
-    public function newAction(Request $request)
-    {
-        $commentaireArticlePerso = new Commentairearticleperso();
-        $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\CommentaireArticlePersoType', $commentaireArticlePerso);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($commentaireArticlePerso);
-            $em->flush($commentaireArticlePerso);
-
-            return $this->redirectToRoute('commentairearticleperso_show', array('id' => $commentaireArticlePerso->getId()));
-        }
-
-        return $this->render('commentairearticleperso/new.html.twig', array(
-            'commentaireArticlePerso' => $commentaireArticlePerso,
-            'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a commentaireArticlePerso entity.
-     *
-     * @Route("/{id}", name="commentairearticleperso_show")
-     * @Method("GET")
-     */
-    public function showAction(CommentaireArticlePerso $commentaireArticlePerso)
-    {
-        $deleteForm = $this->createDeleteForm($commentaireArticlePerso);
-
-        return $this->render('commentairearticleperso/show.html.twig', array(
-            'commentaireArticlePerso' => $commentaireArticlePerso,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
 
     /**
      * Displays a form to edit an existing commentaireArticlePerso entity.
      *
-     * @Route("/{id}/edit", name="commentairearticleperso_edit")
+     * @Route("/{comment_id}/edit", name="commentairearticleperso_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, CommentaireArticlePerso $commentaireArticlePerso)
+    public function editAction(Request $request, Perso $perso, ArticlePerso $articlePerso, CommentaireArticlePerso $commentaireArticlePerso)
     {
-        $deleteForm = $this->createDeleteForm($commentaireArticlePerso);
+
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\CommentaireArticlePersoType', $commentaireArticlePerso);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('commentairearticleperso_edit', array('id' => $commentaireArticlePerso->getId()));
+            return $this->redirectToRoute('articleperso_show', array(
+                'id' => $perso->getId(),
+                'article_id' => $articlePerso->getId()
+
+            ));
         }
 
         return $this->render('commentairearticleperso/edit.html.twig', array(
+            'perso' => $perso,
+            'articlePerso' => $articlePerso,
             'commentaireArticlePerso' => $commentaireArticlePerso,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm->createView()
         ));
     }
 
     /**
      * Deletes a commentaireArticlePerso entity.
      *
-     * @Route("/{id}", name="commentairearticleperso_delete")
-     * @Method("DELETE")
+     * @Route("/{comment_id}/delete", name="commentairearticleperso_delete")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, CommentaireArticlePerso $commentaireArticlePerso)
+    public function deleteAction(Perso $perso, ArticlePerso $articlePerso,CommentaireArticlePerso $commentaireArticlePerso)
     {
-        $form = $this->createDeleteForm($commentaireArticlePerso);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($commentaireArticlePerso);
             $em->flush();
-        }
 
-        return $this->redirectToRoute('commentairearticleperso_index');
+
+        return $this->redirectToRoute('articleperso_show', array(
+            'id' => $perso->getId(),
+            'article_id' => $articlePerso->getId()
+        ));
     }
 
     /**

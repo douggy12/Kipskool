@@ -65,11 +65,11 @@ class PersoController extends Controller
      */
     public function showAction(Perso $perso)
     {
-        $deleteForm = $this->createDeleteForm($perso);
+
 
         return $this->render('perso/show.html.twig', array(
             'perso' => $perso,
-            'delete_form' => $deleteForm->createView(),
+
         ));
     }
 

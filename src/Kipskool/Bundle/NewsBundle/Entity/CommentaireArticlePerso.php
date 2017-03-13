@@ -102,6 +102,16 @@ class CommentaireArticlePerso
         return $this->article;
     }
 
+    /**
+     * @param mixed $article
+     */
+    public function setArticle($article)
+    {
+        $this->article = $article;
+    }
+
+
+
 
 
 

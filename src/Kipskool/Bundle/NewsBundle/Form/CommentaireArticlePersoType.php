@@ -13,7 +13,7 @@ class CommentaireArticlePersoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('texte')->add('createdAt')->add('article');
+        $builder->add('texte');
     }
     
     /**

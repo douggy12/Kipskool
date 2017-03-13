@@ -3,6 +3,7 @@
 namespace Kipskool\Bundle\NewsBundle\Controller;
 
 use Kipskool\Bundle\NewsBundle\Entity\ArticlePerso;
+use Kipskool\Bundle\NewsBundle\Entity\CommentaireArticlePerso;
 use Kipskool\Bundle\NewsBundle\Entity\Perso;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -49,15 +50,31 @@ class ArticlePersoController extends Controller
      * Finds and displays a articlePerso entity.
      *
      * @Route("/{id}/article/{article_id}", name="articleperso_show")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function showAction(Perso $perso, ArticlePerso $articlePerso)
+    public function showAction(Request $request, Perso $perso, ArticlePerso $articlePerso)
     {
+        $commentaireArticlePerso = new CommentaireArticlePerso();
+        $commentaireArticlePerso->setArticle($articlePerso);
+        $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\CommentaireArticlePersoType', $commentaireArticlePerso);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($commentaireArticlePerso);
+            $em->flush($commentaireArticlePerso);
+
+            return $this->redirectToRoute('articleperso_show', array(
+                'id' => $perso->getId(),
+                'article_id' => $articlePerso->getId()
+            ));
+        }
 
         return $this->render('articleperso/show.html.twig', array(
             'article' => $articlePerso,
-            'perso' => $perso
+            'perso' => $perso,
+            'commentaireArticlePerso' => $commentaireArticlePerso,
+            'edit_form' => $form->createView(),
 
         ));
     }
