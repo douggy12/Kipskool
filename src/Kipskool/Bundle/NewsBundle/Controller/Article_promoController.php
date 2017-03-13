@@ -92,7 +92,7 @@ class Article_promoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('promo_show', array('promo_id' => $article_promo->getPromo()->getId()));
+            return $this->redirectToRoute('article_promo_show', array('article_promo_id' => $article_promo->getId()));
         }
 
         return $this->render('article_promo/edit.html.twig', array(

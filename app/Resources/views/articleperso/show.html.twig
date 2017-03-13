@@ -11,7 +11,7 @@
             </tr>
             <tr>
                 <th>Createdat</th>
-                <td>{{ article.createdAt }}</td>
+                <td>{{ article.createdAt|date('d-m-Y') }}</td>
             </tr>
             <tr>
                 <th>Titre</th>
@@ -33,10 +33,10 @@
             <a href="{{ path('perso_show', {"perso_id" : perso.id}) }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('articleperso_edit', {'article_id': article.id, 'perso_id': perso.id}) }}">Edit</a>
+            <a href="{{ path('articleperso_edit', {'article_perso_id': article.id, 'perso_id': perso.id}) }}">Edit</a>
         </li>
         <li>
-            <a href="{{ path('articleperso_delete', {'article_id': article.id, 'perso_id': perso.id}) }}">Supprimer</a>
+            <a href="{{ path('articleperso_delete', {'article_perso_id': article.id, 'perso_id': perso.id}) }}">Supprimer</a>
         </li>
 
     </ul>

@@ -41,7 +41,7 @@ class commentaireArticleEcole
 
     /**
      * commentaireArticleEcole constructor.
-     * @param int $createdAt
+
      */
     public function __construct()
     {

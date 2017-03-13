@@ -2,7 +2,7 @@
 
 namespace Kipskool\Bundle\NewsBundle\Controller;
 
-use Kipskool\Bundle\NewsBundle\Entity\articleEcole;
+
 use Kipskool\Bundle\NewsBundle\Entity\commentaireArticleEcole;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 
 /**
  * Commentairearticleecole controller.
- * @ParamConverter("commentaireArticleEcole", options={"mapping" : {"commentaire_article_ecole_id" : "id"})
+ * @ParamConverter("commentaireArticleEcole", options={"mapping" : {"commentaire_article_ecole_id" : "id"}})
  * @Route("ecole_comment")
  */
 class commentaireArticleEcoleController extends Controller
@@ -24,7 +24,7 @@ class commentaireArticleEcoleController extends Controller
     /**
      * Displays a form to edit an existing commentaireArticleEcole entity.
      *
-     * @Route("{commentaire_article_id}/edit", name="commentairearticleecole_edit")
+     * @Route("{commentaire_article_ecole_id}/edit", name="commentairearticleecole_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, commentaireArticleEcole $commentaireArticleEcole)
@@ -37,7 +37,7 @@ class commentaireArticleEcoleController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('articleecole_show', array(
-                'article_id' => $commentaireArticleEcole->getArticleEcole()->getId(),
+                'article_ecole_id' => $commentaireArticleEcole->getArticleEcole()->getId(),
                 'ecole_id' => $commentaireArticleEcole->getArticleEcole()->getEcole()->getId(),
             ));
         }
@@ -69,7 +69,7 @@ class commentaireArticleEcoleController extends Controller
 
         return $this->redirectToRoute('articleecole_show', array(
             'ecole_id' => $commentaireArticleEcole->getArticleEcole()->getEcole()->getId(),
-            'article_id' => $commentaireArticleEcole->getArticleEcole()->getId()
+            'article_ecole_id' => $commentaireArticleEcole->getArticleEcole()->getId()
         ));
     }
 

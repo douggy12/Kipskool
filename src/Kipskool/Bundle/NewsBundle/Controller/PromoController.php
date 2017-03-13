@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Promo controller.
- * @ParamConverter("promo", options={"mapping" : {"promo_id" : "id"})
+ * @ParamConverter("promo", options={"mapping" : {"promo_id" : "id"}})
  * @Route("/promo/")
  */
 class PromoController extends Controller
@@ -99,7 +99,7 @@ class PromoController extends Controller
      */
     public function deleteAction(Promo $promo)
     {
-        dump($promo);
+
             $em = $this->getDoctrine()->getManager();
             $em->remove($promo);
             $em->flush();

@@ -53,7 +53,7 @@ class Commentaire_article_promoController extends Controller
      * @Route("/{commentaire_article_promo_id}/delete", name="commentaire_delete")
      * @Method("GET")
      */
-    public function deleteAction(Commentaire_article_promo $commentaire_article_promo, Article_promo $article_promo)
+    public function deleteAction(Commentaire_article_promo $commentaire_article_promo)
     {
 
             $em = $this->getDoctrine()->getManager();

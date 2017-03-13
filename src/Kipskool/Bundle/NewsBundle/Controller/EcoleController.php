@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
  * Ecole controller.
- * @ParamConverter("ecole", options={"mapping" : {"ecole_id" : "id"})
+ * @ParamConverter("ecole", options={"mapping" : {"ecole_id" : "id"}})
  * @Route("ecole")
  */
 class EcoleController extends Controller

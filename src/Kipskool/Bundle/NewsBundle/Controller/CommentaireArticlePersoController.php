@@ -35,7 +35,7 @@ class CommentaireArticlePersoController extends Controller
 
             return $this->redirectToRoute('articleperso_show', array(
                 'perso_id' => $commentaireArticlePerso->getArticle()->getPerso()->getId(),
-                'article_id' => $commentaireArticlePerso->getArticle()->getId()
+                'article_perso_id' => $commentaireArticlePerso->getArticle()->getId()
 
             ));
         }
@@ -64,7 +64,7 @@ class CommentaireArticlePersoController extends Controller
 
         return $this->redirectToRoute('articleperso_show', array(
             'perso_id' => $commentaireArticlePerso->getArticle()->getPerso()->getId(),
-            'article_id' => $commentaireArticlePerso->getArticle()->getId()
+            'article_perso_id' => $commentaireArticlePerso->getArticle()->getId()
         ));
     }
 

@@ -48,8 +48,6 @@ class articleEcoleController extends Controller
     /**
      * Finds and displays a articleEcole entity.
      *
-     * @ParamConverter("articleEcole", options={"mapping": {"article_id": "id"}})
-
      * @Route("/{article_ecole_id}", name="articleecole_show")
      * @Method({"GET", "POST"})
      *
@@ -98,7 +96,7 @@ class articleEcoleController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('ecole_show', array('ecole_id' => $articleEcole->getEcole()->getId()));
+            return $this->redirectToRoute('articleecole_show', array('article_ecole_id' => $articleEcole->getId()));
         }
 
         return $this->render('articleecole/edit.html.twig', array(
@@ -115,7 +113,7 @@ class articleEcoleController extends Controller
      * @Route("{article_ecole_id}/delete", name="articleecole_delete")
      * @Method("GET")
      */
-    public function deleteAction(Ecole $ecole, articleEcole $articleEcole)
+    public function deleteAction(articleEcole $articleEcole)
     {
 
 

@@ -21,7 +21,7 @@ class ArticlePersoController extends Controller
 
     /**
      * Creates a new articlePerso entity.
-     *
+     * @ParamConverter("perso", options={"mapping" : {"perso_id" : "id"}})
      * @Route("/article_perso_new/perso/{perso_id}", name="articleperso_new")
      * @Method({"GET", "POST"})
      */
@@ -96,7 +96,7 @@ class ArticlePersoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('perso_show', array('perso_id' => $articlePerso->getPerso()->getId()));
+            return $this->redirectToRoute('articleperso_show', array('article_perso_id' => $articlePerso->getId()));
         }
 
         return $this->render('articleperso/edit.html.twig', array(
@@ -124,7 +124,7 @@ class ArticlePersoController extends Controller
 
 
         return $this->redirectToRoute('perso_show', array(
-            "perso" => $articlePerso->getPerso()->getId()
+            "perso_id" => $articlePerso->getPerso()->getId()
         ));
     }
 
