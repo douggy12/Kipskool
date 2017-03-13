@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<h1>{{ ecole.nom }}</h1><ul>
-    <li><a href="{{ path('admin_ecole', {'ecole_id': ecole.id}) }}">Ecole</a></li>
-    <li><a href="">Promo</a></li>
-    <li><a href="">Perso</a></li>
-    <li><a href="{{ path('ecole_show', {'id': ecole.id}) }}">back to {{ ecole.nom }} view</a></li>
-</ul>
+<h1>{{ ecole.nom }}</h1>
+    <table>
+        <td><a href="{{ path('admin_ecole', {'ecole_id': ecole.id}) }}">Ecole</a>~~</td>
+        <td><a href="{{ path('admin_promo', {'ecole_id': ecole.id}) }}">Promo</a>~~</td>
+        <td><a href="">Perso</a>~~</td>
+        <td><a href="{{ path('ecole_show', {'id': ecole.id}) }}">back to {{ ecole.nom }} view</a></td>
+    </table>
     <br><br>
     <table>
 {% for article in ecole.articles %}
@@ -17,7 +18,8 @@
         <td><a href="{{ path('admin_article_delete', {'article_id': article.id}) }}"> Delete</a></td>
     </tr>
 {% endfor %}
-    </table><br><br><br>
+    </table>
+    <br><br><br>
 <h2>{{ ecole.nom }} Editor</h2>
 
     {{ form_start(edit_form) }}

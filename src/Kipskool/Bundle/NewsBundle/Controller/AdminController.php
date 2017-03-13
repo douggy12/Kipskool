@@ -5,6 +5,7 @@ namespace Kipskool\Bundle\NewsBundle\Controller;
 use Kipskool\Bundle\NewsBundle\Entity\Article_promo;
 use Kipskool\Bundle\NewsBundle\Entity\articleEcole;
 use Kipskool\Bundle\NewsBundle\Entity\Ecole;
+use Kipskool\Bundle\NewsBundle\Entity\Promo;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -84,5 +85,23 @@ class AdminController extends Controller
 
         ));
     }
+
+    /**
+     * Finds and displays a ecole entity.
+     *
+     * @ParamConverter("ecole", options={"mapping": {"ecole_id": "id"}})
+     * @Route("promo/{ecole_id}", name="admin_promo")
+     * @Method("GET")
+     */
+    public function indexPromoAction(Ecole $ecole)
+    {
+
+
+        return $this->render('admin/admin_promo.html.twig', array(
+            'ecole' => $ecole,
+
+        ));
+    }
+
 
 }

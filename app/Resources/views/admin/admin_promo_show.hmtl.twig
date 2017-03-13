@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>{{ promo.ecole.nom }}</h1>
+    <table>
+        <td><a href="{{ path('admin_ecole', {'ecole_id': promo.ecole.id}) }}">Ecole</a></td>
+        <td><a href="{{ path('admin_promo', {'ecole_id': promo.ecole.id}) }}">Promo</a></td>
+        <td><a href="">Perso</a></td>
+        <td><a href="{{ path('ecole_show', {'id': promo.ecole.id}) }}">back to {{ promo.ecole.nom }} view</a></td>
+    </table>
+
+    <select id="promoSelect">
+        {% for promo in ecole.promos %}
+            <option value="{{ promo.id }}"><a href="{{ path('admin_promo_show', {'promo_id': promo.id}) }}">{{ promo.nom }}</a></option>
+        {% endfor %}
+    </select>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var e = document.getElementById("promoSelect");
+        var articleName = e.options[e.selectedIndex].value
+    </script>
+{% endblock %}
