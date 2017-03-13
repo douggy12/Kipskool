@@ -12,15 +12,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 
 /**
  * Articleecole controller.
- *
- *@Route("ecole")
+ * @ParamConverter("articleEcole", options={"mapping" : {"article_ecole_id" : "id"}})
+ * @Route("article_ecole")
  */
 class articleEcoleController extends Controller
 {
     /**
      * Creates a new articleEcole entity for the active ecole.
-     *
-     * @Route("/{id}/new", name="addArticle")
+     * @ParamConverter("ecole", options={"mapping" : {"ecole_id" : "id"}})
+     * @Route("/new_article_ecole/ecole/{ecole_id}", name="addArticle")
      * @Method({"GET", "POST"})
      */
     public function addArticle(Request $request, Ecole $ecole)
@@ -36,7 +36,7 @@ class articleEcoleController extends Controller
             $em->persist($articleEcole);
             $em->flush($articleEcole);
 
-            return $this->redirectToRoute('ecole_show', array('id' => $ecole->getId()));
+            return $this->redirectToRoute('ecole_show', array('ecole_id' => $ecole->getId()));
         }
 
         return $this->render('articleecole/new.html.twig', array(
@@ -48,13 +48,11 @@ class articleEcoleController extends Controller
     /**
      * Finds and displays a articleEcole entity.
      *
-     * @ParamConverter("articleEcole", options={"mapping": {"article_id": "id"}})
-
-     * @Route("/{id}/article/{article_id}", name="articleecole_show")
+     * @Route("/{article_ecole_id}", name="articleecole_show")
      * @Method({"GET", "POST"})
      *
      */
-    public function showArticle( Request $request, Ecole $ecole, articleEcole $articleEcole)
+    public function showArticle( Request $request, articleEcole $articleEcole)
     {
         $commentaireArticleEcole = new commentaireArticleEcole();
         $commentaireArticleEcole->setArticleEcole($articleEcole);
@@ -67,15 +65,15 @@ class articleEcoleController extends Controller
             $em->flush($commentaireArticleEcole);
 
             return $this->redirectToRoute('articleecole_show', array(
-                'article_id' => $articleEcole->getId(),
-                'id' => $ecole->getId(),
+                'article_ecole_id' => $articleEcole->getId(),
+                'ecole_id' => $articleEcole->getEcole()->getId()
             ));
         }
 
 
         return $this->render('articleecole/show.html.twig', array(
             'articleEcole' => $articleEcole,
-            'ecole' => $ecole,
+            'ecole' => $articleEcole->getEcole(),
             'commentaireArticleEcole' => $commentaireArticleEcole,
             'form' => $form->createView(),
 
@@ -86,12 +84,10 @@ class articleEcoleController extends Controller
     /**
      * Displays a form to edit an existing articleEcole entity.
      *
-     * @Route("/{ecole_id}/article/{article_id}/edit", name="articleecole_edit")
-     * @ParamConverter("articleEcole", options={"mapping": {"article_id": "id"}})
-     * @ParamConverter("ecole", options={"mapping": {"ecole_id": "id"}})
+     * @Route("/{article_ecole_id}/edit", name="articleecole_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Ecole $ecole, articleEcole $articleEcole)
+    public function editAction(Request $request, articleEcole $articleEcole)
     {
 
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\articleEcoleType', $articleEcole);
@@ -100,12 +96,12 @@ class articleEcoleController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('ecole_show', array('id' => $ecole->getId()));
+            return $this->redirectToRoute('articleecole_show', array('article_ecole_id' => $articleEcole->getId()));
         }
 
         return $this->render('articleecole/edit.html.twig', array(
             'articleEcole' => $articleEcole,
-            'ecole' => $ecole,
+            'ecole' => $articleEcole->getEcole(),
             'edit_form' => $editForm->createView(),
 
         ));
@@ -114,11 +110,10 @@ class articleEcoleController extends Controller
     /**
      * Deletes a articleEcole entity.
      *
-     * @ParamConverter("articleEcole", options={"mapping": {"article_id": "id"}})
-     * @Route("/{id}/article/{article_id}/delete", name="articleecole_delete")
+     * @Route("{article_ecole_id}/delete", name="articleecole_delete")
      * @Method("GET")
      */
-    public function deleteAction(Ecole $ecole, articleEcole $articleEcole)
+    public function deleteAction(articleEcole $articleEcole)
     {
 
 
@@ -128,6 +123,6 @@ class articleEcoleController extends Controller
             $em->flush();
 
 
-        return $this->redirectToRoute('ecole_show', array('id' => $ecole->getId()));
+        return $this->redirectToRoute('ecole_show', array('ecole_id' => $articleEcole->getEcole()->getId()));
     }
 }

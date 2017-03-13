@@ -5,18 +5,13 @@ namespace Kipskool\Bundle\NewsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * commentaireArticleEcole
+ * CommentaireArticlePerso
  *
- * @ORM\Table(name="commentaire_article_ecole")
- * @ORM\Entity(repositoryClass="Kipskool\Bundle\NewsBundle\Repository\commentaireArticleEcoleRepository")
+ * @ORM\Table(name="commentaire_article_perso")
+ * @ORM\Entity(repositoryClass="Kipskool\Bundle\NewsBundle\Repository\CommentaireArticlePersoRepository")
  */
-class commentaireArticleEcole
+class CommentaireArticlePerso
 {
-    /**
-     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\articleEcole", inversedBy="commentaires")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $articleEcole;
     /**
      * @var int
      *
@@ -34,13 +29,19 @@ class commentaireArticleEcole
     private $texte;
 
     /**
-     * @var int
-     * @ORM\Column(name="createdAt", type="integer")
+     * @var string
+     *
+     * @ORM\Column(name="createdAt", type="string", length=255)
      */
     private $createdAt;
 
     /**
-     * commentaireArticleEcole constructor.
+     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\ArticlePerso",inversedBy="commentaires")
+     */
+    private $article;
+
+    /**
+     * CommentaireArticlePerso constructor.
 
      */
     public function __construct()
@@ -64,7 +65,7 @@ class commentaireArticleEcole
      *
      * @param string $texte
      *
-     * @return commentaireArticleEcole
+     * @return CommentaireArticlePerso
      */
     public function setTexte($texte)
     {
@@ -84,35 +85,35 @@ class commentaireArticleEcole
     }
 
     /**
-     * @return int
+     * Get createdAt
+     *
+     * @return string
      */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-
     /**
-     * Set articleEcole
-     *
-     * @param \Kipskool\Bundle\NewsBundle\Entity\articleEcole $articleEcole
-     *
-     * @return commentaireArticleEcole
+     * @return ArticlePerso
      */
-    public function setArticleEcole(\Kipskool\Bundle\NewsBundle\Entity\articleEcole $articleEcole)
+    public function getArticle()
     {
-        $this->articleEcole = $articleEcole;
-
-        return $this;
+        return $this->article;
     }
 
     /**
-     * Get articleEcole
-     *
-     * @return \Kipskool\Bundle\NewsBundle\Entity\articleEcole
+     * @param mixed $article
      */
-    public function getArticleEcole()
+    public function setArticle($article)
     {
-        return $this->articleEcole;
+        $this->article = $article;
     }
+
+
+
+
+
+
 }
+

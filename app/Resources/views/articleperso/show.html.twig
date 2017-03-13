@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Articleperso</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ article.id }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{{ article.createdAt|date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ article.titre }}</td>
+            </tr>
+            <tr>
+                <th>Texte</th>
+                <td>{{ article.texte }}</td>
+            </tr>
+            <tr>
+                <th>Srcfeature</th>
+                <td>{{ article.srcFeature }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('perso_show', {"perso_id" : perso.id}) }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('articleperso_edit', {'article_perso_id': article.id, 'perso_id': perso.id}) }}">Edit</a>
+        </li>
+        <li>
+            <a href="{{ path('articleperso_delete', {'article_perso_id': article.id, 'perso_id': perso.id}) }}">Supprimer</a>
+        </li>
+
+    </ul>
+
+    <table>
+        <tr>
+            <th>Posté le :</th>
+            <th>Commentaire</th>
+            <th>Action</th>
+        </tr>
+        {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Edit" />
+        {{ form_end(edit_form) }}
+        {% for commentaire in article.commentaires %}
+            <tr>
+                <td>{{ commentaire.createdAt|date('d-m-Y H:m') }}</td>
+                <td>{{ commentaire.texte }}</td>
+                <td>
+                    <a href="{{ path('commentairearticleperso_edit', {'article_id': article.id, 'commentaire_article_perso_id': commentaire.id, 'perso_id': perso.id}) }}">Editer</a>
+                    <a href="{{ path('commentairearticleperso_delete', {'article_id': article.id, 'commentaire_article_perso_id': commentaire.id, 'perso_id': perso.id}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Persos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Titre</th>
+                <th>Mail</th>
+                <th>Born</th>
+                <th>Password</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for perso in persos %}
+            <tr>
+                <td><a href="{{ path('perso_show', { 'perso_id': perso.id }) }}">{{ perso.id }}</a></td>
+                <td>{{ perso.nom }}</td>
+                <td>{{ perso.prenom }}</td>
+                <td>{{ perso.titre }}</td>
+                <td>{{ perso.mail }}</td>
+                <td>{{ perso.born|date("d-m-Y") }}</td>
+                <td>{{ perso.password }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('perso_show', { 'perso_id': perso.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('perso_edit', { 'perso_id': perso.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('perso_new') }}">Create a new perso</a>
+        </li>
+    </ul>
+{% endblock %}
