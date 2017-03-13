@@ -88,7 +88,7 @@ class PersoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('perso_edit', array('id' => $perso->getId()));
+            return $this->redirectToRoute('perso_show', array('id' => $perso->getId()));
         }
 
         return $this->render('perso/edit.html.twig', array(
