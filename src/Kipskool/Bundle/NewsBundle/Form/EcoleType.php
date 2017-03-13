@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PromoType extends AbstractType
+class EcoleType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -15,16 +15,23 @@ class PromoType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('description');
+            ->add('adresse')
+            ->add('ville')
+            ->add('pays')
+            ->add('description')
+            ->add('link')
+            ->add('mail');
+
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+
         $resolver->setDefaults(array(
-            'data_class' => 'Kipskool\Bundle\NewsBundle\Entity\Promo'
+            'data_class' => 'Kipskool\Bundle\NewsBundle\Entity\Ecole'
         ));
     }
 
@@ -33,8 +40,8 @@ class PromoType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'kipskool_bundle_newsbundle_promo';
+
+        return 'kipskool_bundle_newsbundle_ecole';
     }
-
-
 }
+

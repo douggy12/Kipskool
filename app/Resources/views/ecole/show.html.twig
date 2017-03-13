@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <h1><a href="{{ path('admin_ecole', {'ecole_id': ecole.id}) }}">ADMIN</a></h1>
+
     <h1>Ecole</h1>
 
     <table>
