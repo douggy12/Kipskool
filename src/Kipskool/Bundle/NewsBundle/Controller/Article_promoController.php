@@ -51,7 +51,7 @@ class Article_promoController extends Controller
      * @Route("/{id}/article/{article_promo_id}", name="article_promo_show")
      * @Method({"GET", "POST"})
      */
-    public function showArticleAction(Request $request, Promo $promo, Article_promo $article_promo)
+    public function showArticleAction( Promo $promo, Article_promo $article_promo, Request $request)
     {
         dump($article_promo);
         $commentaire_article_promo = new Commentaire_article_promo();

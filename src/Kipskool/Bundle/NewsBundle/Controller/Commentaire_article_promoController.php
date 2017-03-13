@@ -53,13 +53,13 @@ class Commentaire_article_promoController extends Controller
      * Deletes a commentaire_article_promo entity.
      *
      * @ParamConverter("commentaire_article_promo", options={"mapping":{"commentaire_article_id":"id"}})
-     * @ParamConverter("Article_promo", options={"mapping":{"article_promo_id":"id"}})
+     * @ParamConverter("article_promo", options={"mapping":{"article_promo_id":"id"}})
      * @Route("/{id}/article/{article_promo_id}/comment/{commentaire_article_id}/delete", name="commentaire_delete")
      * @Method("GET")
      */
-    public function deleteAction(Promo $promo, Article_promo $article_promo, Commentaire_article_promo $commentaire_article_promo)
+    public function deleteAction(Promo $promo, Commentaire_article_promo $commentaire_article_promo, Article_promo $article_promo)
     {
-        dump($article_promo);
+
             $em = $this->getDoctrine()->getManager();
             $em->remove($commentaire_article_promo);
             $em->flush();
