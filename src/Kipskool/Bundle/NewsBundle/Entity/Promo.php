@@ -21,10 +21,10 @@ class Promo
      */
     private $articles_promo;
     /**
-     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Ecole", mappedBy="promos")
+     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Ecole", inversedBy="promos")
      */
     private $ecole;
-    
+
     /**
      * @var int
      *
