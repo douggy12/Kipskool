@@ -9,8 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\BrowserKit\Request;
-use Symfony\Component\BrowserKit\Response;
+
+
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Admin controller.
@@ -57,5 +58,31 @@ class AdminController extends Controller
         return $this->redirectToRoute('admin_ecole', array('ecole_id' => $articleEcole->getEcole()->getId()));
     }
 
+    /**
+     * Displays a form to edit an existing articleEcole entity.
+     *
+     * @ParamConverter("articleEcole", options={"mapping": {"article_id": "id"}})
+     * @Route("article/{article_id}/edit", name="admin_article_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editArticleAction(Request $request, articleEcole $articleEcole)
+    {
+
+        $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\articleEcoleType', $articleEcole);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_ecole', array('ecole_id' => $articleEcole->getEcole()->getId()));
+        }
+
+        return $this->render('articleecole/edit.html.twig', array(
+            'ecole'=>$articleEcole->getEcole(),
+            'articleEcole' => $articleEcole,
+            'edit_form' => $editForm->createView(),
+
+        ));
+    }
 
 }

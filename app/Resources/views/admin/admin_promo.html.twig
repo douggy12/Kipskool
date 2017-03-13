@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1>{{ ecole.nom }}</h1><ul>
+    <li><a href="{{ path('admin_ecole', {'ecole_id': ecole.id}) }}">Ecole</a></li>
+    <li><a href="">Promo</a></li>
+    <li><a href="">Perso</a></li>
+    <li><a href="{{ path('ecole_show', {'id': ecole.id}) }}">back to {{ ecole.nom }} view</a></li>
+</ul>
+
+
+{% endblock %}
