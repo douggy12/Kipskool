@@ -13,7 +13,7 @@ class ArticlePersoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('createdAt')->add('titre')->add('texte')->add('srcFeature')->add('perso');
+        $builder->add('titre')->add('texte')->add('srcFeature');
     }
     
     /**

@@ -7,38 +7,37 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ articlePerso.id }}</td>
+                <td>{{ article.id }}</td>
             </tr>
             <tr>
                 <th>Createdat</th>
-                <td>{{ articlePerso.createdAt }}</td>
+                <td>{{ article.createdAt }}</td>
             </tr>
             <tr>
                 <th>Titre</th>
-                <td>{{ articlePerso.titre }}</td>
+                <td>{{ article.titre }}</td>
             </tr>
             <tr>
                 <th>Texte</th>
-                <td>{{ articlePerso.texte }}</td>
+                <td>{{ article.texte }}</td>
             </tr>
             <tr>
                 <th>Srcfeature</th>
-                <td>{{ articlePerso.srcFeature }}</td>
+                <td>{{ article.srcFeature }}</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('articleperso_index') }}">Back to the list</a>
+            <a href="{{ path('perso_show', {"id" : perso.id}) }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('articleperso_edit', { 'id': articlePerso.id }) }}">Edit</a>
+            <a href="{{ path('articleperso_edit', {'article_id': article.id, 'id': perso.id}) }}">Edit</a>
         </li>
         <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+            <a href="{{ path('articleperso_delete', {'article_id': article.id, 'id': perso.id}) }}">Supprimer</a>
         </li>
+
     </ul>
 {% endblock %}

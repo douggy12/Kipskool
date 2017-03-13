@@ -4,6 +4,7 @@ namespace Kipskool\Bundle\NewsBundle\Controller;
 
 use Kipskool\Bundle\NewsBundle\Entity\ArticlePerso;
 use Kipskool\Bundle\NewsBundle\Entity\Perso;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Articleperso controller.
  *
- * @Route("persoop")
+ * @Route("perso")
  */
 class ArticlePersoController extends Controller
 {
@@ -38,7 +39,7 @@ class ArticlePersoController extends Controller
             return $this->redirectToRoute('perso_show', array('id' => $perso->getId()));
         }
 
-        return $this->render('perso/show.html.twig', array(
+        return $this->render('articleperso/new.html.twig', array(
             'perso' => $perso,
             'form' => $form->createView(),
         ));
@@ -47,62 +48,67 @@ class ArticlePersoController extends Controller
     /**
      * Finds and displays a articlePerso entity.
      *
-     * @Route("/{id}", name="articleperso_show")
+     * @Route("/{id}/article/{article_id}", name="articleperso_show")
      * @Method("GET")
      */
-    public function showAction(ArticlePerso $articlePerso)
+    public function showAction(Perso $perso, ArticlePerso $articlePerso)
     {
-        $deleteForm = $this->createDeleteForm($articlePerso);
+
 
         return $this->render('articleperso/show.html.twig', array(
-            'articlePerso' => $articlePerso,
-            'delete_form' => $deleteForm->createView(),
+            'article' => $articlePerso,
+            'perso' => $perso
+
         ));
     }
 
     /**
      * Displays a form to edit an existing articlePerso entity.
      *
-     * @Route("/{id}/edit", name="articleperso_edit")
+
+     * @Route("/{id}/article/{article_id}/edit", name="articleperso_edit")
+     *
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, ArticlePerso $articlePerso)
+    public function editAction(Request $request, Perso $perso, ArticlePerso $articlePerso)
     {
-        $deleteForm = $this->createDeleteForm($articlePerso);
+
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\ArticlePersoType', $articlePerso);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('articleperso_edit', array('id' => $articlePerso->getId()));
+            return $this->redirectToRoute('perso_show', array('id' => $perso->getId()));
         }
 
         return $this->render('articleperso/edit.html.twig', array(
-            'articlePerso' => $articlePerso,
+            'article' => $articlePerso,
+            'perso' => $perso,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+
         ));
     }
 
     /**
      * Deletes a articlePerso entity.
      *
-     * @Route("/{id}", name="articleperso_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/article/{article_id}/delete", name="articleperso_delete")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, ArticlePerso $articlePerso)
+    public function deleteAction(Perso $perso, ArticlePerso $articlePerso)
     {
-        $form = $this->createDeleteForm($articlePerso);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+
+
             $em = $this->getDoctrine()->getManager();
             $em->remove($articlePerso);
             $em->flush();
-        }
 
-        return $this->redirectToRoute('articleperso_index');
+
+        return $this->redirectToRoute('perso_show', array(
+            "perso" => $perso->getId()
+        ));
     }
 
     /**

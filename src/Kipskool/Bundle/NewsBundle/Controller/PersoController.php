@@ -101,19 +101,16 @@ class PersoController extends Controller
     /**
      * Deletes a perso entity.
      *
-     * @Route("/{id}", name="perso_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="perso_delete")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, Perso $perso)
+    public function deleteAction(Perso $perso)
     {
-        $form = $this->createDeleteForm($perso);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($perso);
             $em->flush();
-        }
+
 
         return $this->redirectToRoute('perso_index');
     }
