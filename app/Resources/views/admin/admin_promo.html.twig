@@ -7,25 +7,14 @@
         <td><a href="">Perso</a></td>
         <td><a href="{{ path('ecole_show', {'id': ecole.id}) }}">back to {{ ecole.nom }} view</a></td>
     </table>
-
-    <select id="promoSelect">
+    <form action="" method="post">
+    <select id="promoSelect" onchange="this.form.submit()">
         {% for promo in ecole.promos %}
-            <option value="{{ promo}}" onselect="Myfunction({{ promo }})">{{ promo.nom }}</option>
+            <option value="{{ promo. }}" onselect="">{{ promo.nom }}</option>
         {% endfor %}
     </select>
-
+    </form>
 {% endblock %}
 {% block javascripts %}
-    <script>
-       function Myfunction($promo){
-           echo = ' <table>',
-           '',
-           '<td>{ article.nom }}</td>',
-           '<td>{{ article.createdAt }}</td>',
-           '<td>{{ article.texte }}</td>',
-           '{% endfor %}',
-           '</table>';
-       }
-    </script>
 
 {% endblock %}
