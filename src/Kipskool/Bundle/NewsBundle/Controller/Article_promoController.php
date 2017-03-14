@@ -4,6 +4,7 @@ namespace Kipskool\Bundle\NewsBundle\Controller;
 
 use Kipskool\Bundle\NewsBundle\Entity\Article_promo;
 use Kipskool\Bundle\NewsBundle\Entity\Commentaire_article_promo;
+use Kipskool\Bundle\NewsBundle\Entity\Ecole;
 use Kipskool\Bundle\NewsBundle\Entity\Promo;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,18 +13,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 
 /**
  * Article_promo controller.
- *
- * @Route("promo")
+ * @ParamConverter("article_promo", options={"mapping" : {"article_promo_id" : "id"}})
+ * @Route("article_promo")
  */
 class Article_promoController extends Controller
 {
     /**
      * Creates a new article_promo entity.
-     *
-     * @Route("/{id}/new", name="add_article_promo")
+     * @ParamConverter("promo", options={"mapping" : {"promo_id" : "id"}})
+     * @Route("new_article_promo/promo/{promo_id}", name="add_article_promo")
      * @Method({"GET", "POST"})
      */
-    public function newArtcicleAction(Request $request, Promo $promo, Ecole $ecole)
+    public function newArtcicleAction(Request $request, Promo $promo )
     {
         $article_promo = new Article_promo();
         $article_promo->setPromo($promo);
@@ -36,11 +37,12 @@ class Article_promoController extends Controller
             $em->flush($article_promo);
 
             return $this->redirectToRoute('promo_show', array(
-                'ecole_id'=>$ecole->getId(),
-                'id' => $promo->getId()));
+                'ecole_id'=>$promo->getEcole()->getId(),
+                'promo_id' => $promo->getId()));
         }
 
         return $this->render('article_promo/new.html.twig', array(
+            'ecole' => $promo->getEcole()->getId(),
             'promo'=>$promo,
             'article_promo' => $article_promo,
             'form' => $form->createView(),
@@ -49,13 +51,11 @@ class Article_promoController extends Controller
     /**
      * Finds and displays a article_promo entity.
      *
-     * @ParamConverter("article_promo", options={"mapping":{"article_promo_id":"id"}})
-     * @Route("/{id}/article/{article_promo_id}", name="article_promo_show")
+     * @Route("/{article_promo_id}", name="article_promo_show")
      * @Method({"GET", "POST"})
      */
-    public function showArticleAction( Promo $promo, Article_promo $article_promo, Request $request)
+    public function showArticleAction(Article_promo $article_promo, Request $request)
     {
-        dump($article_promo);
         $commentaire_article_promo = new Commentaire_article_promo();
         $commentaire_article_promo->setArticlePromo($article_promo);
         $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\Commentaire_article_promoType', $commentaire_article_promo);
@@ -67,14 +67,14 @@ class Article_promoController extends Controller
             $em->flush($commentaire_article_promo);
 
             return $this->redirectToRoute('article_promo_show', array(
-                'id'=>$promo->getId(),
+                'promo_id'=>$article_promo->getPromo()->getId(),
                 'article_promo_id' => $article_promo->getId()
             ));
         }
 
         return $this->render('article_promo/show.html.twig', array(
             'article_promo' => $article_promo,
-            'promo'=>$promo,
+            'promo'=>$article_promo->getPromo(),
             'commentaire_article_promo' => $commentaire_article_promo,
             'form' => $form->createView(),
         ));
@@ -82,11 +82,10 @@ class Article_promoController extends Controller
     /**
      * Displays a form to edit an existing article_promo entity.
      *
-     * @ParamConverter("article_promo", options={"mapping":{"article_promo_id":"id"}})
-     * @Route("/{id}/article/{article_promo_id}/edit", name="article_promo_edit")
+     * @Route("/{article_promo_id}/edit", name="article_promo_edit")
      * @Method({"GET", "POST"})
      */
-    public function editArticleAction(Request $request, Promo $promo, Article_promo $article_promo)
+    public function editArticleAction(Request $request, Article_promo $article_promo)
     {
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\Article_promoType', $article_promo);
         $editForm->handleRequest($request);
@@ -94,11 +93,11 @@ class Article_promoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('promo_show', array('id' => $promo->getId()));
+            return $this->redirectToRoute('article_promo_show', array('article_promo_id' => $article_promo->getId()));
         }
 
         return $this->render('article_promo/edit.html.twig', array(
-            'promo'=>$promo,
+            'promo'=>$article_promo->getPromo(),
             'article_promo' => $article_promo,
             'edit_form' => $editForm->createView(),
         ));
@@ -107,17 +106,16 @@ class Article_promoController extends Controller
     /**
      * Deletes a article_promo entity.
      *
-     * @ParamConverter("article_promo", options={"mapping":{"article_promo_id":"id"}})
-     * @Route("/{id}/article/{article_promo_id}/delete", name="article_promo_delete")
+     * @Route("/{article_promo_id}/delete", name="article_promo_delete")
      * @Method("GET")
      */
-    public function deleteAction(Promo $promo, Article_promo $article_promo)
+    public function deleteAction(Article_promo $article_promo)
     {
             $em = $this->getDoctrine()->getManager();
             $em->remove($article_promo);
             $em->flush();
 
-        return $this->redirectToRoute('promo_show', array('id' => $promo->getId()));
+        return $this->redirectToRoute('promo_show', array('promo_id' => $article_promo->getPromo()->getId()));
     }
 
 }

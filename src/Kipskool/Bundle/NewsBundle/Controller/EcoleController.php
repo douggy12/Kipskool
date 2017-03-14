@@ -2,17 +2,17 @@
 
 namespace Kipskool\Bundle\NewsBundle\Controller;
 
-use Kipskool\Bundle\NewsBundle\Entity\articleEcole;
+
 use Kipskool\Bundle\NewsBundle\Entity\Ecole;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
+
 
 /**
  * Ecole controller.
- *
+ * @ParamConverter("ecole", options={"mapping" : {"ecole_id" : "id"}})
  * @Route("ecole")
  */
 class EcoleController extends Controller
@@ -37,7 +37,7 @@ class EcoleController extends Controller
     /**
      * Finds and displays a ecole entity.
      *
-     * @Route("/{id}", name="ecole_show")
+     * @Route("/{ecole_id}", name="ecole_show")
      * @Method("GET")
      */
     public function showAction(Ecole $ecole)

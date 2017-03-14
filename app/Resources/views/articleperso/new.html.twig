@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Article_promo creation</h1>
+    <h1>Articleperso creation</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -10,7 +10,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('promo_show', {'ecole_id': promo.ecole.id, 'promo_id': promo.id}) }}">Back to the list</a>
+            <a href="{{ path('perso_show', {"perso_id" : perso.id}) }}">Back to the list</a>
         </li>
     </ul>
 {% endblock %}

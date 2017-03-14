@@ -2,11 +2,13 @@
 
 namespace Kipskool\Bundle\NewsBundle\Form;
 
+
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PromoType extends AbstractType
+class PersoType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -15,7 +17,14 @@ class PromoType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('description');
+            ->add('prenom')
+            ->add('titre')
+            ->add('mail')
+            ->add('born', DateType::class, array(
+                'input' => 'timestamp',
+                'widget' => 'single_text'
+            ))
+            ->add('password');
     }
     
     /**
@@ -24,7 +33,7 @@ class PromoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Kipskool\Bundle\NewsBundle\Entity\Promo'
+            'data_class' => 'Kipskool\Bundle\NewsBundle\Entity\Perso'
         ));
     }
 
@@ -33,7 +42,7 @@ class PromoType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'kipskool_bundle_newsbundle_promo';
+        return 'kipskool_bundle_newsbundle_perso';
     }
 
 
