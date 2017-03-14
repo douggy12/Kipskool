@@ -31,11 +31,11 @@ class PersoAdmin extends AbstractAdmin
                          'choice_label'=>'nom'))
                     ->end()
             ->end();
+
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper){
         $datagridMapper
-            ->add('nom')
             ->add('promo', null, array(), 'entity', array(
             'class'=> 'Kipskool\Bundle\NewsBundle\Entity\Promo',
             'choice_label'=>'nom'

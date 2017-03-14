@@ -8,7 +8,16 @@ services:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
  admin.perso:
+
         class: Kipskool\Bundle\Admin\PersoAdmin
         arguments: [~, Kipskool\Bundle\NewsBundle\Entity\Perso, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Perso }
+
+admin.articles_perso:
+
+        class: Kipskool\Bundle\Admin\ArticlePersoAdmin
+        arguments: [~, Kipskool\Bundle\NewsBundle\Entity\ArticlePerso, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: ArticlePerso }
+
