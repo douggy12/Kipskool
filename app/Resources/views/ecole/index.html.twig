@@ -20,7 +20,7 @@
         <tbody>
         {% for ecole in ecoles %}
             <tr>
-                <td><a href="{{ path('ecole_show', { 'id': ecole.id }) }}">{{ ecole.id }}</a></td>
+                <td><a href="{{ path('ecole_show', { 'ecole_id': ecole.id }) }}">{{ ecole.id }}</a></td>
                 <td>{{ ecole.nom }}</td>
                 <td>{{ ecole.adresse }}</td>
                 <td>{{ ecole.ville }}</td>
@@ -31,7 +31,7 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('ecole_show', { 'id': ecole.id }) }}">show</a>
+                            <a href="{{ path('ecole_show', { 'ecole_id': ecole.id }) }}">show</a>
                         </li>
                     </ul>
                 </td>

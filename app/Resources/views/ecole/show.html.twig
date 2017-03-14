@@ -42,7 +42,7 @@
         </tbody>
     </table>
     <ul>
-        <a href="{{ path("addArticle", {"id":ecole.id}) }}">Ecrire un article</a>
+        <a href="{{ path("addArticle", {"ecole_id":ecole.id}) }}">Ecrire un article</a>
     </ul>
     <table>
         <tr>
@@ -53,7 +53,7 @@
         </tr>
         {% for article in ecole.articles %}
             <tr>
-                <td><a href="{{ path('articleecole_show',{'id': ecole.id, 'article_id': article.id}) }}"> {{ article.titre }}</a></td>
+                <td><a href="{{ path('articleecole_show',{'ecole_id': ecole.id, 'article_ecole_id': article.id}) }}"> {{ article.titre }}</a></td>
                 <td>{{ article.texte }}</td>
                 <td>{{ article.createdAt|date("d/m/Y") }}</td>
             </tr>
@@ -71,7 +71,7 @@
         </tr>
         {% for promo in ecole.promos %}
             <tr>
-                <td><a href="{{ path('promo_show', {'ecole_id': ecole.id, 'id': promo.id}) }}">{{ promo.nom }}</a></td>
+                <td><a href="{{ path('promo_show', {'ecole_id': ecole.id, 'promo_id': promo.id}) }}">{{ promo.nom }}</a></td>
                 <td>{{ promo.description }}</td>
             </tr>
         {% endfor %}

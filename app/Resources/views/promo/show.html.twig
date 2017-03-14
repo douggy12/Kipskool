@@ -5,47 +5,67 @@
 
     <table>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ promo.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ promo.nom }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ promo.description }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ promo.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ promo.nom }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ promo.description }}</td>
+        </tr>
         </tbody>
     </table>
     <ul>
-        <a href="{{ path('add_article_promo', {'id': promo.id}) }}">Ecrire un article</a>
+        <a href="{{ path('add_article_promo', {'promo_id': promo.id}) }}">Ecrire un article</a>
     </ul>
     <table>
-    <tr>
-        <th>Titre</th>
-        <th>Crée</th>
-        <th>Texte</th>
-    </tr>
+        <tr>
+            <th>Titre</th>
+            <th>Crée</th>
+            <th>Texte</th>
+        </tr>
         {% for article_promo in promo.articles_promo %}
             <tr>
-                <td><a href="{{ path('article_promo_show', {'id': promo.id,'article_promo_id': article_promo.id}) }}">{{ article_promo.titre }}</td> 
+                <td>
+                    <a href="{{ path('article_promo_show', {'promo_id': promo.id,'article_promo_id': article_promo.id}) }}">{{ article_promo.titre }}
+                </td>
                 <td>{{ article_promo.createdAt|date("d/m/Y") }}</td>
                 <td>{{ article_promo.texte }}</td>
             </tr>
-            
+
         {% endfor %}
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('ecole_show', {'id': ecole.id}) }}">Back to the list</a>
+            <a href="{{ path('ecole_show', {'ecole_id': ecole.id}) }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('promo_edit', {'ecole_id': ecole.id, 'id': promo.id}) }}">Edit</a>
+            <a href="{{ path('promo_edit', {'ecole_id': ecole.id, 'promo_id': promo.id}) }}">Edit</a>
         </li>
-        <li><a href="{{ path('promo_delete', {'ecole_id': ecole.id, 'id': promo.id}) }}">Delete</a>
+        <li><a href="{{ path('promo_delete', {'ecole_id': ecole.id, 'promo_id': promo.id}) }}">Delete</a>
+        </li>
+    </ul>
+
+    <table>
+        <tr>
+            <th>Etudiants dans la promo</th>
+        </tr>
+        {% for perso in promo.persos %}
+            <tr>
+                <td><a href="{{ path('perso_show', {'perso_id': perso.id}) }}">{{ perso.prenom }} {{ perso.nom }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('perso_new', {'promo_id': promo.id}) }}">Ajouter un étudiant</a>
         </li>
     </ul>
 {% endblock %}

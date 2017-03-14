@@ -34,6 +34,21 @@ class Commentaire_article_promo
      */
     private $texte;
 
+    /**
+     * @var int
+     ** @ORM\Column(name="createdAt", type="integer")
+     */
+    private $createdAt;
+
+    /**
+     * Commentaire_article_promo constructor.
+
+     */
+    public function __construct()
+    {
+        $this->createdAt = time();
+    }
+
 
     /**
      * Get id
@@ -92,5 +107,15 @@ class Commentaire_article_promo
     {
         return $this->article_promo;
     }
+
+    /**
+     * @return int
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+
 
 }

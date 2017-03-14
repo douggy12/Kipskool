@@ -4,7 +4,7 @@ namespace Kipskool\Bundle\NewsBundle\Controller;
 
 use Kipskool\Bundle\NewsBundle\Entity\Article_promo;
 use Kipskool\Bundle\NewsBundle\Entity\Commentaire_article_promo;
-use Kipskool\Bundle\NewsBundle\Entity\Promo;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -13,20 +13,18 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Commentaire_article_promo controller.
- *
- * @Route("ecole/promo")
+ * @ParamConverter("commentaire_article_promo", options={"mapping" : {"commentaire_article_promo_id" : "id"}})
+ * @Route("promo_comment")
  */
 class Commentaire_article_promoController extends Controller
 {
     /**
      * Displays a form to edit an existing commentaire_article_promo entity.
      *
-     * @ParamConverter("commentaire_article_promo", options={"mapping":{"commentaire_article_id":"id"}})
-     * @ParamConverter("article_promo", options={"mapping":{"article_promo_id":"id"}})
-     * @Route("/{id}/article/{article_promo_id}/comment/{commentaire_article_id}/edit", name="commentaire_article_promo_edit")
+     * @Route("/{commentaire_article_promo_id}/edit", name="commentaire_article_promo_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request,Promo $promo, Article_promo $article_promo, Commentaire_article_promo $commentaire_article_promo)
+    public function editAction(Request $request, Commentaire_article_promo $commentaire_article_promo)
     {
 
         $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\Commentaire_article_promoType', $commentaire_article_promo);
@@ -36,14 +34,14 @@ class Commentaire_article_promoController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('article_promo_show', array(
-                'id'=>$promo->getId(),
-                'article_promo_id' => $article_promo->getId(),
+                'promo_id'=>$commentaire_article_promo->getArticlePromo()->getPromo()->getId(),
+                'article_promo_id' => $commentaire_article_promo->getArticlePromo()->getId(),
                 ));
         }
 
         return $this->render('commentaire_article_promo/edit.html.twig', array(
-            'promo'=>$promo,
-            'article_promo'=>$article_promo,
+            'promo'=>$commentaire_article_promo->getArticlePromo()->getPromo(),
+            'article_promo'=>$commentaire_article_promo->getArticlePromo(),
             'commentaire_article_promo' => $commentaire_article_promo,
             'edit_form' => $editForm->createView(),
         ));
@@ -52,12 +50,10 @@ class Commentaire_article_promoController extends Controller
     /**
      * Deletes a commentaire_article_promo entity.
      *
-     * @ParamConverter("commentaire_article_promo", options={"mapping":{"commentaire_article_id":"id"}})
-     * @ParamConverter("article_promo", options={"mapping":{"article_promo_id":"id"}})
-     * @Route("/{id}/article/{article_promo_id}/comment/{commentaire_article_id}/delete", name="commentaire_delete")
+     * @Route("/{commentaire_article_promo_id}/delete", name="commentaire_delete")
      * @Method("GET")
      */
-    public function deleteAction(Promo $promo, Commentaire_article_promo $commentaire_article_promo, Article_promo $article_promo)
+    public function deleteAction(Commentaire_article_promo $commentaire_article_promo)
     {
 
             $em = $this->getDoctrine()->getManager();
@@ -65,8 +61,8 @@ class Commentaire_article_promoController extends Controller
             $em->flush();
 
         return $this->redirectToRoute('article_promo_show', array(
-            'id'=>$promo->getId(),
-            'article_promo_id'=>$article_promo->getId()
+            'promo_id'=>$commentaire_article_promo->getArticlePromo()->getPromo()->getId(),
+            'article_promo_id'=>$commentaire_article_promo->getArticlePromo()->getId()
         ));
     }
 
