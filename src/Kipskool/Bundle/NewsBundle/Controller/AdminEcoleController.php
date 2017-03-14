@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("/admin/")
  */
-class AdminController extends Controller
+class AdminEcoleController extends Controller
 {
     /**
      * Finds and displays a ecole entity.
