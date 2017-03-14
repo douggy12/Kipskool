@@ -7,3 +7,15 @@ services:
     #service_name:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+ # ...
+    admin.promo:
+        class: Kipskool\Bundle\Admin\PromoAdmin
+        arguments: [~, Kipskool\Bundle\NewsBundle\Entity\Promo, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Promo }
+
+    admin.articles_promo:
+        class: Kipskool\Bundle\Admin\ArticlesPromoAdmin
+        arguments: [~, Kipskool\Bundle\NewsBundle\Entity\Article_promo, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Article_Promo }
