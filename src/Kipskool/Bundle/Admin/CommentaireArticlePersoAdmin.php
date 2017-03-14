@@ -12,9 +12,6 @@ class CommentaireArticlePersoAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper){
         $formMapper
             ->add('texte', 'textarea')
-            ->add('createdAt', DateType::class, array(
-                'input' => 'timestamp',
-                'widget' => 'single_text'))
             ->add('article', 'entity', array(
                 'class'=>'Kipskool\Bundle\NewsBundle\Entity\ArticlePerso',
                 'choice_label'=>'titre'));
@@ -29,10 +26,9 @@ class CommentaireArticlePersoAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper){
         $listMapper
-            ->add('text')
+            ->addIdentifier('texte')
             ->add('createdAt', 'date', array(
                 'pattern'=>'dd MM YYYY',
-                'locale'=>'fr',
                 'timezone'=>'Europe/Paris'
             ))
             ->add('article.titre');

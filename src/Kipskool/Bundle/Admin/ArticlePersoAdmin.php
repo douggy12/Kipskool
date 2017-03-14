@@ -12,9 +12,6 @@ class ArticlePersoAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper){
         $formMapper
             ->add('titre', 'text')
-            ->add('createdAt', DateType::class, array(
-                'input' => 'timestamp',
-                'widget' => 'single_text'))
             ->add('texte', 'textarea')
             ->add('src_feature', 'text')
             ->add('Perso', 'entity', array(
@@ -32,7 +29,7 @@ class ArticlePersoAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper){
         $listMapper
-            ->add('titre')
+            ->addIdentifier('titre')
             ->add('createdAt', 'date', array(
                 'pattern'=>'dd MM YYYY',
                 'locale'=>'fr',
