@@ -7,38 +7,34 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class ArticlePersoAdmin extends AbstractAdmin
+class CommentaireArticlePersoAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper){
         $formMapper
-            ->add('titre', 'text')
+            ->add('texte', 'textarea')
             ->add('createdAt', DateType::class, array(
                 'input' => 'timestamp',
                 'widget' => 'single_text'))
-            ->add('texte', 'textarea')
-            ->add('src_feature', 'text')
-            ->add('Perso', 'entity', array(
-                'class'=>'Kipskool\Bundle\NewsBundle\Entity\Perso',
-                'choice_label'=>'nom'));
+            ->add('article', 'entity', array(
+                'class'=>'Kipskool\Bundle\NewsBundle\Entity\ArticlePerso',
+                'choice_label'=>'titre'));
+
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper){
-        $datagridMapper
-            ->add('perso', null, array(), 'entity', array(
-                'class'=> 'Kipskool\Bundle\NewsBundle\Entity\Perso',
-                'choice_label'=>'nom'
-            ));
+        $datagridMapper->add('article', null, array(), 'entity', array(
+            'class'=>'Kipskool\Bundle\NewsBundle\Entity\ArticlePerso',
+            'choice_label'=>'titre'));
     }
 
     protected function configureListFields(ListMapper $listMapper){
         $listMapper
-            ->add('titre')
+            ->add('text')
             ->add('createdAt', 'date', array(
                 'pattern'=>'dd MM YYYY',
                 'locale'=>'fr',
                 'timezone'=>'Europe/Paris'
             ))
-            ->add('perso.nom')
-            ->add('texte');
+            ->add('article.titre');
     }
 }
