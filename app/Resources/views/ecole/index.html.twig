@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ecoles list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Ville</th>
+                <th>Pays</th>
+                <th>Description</th>
+                <th>Link</th>
+                <th>Mail</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ecole in ecoles %}
+            <tr>
+                <td><a href="{{ path('ecole_show', { 'ecole_id': ecole.id }) }}">{{ ecole.id }}</a></td>
+                <td>{{ ecole.nom }}</td>
+                <td>{{ ecole.adresse }}</td>
+                <td>{{ ecole.ville }}</td>
+                <td>{{ ecole.pays }}</td>
+                <td>{{ ecole.description }}</td>
+                <td>{{ ecole.link }}</td>
+                <td>{{ ecole.mail }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('ecole_show', { 'ecole_id': ecole.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

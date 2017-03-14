@@ -1,5 +1,5 @@
 news:
-    resource: "@NewsBundle/Resources/config/routing.xml"
+    resource: "@NewsBundle/Controller/"
+    type: annotation
     prefix:   /
-
 

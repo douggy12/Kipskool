@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Articleecole</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ articleEcole.id }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{{ articleEcole.createdAt|date("d/m/Y H:m:s") }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ articleEcole.titre }}</td>
+            </tr>
+            <tr>
+                <th>Texte</th>
+                <td>{{ articleEcole.texte }}</td>
+            </tr>
+            <tr>
+                <th>Srcfeature</th>
+                <td>{{ articleEcole.srcFeature }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ecole_show',{'ecole_id': ecole.id }) }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('articleecole_edit', { 'article_ecole_id': articleEcole.id, 'ecole_id': ecole.id }) }}">Edit</a>
+        </li>
+        <li>
+            <a href="{{ path('articleecole_delete', { 'article_ecole_id': articleEcole.id, 'ecole_id': ecole.id}) }}">Supprimer</a>
+        </li>
+
+    </ul>
+
+    <table>
+        <tr>
+            <th>Posté le :</th>
+            <th>Commentaire</th>
+            <th>Action</th>
+        </tr>
+        {% for commentaire in articleEcole.commentaires %}
+            <tr>
+                <td>{{ commentaire.createdAt|date("d/m/Y H:m:s") }}</td>
+                <td>{{ commentaire.texte }}</td>
+                <td>
+                    <a href="{{ path('commentairearticleecole_edit', { 'article_ecole_id' : articleEcole.id, 'commentaire_article_ecole_id' : commentaire.id, 'ecole_id': ecole.id}) }}">Editer</a>
+                    <a href="{{ path('commentairearticleecole_delete', {'article_ecole_id': articleEcole.id, 'commentaire_article_ecole_id': commentaire.id, 'ecole_id': ecole.id}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Create" />
+    {{ form_end(form) }}
+{% endblock %}
