@@ -116,6 +116,10 @@ class Commentaire_article_promo
         return $this->createdAt;
     }
 
+    function __toString()
+    {
+        return $this->texte;
+    }
 
 
 }

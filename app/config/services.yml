@@ -19,3 +19,9 @@ services:
         arguments: [~, Kipskool\Bundle\NewsBundle\Entity\Article_promo, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Article_Promo }
+
+    admin.commentaires_articles_promo:
+            class: Kipskool\Bundle\Admin\CommentairesArticlesPromoAdmin
+            arguments: [~, Kipskool\Bundle\NewsBundle\Entity\Commentaire_article_promo, ~]
+            tags:
+                - { name: sonata.admin, manager_type: orm, label: Commentaire_Article_Promo }
