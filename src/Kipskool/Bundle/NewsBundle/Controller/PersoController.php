@@ -83,6 +83,7 @@ class PersoController extends Controller
         }
 
         return $this->render('perso/edit.html.twig', array(
+            'promo' => $perso->getPromo(),
             'perso' => $perso,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -103,22 +104,9 @@ class PersoController extends Controller
             $em->flush();
 
 
-        return $this->redirectToRoute('perso_index');
+        return $this->redirectToRoute('promo_show', array(
+            'promo_id' => $perso->getPromo()->getId()
+        ));
     }
 
-    /**
-     * Creates a form to delete a perso entity.
-     *
-     * @param Perso $perso The perso entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Perso $perso)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('perso_delete', array('perso_id' => $perso->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
 }
