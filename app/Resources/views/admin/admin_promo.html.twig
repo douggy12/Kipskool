@@ -10,22 +10,22 @@
 
     <select id="promoSelect">
         {% for promo in ecole.promos %}
-            <option value="{{ promo}}">{{ promo.nom }}</option>
+            <option value="{{ promo}}" onselect="Myfunction({{ promo }})">{{ promo.nom }}</option>
         {% endfor %}
     </select>
 
 {% endblock %}
 {% block javascripts %}
     <script>
-        var e = document.getElementById("promoSelect");
-        var articleName = e.options[e.selectedIndex].value;
-        console.log(articleName);
+       function Myfunction($promo){
+           echo = ' <table>',
+           '',
+           '<td>{ article.nom }}</td>',
+           '<td>{{ article.createdAt }}</td>',
+           '<td>{{ article.texte }}</td>',
+           '{% endfor %}',
+           '</table>';
+       }
     </script>
-    {#<table>#}
-    {#{% for article in promo.articles %}#}
-        {#<td>{ article.nom }}</td>#}
-        {#<td>{{ article.createdAt }}</td>#}
-        {#<td>{{ article.texte }}</td>#}
-    {#{% endfor %}#}
-    {#</table>#}
+
 {% endblock %}
