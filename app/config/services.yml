@@ -13,6 +13,11 @@ services:
         arguments: [~, Kipskool\Bundle\NewsBundle\Entity\Promo, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Promo }
+    admin.perso:
+        class: Kipskool\Bundle\Admin\PersoAdmin
+        arguments: [~, Kipskool\Bundle\NewsBundle\Entity\Perso, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Perso }
 
     admin.articles_promo:
         class: Kipskool\Bundle\Admin\ArticlesPromoAdmin
@@ -25,3 +30,14 @@ services:
             arguments: [~, Kipskool\Bundle\NewsBundle\Entity\Commentaire_article_promo, ~]
             tags:
                 - { name: sonata.admin, manager_type: orm, label: Commentaire_Article_Promo }
+    admin.articles_perso:
+        class: Kipskool\Bundle\Admin\ArticlePersoAdmin
+        arguments: [~, Kipskool\Bundle\NewsBundle\Entity\ArticlePerso, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Article_Perso }
+
+    admin.commentaire_perso:
+        class: Kipskool\Bundle\Admin\CommentaireArticlePersoAdmin
+        arguments: [~, Kipskool\Bundle\NewsBundle\Entity\CommentaireArticlePerso, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Commentaire_Perso}
