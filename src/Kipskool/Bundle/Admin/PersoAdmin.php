@@ -10,39 +10,49 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class PersoAdmin extends AbstractAdmin
 {
-    protected function configureFormFields(FormMapper $formMapper){
+    protected function configureFormFields(FormMapper $formMapper)
+    {
         $formMapper
             ->tab('Perso')
-                ->with('Utilisateur', array('class' => 'col-md-9'))
-                    ->add('nom', 'text')
-                    ->add('prenom', 'text')
-                    ->add('titre', 'text')
-                    ->add('mail', 'text')
-                    ->add('born', DateType::class, array(
-                        'input' => 'timestamp',
-                        'widget' => 'single_text'))
-                    ->add('password', 'text')
-                ->end()
+            ->with('Utilisateur', array('class' => 'col-md-9'))
+            ->add('nom', 'text')
+            ->add('prenom', 'text')
+            ->add('titre', 'text')
+            ->add('born', DateType::class, array(
+                'input' => 'timestamp',
+                'widget' => 'single_text'))
+            ->end()
+            ->with('Role')
+            ->add('role', 'entity', array(
+                'class' => 'Kipskool\Bundle\NewsBundle\Entity\Role',
+                'choice_label' => 'nom'))
+            ->end()
+            ->with('Compte')
+            ->add('username', 'text')
+            ->add('email','text')
+            ->end()
             ->end()
             ->tab('Promo')
-                ->with('Promo', array('class' => 'col-md-3'))
-                    ->add('promo', 'entity', array(
-                         'class'=>'Kipskool\Bundle\NewsBundle\Entity\Promo',
-                         'choice_label'=>'nom'))
-                    ->end()
+            ->with('Promo', array('class' => 'col-md-3'))
+            ->add('promo', 'entity', array(
+                'class' => 'Kipskool\Bundle\NewsBundle\Entity\Promo',
+                'choice_label' => 'nom'))
+            ->end()
             ->end();
 
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper){
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
         $datagridMapper
             ->add('promo', null, array(), 'entity', array(
-            'class'=> 'Kipskool\Bundle\NewsBundle\Entity\Promo',
-            'choice_label'=>'nom'
-        ));
+                'class' => 'Kipskool\Bundle\NewsBundle\Entity\Promo',
+                'choice_label' => 'nom'
+            ));
     }
 
-    protected function configureListFields(ListMapper $listMapper){
+    protected function configureListFields(ListMapper $listMapper)
+    {
         $listMapper
             ->addIdentifier('nom')
             ->add('prenom')

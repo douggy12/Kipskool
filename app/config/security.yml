@@ -6,7 +6,7 @@ security:
       ROLE_DELEGUE: ROLE_ETUDIANT
       ROLE_FORMATEUR : ROLE ETUDIANT
       ROLE_STAFF : ROLE ETUDIANT
-      ROLE_ADMIN:       ROLE_ETUDIANT
+      ROLE_ADMIN:       ROLE_ETUDIANT, ROLE_DELEGUE, ROLE_FORMATEUR, ROLE_STAFF
 
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
@@ -15,8 +15,7 @@ security:
             memory: ~
         main:
             id: fos_user.user_provider.username
-        fos_userbundle:
-            id: fos_user.user_provider.username
+
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
