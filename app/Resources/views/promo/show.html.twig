@@ -22,9 +22,11 @@
         </tr>
         </tbody>
     </table>
-    <ul>
-        <a href="{{ path('add_article_promo', {'promo_id': promo.id}) }}">Ecrire un article</a>
-    </ul>
+    {% if is_granted('ROLE_STAFF') %}
+        <ul>
+            <a href="{{ path('add_article_promo', {'promo_id': promo.id}) }}">Ecrire un article</a>
+        </ul>
+    {% endif %}
     <table>
         <tr>
             <th>Titre</th>
