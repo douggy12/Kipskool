@@ -41,3 +41,21 @@ services:
         arguments: [~, Kipskool\Bundle\NewsBundle\Entity\CommentaireArticlePerso, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Commentaire_Perso}
+
+    admin.ecole:
+        class: Kipskool\Bundle\Admin\EcoleAdmin
+        arguments: [~, Kipskool\Bundle\NewsBundle\Entity\Ecole, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Ecole}
+
+    admin.article_ecole:
+        class: Kipskool\Bundle\Admin\ArticleEcoleAdmin
+        arguments: [~, Kipskool\Bundle\NewsBundle\Entity\articleEcole, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Article_Ecole}
+
+    admin.commentaire_ecole:
+        class: Kipskool\Bundle\Admin\CommentaireArticleEcoleAdmin
+        arguments: [~, Kipskool\Bundle\NewsBundle\Entity\commentaireArticleEcole, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Commentaire_Ecole}
