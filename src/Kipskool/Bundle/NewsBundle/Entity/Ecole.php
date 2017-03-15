@@ -14,7 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Ecole
 {
     /**
-     * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\articleEcole", mappedBy="ecole")
+     * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\articleEcole", mappedBy="ecole", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $articles;
     /**
@@ -22,7 +23,6 @@ class Ecole
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $promos;
-
     /**
      * @var int
      *
@@ -31,49 +31,42 @@ class Ecole
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
-
     /**
      * @var string
      *
      * @ORM\Column(name="adresse", type="string", length=255)
      */
     private $adresse;
-
     /**
      * @var string
      *
      * @ORM\Column(name="ville", type="string", length=255)
      */
     private $ville;
-
     /**
      * @var string
      *
      * @ORM\Column(name="pays", type="string", length=255)
      */
     private $pays;
-
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
-
     /**
      * @var string
      *
      * @ORM\Column(name="link", type="string", length=255)
      */
     private $link;
-
     /**
      * @var string
      *
@@ -89,7 +82,6 @@ class Ecole
         $this->articles = new ArrayCollection();
         $this->promos = new ArrayCollection();
     }
-
     /**
      * @return ArrayCollection|articleEcole[]
      */
@@ -97,9 +89,6 @@ class Ecole
     {
         return $this->articles;
     }
-
-
-
     /**
      * @return mixed
      */

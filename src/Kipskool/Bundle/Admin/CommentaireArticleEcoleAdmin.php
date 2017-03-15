@@ -3,39 +3,40 @@ namespace Kipskool\Bundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class ArticlePersoAdmin extends AbstractAdmin
+class CommentaireArticleEcoleAdmin extends AbstractAdmin
+
 {
     protected function configureFormFields(FormMapper $formMapper){
         $formMapper
-            ->add('titre', 'text')
-            ->add('texte', 'textarea')
-            ->add('src_feature', 'text')
-            ->add('Perso', 'entity', array(
-                'class'=>'Kipskool\Bundle\NewsBundle\Entity\Perso',
-                'choice_label'=>'nom'));
+            ->add('texte','textarea')
+            ->add('articleEcole', 'entity', array(
+                'class'=>'Kipskool\Bundle\NewsBundle\Entity\articleEcole',
+                'choice_label'=>'titre'
+            ))
+        ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper){
         $datagridMapper
-            ->add('Perso', null, array(), 'entity', array(
-                'class'=> 'Kipskool\Bundle\NewsBundle\Entity\Perso',
-                'choice_label'=>'nom'
-            ));
+            ->add('articleEcole', null, array(), 'entity', array(
+                'class'=>'Kipskool\Bundle\NewsBundle\Entity\articleEcole',
+                'choice_label'=>'titre'
+            ))
+            ;
     }
 
     protected function configureListFields(ListMapper $listMapper){
         $listMapper
-            ->addIdentifier('titre')
+            ->addIdentifier('texte')
             ->add('createdAt', 'date', array(
                 'pattern'=>'dd MM YYYY',
                 'locale'=>'fr',
                 'timezone'=>'Europe/Paris'
             ))
-            ->add('perso.nom')
-            ->add('texte');
+            ->add('articleEcole.titre')
+        ;
     }
 }

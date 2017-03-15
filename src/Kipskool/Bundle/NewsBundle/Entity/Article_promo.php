@@ -63,6 +63,7 @@ class Article_promo
     private $srcFeature;
 
 
+
     public function __construct()
     {
         $this->createdAt = time();

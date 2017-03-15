@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <ul>
+        <li><a href="{{ path('ecole_show', {'ecole_id': article_promo.promo.ecole.id}) }}">{{ article_promo.promo.ecole.nom }}</a></li>
+        <li><a href="{{ path('promo_show', {'promo_id': article_promo.promo.id}) }}">{{ article_promo.promo.nom }}</a></li>
+    </ul>
     <h1>Article_promo</h1>
 
     <table>
