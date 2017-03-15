@@ -34,7 +34,7 @@
         {% for article_promo in promo.articles_promo %}
             <tr>
                 <td>
-                    <a href="{{ path('article_promo_show', {'promo_id': promo.id,'article_promo_id': article_promo.id}) }}">{{ article_promo.titre }}
+                    <a href="{{ path('article_promo_show', {'promo_id': promo.id,'article_promo_id': article_promo.id}) }}">{{ article_promo.titre }}</a>
                 </td>
                 <td>{{ article_promo.createdAt|date("d/m/Y") }}</td>
                 <td>{{ article_promo.texte }}</td>

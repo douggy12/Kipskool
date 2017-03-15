@@ -76,6 +76,11 @@ class Perso
     private $promo;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Role", inversedBy="persos")
+     */
+    private $role;
+
+    /**
      * Perso constructor
      */
     public function __construct()
@@ -267,6 +272,22 @@ class Perso
     public function setPromo($promo)
     {
         $this->promo = $promo;
+    }
+
+    /**
+     * @return Role
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param Role $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
     }
 
 
