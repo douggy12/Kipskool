@@ -52,6 +52,7 @@ class ArticlePerso
 
     /**
      * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Perso", inversedBy="articles")
+     *
      */
     private $perso;
 

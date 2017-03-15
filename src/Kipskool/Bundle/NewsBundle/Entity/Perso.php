@@ -4,6 +4,7 @@ namespace Kipskool\Bundle\NewsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * Perso
@@ -11,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="perso")
  * @ORM\Entity(repositoryClass="Kipskool\Bundle\NewsBundle\Repository\PersoRepository")
  */
-class Perso
+class Perso extends BaseUser
 {
     /**
      * @var int
@@ -20,49 +21,39 @@ class Perso
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
     private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
      */
     private $prenom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="titre", type="string", length=255)
+     * @ORM\Column(name="titre", type="string", length=255, nullable=true)
      */
     private $titre;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mail", type="string", length=255)
-     */
-    private $mail;
+
 
     /**
      * @var int
      *
-     * @ORM\Column(name="born", type="integer")
+     * @ORM\Column(name="born", type="integer", nullable=true)
      */
     private $born;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
-     */
-    private $password;
+
 
     /**
      * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\ArticlePerso", mappedBy="perso", cascade={"remove"})
@@ -72,11 +63,13 @@ class Perso
 
     /**
      * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Promo", inversedBy="persos")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $promo;
 
     /**
      * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Role", inversedBy="persos")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $role;
 
@@ -86,6 +79,7 @@ class Perso
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        parent::__construct();
     }
 
     /**
@@ -181,29 +175,7 @@ class Perso
         return $this->titre;
     }
 
-    /**
-     * Set mail
-     *
-     * @param string $mail
-     *
-     * @return Perso
-     */
-    public function setMail($mail)
-    {
-        $this->mail = $mail;
 
-        return $this;
-    }
-
-    /**
-     * Get mail
-     *
-     * @return string
-     */
-    public function getMail()
-    {
-        return $this->mail;
-    }
 
     /**
      * Set born
@@ -229,29 +201,7 @@ class Perso
         return $this->born;
     }
 
-    /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return Perso
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
 
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
 
     function __toString()
     {
