@@ -3,10 +3,10 @@
 security:
 
     role_hierarchy:
-      ROLE_DELEGUE:     ROLE_ETUDIANT
-      ROLE_FORMATEUR :  ROLE ETUDIANT
-      ROLE_STAFF :      ROLE ETUDIANT
-      ROLE_ADMIN:       ROLE_ETUDIANT, ROLE_FORMATEUR, ROLE_STAFF, ROLE_DELEGUE
+        ROLE_DELEGUE:     ROLE_ETUDIANT
+        ROLE_FORMATEUR :  ROLE ETUDIANT
+        ROLE_STAFF :      ROLE ETUDIANT
+        ROLE_ADMIN:       ROLE_ETUDIANT, ROLE_FORMATEUR, ROLE_STAFF, ROLE_DELEGUE
 
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
