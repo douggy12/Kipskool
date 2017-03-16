@@ -5,6 +5,7 @@ namespace Kipskool\Bundle\NewsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * articleEcole
@@ -28,6 +29,18 @@ class articleEcole
      */
     private $id;
 
+    /**
+     * @return mixed
+     */
+    public function getExtrait()
+    {
+        $raccourci=$this->container->get('kipskool_news.raccourci_texte');
+        $text=$this->texte;
+        $textRaccourci=$raccourci->getChaineRaccourci($text,50);
+        return $textRaccourci;
+    }
+
+    private $extrait;
     /**
      * @var int
      *

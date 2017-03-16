@@ -6,7 +6,7 @@
  * Date: 10/03/2017
  * Time: 11:52
  */
-namespace Kipskool\NewsBundle\Extrait;
+namespace Kipskool\Bundle\Extrait;
 
 class Extrait
 {
@@ -21,7 +21,7 @@ class Extrait
      * @param : integer $tailleMax la taille maximale de la chaine tronquée
      * @return : string
      */
-    function getChaineRaccourci($chaine, $tailleMax)
+    public function getChaineRaccourci($chaine, $tailleMax)
     {
         $positionDernierEspace = 0;
         if( strlen($chaine) >= $tailleMax )
@@ -32,4 +32,5 @@ class Extrait
         }
         return $chaine;
     }
+
 }

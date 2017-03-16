@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Kipskool\Bundle\Extrait\Extrait;
 
 /**
  * Articleecole controller.
@@ -31,9 +32,6 @@ class articleEcoleController extends Controller
 
         $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\articleEcoleType', $articleEcole);
         $form->handleRequest($request);
-
-        $raccourciText=$this->container->get('kipskool_news.raccourci_text');
-        $articleText=$articleEcole->getTexte();
 
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,6 +61,12 @@ class articleEcoleController extends Controller
         $commentaireArticleEcole->setArticleEcole($articleEcole);
         $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\commentaireArticleEcoleType', $commentaireArticleEcole);
         $form->handleRequest($request);
+
+
+        $raccourci=$this->container->get('kipskool_news.raccourci_texte');
+        $text=$articleEcole->getTexte();
+        $textRaccourci=$raccourci->getChaineRaccourci($text,50);
+        $articleEcole->setExtrait($textRaccourci);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

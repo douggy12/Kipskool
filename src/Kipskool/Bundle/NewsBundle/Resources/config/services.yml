@@ -1,3 +1,0 @@
-services:
-    kipskool_news.raccourci_texte:
-        class: Kipskool\NewsBundle\Extrait\Extrait

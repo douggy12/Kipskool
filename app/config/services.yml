@@ -61,4 +61,4 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Commentaire_Ecole}
 
     kipskool_news.raccourci_texte:
-        class: Kipskool\NewsBundle\Extrait\Extrait
+        class: Kipskool\Bundle\Extrait\Extrait
