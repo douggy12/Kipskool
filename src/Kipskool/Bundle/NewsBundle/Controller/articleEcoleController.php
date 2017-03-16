@@ -35,6 +35,7 @@ class articleEcoleController extends Controller
 
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($articleEcole);
             $em->flush($articleEcole);
@@ -62,11 +63,6 @@ class articleEcoleController extends Controller
         $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\commentaireArticleEcoleType', $commentaireArticleEcole);
         $form->handleRequest($request);
 
-
-        $raccourci=$this->container->get('kipskool_news.raccourci_texte');
-        $text=$articleEcole->getTexte();
-        $textRaccourci=$raccourci->getChaineRaccourci($text,50);
-        $articleEcole->setExtrait($textRaccourci);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

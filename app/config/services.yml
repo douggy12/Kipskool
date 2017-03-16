@@ -62,3 +62,4 @@ services:
 
     kipskool_news.raccourci_texte:
         class: Kipskool\Bundle\Extrait\Extrait
+
