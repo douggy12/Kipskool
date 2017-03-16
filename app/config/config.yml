@@ -77,3 +77,12 @@ sonata_block:
         sonata.admin.block.admin_list:
             contexts: [admin]
         # ...
+
+# FOS config
+fos_user:
+    db_driver:     orm                       # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
+    firewall_name: main                      # Le nom du firewall derrière lequel on utilisera ces utilisateurs
+    user_class:    Kipskool\Bundle\NewsBundle\Entity\Perso # La classe de l'entité User que nous utilisons
+    from_email:
+      address: "noreply@Kipskool.com"
+      sender_name: "No reply"

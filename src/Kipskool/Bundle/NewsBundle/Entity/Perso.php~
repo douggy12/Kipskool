@@ -37,6 +37,14 @@ class Perso extends BaseUser
      */
     private $prenom;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=255, nullable=true)
+     */
+    private $titre;
+
+
 
     /**
      * @var int
@@ -60,12 +68,10 @@ class Perso extends BaseUser
     private $promo;
 
     /**
-     * @ORM\OneToOne(targetEntity="Invitation")
-     * @ORM\JoinColumn(referencedColumnName="code")
-     * @Assert\NotNull(message="Your invitation is wrong", groups={"Registration"})
+     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Role", inversedBy="persos")
+     * @ORM\JoinColumn(nullable=true)
      */
-    protected $invitation;
-
+    private $role;
 
     /**
      * Perso constructor
@@ -146,6 +152,29 @@ class Perso extends BaseUser
         return $this->prenom;
     }
 
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return Perso
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
 
 
 
@@ -197,67 +226,24 @@ class Perso extends BaseUser
         $this->promo = $promo;
     }
 
-
-
-
-
-
-
     /**
-     * Add article
-     *
-     * @param \Kipskool\Bundle\NewsBundle\Entity\ArticlePerso $article
-     *
-     * @return Perso
+     * @return Role
      */
-    public function addArticle(\Kipskool\Bundle\NewsBundle\Entity\ArticlePerso $article)
+    public function getRole()
     {
-        $this->articles[] = $article;
-
-        return $this;
+        return $this->role;
     }
 
     /**
-     * Remove article
-     *
-     * @param \Kipskool\Bundle\NewsBundle\Entity\ArticlePerso $article
+     * @param Role $role
      */
-    public function removeArticle(\Kipskool\Bundle\NewsBundle\Entity\ArticlePerso $article)
+    public function setRole($role)
     {
-        $this->articles->removeElement($article);
+        $this->role = $role;
     }
 
-    /**
-     * Add promo
-     *
-     * @param \Kipskool\Bundle\NewsBundle\Entity\Promo $promo
-     *
-     * @return Perso
-     */
-    public function addPromo(\Kipskool\Bundle\NewsBundle\Entity\Promo $promo)
-    {
-        $this->promo[] = $promo;
 
-        return $this;
-    }
 
-    /**
-     * Remove promo
-     *
-     * @param \Kipskool\Bundle\NewsBundle\Entity\Promo $promo
-     */
-    public function removePromo(\Kipskool\Bundle\NewsBundle\Entity\Promo $promo)
-    {
-        $this->promo->removeElement($promo);
-    }
 
-    public function setInvitation(Invitation $invitation)
-    {
-        $this->invitation = $invitation;
-    }
-
-    public function getInvitation()
-    {
-        return $this->invitation;
-    }
 }
+
