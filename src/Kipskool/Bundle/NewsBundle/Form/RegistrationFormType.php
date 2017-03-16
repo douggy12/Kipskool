@@ -13,8 +13,8 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('invitation', 'app_invitation_type')
-            ->add('nom', 'texte')
-            ->add('prenom', 'texte')
+            ->add('nom')
+            ->add('prenom')
             ->add('born', DateType::class, array(
                 'input' => 'timestamp',
                 'widget' => 'single_text'

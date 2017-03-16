@@ -1,7 +1,7 @@
 <?php
-// src/AppBundle/Entity/Invitation.php
 
-namespace AppBundle\Entity;
+
+namespace Kipskool\Bundle\NewsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
