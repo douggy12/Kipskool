@@ -63,3 +63,9 @@ services:
     kipskool_news.raccourci_texte:
         class: Kipskool\Bundle\Extrait\Extrait
 
+    kipskool_news.twig_extension:
+        class: Kipskool\Bundle\Extrait\TwigExtension
+        public: false
+        tag:
+            - { name: twig.extension }
+

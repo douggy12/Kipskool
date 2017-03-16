@@ -8,7 +8,7 @@
  */
 namespace Kipskool\Bundle\Extrait;
 
-class Extrait
+class Extrait extends  \Twig_Extension
 {
 
     /**
