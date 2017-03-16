@@ -17,6 +17,7 @@ class PersoAdmin extends AbstractAdmin
 
         $rolesChoices = self::flattenRoles($roles);
 
+
         $formMapper
             ->tab('Perso')
             ->with('Utilisateur', array('class' => 'col-md-9'))
@@ -31,6 +32,8 @@ class PersoAdmin extends AbstractAdmin
             ->with('Promo', array('class' => 'col-md-3'))
             ->add('promo', 'entity', array(
                 'class' => 'Kipskool\Bundle\NewsBundle\Entity\Promo',
+                'expanded' =>true,
+                'multiple' => true,
                 'choice_label' => 'nom'))
             ->end()
             ->end()
