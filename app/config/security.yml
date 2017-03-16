@@ -4,8 +4,8 @@ security:
 
     role_hierarchy:
       ROLE_DELEGUE: ROLE_ETUDIANT
-      ROLE_FORMATEUR : ROLE ETUDIANT
-      ROLE_STAFF : ROLE ETUDIANT
+      ROLE_FORMATEUR : ROLE ETUDIANT, ROLE_DELEGUE
+      ROLE_STAFF : ROLE ETUDIANT, ROLE_DELEGUE, ROLE_FORMATEUR
       ROLE_ADMIN:       ROLE_ETUDIANT, ROLE_DELEGUE, ROLE_FORMATEUR, ROLE_STAFF
 
 
@@ -30,6 +30,7 @@ security:
             form_login:
               login_path: fos_user_security_login
               check_path: fos_user_security_check
+
             logout:
               path:       fos_user_security_logout
               target:     /ecole

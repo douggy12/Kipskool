@@ -59,6 +59,13 @@ class Perso extends BaseUser
      */
     private $promo;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Invitation")
+     * @ORM\JoinColumn(referencedColumnName="code")
+     * @Assert\NotNull(message="Your invitation is wrong", groups={"Registration"})
+     */
+    protected $invitation;
+
 
     /**
      * Perso constructor
@@ -242,5 +249,15 @@ class Perso extends BaseUser
     public function removePromo(\Kipskool\Bundle\NewsBundle\Entity\Promo $promo)
     {
         $this->promo->removeElement($promo);
+    }
+
+    public function setInvitation(Invitation $invitation)
+    {
+        $this->invitation = $invitation;
+    }
+
+    public function getInvitation()
+    {
+        return $this->invitation;
     }
 }
