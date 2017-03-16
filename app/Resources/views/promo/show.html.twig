@@ -49,11 +49,7 @@
         <li>
             <a href="{{ path('ecole_show', {'ecole_id': ecole.id}) }}">Back to the list</a>
         </li>
-        <li>
-            <a href="{{ path('promo_edit', {'ecole_id': ecole.id, 'promo_id': promo.id}) }}">Edit</a>
-        </li>
-        <li><a href="{{ path('promo_delete', {'ecole_id': ecole.id, 'promo_id': promo.id}) }}">Delete</a>
-        </li>
+
     </ul>
 
     <table>
@@ -68,9 +64,5 @@
         {% endfor %}
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('perso_new', {'promo_id': promo.id}) }}">Ajouter un étudiant</a>
-        </li>
-    </ul>
+
 {% endblock %}
