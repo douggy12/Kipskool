@@ -8,7 +8,8 @@ use Kipskool\Bundle\NewsBundle\Entity\Ecole;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Articleecole controller.
@@ -30,6 +31,10 @@ class articleEcoleController extends Controller
 
         $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\articleEcoleType', $articleEcole);
         $form->handleRequest($request);
+
+        $raccourciText=$this->container->get('kipskool_news.raccourci_text');
+        $articleText=$articleEcole->getTexte();
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

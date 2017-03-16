@@ -21,7 +21,7 @@ class Extrait
      * @param : integer $tailleMax la taille maximale de la chaine tronquée
      * @return : string
      */
-    function raccourcirChaine($chaine, $tailleMax)
+    function getChaineRaccourci($chaine, $tailleMax)
     {
         $positionDernierEspace = 0;
         if( strlen($chaine) >= $tailleMax )
@@ -32,8 +32,4 @@ class Extrait
         }
         return $chaine;
     }
-    /** Exemple d'utilisation **/
-$uneChaineTropLongue = 'Lorem Ipsum is simply dummy text of the printing and ';
-$uneChaineTropLongue.= 'typesetting industry.';
-echo raccourcirChaine($uneChaineTropLongue, 40);
 }
