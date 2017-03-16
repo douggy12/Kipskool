@@ -12,24 +12,19 @@ class PersoAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $container = $this->getConfigurationPool()->getContainer();
+        $roles = $container->getParameter('security.role_hierarchy.roles');
+
+        $rolesChoices = self::flattenRoles($roles);
+
         $formMapper
             ->tab('Perso')
             ->with('Utilisateur', array('class' => 'col-md-9'))
             ->add('nom', 'text')
             ->add('prenom', 'text')
-            ->add('titre', 'text')
             ->add('born', DateType::class, array(
                 'input' => 'timestamp',
                 'widget' => 'single_text'))
-            ->end()
-            ->with('Role')
-            ->add('role', 'entity', array(
-                'class' => 'Kipskool\Bundle\NewsBundle\Entity\Role',
-                'choice_label' => 'nom'))
-            ->end()
-            ->with('Compte')
-            ->add('username', 'text')
-            ->add('email','text')
             ->end()
             ->end()
             ->tab('Promo')
@@ -38,7 +33,20 @@ class PersoAdmin extends AbstractAdmin
                 'class' => 'Kipskool\Bundle\NewsBundle\Entity\Promo',
                 'choice_label' => 'nom'))
             ->end()
-            ->end();
+            ->end()
+            ->tab('Compte')
+            ->with('Utilisateur')
+            ->add('username', 'text')
+            ->add('email','text')
+            ->end()
+            ->with('Role')
+            ->add('roles', 'choice', array(
+                'choices' => $rolesChoices,
+                'multiple' => true))
+            ->end()
+            ->end()
+
+        ;
 
     }
 
@@ -57,7 +65,29 @@ class PersoAdmin extends AbstractAdmin
             ->addIdentifier('nom')
             ->add('prenom')
             ->add('promo.nom')
-            ->add('mail');
+            ->add('email');
+    }
+    /**
+     * Turns the role's array keys into string <ROLES_NAME> keys.
+     * @todo Move to convenience or make it recursive ? ;-)
+     */
+    protected static function flattenRoles($rolesHierarchy)
+    {
+        $flatRoles = array();
+        foreach($rolesHierarchy as $roles) {
+
+            if(empty($roles)) {
+                continue;
+            }
+
+            foreach($roles as $role) {
+                if(!isset($flatRoles[$role])) {
+                    $flatRoles[$role] = $role;
+                }
+            }
+        }
+
+        return $flatRoles;
     }
 
 }
