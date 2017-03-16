@@ -5,6 +5,7 @@ namespace Kipskool\Bundle\NewsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Perso
@@ -60,7 +61,7 @@ class Perso extends BaseUser
     private $promo;
 
     /**
-     * @ORM\OneToOne(targetEntity="Invitation")
+     * @ORM\OneToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Invitation")
      * @ORM\JoinColumn(referencedColumnName="code")
      * @Assert\NotNull(message="Your invitation is wrong", groups={"Registration"})
      */
