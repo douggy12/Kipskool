@@ -7,9 +7,11 @@ use Kipskool\Bundle\NewsBundle\Entity\Commentaire_article_promo;
 use Kipskool\Bundle\NewsBundle\Entity\Ecole;
 use Kipskool\Bundle\NewsBundle\Entity\Promo;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Article_promo controller.
@@ -23,9 +25,12 @@ class Article_promoController extends Controller
      * @ParamConverter("promo", options={"mapping" : {"promo_id" : "id"}})
      * @Route("new_article_promo/promo/{promo_id}", name="add_article_promo")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_STAFF')")
      */
     public function newArtcicleAction(Request $request, Promo $promo )
     {
+
+
         $article_promo = new Article_promo();
         $article_promo->setPromo($promo);
         $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\Article_promoType', $article_promo);
