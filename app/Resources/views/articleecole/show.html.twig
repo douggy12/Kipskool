@@ -11,8 +11,8 @@
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ articleEcole.id }}</td>
+                <th>Auteur</th>
+                <td>{{ articleEcole.auteur }}</td>
             </tr>
             <tr>
                 <th>Createdat</th>
@@ -49,12 +49,14 @@
     <table>
         <tr>
             <th>Posté le :</th>
+            <th>par :</th>
             <th>Commentaire</th>
             <th>Action</th>
         </tr>
         {% for commentaire in articleEcole.commentaires %}
             <tr>
                 <td>{{ commentaire.createdAt|date("d/m/Y H:m:s") }}</td>
+                <td>{{ commentaire.auteur }}</td>
                 <td>{{ commentaire.texte }}</td>
                 <td>
                     <a href="{{ path('commentairearticleecole_edit', { 'article_ecole_id' : articleEcole.id, 'commentaire_article_ecole_id' : commentaire.id, 'ecole_id': ecole.id}) }}">Editer</a>

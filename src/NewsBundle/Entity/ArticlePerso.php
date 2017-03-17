@@ -63,8 +63,15 @@ class ArticlePerso
     private $commentaires;
 
     /**
+     * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $auteur;
+
+    /**
      * ArticlePerso constructor
      */
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -195,6 +202,24 @@ class ArticlePerso
     {
         return $this->getTitre();
     }
+
+    /**
+     * @return Perso
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
+    }
+
+    /**
+     * @param Perso $auteur
+     */
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+    }
+
+
 
 
 }

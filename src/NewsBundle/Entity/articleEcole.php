@@ -28,7 +28,7 @@ class articleEcole
      */
     private $id;
 
-    private $extrait;
+
     /**
      * @var int
      *
@@ -62,6 +62,13 @@ class articleEcole
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $commentaires;
+
+    /**
+     * @var Perso
+     * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $auteur;
 
     /**
      * articleEcole constructor.
@@ -204,4 +211,23 @@ class articleEcole
     function __toString() {
         return $this->titre;
 
-}}
+    }
+
+    /**
+     * @return Perso
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
+    }
+
+    /**
+     * @param Perso $auteur
+     */
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+    }
+
+
+}

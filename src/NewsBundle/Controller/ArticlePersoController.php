@@ -29,6 +29,7 @@ class ArticlePersoController extends Controller
     {
         $articlePerso = new ArticlePerso();
         $articlePerso->setPerso($perso);
+        $articlePerso->setAuteur($this->getUser());
         $form = $this->createForm('NewsBundle\Form\ArticlePersoType', $articlePerso);
         $form->handleRequest($request);
 
@@ -56,6 +57,7 @@ class ArticlePersoController extends Controller
     {
         $commentaireArticlePerso = new CommentaireArticlePerso();
         $commentaireArticlePerso->setArticle($articlePerso);
+        $commentaireArticlePerso->setAuteur($this->getUser());
         $form = $this->createForm('NewsBundle\Form\CommentaireArticlePersoType', $commentaireArticlePerso);
         $form->handleRequest($request);
 

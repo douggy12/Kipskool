@@ -33,6 +33,7 @@ class Article_promoController extends Controller
 
         $article_promo = new Article_promo();
         $article_promo->setPromo($promo);
+        $article_promo->setAuteur($this->getUser());
         $form = $this->createForm('NewsBundle\Form\Article_promoType', $article_promo);
         $form->handleRequest($request);
 
@@ -63,6 +64,7 @@ class Article_promoController extends Controller
     {
         $commentaire_article_promo = new Commentaire_article_promo();
         $commentaire_article_promo->setArticlePromo($article_promo);
+        $commentaire_article_promo->setAuteur($this->getUser());
         $form = $this->createForm('NewsBundle\Form\Commentaire_article_promoType', $commentaire_article_promo);
         $form->handleRequest($request);
 

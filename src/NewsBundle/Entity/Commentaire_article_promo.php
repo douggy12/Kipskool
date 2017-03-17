@@ -41,6 +41,12 @@ class Commentaire_article_promo
     private $createdAt;
 
     /**
+     * @var Perso
+     * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $auteur;
+    /**
      * Commentaire_article_promo constructor.
 
      */
@@ -120,6 +126,23 @@ class Commentaire_article_promo
     {
         return $this->texte;
     }
+
+    /**
+     * @return Perso
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
+    }
+
+    /**
+     * @param Perso $auteur
+     */
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+    }
+
 
 
 }

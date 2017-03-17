@@ -62,6 +62,16 @@ class Article_promo
      */
     private $srcFeature;
 
+    /**
+     * @var Perso
+     * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $auteur;
+    /**
+     * Article_promo constructor.
+     */
+
 
 
     public function __construct()
@@ -195,4 +205,21 @@ class Article_promo
     {
         return $this->comments;
     }
+
+    /**
+     * @return Perso
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
+    }
+
+    /**
+     * @param Perso $auteur
+     */
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+    }
+
 }

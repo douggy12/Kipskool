@@ -170,7 +170,7 @@ class Perso extends BaseUser
 
     function __toString()
     {
-        return $this->getPrenom().$this->getNom();
+        return $this->getPrenom().' '.$this->getNom();
     }
 
 
