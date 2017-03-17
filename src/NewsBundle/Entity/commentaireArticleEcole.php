@@ -1,6 +1,6 @@
 <?php
 
-namespace Kipskool\Bundle\NewsBundle\Entity;
+namespace NewsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,12 +8,12 @@ use Doctrine\ORM\Mapping as ORM;
  * commentaireArticleEcole
  *
  * @ORM\Table(name="commentaire_article_ecole")
- * @ORM\Entity(repositoryClass="Kipskool\Bundle\NewsBundle\Repository\commentaireArticleEcoleRepository")
+ * @ORM\Entity(repositoryClass="NewsBundle\Repository\commentaireArticleEcoleRepository")
  */
 class commentaireArticleEcole
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\articleEcole", inversedBy="commentaires")
+     * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\articleEcole", inversedBy="commentaires")
      * @ORM\JoinColumn(nullable=false)
      */
     private $articleEcole;
@@ -95,11 +95,11 @@ class commentaireArticleEcole
     /**
      * Set articleEcole
      *
-     * @param \Kipskool\Bundle\NewsBundle\Entity\articleEcole $articleEcole
+     * @param \NewsBundle\Entity\articleEcole $articleEcole
      *
      * @return commentaireArticleEcole
      */
-    public function setArticleEcole(\Kipskool\Bundle\NewsBundle\Entity\articleEcole $articleEcole)
+    public function setArticleEcole(\NewsBundle\Entity\articleEcole $articleEcole)
     {
         $this->articleEcole = $articleEcole;
 
@@ -109,7 +109,7 @@ class commentaireArticleEcole
     /**
      * Get articleEcole
      *
-     * @return \Kipskool\Bundle\NewsBundle\Entity\articleEcole
+     * @return \NewsBundle\Entity\articleEcole
      */
     public function getArticleEcole()
     {

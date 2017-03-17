@@ -1,6 +1,6 @@
 <?php
 
-namespace Kipskool\Bundle\NewsBundle\Entity;
+namespace NewsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,13 +10,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * articleEcole
  *
  * @ORM\Table(name="article_ecole")
- * @ORM\Entity(repositoryClass="Kipskool\Bundle\NewsBundle\Repository\articleEcoleRepository")
+ * @ORM\Entity(repositoryClass="NewsBundle\Repository\articleEcoleRepository")
  *
  */
 class articleEcole
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Ecole", inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Ecole", inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
     private $ecole;
@@ -58,7 +58,7 @@ class articleEcole
     private $srcFeature;
 
     /**
-     * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\commentaireArticleEcole", mappedBy="articleEcole", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="NewsBundle\Entity\commentaireArticleEcole", mappedBy="articleEcole", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $commentaires;
@@ -170,11 +170,11 @@ class articleEcole
     /**
      * Set ecole
      *
-     * @param \Kipskool\Bundle\NewsBundle\Entity\Ecole $ecole
+     * @param \NewsBundle\Entity\Ecole $ecole
      *
      * @return articleEcole
      */
-    public function setEcole(\Kipskool\Bundle\NewsBundle\Entity\Ecole $ecole)
+    public function setEcole(\NewsBundle\Entity\Ecole $ecole)
     {
         $this->ecole = $ecole;
 
@@ -194,7 +194,7 @@ class articleEcole
     /**
      * Get ecole
      *
-     * @return \Kipskool\Bundle\NewsBundle\Entity\Ecole
+     * @return \NewsBundle\Entity\Ecole
      */
     public function getEcole()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kipskool\Bundle\NewsBundle\Form;
+namespace NewsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,7 +22,7 @@ class Article_promoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Kipskool\Bundle\NewsBundle\Entity\Article_promo'
+            'data_class' => 'NewsBundle\Entity\Article_promo'
         ));
     }
 
@@ -31,7 +31,7 @@ class Article_promoType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'kipskool_bundle_newsbundle_article_promo';
+        return 'newsbundle_article_promo';
     }
 
 

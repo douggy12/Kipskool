@@ -1,11 +1,11 @@
 <?php
 
-namespace Kipskool\Bundle\NewsBundle\Controller;
+namespace NewsBundle\Controller;
 
-use Kipskool\Bundle\NewsBundle\Entity\Article_promo;
-use Kipskool\Bundle\NewsBundle\Entity\Commentaire_article_promo;
-use Kipskool\Bundle\NewsBundle\Entity\Ecole;
-use Kipskool\Bundle\NewsBundle\Entity\Promo;
+use NewsBundle\Entity\Article_promo;
+use NewsBundle\Entity\Commentaire_article_promo;
+use NewsBundle\Entity\Ecole;
+use NewsBundle\Entity\Promo;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -33,7 +33,7 @@ class Article_promoController extends Controller
 
         $article_promo = new Article_promo();
         $article_promo->setPromo($promo);
-        $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\Article_promoType', $article_promo);
+        $form = $this->createForm('NewsBundle\Form\Article_promoType', $article_promo);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class Article_promoController extends Controller
     {
         $commentaire_article_promo = new Commentaire_article_promo();
         $commentaire_article_promo->setArticlePromo($article_promo);
-        $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\Commentaire_article_promoType', $commentaire_article_promo);
+        $form = $this->createForm('NewsBundle\Form\Commentaire_article_promoType', $commentaire_article_promo);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -92,7 +92,7 @@ class Article_promoController extends Controller
      */
     public function editArticleAction(Request $request, Article_promo $article_promo)
     {
-        $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\Article_promoType', $article_promo);
+        $editForm = $this->createForm('NewsBundle\Form\Article_promoType', $article_promo);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

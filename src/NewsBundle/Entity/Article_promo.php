@@ -1,6 +1,6 @@
 <?php
 
-namespace Kipskool\Bundle\NewsBundle\Entity;
+namespace NewsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,18 +9,18 @@ use Doctrine\ORM\Mapping as ORM;
  * Article_promo
  *
  * @ORM\Table(name="article_promo")
- * @ORM\Entity(repositoryClass="Kipskool\Bundle\NewsBundle\Repository\Article_promoRepository")
+ * @ORM\Entity(repositoryClass="NewsBundle\Repository\Article_promoRepository")
  */
 class Article_promo
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Promo", inversedBy="articles_promo")
+     * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Promo", inversedBy="articles_promo")
      * @ORM\JoinColumn(nullable=false)
      */
     private $promo;
 
     /**
-     * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Commentaire_article_promo", mappedBy="article_promo", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="NewsBundle\Entity\Commentaire_article_promo", mappedBy="article_promo", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $comments;
@@ -176,7 +176,7 @@ class Article_promo
     }
 
     /**
-     * @param \Kipskool\Bundle\NewsBundle\Entity\Promo $promo
+     * @param \NewsBundle\Entity\Promo $promo
      */
     public function setPromo($promo)
     {

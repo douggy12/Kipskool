@@ -1,6 +1,6 @@
 <?php
 
-namespace Kipskool\Bundle\NewsBundle\Repository;
+namespace NewsBundle\Repository;
 
 /**
  * articleEcoleRepository

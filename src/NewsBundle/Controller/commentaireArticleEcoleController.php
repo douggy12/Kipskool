@@ -1,9 +1,9 @@
 <?php
 
-namespace Kipskool\Bundle\NewsBundle\Controller;
+namespace NewsBundle\Controller;
 
 
-use Kipskool\Bundle\NewsBundle\Entity\commentaireArticleEcole;
+use NewsBundle\Entity\commentaireArticleEcole;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -30,7 +30,7 @@ class commentaireArticleEcoleController extends Controller
     public function editAction(Request $request, commentaireArticleEcole $commentaireArticleEcole)
     {
 
-        $editForm = $this->createForm('Kipskool\Bundle\NewsBundle\Form\commentaireArticleEcoleType', $commentaireArticleEcole);
+        $editForm = $this->createForm('NewsBundle\Form\commentaireArticleEcoleType', $commentaireArticleEcole);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
