@@ -13,7 +13,9 @@ class Article_promoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('titre')->add('texte')->add('srcFeature');
+        $builder->add('titre')->add('texte')->add('srcFeature')->add('image', FileType::class, array(
+            'label'=>'Image (jpeg)'
+        ));
     }
     
     /**

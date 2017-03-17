@@ -64,6 +64,28 @@ class articleEcole
     private $commentaires;
 
     /**
+     * @ORM\Column(name="image", type="string", length=1000)
+     */
+    private $image;
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+
+    /**
      * articleEcole constructor.
      */
     public function __construct()

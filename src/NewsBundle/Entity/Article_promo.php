@@ -62,6 +62,26 @@ class Article_promo
      */
     private $srcFeature;
 
+    /**
+     * @ORM\Column(name="image", type="string", length=1000)
+     */
+    private $image;
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
 
 
     public function __construct()

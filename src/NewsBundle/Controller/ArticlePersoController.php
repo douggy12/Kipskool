@@ -5,6 +5,7 @@ namespace NewsBundle\Controller;
 use NewsBundle\Entity\ArticlePerso;
 use NewsBundle\Entity\CommentaireArticlePerso;
 use NewsBundle\Entity\Perso;
+use NewsBundle\Form\ArticlePersoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -27,12 +28,25 @@ class ArticlePersoController extends Controller
      */
     public function newAction(Request $request, Perso $perso)
     {
+
         $articlePerso = new ArticlePerso();
         $articlePerso->setPerso($perso);
         $form = $this->createForm('NewsBundle\Form\ArticlePersoType', $articlePerso);
         $form->handleRequest($request);
 
+
+        //
+
         if ($form->isSubmitted() && $form->isValid()) {
+            if($articlePerso->getImage()==!null) {
+                $file = $articlePerso->getImage();
+                $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move(
+                    $this->getParameter('image_directory'),
+                    $filename
+                );
+                $articlePerso->setImage($filename);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($articlePerso);
             $em->flush($articlePerso);
