@@ -38,6 +38,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        raccourci: "@kipskool_news.raccourci_texte"
 
 # Doctrine Configuration
 doctrine:
