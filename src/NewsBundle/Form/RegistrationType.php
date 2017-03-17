@@ -2,7 +2,9 @@
 
 namespace NewsBundle\Form;
 
+
 use Symfony\Component\Form\AbstractType;
+
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -18,7 +20,7 @@ class RegistrationType extends AbstractType
                 'widget' => 'single_text'
             ))
             ->add('promo', 'entity', array(
-                'class' => '\NewsBundle\Entity\Promo',
+                'class' => 'NewsBundle\Entity\Promo',
                 'expanded' =>true,
                 'multiple' => true,
                 'choice_label' => 'nom'))
