@@ -6,6 +6,7 @@ use Kipskool\Bundle\NewsBundle\Entity\articleEcole;
 use Kipskool\Bundle\NewsBundle\Entity\commentaireArticleEcole;
 use Kipskool\Bundle\NewsBundle\Entity\Ecole;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,6 +25,7 @@ class articleEcoleController extends Controller
      * @ParamConverter("ecole", options={"mapping" : {"ecole_id" : "id"}})
      * @Route("/new_article_ecole/ecole/{ecole_id}", name="addArticle")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_STAFF')")
      */
     public function addArticle(Request $request, Ecole $ecole)
     {
@@ -91,6 +93,7 @@ class articleEcoleController extends Controller
      *
      * @Route("/{article_ecole_id}/edit", name="articleecole_edit")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_STAFF')")
      */
     public function editAction(Request $request, articleEcole $articleEcole)
     {
@@ -117,6 +120,7 @@ class articleEcoleController extends Controller
      *
      * @Route("{article_ecole_id}/delete", name="articleecole_delete")
      * @Method("GET")
+     * @Security("has_role('ROLE_STAFF')")
      */
     public function deleteAction(articleEcole $articleEcole)
     {
