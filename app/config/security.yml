@@ -4,8 +4,8 @@ security:
 
     role_hierarchy:
       ROLE_DELEGUE: ROLE_ETUDIANT
-      ROLE_FORMATEUR : ROLE ETUDIANT
-      ROLE_STAFF : ROLE ETUDIANT
+      ROLE_FORMATEUR : ROLE_ETUDIANT
+      ROLE_STAFF : ROLE_ETUDIANT
       ROLE_ADMIN:       ROLE_ETUDIANT, ROLE_DELEGUE, ROLE_FORMATEUR, ROLE_STAFF
 
 
@@ -52,5 +52,5 @@ security:
         - { path: ^/admin/, role: ROLE_ADMIN }
 
     encoders:
-      Kipskool\Bundle\NewsBundle\Entity\Perso: sha512
+      NewsBundle\Entity\Perso: sha512
       FOS\UserBundle\Model\UserInterface: bcrypt
