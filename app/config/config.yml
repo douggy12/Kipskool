@@ -84,7 +84,16 @@ sonata_block:
 fos_user:
     db_driver:     orm                       # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
     firewall_name: main                      # Le nom du firewall derrière lequel on utilisera ces utilisateurs
-    user_class:    Kipskool\Bundle\NewsBundle\Entity\Perso # La classe de l'entité User que nous utilisons
+    user_class:    NewsBundle\Entity\Perso # La classe de l'entité User que nous utilisons
     from_email:
       address: "noreply@Kipskool.com"
       sender_name: "No reply"
+    registration:
+      form:
+        type: NewsBundle\Form\RegistrationType
+
+sonata_admin:
+    title:      KipsKool Admin
+    title_logo: img/logo_small.png
+    templates:
+        layout:     admin_layout.html.twig
