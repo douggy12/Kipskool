@@ -25,10 +25,11 @@ class PersoController extends Controller
      */
     public function showAction(Perso $perso)
     {
+        $promo = $perso->getPromo()->first();
 
 
         return $this->render('perso/show.html.twig', array(
-            'promo' => $perso->getPromo(),
+            'promo' => $promo,
             'perso' => $perso,
 
         ));
