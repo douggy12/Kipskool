@@ -90,7 +90,7 @@ fos_user:
       sender_name: "No reply"
     registration:
       form:
-        type: Kipskool\Bundle\NewsBundle\Form\RegistrationType
+        type: NewsBundle\Form\RegistrationType
 
 sonata_admin:
     title:      KipsKool Admin

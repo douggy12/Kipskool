@@ -1,6 +1,6 @@
 <?php
 
-namespace Kipskool\Bundle\NewsBundle\Form;
+namespace NewsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -18,7 +18,7 @@ class RegistrationType extends AbstractType
                 'widget' => 'single_text'
             ))
             ->add('promo', 'entity', array(
-                'class' => 'Kipskool\Bundle\NewsBundle\Entity\Promo',
+                'class' => '\NewsBundle\Entity\Promo',
                 'expanded' =>true,
                 'multiple' => true,
                 'choice_label' => 'nom'))

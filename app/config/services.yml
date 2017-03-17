@@ -70,7 +70,7 @@ services:
             - { name: twig.extension }
 
     app.form.registration:
-      class: Kipskool\Bundle\NewsBundle\Form\RegistrationType
+      class: NewsBundle\Form\RegistrationType
       tags:
           - { name: form.type, alias: app_user_registration }
 
