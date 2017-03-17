@@ -8,7 +8,9 @@ use Kipskool\Bundle\NewsBundle\Entity\Ecole;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Kipskool\Bundle\Extrait\Extrait;
 
 /**
  * Articleecole controller.
@@ -31,7 +33,9 @@ class articleEcoleController extends Controller
         $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\articleEcoleType', $articleEcole);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($articleEcole);
             $em->flush($articleEcole);
@@ -58,6 +62,7 @@ class articleEcoleController extends Controller
         $commentaireArticleEcole->setArticleEcole($articleEcole);
         $form = $this->createForm('Kipskool\Bundle\NewsBundle\Form\commentaireArticleEcoleType', $commentaireArticleEcole);
         $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

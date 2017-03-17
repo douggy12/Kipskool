@@ -28,6 +28,7 @@ class articleEcole
      */
     private $id;
 
+    private $extrait;
     /**
      * @var int
      *
@@ -45,7 +46,7 @@ class articleEcole
     /**
      * @var string
      *
-     * @ORM\Column(name="texte", type="string", length=255)
+     * @ORM\Column(name="texte", type="string", length=10000)
      */
     private $texte;
 
