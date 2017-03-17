@@ -52,7 +52,7 @@ class Promo
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Perso", mappedBy="promo", cascade={"remove"})
+     * @ORM\ManyToMany(targetEntity="Kipskool\Bundle\NewsBundle\Entity\Perso", mappedBy="promo", cascade={"persist"})
      */
     private $persos;
 
