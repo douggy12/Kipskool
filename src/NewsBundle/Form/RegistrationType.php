@@ -18,8 +18,8 @@ class RegistrationType extends AbstractType
                 'widget' => 'single_text'
             ))
             ->add('promo', 'entity', array(
-                'class' => '\NewsBundle\Entity\Promo',
-                'expanded' =>true,
+                'class' => 'NewsBundle\Entity\Promo',
+                'expanded'=> true,
                 'multiple' => true,
                 'choice_label' => 'nom'))
             ;

@@ -59,7 +59,7 @@
                 <td>
                     <a href="{{ path('articleecole_show',{'ecole_id': ecole.id, 'article_ecole_id': article.id}) }}"> {{ article.titre }}</a>
                 </td>
-                <td>{{ article.texte }}</td>
+                <td>{{ article.texte|raccourci }}</td>
                 <td>{{ article.createdAt|date("d/m/Y") }}</td>
             </tr>
         {% endfor %}
