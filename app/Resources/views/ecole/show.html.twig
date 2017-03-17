@@ -52,6 +52,7 @@
             <th>Titre</th>
             <th>Extrait</th>
             <th>Créé</th>
+            <th>Auteur</th>
 
         </tr>
         {% for article in ecole.articles %}
@@ -61,6 +62,7 @@
                 </td>
                 <td>{{ article.texte }}</td>
                 <td>{{ article.createdAt|date("d/m/Y") }}</td>
+                <td><a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"> {{ article.auteur.nom }}</a></td>
             </tr>
         {% endfor %}
     </table>

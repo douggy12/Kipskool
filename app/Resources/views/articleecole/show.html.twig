@@ -56,7 +56,7 @@
         {% for commentaire in articleEcole.commentaires %}
             <tr>
                 <td>{{ commentaire.createdAt|date("d/m/Y H:m:s") }}</td>
-                <td>{{ commentaire.auteur }}</td>
+                <td><a href="{{ path('perso_show', {'perso_id': commentaire.auteur.id}) }}"> {{ commentaire.auteur }}</a></td>
                 <td>{{ commentaire.texte }}</td>
                 <td>
                     <a href="{{ path('commentairearticleecole_edit', { 'article_ecole_id' : articleEcole.id, 'commentaire_article_ecole_id' : commentaire.id, 'ecole_id': ecole.id}) }}">Editer</a>
