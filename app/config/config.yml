@@ -88,3 +88,12 @@ fos_user:
     from_email:
       address: "noreply@Kipskool.com"
       sender_name: "No reply"
+    registration:
+      form:
+        type: Kipskool\Bundle\NewsBundle\Form\RegistrationType
+
+sonata_admin:
+    title:      KipsKool Admin
+    title_logo: img/logo_small.png
+    templates:
+        layout:     admin_layout.html.twig

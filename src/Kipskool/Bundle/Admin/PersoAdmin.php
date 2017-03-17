@@ -67,7 +67,10 @@ class PersoAdmin extends AbstractAdmin
         $listMapper
             ->addIdentifier('nom')
             ->add('prenom')
-            ->add('promo.nom')
+            ->add('promo', 'entity', array(
+                'class' => 'Kipskool\Bundle\NewsBundle\Entity\Promo',
+                'multiple' => true,
+                'choice_label' => 'nom'))
             ->add('email');
     }
     /**

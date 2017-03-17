@@ -3,6 +3,7 @@
 namespace Kipskool\Bundle\NewsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class RegistrationType extends AbstractType
@@ -12,6 +13,15 @@ class RegistrationType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
+            ->add('born', DateType::class, array(
+                'input' => 'timestamp',
+                'widget' => 'single_text'
+            ))
+            ->add('promo', 'entity', array(
+                'class' => 'Kipskool\Bundle\NewsBundle\Entity\Promo',
+                'expanded' =>true,
+                'multiple' => true,
+                'choice_label' => 'nom'))
             ;
     }
 
