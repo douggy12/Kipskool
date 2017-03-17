@@ -57,6 +57,7 @@ class ArticlePersoController extends Controller
     {
         $commentaireArticlePerso = new CommentaireArticlePerso();
         $commentaireArticlePerso->setArticle($articlePerso);
+        $commentaireArticlePerso->setAuteur($this->getUser());
         $form = $this->createForm('NewsBundle\Form\CommentaireArticlePersoType', $commentaireArticlePerso);
         $form->handleRequest($request);
 

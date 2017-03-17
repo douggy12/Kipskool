@@ -63,7 +63,7 @@
                     <a href="{{ path('articleperso_show', {'article_perso_id': article.id, 'perso_id': perso.id}) }}">{{ article.titre }}</a>
                 </td>
                 <td>{{ article.texte }}</td>
-                <td>{{ article.auteur.nom }}</td>
+                <td><a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"> {{ article.auteur.nom }}</a></td>
             </tr>
         {% endfor %}
     </table>
