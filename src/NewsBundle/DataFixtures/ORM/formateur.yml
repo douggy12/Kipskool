@@ -1,0 +1,14 @@
+NewsBundle\Entity\Perso:
+    formateur_{1}:
+      username: formateur
+      email: formateur@formateur.com
+      enabled: true
+      plainpassword: formateur
+      promo:
+        - '@promo_{1}'
+        - '@promo_{2}'
+      nom: <lastName()>
+      prenom: <firstName()>
+      born: <unixTime($max = 'nox')>
+      roles:
+        - ROLE_FORMATEUR

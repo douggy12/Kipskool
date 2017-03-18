@@ -1,0 +1,7 @@
+NewsBundle\Entity\Articlepromo:
+  articlePromo_{1..10}:
+    promo: '@promo*'
+    titre: <realText($maxNbChars = 20)>
+    texte: <realText($maxNbChars = 400)>
+    srcFeature: <imageUrl()>
+    auteur: '@perso*'

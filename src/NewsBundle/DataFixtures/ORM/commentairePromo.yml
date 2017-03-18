@@ -1,0 +1,5 @@
+NewsBundle\Entity\Commentaire_article_promo:
+  commentaire_promo{1..50}:
+    Article_promo: '@articlePromo*'
+    texte: <realtext($maxNbChars = 65)>
+    auteur: '@perso*'

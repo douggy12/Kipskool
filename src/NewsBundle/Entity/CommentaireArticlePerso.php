@@ -5,7 +5,7 @@ namespace NewsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CommentaireArticlePerso
+ * CommentaireArticlePerso.yml
  *
  * @ORM\Table(name="commentaire_article_perso")
  * @ORM\Entity(repositoryClass="NewsBundle\Repository\CommentaireArticlePersoRepository")
@@ -48,7 +48,7 @@ class CommentaireArticlePerso
     private $auteur;
 
     /**
-     * CommentaireArticlePerso constructor.
+     * CommentaireArticlePerso.yml constructor.
 
      */
     public function __construct()
