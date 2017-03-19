@@ -1,5 +1,5 @@
 NewsBundle\Entity\ArticlePerso:
-  articlePerso_{1..10}:
+  articlePerso_{1..100}:
     perso: '@perso*'
     titre: <realText($maxNbChars = 20)>
     texte: <realText($maxNbChars = 400)>
