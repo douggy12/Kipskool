@@ -1,42 +1,47 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <h1>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('sonata_admin_dashboard') }}">ADMIN</a></h1>
+    {% endif %}
+
     <h1>Ecole</h1>
 
     <table>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ ecole.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ ecole.nom }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ ecole.adresse }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ ecole.ville }}</td>
-            </tr>
-            <tr>
-                <th>Pays</th>
-                <td>{{ ecole.pays }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ ecole.description }}</td>
-            </tr>
-            <tr>
-                <th>Link</th>
-                <td>{{ ecole.link }}</td>
-            </tr>
-            <tr>
-                <th>Mail</th>
-                <td>{{ ecole.mail }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ ecole.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ ecole.nom }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ ecole.adresse }}</td>
+        </tr>
+        <tr>
+            <th>Ville</th>
+            <td>{{ ecole.ville }}</td>
+        </tr>
+        <tr>
+            <th>Pays</th>
+            <td>{{ ecole.pays }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ ecole.description }}</td>
+        </tr>
+        <tr>
+            <th>Link</th>
+            <td>{{ ecole.link }}</td>
+        </tr>
+        <tr>
+            <th>Mail</th>
+            <td>{{ ecole.mail }}</td>
+        </tr>
         </tbody>
     </table>
     <ul>
@@ -47,21 +52,21 @@
             <th>Titre</th>
             <th>Extrait</th>
             <th>Créé</th>
+            <th>Auteur</th>
 
         </tr>
         {% for article in ecole.articles %}
             <tr>
-                <td><a href="{{ path('articleecole_show',{'ecole_id': ecole.id, 'article_ecole_id': article.id}) }}"> {{ article.titre }}</a></td>
+                <td>
+                    <a href="{{ path('articleecole_show',{'ecole_id': ecole.id, 'article_ecole_id': article.id}) }}"> {{ article.titre }}</a>
+                </td>
                 <td>{{ article.texte }}</td>
                 <td>{{ article.createdAt|date("d/m/Y") }}</td>
+                <td><a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"> {{ article.auteur.nom }}</a></td>
             </tr>
         {% endfor %}
     </table>
-    <ul>
-        <li>
-            <a href="{{ path('promo_new', {'ecole_id': ecole.id}) }}">Create a new promo</a>
-        </li>
-    </ul>
+
     <table>
         <tr>
             <th>Promo</th>
@@ -69,7 +74,8 @@
         </tr>
         {% for promo in ecole.promos %}
             <tr>
-                <td><a href="{{ path('promo_show', {'ecole_id': ecole.id, 'promo_id': promo.id}) }}">{{ promo.nom }}</a></td>
+                <td><a href="{{ path('promo_show', {'ecole_id': ecole.id, 'promo_id': promo.id}) }}">{{ promo.nom }}</a>
+                </td>
                 <td>{{ promo.description }}</td>
             </tr>
         {% endfor %}

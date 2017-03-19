@@ -1,13 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <ul>
+        <li><a href="{{ path('ecole_show', {'ecole_id': article.perso.promo|first.ecole.id}) }}">{{ article.perso.promo|first.ecole.nom }}</a></li>
+        <li><a href="{{ path('promo_show', {'promo_id': article.perso.promo|first.id}) }}">{{ article.perso.promo|first.nom }}</a></li>
+        <li><a href="{{ path('perso_show', {'perso_id': article.perso.id}) }}">{{ article.perso.prenom }} {{ article.perso.nom }}</a></li>
+    </ul>
     <h1>Articleperso</h1>
 
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
+                <th>Auteur</th>
+                <td>{{ article.auteur }}</td>
             </tr>
             <tr>
                 <th>Createdat</th>
@@ -44,6 +49,7 @@
     <table>
         <tr>
             <th>Posté le :</th>
+            <th>par :</th>
             <th>Commentaire</th>
             <th>Action</th>
         </tr>
@@ -54,6 +60,7 @@
         {% for commentaire in article.commentaires %}
             <tr>
                 <td>{{ commentaire.createdAt|date('d-m-Y H:m') }}</td>
+                <td>{{ commentaire.auteur }}</td>
                 <td>{{ commentaire.texte }}</td>
                 <td>
                     <a href="{{ path('commentairearticleperso_edit', {'article_id': article.id, 'commentaire_article_perso_id': commentaire.id, 'perso_id': perso.id}) }}">Editer</a>

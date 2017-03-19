@@ -1,50 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <ul>
+        <li><a href="{{ path('ecole_show', {'ecole_id': promo.ecole.id}) }}">{{ promo.ecole.nom }}</a></li>
+        <li><a href="{{ path('promo_show', {'promo_id': promo.id}) }}">{{ promo.nom }}</a></li>
+    </ul>
     <h1>Perso</h1>
 
     <table>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ perso.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ perso.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ perso.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ perso.titre }}</td>
-            </tr>
-            <tr>
-                <th>Mail</th>
-                <td>{{ perso.mail }}</td>
-            </tr>
-            <tr>
-                <th>Born</th>
-                <td>{{ perso.born|date('d-m-Y') }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ perso.password }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ perso.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ perso.nom }}</td>
+        </tr>
+        <tr>
+            <th>Prenom</th>
+            <td>{{ perso.prenom }}</td>
+        </tr>
+        <tr>
+            <th>Mail</th>
+            <td>{{ perso.Email }}</td>
+        </tr>
+        <tr>
+            <th>Born</th>
+            <td>{{ perso.born|date('d-m-Y') }}</td>
+        </tr>
+        <tr>
+            <th>Password</th>
+            <td>{{ perso.password }}</td>
+        </tr>
         </tbody>
     </table>
 
     <ul>
         <li>
             <a href="{{ path('promo_show', {'promo_id': promo.id}) }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('perso_edit', { 'perso_id': perso.id }) }}">Edit</a>
-        </li>
-        <li>
-            <a href="{{ path('perso_delete', {'perso_id': perso.id}) }}">Supprimer</a>
         </li>
 
     </ul>
@@ -60,12 +54,16 @@
             <th>créé le :</th>
             <th>titre</th>
             <th>texte</th>
+            <th>auteur</th>
         </tr>
         {% for article in perso.articles %}
             <tr>
-            <th>{{ article.createdAt|date("d-m-Y") }}</th>
-            <th><a href="{{ path('articleperso_show', {'article_perso_id': article.id, 'perso_id': perso.id}) }}">{{ article.titre }}</a></th>
-            <th>{{ article.texte }}</th>
+                <td>{{ article.createdAt|date("d-m-Y") }}</td>
+                <td>
+                    <a href="{{ path('articleperso_show', {'article_perso_id': article.id, 'perso_id': perso.id}) }}">{{ article.titre }}</a>
+                </td>
+                <td>{{ article.texte }}</td>
+                <td><a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"> {{ article.auteur.nom }}</a></td>
             </tr>
         {% endfor %}
     </table>

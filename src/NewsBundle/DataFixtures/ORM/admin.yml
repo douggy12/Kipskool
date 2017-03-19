@@ -1,0 +1,12 @@
+NewsBundle\Entity\Perso:
+    admin_{1}:
+      username: admin
+      email: admin@admin.com
+      enabled: true
+      plainpassword: admin
+
+      nom: nomadmin
+      prenom: prenomadmin
+      born: <unixTime($max = 'nox')>
+      roles:
+        - ROLE_ADMIN

@@ -1,0 +1,12 @@
+NewsBundle\Entity\Perso:
+    staff_{1}:
+      username: staff
+      email: staff@staff.com
+      enabled: true
+      plainpassword: staff
+
+      nom: <lastName()>
+      prenom: <firstName()>
+      born: <unixTime($max = 'nox')>
+      roles:
+        - ROLE_STAFF

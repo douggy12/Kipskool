@@ -1,13 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<ul>
+    <li>
+        <a href="{{ path('ecole_show',{'ecole_id': ecole.id }) }}">{{ ecole.nom }}</a>
+    </li>
+</ul>
     <h1>Articleecole</h1>
 
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ articleEcole.id }}</td>
+                <th>Auteur</th>
+                <td>{{ articleEcole.auteur }}</td>
             </tr>
             <tr>
                 <th>Createdat</th>
@@ -44,12 +49,14 @@
     <table>
         <tr>
             <th>Posté le :</th>
+            <th>par :</th>
             <th>Commentaire</th>
             <th>Action</th>
         </tr>
         {% for commentaire in articleEcole.commentaires %}
             <tr>
                 <td>{{ commentaire.createdAt|date("d/m/Y H:m:s") }}</td>
+                <td><a href="{{ path('perso_show', {'perso_id': commentaire.auteur.id}) }}"> {{ commentaire.auteur }}</a></td>
                 <td>{{ commentaire.texte }}</td>
                 <td>
                     <a href="{{ path('commentairearticleecole_edit', { 'article_ecole_id' : articleEcole.id, 'commentaire_article_ecole_id' : commentaire.id, 'ecole_id': ecole.id}) }}">Editer</a>

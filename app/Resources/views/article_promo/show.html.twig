@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <ul>
+        <li><a href="{{ path('ecole_show', {'ecole_id': article_promo.promo.ecole.id}) }}">{{ article_promo.promo.ecole.nom }}</a></li>
+        <li><a href="{{ path('promo_show', {'promo_id': article_promo.promo.id}) }}">{{ article_promo.promo.nom }}</a></li>
+    </ul>
     <h1>Article_promo</h1>
 
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ article_promo.id }}</td>
+                <th>Auteur</th>
+                <td>{{ article_promo.auteur }}</td>
             </tr>
             <tr>
                 <th>Createdat</th>
@@ -30,12 +34,14 @@
     <table>
         <tr>
             <th>posté le :</th>
+            <th>par :</th>
             <th>Commentaire</th>
             <th>Action</th>
         </tr>
         {% for comment in article_promo.comments  %}
             <tr>
                 <td>{{ comment.createdAt|date('d-m-Y H:m:s') }}</td>
+                <td>{{ comment.auteur }}</td>
                 <td>{{ comment.texte }}<td>
                 <td>
                     <a href="{{ path('commentaire_article_promo_edit', {'promo_id': promo.id, 'article_promo_id': article_promo.id, 'commentaire_article_promo_id': comment.id }) }}">Edit</a>
