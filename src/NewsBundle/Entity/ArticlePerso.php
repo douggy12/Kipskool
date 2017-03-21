@@ -39,14 +39,14 @@ class ArticlePerso
     /**
      * @var string
      *
-     * @ORM\Column(name="texte", type="string", length=255)
+     * @ORM\Column(name="texte", type="string", length=10000)
      */
     private $texte;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="src_feature", type="string", length=255)
+     * @ORM\Column(name="src_feature", type="string", length=255, nullable=true)
      */
     private $srcFeature;
 
@@ -63,31 +63,21 @@ class ArticlePerso
     private $commentaires;
 
     /**
-     * @ORM\Column(name="image", type="string", length=1000)
+     * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $image;
+    private $auteur;
 
     /**
-     * @return string
+     * @var string
+     * @ORM\Column(name="type", type="string", length=16, nullable=true)
      */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param string $image
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-    }
-
-
+    private $type;
 
     /**
      * ArticlePerso constructor
      */
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -218,6 +208,42 @@ class ArticlePerso
     {
         return $this->getTitre();
     }
+
+    /**
+     * @return Perso
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
+    }
+
+    /**
+     * @param Perso $auteur
+     */
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+
+
+
 
 
 }

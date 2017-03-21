@@ -40,6 +40,13 @@ class commentaireArticleEcole
     private $createdAt;
 
     /**
+     * @var Perso
+     * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $auteur;
+
+    /**
      * commentaireArticleEcole constructor.
 
      */
@@ -115,4 +122,21 @@ class commentaireArticleEcole
     {
         return $this->articleEcole;
     }
+
+    /**
+     * @return Perso
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
+    }
+
+    /**
+     * @param Perso $auteur
+     */
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+    }
+
 }

@@ -51,7 +51,7 @@ class Article_promo
     /**
      * @var string
      *
-     * @ORM\Column(name="texte", type="string", length=255)
+     * @ORM\Column(name="texte", type="string", length=10000)
      */
     private $texte;
 
@@ -63,9 +63,14 @@ class Article_promo
     private $srcFeature;
 
     /**
-     * @ORM\Column(name="image", type="string", length=1000)
+     * @var Perso
+     * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $image;
+    private $auteur;
+    /**
+     * Article_promo constructor.
+     */
 
     /**
      * @return string
@@ -73,14 +78,6 @@ class Article_promo
     public function getImage()
     {
         return $this->image;
-    }
-
-    /**
-     * @param string $image
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
     }
 
 
@@ -215,4 +212,21 @@ class Article_promo
     {
         return $this->comments;
     }
+
+    /**
+     * @return Perso
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
+    }
+
+    /**
+     * @param Perso $auteur
+     */
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+    }
+
 }

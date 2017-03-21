@@ -1,0 +1,12 @@
+NewsBundle\Entity\Perso:
+    perso_{1..30}:
+      username: <userName()>
+      email: <email()>
+      enabled: true
+      plainpassword: user
+
+      nom: <lastName()>
+      prenom: <firstName($gender = 'male'|'female')>
+      born: <unixTime($max = 'nox')>
+      promo:
+        - '@promo*'

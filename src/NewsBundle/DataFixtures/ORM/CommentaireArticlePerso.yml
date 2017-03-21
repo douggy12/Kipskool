@@ -1,0 +1,5 @@
+NewsBundle\Entity\CommentaireArticlePerso:
+  commentaire_perso{1..500}:
+    article: '@articlePerso*'
+    texte: <realtext($maxNbChars = 65)>
+    auteur: '@perso*'

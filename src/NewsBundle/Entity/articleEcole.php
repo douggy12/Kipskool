@@ -28,7 +28,7 @@ class articleEcole
      */
     private $id;
 
-    private $extrait;
+
     /**
      * @var int
      *
@@ -64,26 +64,11 @@ class articleEcole
     private $commentaires;
 
     /**
-     * @ORM\Column(name="image", type="string", length=1000)
+     * @var Perso
+     * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $image;
-
-    /**
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param string $image
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-    }
-
+    private $auteur;
 
     /**
      * articleEcole constructor.
@@ -226,4 +211,23 @@ class articleEcole
     function __toString() {
         return $this->titre;
 
-}}
+    }
+
+    /**
+     * @return Perso
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
+    }
+
+    /**
+     * @param Perso $auteur
+     */
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+    }
+
+
+}

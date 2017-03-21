@@ -10,8 +10,8 @@
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ article_promo.id }}</td>
+                <th>Auteur</th>
+                <td>{{ article_promo.auteur }}</td>
             </tr>
             <tr>
                 <th>Createdat</th>
@@ -34,12 +34,14 @@
     <table>
         <tr>
             <th>posté le :</th>
+            <th>par :</th>
             <th>Commentaire</th>
             <th>Action</th>
         </tr>
         {% for comment in article_promo.comments  %}
             <tr>
                 <td>{{ comment.createdAt|date('d-m-Y H:m:s') }}</td>
+                <td>{{ comment.auteur }}</td>
                 <td>{{ comment.texte }}<td>
                 <td>
                     <a href="{{ path('commentaire_article_promo_edit', {'promo_id': promo.id, 'article_promo_id': article_promo.id, 'commentaire_article_promo_id': comment.id }) }}">Edit</a>

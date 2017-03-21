@@ -29,6 +29,7 @@ class articleEcoleController extends Controller
     {
         $articleEcole = new articleEcole();
         $articleEcole->setEcole($ecole);
+        $articleEcole->setAuteur($this->getUser());
 
         $form = $this->createForm('NewsBundle\Form\articleEcoleType', $articleEcole);
         $form->handleRequest($request);
@@ -60,6 +61,7 @@ class articleEcoleController extends Controller
     {
         $commentaireArticleEcole = new commentaireArticleEcole();
         $commentaireArticleEcole->setArticleEcole($articleEcole);
+        $commentaireArticleEcole->setAuteur($this->getUser());
         $form = $this->createForm('NewsBundle\Form\commentaireArticleEcoleType', $commentaireArticleEcole);
         $form->handleRequest($request);
 

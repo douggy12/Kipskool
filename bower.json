@@ -1,0 +1,22 @@
+{
+  "name": "Kipskool",
+  "homepage": "https://github.com/douggy12/Kipskool",
+  "authors": [
+    "Douglas Metthey <d.metthey@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ace-builds": "^1.2.6",
+    "sonata-project-admin-bundle": "./vendor/sonata-project/admin-bundle/bower.json"
+  }
+}

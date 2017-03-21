@@ -5,7 +5,7 @@ namespace NewsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CommentaireArticlePerso
+ * CommentaireArticlePerso.yml
  *
  * @ORM\Table(name="commentaire_article_perso")
  * @ORM\Entity(repositoryClass="NewsBundle\Repository\CommentaireArticlePersoRepository")
@@ -41,7 +41,14 @@ class CommentaireArticlePerso
     private $article;
 
     /**
-     * CommentaireArticlePerso constructor.
+     * @var Perso
+     * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $auteur;
+
+    /**
+     * CommentaireArticlePerso.yml constructor.
 
      */
     public function __construct()
@@ -109,6 +116,23 @@ class CommentaireArticlePerso
     {
         $this->article = $article;
     }
+
+    /**
+     * @return Perso
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
+    }
+
+    /**
+     * @param Perso $auteur
+     */
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+    }
+
 
 
 

@@ -1,0 +1,5 @@
+NewsBundle\Entity\Promo:
+    promo_{1..6}:
+        ecole: '@ecole*'
+        nom: <company()>
+        description: <catchPhrase()>

@@ -2,8 +2,8 @@
 
 {% block body %}
     <ul>
-        <li><a href="{{ path('ecole_show', {'ecole_id': article.perso.promo.ecole.id}) }}">{{ article.perso.promo.ecole.nom }}</a></li>
-        <li><a href="{{ path('promo_show', {'promo_id': article.perso.promo.id}) }}">{{ article.perso.promo.nom }}</a></li>
+        <li><a href="{{ path('ecole_show', {'ecole_id': article.perso.promo|first.ecole.id}) }}">{{ article.perso.promo|first.ecole.nom }}</a></li>
+        <li><a href="{{ path('promo_show', {'promo_id': article.perso.promo|first.id}) }}">{{ article.perso.promo|first.nom }}</a></li>
         <li><a href="{{ path('perso_show', {'perso_id': article.perso.id}) }}">{{ article.perso.prenom }} {{ article.perso.nom }}</a></li>
     </ul>
     <h1>Articleperso</h1>
@@ -11,8 +11,8 @@
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
+                <th>Auteur</th>
+                <td>{{ article.auteur }}</td>
             </tr>
             <tr>
                 <th>Createdat</th>
@@ -22,10 +22,37 @@
                 <th>Titre</th>
                 <td>{{ article.titre }}</td>
             </tr>
+            {% if article.type == "java" %}
+                <tr>
+                    <th>Code</th>
+                    <td>
+                        <div id="editor" style="height: 600px; width: 800px;">{{ article.texte }}</div>
+                    </td>
+                </tr>
+
+
+
+
+
+
+                <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}" type="text/javascript" charset="utf-8"></script>
+                <script>
+                    var editor = ace.edit("editor");
+                    editor.setTheme("ace/theme/monokai");
+                    editor.getSession().setMode("ace/mode/java");
+
+                    editor.setReadOnly(true);  // false to make it editable
+
+
+                </script>
+
+
+            {% else %}
             <tr>
                 <th>Texte</th>
                 <td>{{ article.texte }}</td>
             </tr>
+            {% endif %}
             <tr>
                 <th>Srcfeature</th>
                 <td>{{ article.srcFeature }}</td>
@@ -49,6 +76,7 @@
     <table>
         <tr>
             <th>Posté le :</th>
+            <th>par :</th>
             <th>Commentaire</th>
             <th>Action</th>
         </tr>
@@ -59,6 +87,7 @@
         {% for commentaire in article.commentaires %}
             <tr>
                 <td>{{ commentaire.createdAt|date('d-m-Y H:m') }}</td>
+                <td>{{ commentaire.auteur }}</td>
                 <td>{{ commentaire.texte }}</td>
                 <td>
                     <a href="{{ path('commentairearticleperso_edit', {'article_id': article.id, 'commentaire_article_perso_id': commentaire.id, 'perso_id': perso.id}) }}">Editer</a>
