@@ -39,14 +39,14 @@ class ArticlePerso
     /**
      * @var string
      *
-     * @ORM\Column(name="texte", type="string", length=255)
+     * @ORM\Column(name="texte", type="string", length=10000)
      */
     private $texte;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="src_feature", type="string", length=255)
+     * @ORM\Column(name="src_feature", type="string", length=255, nullable=true)
      */
     private $srcFeature;
 
@@ -67,6 +67,12 @@ class ArticlePerso
      * @ORM\JoinColumn(nullable=true)
      */
     private $auteur;
+
+    /**
+     * @var string
+     * @ORM\Column(name="type", type="string", length=16, nullable=true)
+     */
+    private $type;
 
     /**
      * ArticlePerso constructor
@@ -218,6 +224,24 @@ class ArticlePerso
     {
         $this->auteur = $auteur;
     }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+
 
 
 

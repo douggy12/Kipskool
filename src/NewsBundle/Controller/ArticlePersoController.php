@@ -29,6 +29,7 @@ class ArticlePersoController extends Controller
     {
         $articlePerso = new ArticlePerso();
         $articlePerso->setPerso($perso);
+        $articlePerso->setType("article");
         $articlePerso->setAuteur($this->getUser());
         $form = $this->createForm('NewsBundle\Form\ArticlePersoType', $articlePerso);
         $form->handleRequest($request);
@@ -45,6 +46,35 @@ class ArticlePersoController extends Controller
             'perso' => $perso,
             'form' => $form->createView(),
         ));
+    }
+    /**
+     * Creates a new articlePerso entity.
+     * @ParamConverter("perso", options={"mapping" : {"perso_id" : "id"}})
+     * @Route("/article_perso_new_code/perso/{perso_id}", name="articleperso_new_code")
+     * @Method({"GET", "POST"})
+     */
+    public function newCode(Request $request, Perso $perso)
+    {
+        $codePerso = new ArticlePerso();
+        $codePerso->setPerso($perso);
+        $codePerso->setType("java");
+        $codePerso->setTitre("du code en JAVA");
+        $codePerso->setAuteur($this->getUser());
+
+        if($request->isXmlHttpRequest()){
+
+            $codePerso->setTexte($request->get('code'));
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($codePerso);
+            $em->flush($codePerso);
+
+            return $this->redirectToRoute('perso_show', array('perso_id' => $perso->getId()));
+        }
+
+        return $this->render('::ace_builds.html.twig', array(
+            'perso' => $perso,
+        ));
+
     }
 
     /**

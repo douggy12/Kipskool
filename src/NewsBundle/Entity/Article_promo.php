@@ -51,7 +51,7 @@ class Article_promo
     /**
      * @var string
      *
-     * @ORM\Column(name="texte", type="string", length=255)
+     * @ORM\Column(name="texte", type="string", length=10000)
      */
     private $texte;
 

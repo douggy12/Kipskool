@@ -47,6 +47,9 @@
         <li>
             <a href="{{ path('articleperso_new', { 'perso_id' : perso.id} ) }}">Ajouter un article</a>
         </li>
+        <li>
+            <a href="{{ path('articleperso_new_code', {'perso_id': perso.id}) }}">Poster du code</a>
+        </li>
     </ul>
 
     <table>
@@ -57,13 +60,35 @@
             <th>auteur</th>
         </tr>
         {% for article in perso.articles %}
+
             <tr>
                 <td>{{ article.createdAt|date("d-m-Y") }}</td>
                 <td>
                     <a href="{{ path('articleperso_show', {'article_perso_id': article.id, 'perso_id': perso.id}) }}">{{ article.titre }}</a>
                 </td>
-                <td>{{ article.texte }}</td>
-                <td><a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"> {{ article.auteur.nom }}</a></td>
+                {% if article.type == "java" %}
+                    <td>
+
+                    <div id="editor" style="width: 500px; height: 100px">{{ article.texte }}</div>
+                    </td>
+
+                    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}"
+                            type="text/javascript"
+                            charset="utf-8">
+
+                    </script>
+                    <script>
+                        var editor = ace.edit("editor");
+                        editor.setTheme("ace/theme/monokai");
+                        editor.getSession().setMode("ace/mode/java");
+                        editor.setReadOnly(true);  // false to make it editable
+                    </script>
+                {% else %}
+                    <td>{{ article.texte }}</td>
+                {% endif %}
+
+                <td><a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"> {{ article.auteur.nom }}</a>
+                </td>
             </tr>
         {% endfor %}
     </table>
