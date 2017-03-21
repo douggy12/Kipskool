@@ -36,12 +36,7 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('promo_show', {'promo_id': promo.id}) }}">Back to the list</a>
-        </li>
 
-    </ul>
 
     <ul>
         <li>
@@ -84,12 +79,14 @@
                         editor.setReadOnly(true);  // false to make it editable
                     </script>
                 {% else %}
-                    <td>{{ article.texte }}</td>
                 {% endif %}
 
                 <td><a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"> {{ article.auteur.nom }}</a>
                 </td>
+                    <td>{{ article.texte }}</td>
             </tr>
         {% endfor %}
     </table>
+
+
 {% endblock %}

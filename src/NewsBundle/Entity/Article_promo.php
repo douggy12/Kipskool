@@ -72,6 +72,13 @@ class Article_promo
      * Article_promo constructor.
      */
 
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
 
 
     public function __construct()
