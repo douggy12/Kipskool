@@ -29,10 +29,7 @@
             <th>Born</th>
             <td>{{ perso.born|date('d-m-Y') }}</td>
         </tr>
-        <tr>
-            <th>Password</th>
-            <td>{{ perso.password }}</td>
-        </tr>
+
         </tbody>
     </table>
 
@@ -79,11 +76,12 @@
                         editor.setReadOnly(true);  // false to make it editable
                     </script>
                 {% else %}
+                    <td>{{ article.texte|raccourci }}</td>
                 {% endif %}
 
                 <td><a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"> {{ article.auteur.nom }}</a>
                 </td>
-                    <td>{{ article.texte }}</td>
+
             </tr>
         {% endfor %}
     </table>

@@ -18,9 +18,8 @@ class articleEcoleType extends AbstractType
             ->add('titre')
             ->add('texte', 'textarea')
             ->add('srcFeature')
-            ->add('image', FileType::class, array(
-                'label'=>'Image (jpeg)'
-            ))
+
+            
         ;
     }
     
