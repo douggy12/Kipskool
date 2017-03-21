@@ -22,10 +22,37 @@
                 <th>Titre</th>
                 <td>{{ article.titre }}</td>
             </tr>
+            {% if article.type == "java" %}
+                <tr>
+                    <th>Code</th>
+                    <td>
+                        <div id="editor" style="height: 600px; width: 800px;">{{ article.texte }}</div>
+                    </td>
+                </tr>
+
+
+
+
+
+
+                <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}" type="text/javascript" charset="utf-8"></script>
+                <script>
+                    var editor = ace.edit("editor");
+                    editor.setTheme("ace/theme/monokai");
+                    editor.getSession().setMode("ace/mode/java");
+
+                    editor.setReadOnly(true);  // false to make it editable
+
+
+                </script>
+
+
+            {% else %}
             <tr>
                 <th>Texte</th>
                 <td>{{ article.texte }}</td>
             </tr>
+            {% endif %}
             <tr>
                 <th>Srcfeature</th>
                 <td>{{ article.srcFeature }}</td>
