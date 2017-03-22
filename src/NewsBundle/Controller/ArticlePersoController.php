@@ -72,8 +72,8 @@ class ArticlePersoController extends Controller
     {
         $codePerso = new ArticlePerso();
         $codePerso->setPerso($perso);
-        $codePerso->setType("java");
-        $codePerso->setTitre("du code en JAVA");
+
+
         $codePerso->setAuteur($this->getUser());
 
         $form = $this->createForm('NewsBundle\Form\CodeType', $codePerso);
@@ -81,6 +81,7 @@ class ArticlePersoController extends Controller
 
         if ($form->isSubmitted() && $form->isValid())
         {
+            $codePerso->setTitre("[".strtoupper($form->get('type')->getData())."]".$form->get('titre')->getData());
             $em = $this->getDoctrine()->getManager();
             $em->persist($codePerso);
             $em->flush($codePerso);

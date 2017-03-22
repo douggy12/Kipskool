@@ -22,7 +22,7 @@
                 <th>Titre</th>
                 <td>{{ article.titre }}</td>
             </tr>
-            {% if article.type == "java" %}
+            {% if article.type != null %}
                 <tr>
                     <th>Code</th>
                     <td>

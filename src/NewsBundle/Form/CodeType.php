@@ -24,7 +24,7 @@ class CodeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
+            ->add('titre', 'text')
             ->add('type', ChoiceType::class, array(
                 'choices' => array(
                     'java' => 'java',
@@ -47,6 +47,6 @@ class CodeType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'newsbundle_articleecole';
+        return 'newsbundle_codepost';
     }
 }
