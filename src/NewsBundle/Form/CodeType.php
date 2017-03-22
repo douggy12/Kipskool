@@ -38,12 +38,12 @@ class CodeType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $optionsResolver)
-    {
-        $optionsResolver->setDefaults(array(
-            'data_class' => 'NewsBundle\Entity\articlePerso'
-        ));
-    }
+//    public function configureOptions(OptionsResolver $optionsResolver)
+//    {
+//        $optionsResolver->setDefaults(array(
+//            'data_class' => null
+//        ));
+//    }
 
     public function getBlockPrefix()
     {

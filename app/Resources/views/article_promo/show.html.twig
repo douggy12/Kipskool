@@ -2,33 +2,46 @@
 
 {% block body %}
     <ul>
-        <li><a href="{{ path('ecole_show', {'ecole_id': article_promo.promo.ecole.id}) }}">{{ article_promo.promo.ecole.nom }}</a></li>
-        <li><a href="{{ path('promo_show', {'promo_id': article_promo.promo.id}) }}">{{ article_promo.promo.nom }}</a></li>
+        <li>
+            <a href="{{ path('ecole_show', {'ecole_id': article_promo.promo.ecole.id}) }}">{{ article_promo.promo.ecole.nom }}</a>
+        </li>
+        <li><a href="{{ path('promo_show', {'promo_id': article_promo.promo.id}) }}">{{ article_promo.promo.nom }}</a>
+        </li>
     </ul>
     <h1>Article_promo</h1>
 
     <table>
         <tbody>
+        <tr>
+            <th>Auteur</th>
+            <td>{{ article_promo.auteur }}</td>
+        </tr>
+        <tr>
+            <th>Createdat</th>
+            <td>{{ article_promo.createdAt|date('d-m-Y') }}</td>
+        </tr>
+        <tr>
+            <th>Titre</th>
+            <td>{{ article_promo.titre }}</td>
+        </tr>
+        {% if article_promo.type != null %}
             <tr>
-                <th>Auteur</th>
-                <td>{{ article_promo.auteur }}</td>
+                <th>Code</th>
+                <td>
+                    <div id="editor" style="height: 600px; width: 800px;">{{ article_promo.texte }}</div>
+                </td>
             </tr>
-            <tr>
-                <th>Createdat</th>
-                <td>{{ article_promo.createdAt|date('d-m-Y') }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ article_promo.titre }}</td>
-            </tr>
+
+        {% else %}
             <tr>
                 <th>Texte</th>
                 <td>{{ article_promo.texte }}</td>
             </tr>
-            <tr>
-                <th>Srcfeature</th>
-                <td>{{ article_promo.srcFeature }}</td>
-            </tr>
+        {% endif %}
+        <tr>
+            <th>Srcfeature</th>
+            <td>{{ article_promo.srcFeature }}</td>
+        </tr>
         </tbody>
     </table>
     <table>
@@ -38,11 +51,12 @@
             <th>Commentaire</th>
             <th>Action</th>
         </tr>
-        {% for comment in article_promo.comments  %}
+        {% for comment in article_promo.comments %}
             <tr>
                 <td>{{ comment.createdAt|date('d-m-Y H:m:s') }}</td>
                 <td>{{ comment.auteur }}</td>
-                <td>{{ comment.texte }}<td>
+                <td>{{ comment.texte }}
+                <td>
                 <td>
                     <a href="{{ path('commentaire_article_promo_edit', {'promo_id': promo.id, 'article_promo_id': article_promo.id, 'commentaire_article_promo_id': comment.id }) }}">Edit</a>
                     <a href="{{ path('commentaire_delete', {'promo_id': promo.id, 'article_promo_id': article_promo.id, 'commentaire_article_promo_id': comment.id}) }}">Delete</a>
@@ -63,4 +77,14 @@
             <a href="{{ path('article_promo_delete',{'promo_id': promo.id, 'article_promo_id': article_promo.id }) }}">Delete</a>
         </li>
     </ul>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}" type="text/javascript"
+            charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/java");
+        editor.setReadOnly(true);  // false to make it editable
+    </script>
 {% endblock %}

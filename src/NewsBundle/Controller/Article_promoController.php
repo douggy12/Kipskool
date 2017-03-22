@@ -55,6 +55,42 @@ class Article_promoController extends Controller
         ));
     }
     /**
+     * Creates a new article_promo entity.
+     * @ParamConverter("promo", options={"mapping" : {"promo_id" : "id"}})
+     * @Route("new_code_promo/promo/{promo_id}", name="add_code_promo")
+     * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_STAFF')")
+     */
+    public function newCode(Request $request, Promo $promo)
+    {
+        $codePromo = new Article_promo();
+        $codePromo->setPromo($promo);
+
+
+        $codePromo->setAuteur($this->getUser());
+
+        $form = $this->createForm('NewsBundle\Form\CodeType', $codePromo);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $codePromo->setTitre("[".strtoupper($form->get('type')->getData())."]".$form->get('titre')->getData());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($codePromo);
+            $em->flush();
+
+            return $this->redirectToRoute('promo_show', array('promo_id' => $promo->getId()));
+        }
+
+
+
+        return $this->render('ace_editor.html.twig', array(
+            'promo' => $promo,
+            'form' => $form->createView()
+        ));
+
+    }
+    /**
      * Finds and displays a article_promo entity.
      *
      * @Route("/{article_promo_id}", name="article_promo_show")

@@ -58,7 +58,7 @@ class Article_promo
     /**
      * @var string
      *
-     * @ORM\Column(name="src_feature", type="string", length=255)
+     * @ORM\Column(name="src_feature", type="string", length=255, nullable=true)
      */
     private $srcFeature;
 
@@ -68,9 +68,16 @@ class Article_promo
      * @ORM\JoinColumn(nullable=true)
      */
     private $auteur;
+
+    /**
+     * @var string
+     * @ORM\Column(name="type", type="string", length=16, nullable=true)
+     */
+    private $type;
     /**
      * Article_promo constructor.
      */
+
 
     /**
      * @return string
@@ -228,5 +235,22 @@ class Article_promo
     {
         $this->auteur = $auteur;
     }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
 
 }

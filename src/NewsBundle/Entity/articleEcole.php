@@ -53,7 +53,7 @@ class articleEcole
     /**
      * @var string
      *
-     * @ORM\Column(name="srcFeature", type="string", length=255)
+     * @ORM\Column(name="srcFeature", type="string", length=255,nullable=true)
      */
     private $srcFeature;
 
