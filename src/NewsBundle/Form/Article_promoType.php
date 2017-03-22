@@ -40,5 +40,4 @@ class Article_promoType extends AbstractType
         return 'newsbundle_article_promo';
     }
 
-
 }
