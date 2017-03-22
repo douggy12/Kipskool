@@ -57,12 +57,11 @@ class Article_promo
     private $texte;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="src_feature", type="string", length=255)
      *
      * @Assert\NotBlank(message="Please, upload a picture as a JPEG file")
-     * @Assert\File(mimeTypes={ "application/jpeg" })
+     * @Assert\File(mimeTypes={ "image/jpeg" })
      */
     private $srcFeature;
 
@@ -72,18 +71,10 @@ class Article_promo
      * @ORM\JoinColumn(nullable=true)
      */
     private $auteur;
+
     /**
      * Article_promo constructor.
      */
-
-    /**
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
 
     public function __construct()
     {

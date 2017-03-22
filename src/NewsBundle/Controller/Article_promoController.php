@@ -41,7 +41,8 @@ class Article_promoController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $image= $article_promo->getSrcFeature();
 
-            $imageName= md5(uniqid()). '.' .$image->guessExtension();
+            $imageName= $this->get('app.srcFeatur_uploader')->upload($image);
+
             $image->move(
                 $this->getParameter('srcFeatures_directory'),
                 $imageName
