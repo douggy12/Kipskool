@@ -59,6 +59,9 @@ class Article_promo
      * @var string
      *
      * @ORM\Column(name="src_feature", type="string", length=255)
+     *
+     * @Assert\NotBlank(message="Please, upload a picture as a JPEG file")
+     * @Assert\File(mimeTypes={ "application/jpeg" })
      */
     private $srcFeature;
 

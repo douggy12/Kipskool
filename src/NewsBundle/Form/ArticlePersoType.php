@@ -17,12 +17,11 @@ class ArticlePersoType extends AbstractType
         $builder
             ->add('titre')
             ->add('texte')
-            ->add('srcFeature')
-            ->add('image', FileType::class, array(
-            'label'=>'Image (jpeg)'
-        ));
+            ->add('srcFeature', FileType::class, array(
+                'label' => 'Image (jpeg)'
+            ));
     }
-    
+
     /**
      * {@inheritdoc}
      */

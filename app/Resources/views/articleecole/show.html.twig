@@ -1,35 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<ul>
-    <li>
-        <a href="{{ path('ecole_show',{'ecole_id': ecole.id }) }}">{{ ecole.nom }}</a>
-    </li>
-</ul>
+    <ul>
+        <li>
+            <a href="{{ path('ecole_show',{'ecole_id': ecole.id }) }}">{{ ecole.nom }}</a>
+        </li>
+    </ul>
     <h1>Articleecole</h1>
 
     <table>
         <tbody>
-            <tr>
-                <th>Auteur</th>
-                <td>{{ articleEcole.auteur }}</td>
-            </tr>
-            <tr>
-                <th>Createdat</th>
-                <td>{{ articleEcole.createdAt|date("d/m/Y H:m:s") }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ articleEcole.titre }}</td>
-            </tr>
-            <tr>
-                <th>Texte</th>
-                <td>{{ articleEcole.texte }}</td>
-            </tr>
-            <tr>
-                <th>Srcfeature</th>
-                <td>{{ articleEcole.srcFeature }}</td>
-            </tr>
+        <tr>
+            <th>Auteur</th>
+            <td>{{ articleEcole.auteur }}</td>
+        </tr>
+        <tr>
+            <th>Createdat</th>
+            <td>{{ articleEcole.createdAt|date("d/m/Y H:m:s") }}</td>
+        </tr>
+        <tr>
+            <th>Titre</th>
+            <td>{{ articleEcole.titre }}</td>
+        </tr>
+        <tr>
+            <th>Texte</th>
+            <td>{{ articleEcole.texte }}</td>
+        </tr>
+        <tr>
+            <th>Srcfeature</th>
+            <td>{{ articleEcole.srcFeature }}</td>
+        </tr>
         </tbody>
     </table>
 
@@ -56,7 +56,9 @@
         {% for commentaire in articleEcole.commentaires %}
             <tr>
                 <td>{{ commentaire.createdAt|date("d/m/Y H:m:s") }}</td>
-                <td><a href="{{ path('perso_show', {'perso_id': commentaire.auteur.id}) }}"> {{ commentaire.auteur }}</a></td>
+                <td>
+                    <a href="{{ path('perso_show', {'perso_id': commentaire.auteur.id}) }}"> {{ commentaire.auteur }}</a>
+                </td>
                 <td>{{ commentaire.texte }}</td>
                 <td>
                     <a href="{{ path('commentairearticleecole_edit', { 'article_ecole_id' : articleEcole.id, 'commentaire_article_ecole_id' : commentaire.id, 'ecole_id': ecole.id}) }}">Editer</a>
@@ -68,6 +70,6 @@
     </table>
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <input type="submit" value="Create" />
+    <input type="submit" value="Create"/>
     {{ form_end(form) }}
 {% endblock %}

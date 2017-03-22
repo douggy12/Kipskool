@@ -17,12 +17,11 @@ class articleEcoleType extends AbstractType
         $builder
             ->add('titre')
             ->add('texte', 'textarea')
-            ->add('srcFeature')
-
-            
-        ;
+            ->add('srcFeature', FileType::class, array(
+                'label' => 'Image (jpeg)'
+            ));
     }
-    
+
     /**
      * {@inheritdoc}
      */

@@ -24,11 +24,10 @@ class Extrait
     public function getChaineRaccourci($chaine, $tailleMax)
     {
         $positionDernierEspace = 0;
-        if( strlen($chaine) >= $tailleMax )
-        {
-            $chaine = substr($chaine,0,$tailleMax);
-            $positionDernierEspace = strrpos($chaine,' ');
-            $chaine = substr($chaine,0,$positionDernierEspace).'...';
+        if (strlen($chaine) >= $tailleMax) {
+            $chaine = substr($chaine, 0, $tailleMax);
+            $positionDernierEspace = strrpos($chaine, ' ');
+            $chaine = substr($chaine, 0, $positionDernierEspace) . '...';
         }
         return $chaine;
     }
