@@ -4,14 +4,15 @@ namespace NewsBundle\Controller;
 
 use NewsBundle\Entity\Article_promo;
 use NewsBundle\Entity\Commentaire_article_promo;
-use NewsBundle\Entity\Ecole;
 use NewsBundle\Entity\Promo;
+use NewsBundle\Form\Article_promoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Article_promo controller.
@@ -38,6 +39,16 @@ class Article_promoController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image= $article_promo->getSrcFeature();
+
+            $imageName= md5(uniqid()). '.' .$image->guessExtension();
+            $image->move(
+                $this->getParameter('srcFeatures_directory'),
+                $imageName
+            );
+
+            $article_promo->setSrcFeature($imageName);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($article_promo);
             $em->flush($article_promo);
@@ -94,6 +105,10 @@ class Article_promoController extends Controller
      */
     public function editArticleAction(Request $request, Article_promo $article_promo)
     {
+
+        $article_promo->setSrcFeature(
+            new File($this->getParameter('srcFeatures_directory').'/'.$article_promo->getSrcFeature())
+        );
         $editForm = $this->createForm('NewsBundle\Form\Article_promoType', $article_promo);
         $editForm->handleRequest($request);
 
