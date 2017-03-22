@@ -5,24 +5,39 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUpLoader
 {
-    private $targetDir;
+
 
     public function __construct($targetDir)
     {
-        $this->targetDir = $targetDir;
+
     }
 
-    public function upload(UploadedFile $file)
+    public function resize($src, $mywidth)
     {
-        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+        // Fichier et nouvelle taille
+        $filename = $src;
 
-        $file->move($this->targetDir, $fileName);
+        // Content type
+        header('Content-Type: image/jpeg');
 
-        return $fileName;
+        // Calcul des nouvelles dimensions
+        list($width, $height) = getimagesize($filename);
+        $newwidth = $mywidth;
+        $newheight = $height / $width * $mywidth;
+
+        // Chargement
+        $thumb = imagecreatetruecolor($newwidth, $newheight);
+        $source = imagecreatefromjpeg($filename);
+
+        // Redimensionnement
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+        // Affichage
+        imagejpeg($thumb);
     }
 
     public function getTargetDir()
     {
-        return $this->targetDir;
+
     }
 }

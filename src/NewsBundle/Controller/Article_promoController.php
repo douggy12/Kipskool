@@ -39,11 +39,14 @@ class Article_promoController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $image= $article_promo->getSrcFeature();
 
-            $imageName= $this->get('app.srcFeatur_uploader')->upload($image);
 
-            $image->move(
+
+            $newImage=$this->get('app.srcfeatur_uploader')->resize($image, 800);
+            $imageName= md5(uniqid()).'.'.$newImage->guessExtension();
+            $newImage->move(
                 $this->getParameter('srcFeatures_directory'),
                 $imageName
             );
@@ -106,10 +109,10 @@ class Article_promoController extends Controller
      */
     public function editArticleAction(Request $request, Article_promo $article_promo)
     {
-
         $article_promo->setSrcFeature(
             new File($this->getParameter('srcFeatures_directory').'/'.$article_promo->getSrcFeature())
         );
+
         $editForm = $this->createForm('NewsBundle\Form\Article_promoType', $article_promo);
         $editForm->handleRequest($request);
 
