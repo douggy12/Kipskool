@@ -81,3 +81,10 @@ services:
     app.srcFeatur_uploader:
         class: NewsBundle\FileUpLoader
         arguments: ['%srcfeatures_directory%']
+
+
+    app.resize:
+        class: NewsBundle\Twig\AppExtension
+        public: false
+        tags:
+            - { name: twig.extension }

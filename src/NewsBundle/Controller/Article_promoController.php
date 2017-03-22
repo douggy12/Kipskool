@@ -42,16 +42,9 @@ class Article_promoController extends Controller
 
             $image= $article_promo->getSrcFeature();
 
-
-
             $newImage=$this->get('app.srcfeatur_uploader')->resize($image, 800);
-            $imageName= md5(uniqid()).'.'.$newImage->guessExtension();
-            $newImage->move(
-                $this->getParameter('srcFeatures_directory'),
-                $imageName
-            );
 
-            $article_promo->setSrcFeature($imageName);
+            $article_promo->setSrcFeature($newImage);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($article_promo);
