@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -75,9 +76,11 @@ class ArticlePersoController extends Controller
         $codePerso->setTitre("du code en JAVA");
         $codePerso->setAuteur($this->getUser());
 
-        if($request->isXmlHttpRequest()){
+        $form = $this->createForm('NewsBundle\Form\CodeType', $codePerso);
+        $form->handleRequest($request);
 
-            $codePerso->setTexte($request->get('code'));
+        if ($form->isSubmitted() && $form->isValid())
+        {
             $em = $this->getDoctrine()->getManager();
             $em->persist($codePerso);
             $em->flush($codePerso);
@@ -85,8 +88,20 @@ class ArticlePersoController extends Controller
             return $this->redirectToRoute('perso_show', array('perso_id' => $perso->getId()));
         }
 
-        return $this->render('::ace_builds.html.twig', array(
+//        if($request->isXmlHttpRequest()){
+//
+//            $codePerso->setTexte($request->get('code'));
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($codePerso);
+//            $em->flush($codePerso);
+//
+//            //return $this->redirectToRoute('perso_show', array('perso_id' => $perso->getId()));
+//            return new JsonResponse(array());
+//        }
+
+        return $this->render('ace_editor.html.twig', array(
             'perso' => $perso,
+            'form' => $form->createView()
         ));
 
     }

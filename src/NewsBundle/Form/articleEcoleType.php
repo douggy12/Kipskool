@@ -19,7 +19,7 @@ class articleEcoleType extends AbstractType
             ->add('texte', 'textarea')
             ->add('srcFeature')
 
-            
+
         ;
     }
     

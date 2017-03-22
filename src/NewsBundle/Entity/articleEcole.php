@@ -66,7 +66,7 @@ class articleEcole
     /**
      * @var Perso
      * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $auteur;
 
