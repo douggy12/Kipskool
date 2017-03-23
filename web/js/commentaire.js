@@ -25,7 +25,7 @@ function showList(commentaires) {
     $.each(commentaires, function (index, commentaire) {
 
         $('#commentaires_list').append('<tr><td>' + commentaire.createdAt
-            + '</td><td> ' + commentaire.auteur + '</td><td>' + commentaire.texte + '</td></tr>');
+            + '</td><td> ' + commentaire.auteur + '</td><td>' + commentaire.texte + '</td><td><input type="button" id="delCom" value="Supprimer" onclick="delCom('+ commentaire.id +')"></td></tr>');
 
     });
 }
@@ -39,6 +39,17 @@ function addComment() {
             articleType: typeArticle
         }
 
-    }).done(getList())
+    }).done(getList());
     $('#comment').val('');
+}
+
+function delCom(id) {
+    $.ajax({
+        url:"/delcom",
+        method: "POST",
+        data: {
+            commentaire: id,
+            articleType: typeArticle
+        }
+    }).done(getList());
 }

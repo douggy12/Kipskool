@@ -54,7 +54,8 @@ class AjaxCommentaireController extends Controller
             $jsonCom[] = array(
                 "createdAt" => $commentaire->getCreatedAt(),
                 "auteur"    => $commentaire->getAuteur()->getPrenom().' '.$commentaire->getAuteur()->getNom(),
-                "texte"     => $commentaire->getTexte()
+                "texte"     => $commentaire->getTexte(),
+                "id"        => $commentaire->getId()
             );
         }
 
@@ -116,6 +117,28 @@ class AjaxCommentaireController extends Controller
      */
     public function delAjaxCommentaire (Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
+
+        switch($request->get('articleType') ){
+            case "ArticlePerso":
+                $repository = $em->getRepository('NewsBundle:CommentaireArticlePerso');
+                break;
+            case "articleEcole":
+                $repository =$em->getRepository('NewsBundle:commentaireArticleEcole');
+                break;
+            case "Article_promo":
+                $repository = $em->getRepository('NewsBundle:Commentaire_article_promo');
+                break;
+        }
+
+        $commentaire = $repository->find($request->get('commentaire'));
+
+        $em->remove($commentaire);
+        $em->flush();
+
+        return new Response("ok");
+
 
     }
 }
