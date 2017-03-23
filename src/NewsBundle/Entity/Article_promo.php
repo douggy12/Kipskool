@@ -20,7 +20,7 @@ class Article_promo
     private $promo;
 
     /**
-     * @ORM\OneToMany(targetEntity="NewsBundle\Entity\Commentaire_article_promo", mappedBy="article_promo", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="NewsBundle\Entity\Commentaire_article_promo", mappedBy="article", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $comments;

@@ -34,14 +34,14 @@ class Commentaire_article_promoController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('article_promo_show', array(
-                'promo_id'=>$commentaire_article_promo->getArticlePromo()->getPromo()->getId(),
-                'article_promo_id' => $commentaire_article_promo->getArticlePromo()->getId(),
+                'promo_id'=>$commentaire_article_promo->getArticle()->getPromo()->getId(),
+                'article_promo_id' => $commentaire_article_promo->getArticle()->getId(),
                 ));
         }
 
         return $this->render('commentaire_article_promo/edit.html.twig', array(
-            'promo'=>$commentaire_article_promo->getArticlePromo()->getPromo(),
-            'article_promo'=>$commentaire_article_promo->getArticlePromo(),
+            'promo'=>$commentaire_article_promo->getArticle()->getPromo(),
+            'article_promo'=>$commentaire_article_promo->getArticle(),
             'commentaire_article_promo' => $commentaire_article_promo,
             'edit_form' => $editForm->createView(),
         ));
@@ -61,8 +61,8 @@ class Commentaire_article_promoController extends Controller
             $em->flush();
 
         return $this->redirectToRoute('article_promo_show', array(
-            'promo_id'=>$commentaire_article_promo->getArticlePromo()->getPromo()->getId(),
-            'article_promo_id'=>$commentaire_article_promo->getArticlePromo()->getId()
+            'promo_id'=>$commentaire_article_promo->getArticle()->getPromo()->getId(),
+            'article_promo_id'=>$commentaire_article_promo->getArticle()->getId()
         ));
     }
 

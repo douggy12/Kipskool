@@ -99,7 +99,7 @@ class Article_promoController extends Controller
     public function showArticleAction(Article_promo $article_promo, Request $request)
     {
         $commentaire_article_promo = new Commentaire_article_promo();
-        $commentaire_article_promo->setArticlePromo($article_promo);
+        $commentaire_article_promo->setArticle($article_promo);
         $commentaire_article_promo->setAuteur($this->getUser());
         $form = $this->createForm('NewsBundle\Form\Commentaire_article_promoType', $commentaire_article_promo);
         $form->handleRequest($request);

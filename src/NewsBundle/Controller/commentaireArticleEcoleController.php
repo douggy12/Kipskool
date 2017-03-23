@@ -37,14 +37,14 @@ class commentaireArticleEcoleController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('articleecole_show', array(
-                'article_ecole_id' => $commentaireArticleEcole->getArticleEcole()->getId(),
-                'ecole_id' => $commentaireArticleEcole->getArticleEcole()->getEcole()->getId(),
+                'article_ecole_id' => $commentaireArticleEcole->getArticle()->getId(),
+                'ecole_id' => $commentaireArticleEcole->getArticle()->getEcole()->getId(),
             ));
         }
 
         return $this->render('commentairearticleecole/edit.html.twig', array(
-            'ecole' => $commentaireArticleEcole->getArticleEcole()->getEcole(),
-            'articleEcole' => $commentaireArticleEcole->getArticleEcole(),
+            'ecole' => $commentaireArticleEcole->getArticle()->getEcole(),
+            'articleEcole' => $commentaireArticleEcole->getArticle(),
             'commentaireArticleEcole' => $commentaireArticleEcole,
             'edit_form' => $editForm->createView(),
 
@@ -68,8 +68,8 @@ class commentaireArticleEcoleController extends Controller
 
 
         return $this->redirectToRoute('articleecole_show', array(
-            'ecole_id' => $commentaireArticleEcole->getArticleEcole()->getEcole()->getId(),
-            'article_ecole_id' => $commentaireArticleEcole->getArticleEcole()->getId()
+            'ecole_id' => $commentaireArticleEcole->getArticle()->getEcole()->getId(),
+            'article_ecole_id' => $commentaireArticleEcole->getArticle()->getId()
         ));
     }
 

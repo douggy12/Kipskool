@@ -58,7 +58,7 @@ class articleEcole
     private $srcFeature;
 
     /**
-     * @ORM\OneToMany(targetEntity="NewsBundle\Entity\commentaireArticleEcole", mappedBy="articleEcole", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="NewsBundle\Entity\commentaireArticleEcole", mappedBy="article", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $commentaires;

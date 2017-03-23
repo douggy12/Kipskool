@@ -2,6 +2,8 @@
 
 namespace NewsBundle\Controller;
 
+use NewsBundle\Entity\Commentaire_article_promo;
+use NewsBundle\Entity\commentaireArticleEcole;
 use NewsBundle\Entity\CommentaireArticlePerso;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,8 +28,16 @@ class AjaxCommentaireController extends Controller
         $article = $request->get('article');
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('NewsBundle:commentaireArticleEcole');
-        if($request->get('articleType') == "ArticlePerso"){
-            $repository = $em->getRepository('NewsBundle:CommentaireArticlePerso');
+        switch($request->get('articleType') ){
+            case "ArticlePerso":
+                $repository = $em->getRepository('NewsBundle:CommentaireArticlePerso');
+                break;
+            case "articleEcole":
+                $repository =$em->getRepository('NewsBundle:commentaireArticleEcole');
+                break;
+            case "Article_promo":
+                $repository = $em->getRepository('NewsBundle:Commentaire_article_promo');
+                break;
         }
 
 
@@ -61,14 +71,32 @@ class AjaxCommentaireController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $repository;
-        if($request->get('articleType') == "ArticlePerso"){
-            $repository = $em->getRepository('NewsBundle:ArticlePerso');
+        $repository = $em->getRepository('NewsBundle:ArticlePerso');
+        switch($request->get('articleType') ){
+            case "ArticlePerso":
+                $repository = $em->getRepository('NewsBundle:ArticlePerso');
+                break;
+            case "articleEcole":
+                $repository =$em->getRepository('NewsBundle:articleEcole');
+                break;
+            case "Article_promo":
+                $repository = $em->getRepository('NewsBundle:Article_promo');
+                break;
         }
 
         $article = $repository->find($request->get('article'));
 
-        $commentaire = new CommentaireArticlePerso();
+        switch($request->get('articleType') ){
+            case "ArticlePerso":
+                $commentaire = new CommentaireArticlePerso();
+                break;
+            case "articleEcole":
+                $commentaire =new commentaireArticleEcole();
+                break;
+            case "Article_promo":
+                $commentaire = new Commentaire_article_promo();
+        }
+
         $commentaire->setArticle($article);
         $commentaire->setAuteur($this->getUser());
         $commentaire->setTexte($request->get('texte'));
