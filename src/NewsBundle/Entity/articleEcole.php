@@ -229,5 +229,14 @@ class articleEcole
         $this->auteur = $auteur;
     }
 
+    /**
+     * @return string
+     */
+    public function getClassName()
+    {
+        return (new \ReflectionClass($this))->getShortName();
+
+    }
+
 
 }

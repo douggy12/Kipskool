@@ -58,6 +58,9 @@
         <li>
             <a href="{{ path('articleperso_delete', {'article_perso_id': article.id, 'perso_id': perso.id}) }}">Supprimer</a>
         </li>
+        <li>
+            {{ article.className }}
+        </li>
 
     </ul>
 
@@ -84,13 +87,26 @@
             </tr>
         {% endfor %}
     </table>
+    {% include ':commentairearticleperso:index.html.twig' %}
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}" type="text/javascript" charset="utf-8"></script>
-    <script>
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
-        editor.getSession().setMode("ace/mode/java");
-        editor.setReadOnly(true);  // false to make it editable
+    <script language="JavaScript" type="text/javascript">
+        var article = {{ article.id }};
+        var typeArticle = "{{ article.className }}";
     </script>
+    <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}" type="text/javascript"
+            charset="utf-8"></script>
+    {% if article.type != null %}
+        <script>
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/monokai");
+            editor.getSession().setMode("ace/mode/java");
+            editor.setReadOnly(true);  // false to make it editable
+        </script>
+    {% endif %}
+
+
+
+    <script src="{{ asset('js/commentaire.js') }}"></script>
 {% endblock %}

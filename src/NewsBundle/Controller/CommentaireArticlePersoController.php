@@ -3,12 +3,19 @@
 namespace NewsBundle\Controller;
 
 
+use NewsBundle\Entity\ArticlePerso;
 use NewsBundle\Entity\CommentaireArticlePerso;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Commentairearticleperso controller.
@@ -17,20 +24,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class CommentaireArticlePersoController extends Controller
 {
-    /**
-     * @param $query
-     * @Route("/{commentaire_article_perso_id}/list")
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function listAjaxCommentaire($query)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $commentaires = $em->getRepository('NewsBundle:CommentaireArticlePerso')->findAll();
 
-        return $this->render(':commentairearticleperso:index.html.twig', array(
-            'commentaires' => $commentaires
-        ));
-    }
     /**
      * @param $query
      * @Route("/{commentaire_article_perso_id}/new")
