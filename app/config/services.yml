@@ -2,6 +2,7 @@
 # http://symfony.com/doc/current/service_container.html
 parameters:
     #parameter_name: value
+    image_directory: NewsBundle\img
 
 services:
     #service_name:
@@ -61,7 +62,10 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Commentaire_Ecole}
 
     kipskool_news.raccourci_texte:
-        class: Extrait\Extrait
+        class: NewsBundle\Twig\AppExtension
+        public: false
+        tags:
+            - { name: twig.extension}
 
     app.twig_extension:
         class: NewsBundle\Twig\AppExtension

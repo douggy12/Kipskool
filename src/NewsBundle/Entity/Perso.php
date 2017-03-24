@@ -49,6 +49,7 @@ class Perso extends BaseUser
 
     /**
      * @ORM\OneToMany(targetEntity="NewsBundle\Entity\ArticlePerso", mappedBy="perso", cascade={"remove"})
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $articles;

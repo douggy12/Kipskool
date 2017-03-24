@@ -20,7 +20,7 @@ class Article_promo
     private $promo;
 
     /**
-     * @ORM\OneToMany(targetEntity="NewsBundle\Entity\Commentaire_article_promo", mappedBy="article_promo", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="NewsBundle\Entity\Commentaire_article_promo", mappedBy="article", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $comments;
@@ -51,14 +51,14 @@ class Article_promo
     /**
      * @var string
      *
-     * @ORM\Column(name="texte", type="string", length=255)
+     * @ORM\Column(name="texte", type="string", length=10000)
      */
     private $texte;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="src_feature", type="string", length=255)
+     * @ORM\Column(name="src_feature", type="string", length=255, nullable=true)
      */
     private $srcFeature;
 
@@ -68,10 +68,24 @@ class Article_promo
      * @ORM\JoinColumn(nullable=true)
      */
     private $auteur;
+
+    /**
+     * @var string
+     * @ORM\Column(name="type", type="string", length=16, nullable=true)
+     */
+    private $type;
     /**
      * Article_promo constructor.
      */
 
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
 
 
     public function __construct()
@@ -221,5 +235,31 @@ class Article_promo
     {
         $this->auteur = $auteur;
     }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClassName()
+    {
+        return (new \ReflectionClass($this))->getShortName();
+
+    }
+
 
 }

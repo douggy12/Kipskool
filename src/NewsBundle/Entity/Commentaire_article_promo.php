@@ -16,7 +16,7 @@ class Commentaire_article_promo
      * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Article_promo", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $article_promo;
+    private $article;
 
     /**
      * @var int
@@ -93,13 +93,13 @@ class Commentaire_article_promo
     /**
      * Set article_promo
      *
-     * @param \NewsBundle\Entity\Article_promo $article_promo
+     * @param \NewsBundle\Entity\Article_promo $article
      *
      * @return Commentaire_article_promo
      */
-    public function setArticlePromo(\NewsBundle\Entity\Article_promo $article_promo)
+    public function setArticle(\NewsBundle\Entity\Article_promo $article)
     {
-        $this->article_promo = $article_promo;
+        $this->article = $article;
 
         return $this;
     }
@@ -109,9 +109,9 @@ class Commentaire_article_promo
      *
      * @return \NewsBundle\Entity\Article_promo
      */
-    public function getArticlePromo()
+    public function getArticle()
     {
-        return $this->article_promo;
+        return $this->article;
     }
 
     /**

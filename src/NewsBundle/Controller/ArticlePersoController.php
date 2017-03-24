@@ -5,11 +5,17 @@ namespace NewsBundle\Controller;
 use NewsBundle\Entity\ArticlePerso;
 use NewsBundle\Entity\CommentaireArticlePerso;
 use NewsBundle\Entity\Perso;
+use NewsBundle\Form\ArticlePersoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Articleperso controller.
@@ -27,13 +33,27 @@ class ArticlePersoController extends Controller
      */
     public function newAction(Request $request, Perso $perso)
     {
+
         $articlePerso = new ArticlePerso();
         $articlePerso->setPerso($perso);
+        $articlePerso->setType("article");
         $articlePerso->setAuteur($this->getUser());
         $form = $this->createForm('NewsBundle\Form\ArticlePersoType', $articlePerso);
         $form->handleRequest($request);
 
+
+        //
+
         if ($form->isSubmitted() && $form->isValid()) {
+            if($articlePerso->getImage()==!null) {
+                $file = $articlePerso->getImage();
+                $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move(
+                    $this->getParameter('image_directory'),
+                    $filename
+                );
+                $articlePerso->setImage($filename);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($articlePerso);
             $em->flush($articlePerso);
@@ -45,6 +65,50 @@ class ArticlePersoController extends Controller
             'perso' => $perso,
             'form' => $form->createView(),
         ));
+    }
+    /**
+     * Creates a new articlePerso entity.
+     * @ParamConverter("perso", options={"mapping" : {"perso_id" : "id"}})
+     * @Route("/article_perso_new_code/perso/{perso_id}", name="articleperso_new_code")
+     * @Method({"GET", "POST"})
+     */
+    public function newCode(Request $request, Perso $perso)
+    {
+        $codePerso = new ArticlePerso();
+        $codePerso->setPerso($perso);
+
+
+        $codePerso->setAuteur($this->getUser());
+
+        $form = $this->createForm('NewsBundle\Form\CodeType', $codePerso);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $codePerso->setTitre("[".strtoupper($form->get('type')->getData())."]".$form->get('titre')->getData());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($codePerso);
+            $em->flush($codePerso);
+
+            return $this->redirectToRoute('perso_show', array('perso_id' => $perso->getId()));
+        }
+
+//        if($request->isXmlHttpRequest()){
+//
+//            $codePerso->setTexte($request->get('code'));
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($codePerso);
+//            $em->flush($codePerso);
+//
+//            //return $this->redirectToRoute('perso_show', array('perso_id' => $perso->getId()));
+//            return new JsonResponse(array());
+//        }
+
+        return $this->render('ace_editor.html.twig', array(
+            'perso' => $perso,
+            'form' => $form->createView()
+        ));
+
     }
 
     /**
@@ -129,6 +193,8 @@ class ArticlePersoController extends Controller
             "perso_id" => $articlePerso->getPerso()->getId()
         ));
     }
+
+
 
 
 }

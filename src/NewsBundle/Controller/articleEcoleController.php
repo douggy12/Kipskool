@@ -60,7 +60,7 @@ class articleEcoleController extends Controller
     public function showArticle( Request $request, articleEcole $articleEcole)
     {
         $commentaireArticleEcole = new commentaireArticleEcole();
-        $commentaireArticleEcole->setArticleEcole($articleEcole);
+        $commentaireArticleEcole->setArticle($articleEcole);
         $commentaireArticleEcole->setAuteur($this->getUser());
         $form = $this->createForm('NewsBundle\Form\commentaireArticleEcoleType', $commentaireArticleEcole);
         $form->handleRequest($request);

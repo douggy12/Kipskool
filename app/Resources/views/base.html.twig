@@ -5,13 +5,15 @@
         <title>{% block title %}Kipskool{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block link %}{% endblock %}
     </head>
     <body>
     <ul>
         <li>
             {% if app.user %}
                 Logged in as {{ app.user.username }}
-                <a href="/logout">logout</a>
+                <a href="/logout">logout </a>
+                <a href="{{ path('perso_show', {'perso_id': app.user.id}) }}">Page perso</a>
             {% else %}
                 <a href="/login">login</a> or <a href="/register">Register</a>
             {% endif %}</li>
@@ -25,4 +27,5 @@
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
+
 </html>

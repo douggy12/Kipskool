@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}"
+            type="text/javascript"
+            charset="utf-8">
+
+    </script>
     <ul>
         <li><a href="{{ path('ecole_show', {'ecole_id': promo.ecole.id}) }}">{{ promo.ecole.nom }}</a></li>
     </ul>
@@ -24,7 +29,9 @@
     </table>
     {% if is_granted('ROLE_STAFF') %}
         <ul>
-            <a href="{{ path('add_article_promo', {'promo_id': promo.id}) }}">Ecrire un article</a>
+            <li><a href="{{ path('add_article_promo', {'promo_id': promo.id}) }}">Ecrire un article</a></li>
+            <li><a href="{{ path('add_code_promo', {'promo_id': promo.id}) }}">Poster du code</a></li>
+
         </ul>
     {% endif %}
     <table>
@@ -39,7 +46,24 @@
                     <a href="{{ path('article_promo_show', {'promo_id': promo.id,'article_promo_id': article_promo.id}) }}">{{ article_promo.titre }}</a>
                 </td>
                 <td>{{ article_promo.createdAt|date("d/m/Y") }}</td>
-                <td>{{ article_promo.texte }}</td>
+                {% if article_promo.type != null %}
+                    <td>
+
+                        <div id="editor{{ loop.index }}" style="width: 500px; height: 100px">{{ article_promo.texte }}</div>
+                    </td>
+                    <script>
+
+                        var editor{{ loop.index }} = ace.edit("editor{{ loop.index }}");
+                        editor{{ loop.index }}.setTheme("ace/theme/monokai");
+                        editor{{ loop.index }}.getSession().setMode("ace/mode/{{ article_promo.type }}");
+                        editor{{ loop.index }}.setReadOnly(true);  // false to make it editable
+
+                    </script>
+
+
+                {% else %}
+                    <td>{{ article_promo.texte|raccourci }}</td>
+                {% endif %}
             </tr>
 
         {% endfor %}

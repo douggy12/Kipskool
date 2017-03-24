@@ -16,7 +16,7 @@ class commentaireArticleEcole
      * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\articleEcole", inversedBy="commentaires")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $articleEcole;
+    private $article;
     /**
      * @var int
      *
@@ -102,13 +102,13 @@ class commentaireArticleEcole
     /**
      * Set articleEcole
      *
-     * @param \NewsBundle\Entity\articleEcole $articleEcole
+     * @param \NewsBundle\Entity\articleEcole $article
      *
      * @return commentaireArticleEcole
      */
-    public function setArticleEcole(\NewsBundle\Entity\articleEcole $articleEcole)
+    public function setArticle(\NewsBundle\Entity\articleEcole $article)
     {
-        $this->articleEcole = $articleEcole;
+        $this->article = $article;
 
         return $this;
     }
@@ -118,9 +118,9 @@ class commentaireArticleEcole
      *
      * @return \NewsBundle\Entity\articleEcole
      */
-    public function getArticleEcole()
+    public function getArticle()
     {
-        return $this->articleEcole;
+        return $this->article;
     }
 
     /**
