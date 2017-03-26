@@ -125,6 +125,7 @@ class ArticlePersoController extends Controller
         $form = $this->createForm('NewsBundle\Form\CommentaireArticlePersoType', $commentaireArticlePerso);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($commentaireArticlePerso);
