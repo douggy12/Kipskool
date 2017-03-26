@@ -97,3 +97,10 @@ sonata_admin:
     title_logo: img/logo_small.png
     templates:
         layout:     admin_layout.html.twig
+
+vich_uploader:
+    db_driver: orm # or mongodb or propel or phpcr
+    mappings:
+        articlePerso_image:
+            uri_prefix:         /images/articleperso
+            upload_destination: '%kernel.root_dir%/../web/images/articleperso'

@@ -65,7 +65,7 @@
                 <td>
                     <a href="{{ path('articleperso_show', {'article_perso_id': article.id, 'perso_id': perso.id}) }}">{{ article.titre }}</a>
                 </td>
-                {% if article.type != null %}
+                {% if article.type != "article" %}
                     <td>
 
                     <div id="editor{{ loop.index }}" style="width: 500px; height: 100px">{{ article.texte }}</div>

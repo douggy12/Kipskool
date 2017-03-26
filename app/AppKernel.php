@@ -31,6 +31,9 @@ class AppKernel extends Kernel
             //FOS
             new FOS\UserBundle\FOSUserBundle(),
 
+            //Vichuploader
+            new Vich\UploaderBundle\VichUploaderBundle(),
+
 
 
         ];

@@ -42,18 +42,8 @@ class ArticlePersoController extends Controller
         $form->handleRequest($request);
 
 
-        //
-
         if ($form->isSubmitted() && $form->isValid()) {
-            if($articlePerso->getImage()==!null) {
-                $file = $articlePerso->getImage();
-                $filename = md5(uniqid()) . '.' . $file->guessExtension();
-                $file->move(
-                    $this->getParameter('image_directory'),
-                    $filename
-                );
-                $articlePerso->setImage($filename);
-            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($articlePerso);
             $em->flush($articlePerso);

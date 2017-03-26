@@ -17,7 +17,7 @@ class ArticlePersoType extends AbstractType
         $builder
             ->add('titre')
             ->add('texte')
-            ->add('srcFeature', filety);
+            ->add('srcFeature', FileType::class);
 
     }
     
