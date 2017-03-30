@@ -28,7 +28,7 @@
             <th>Titre</th>
             <td>{{ article.titre }}</td>
         </tr>
-        {% if article.type != "article" %}
+        {% if article.type != "article"  %}
             <tr>
                 <th>Code</th>
                 <td>
@@ -40,7 +40,7 @@
                 <th>Texte</th>
                 <td>
                     {% if article.srcFeature != null %}
-                    <img src="{{ vich_uploader_asset(article, 'srcFeature') }}">
+                    <img src="{{ vich_uploader_asset(article, 'srcFeature')|imagine_filter('article_image') }}">
                     {% endif %}
                     <p>{{ article.texte }}</p>
                 </td>

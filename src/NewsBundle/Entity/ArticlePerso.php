@@ -6,7 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ArticlePerso
@@ -55,9 +57,29 @@ class ArticlePerso
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $imageName;
+
+
+    /**
+     * @Assert\Callback
+     * @param ExecutionContextInterface $context
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        if (! in_array($this->srcFeature->getMimeType(), array(
+            'image/jpeg',
+            'image/gif',
+            'image/png'
+        ))) {
+            $context
+                ->buildViolation('Wrong file type (jpg,gif,png)')
+                ->atPath('fileName')
+                ->addViolation()
+            ;
+        }
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso", inversedBy="articles")

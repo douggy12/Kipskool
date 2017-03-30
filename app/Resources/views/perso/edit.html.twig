@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Articleperso edit</h1>
+    <h1>Perso edit</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -10,7 +10,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('perso_show', {'perso_id': perso.id}) }}">Back to the list</a>
+            <a href="{{ path('perso_show', {'perso_id': app.user.id}) }}">Back to the list</a>
         </li>
 
     </ul>

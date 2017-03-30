@@ -17,8 +17,8 @@
     <table>
         <tbody>
         <tr>
-            <th>Id</th>
-            <td>{{ perso.id }}</td>
+            <th></th>
+            <td> <img src="{{ vich_uploader_asset(perso, 'avatar')|imagine_filter('avatar_image') }}"></td>
         </tr>
         <tr>
             <th>Nom</th>
@@ -52,7 +52,7 @@
     </ul>
 
     <table>
-        <tr>
+        <tr><th></th>
             <th>créé le :</th>
             <th>titre</th>
             <th>texte</th>
@@ -61,6 +61,11 @@
         {% for article in perso.articles %}
 
             <tr>
+                <td>
+                    {% if article.srcFeature != null %}
+                        <img src="{{ vich_uploader_asset(article, 'srcFeature')|imagine_filter('article_thumb') }}" />
+                    {% endif %}
+                </td>
                 <td>{{ article.createdAt|date("d-m-Y") }}</td>
                 <td>
                     <a href="{{ path('articleperso_show', {'article_perso_id': article.id, 'perso_id': perso.id}) }}">{{ article.titre }}</a>

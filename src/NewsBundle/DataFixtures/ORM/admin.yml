@@ -4,7 +4,9 @@ NewsBundle\Entity\Perso:
       email: admin@admin.com
       enabled: true
       plainpassword: admin
-
+      promo:
+              - '@promo_1'
+              - '@promo_2'
       nom: nomadmin
       prenom: prenomadmin
       born: <unixTime($max = 'nox')>

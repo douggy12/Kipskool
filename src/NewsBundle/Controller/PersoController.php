@@ -3,7 +3,7 @@
 namespace NewsBundle\Controller;
 
 use NewsBundle\Entity\Perso;
-use NewsBundle\Entity\Promo;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -31,6 +31,33 @@ class PersoController extends Controller
         return $this->render('perso/show.html.twig', array(
             'promo' => $promo,
             'perso' => $perso,
+
+        ));
+    }
+
+    /**
+     * Displays a form to edit an existing Perso entity.
+     *
+
+     * @Route("/{perso_id}/edit", name="perso_edit")
+     *
+     * @Method({"GET", "POST"})
+     */
+    public function editAction(Request $request, Perso $perso)
+    {
+
+        $editForm = $this->createForm('NewsBundle\Form\PersoType', $perso);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('perso_show', array('perso_id' => $perso->getId()));
+        }
+
+        return $this->render('perso/edit.html.twig', array(
+            'perso' => $perso,
+            'edit_form' => $editForm->createView(),
 
         ));
     }

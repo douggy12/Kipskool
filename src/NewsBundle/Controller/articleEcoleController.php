@@ -30,6 +30,7 @@ class articleEcoleController extends Controller
         $articleEcole = new articleEcole();
         $articleEcole->setEcole($ecole);
         $articleEcole->setAuteur($this->getUser());
+        $articleEcole->setType("article");
 
         $form = $this->createForm('NewsBundle\Form\articleEcoleType', $articleEcole);
         $form->handleRequest($request);

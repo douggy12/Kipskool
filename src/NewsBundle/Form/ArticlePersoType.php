@@ -2,10 +2,12 @@
 
 namespace NewsBundle\Form;
 
+use Liip\ImagineBundle\Form\Type\ImageType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ArticlePersoType extends AbstractType
 {
@@ -17,7 +19,14 @@ class ArticlePersoType extends AbstractType
         $builder
             ->add('titre')
             ->add('texte')
-            ->add('srcFeature', FileType::class);
+            ->add('srcFeature', FileType::class, array(
+                'data_class' => null,
+                'required' => false
+            ))
+//            ->add('srcFeature', VichImageType::class, array(
+//            'required' => false,
+//            'data_class' => null))
+        ;
 
     }
     
