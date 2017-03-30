@@ -42,7 +42,7 @@ class EcoleController extends Controller
      */
     public function showAction(Ecole $ecole)
     {
-        return $this->render('ecole/show.html.twig', array(
+        return $this->render(':ViewPromo:page_ecole.html.twig', array(
             'ecole' => $ecole,
 
         ));

@@ -21,10 +21,7 @@
 
                     <!-- Header Link -->
                     <li class="hidden-xs animation-fadeInQuick">
-                        <a href="{{ path('ecole_show', {'ecole_id': promo.ecole.id}) }}"><strong>{{ promo.ecole.nom }}</strong></a>
-                    </li>
-                    <li class="hidden-xs animation-fadeInQuick">
-                        <a href="page_promo.html.twig"><strong>{{ promo.nom }}</strong></a>
+                        <a href="{{ path('ecole_show', {'ecole_id': ecole.id}) }}"><strong>{{ ecole.nom }}</strong></a>
                     </li>
 
                     <!-- END Header Link -->
@@ -62,10 +59,6 @@
                             <a href="{{ path('sonata_admin_dashboard') }}">interface admin</a>
                         </li>
                     {% endif %}
-
-                    <!-- END Search Form -->
-
-
                 </ul>
                 <!-- END Left Header Navigation -->
             </header>
@@ -83,18 +76,17 @@
                                 Etudiants
                             </h4>
                             <ul class="nav-users nav-users-online">
-                                {% for perso in promo.persos %}
+                                {% for promo in ecole.promos %}
                                     <li>
-                                        <a href="{{ path('perso_show', {'perso_id': perso.id}) }}">
-                                            {% if perso.avatar != null %}
-                                                <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini') }}"
+                                        <a href="{{ path('promo_show', {'promo_id': promo.id}) }}">
+                                            {% if promo.avatar != null %}
+                                                <img src="{{ vich_uploader_asset(promo,'avatar')|imagine_filter('avatar_mini') }}"
                                                      alt="image" class="nav-users-avatar"/>
                                             {% else %}
                                                 <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
                                                      alt="image" class="nav-users-avatar"/>
                                             {% endif %}
-                                            <span class="nav-users-heading">{{ perso.prenom }} </span>
-                                            <span class="text-muted"> {{ perso.nom }}</span>
+                                            <span class="nav-users-heading">{{ promo.nom }} </span>
                                         </a>
                                     </li>
                                 {% endfor %}
@@ -111,14 +103,14 @@
                     <div class="header-section">
                         <div class="row">
                             <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
-                                <h1>{{ promo.nom }}</h1>
-                                <h2 class="text-light-op"> {{ promo.description }}</h2>
+                                <h1>{{ ecole.nom }}</h1>
+                                <h2 class="text-light-op"> {{ ecole.description }}</h2>
                             </div>
 
                         </div>
                     </div>
-                    {% if promo.ecole.avatar != null %}
-                        <img src="{{ vich_uploader_asset(promo.ecole,'avatar')|imagine_filter('avatar_mini') }}"
+                    {% if ecole.avatar != null %}
+                        <img src="{{ vich_uploader_asset(ecole,'avatar')|imagine_filter('avatar_mini') }}"
                              alt="image" class="nav-users-avatar"/>
                     {% else %}
                         <img src="{{ asset('img/LOGO_IMIE_res.jpg')|imagine_filter('avatar_mini') }}"
@@ -128,15 +120,11 @@
                 <!-- END Social Net Header -->
 
 
-                {% if is_granted('ROLE_STAFF') or (is_granted('ROLE_DELEGUE') and app.user.promo == promo) %}
+                {% if is_granted('ROLE_STAFF') or (is_granted('ROLE_DELEGUE') and app.user.ecole == ecole) %}
                     <ul class="nav navbar-nav-custom">
                         <li class="hidden-xs animation-fadeInQuick">
-                            <a href="{{ path('add_article_promo', {'promo_id': promo.id}) }}" class="">Ecrire un article</a>
+                            <a href="{{ path('addArticle', {'ecole_id': ecole.id}) }}" class="">Ecrire un article</a>
                         </li>
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="{{ path('add_code_promo', {'promo_id': promo.id}) }}">Poster du code</a>
-                        </li>
-
                     </ul>
                 {% endif %}
 
@@ -145,35 +133,20 @@
                     <!-- Latest News -->
                     <div class="col-lg-12">
                         <!-- Story -->
-                        {% for article_promo in promo.articles_promo %}
+                        {% for article_ecole in ecole.articles %}
                             <div class="widget">
 
                                 <div class="widget-content widget-content-mini themed-background-dark text-light-op">
-                                    <span class="pull-right text-muted">{{ article_promo.createdAt|date("d/m/Y") }}</span>
-                                    <a href="{{ path('perso_show', {'perso_id': article_promo.auteur.id}) }}"
-                                       class="text-light">{{ article_promo.auteur }}</a>
+                                    <span class="pull-right text-muted">{{ article_ecole.createdAt|date("d/m/Y") }}</span>
+                                    <a href="{{ path('perso_show', {'perso_id': article_ecole.auteur.id}) }}"
+                                       class="text-light">{{ article_ecole.auteur }}</a>
                                     posted an Article
                                 </div>
                                 <div class="widget-content">
                                     <h3>
-                                        <a href="{{ path('article_promo_show', {'article_promo_id': article_promo.id}) }}">{{ article_promo.titre }}</a>
+                                        <a href="{{ path('articleecole_show', {'article_ecole_id': article_ecole.id}) }}">{{ article_ecole.titre }}</a>
                                     </h3>
-                                    {% if article_promo.type != 'article' %}
-                                        <p>
-                                        <div id="editor{{ loop.index }}"
-                                             style="width: 500px; height: 100px">{{ article_promo.texte|raccourci }}</div>
-                                        </p>
-                                        <script>
-
-                                            var editor{{ loop.index }} = ace.edit("editor{{ loop.index }}");
-                                            editor{{ loop.index }}.setTheme("ace/theme/monokai");
-                                            editor{{ loop.index }}.getSession().setMode("ace/mode/{{ article_promo.type }}");
-                                            editor{{ loop.index }}.setReadOnly(true);  // false to make it editable
-
-                                        </script>
-                                    {% else %}
-                                        <p>{{ article_promo.texte|raccourci }}</p>
-                                    {% endif %}
+                                        <p>{{ article_ecole.texte|raccourci }}</p>
                                 </div>
 
                             </div>
