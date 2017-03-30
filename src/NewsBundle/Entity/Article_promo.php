@@ -4,12 +4,17 @@ namespace NewsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Article_promo
  *
  * @ORM\Table(name="article_promo")
  * @ORM\Entity(repositoryClass="NewsBundle\Repository\Article_promoRepository")
+ * @Vich\Uploadable()
  */
 class Article_promo
 {
@@ -55,12 +60,21 @@ class Article_promo
      */
     private $texte;
 
+
     /**
-     * @var string
-     *
+     * @var File
+     * @Vich\UploadableField(mapping="articlePerso_image",fileNameProperty="imageName")
      * @ORM\Column(name="src_feature", type="string", length=255, nullable=true)
      */
     private $srcFeature;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageName;
+
+
 
     /**
      * @var Perso
@@ -78,14 +92,26 @@ class Article_promo
      * Article_promo constructor.
      */
 
-
     /**
-     * @return string
+     * @Assert\Callback
+     * @param ExecutionContextInterface $context
      */
-    public function getImage()
+    public function validate(ExecutionContextInterface $context)
     {
-        return $this->image;
+        if (! in_array($this->srcFeature->getMimeType(), array(
+            'image/jpeg',
+            'image/gif',
+            'image/png'
+        ))) {
+            $context
+                ->buildViolation('Wrong file type (jpg,gif,png)')
+                ->atPath('fileName')
+                ->addViolation()
+            ;
+        }
     }
+
+
 
 
     public function __construct()
@@ -165,29 +191,55 @@ class Article_promo
     }
 
     /**
-     * Set srcFeature
-     *
-     * @param string $srcFeature
-     *
+     * @param string $imageName
      *
      * @return Article_promo
      */
-    public function setSrcFeature($srcFeature)
+    public function setImageName($imageName)
     {
-        $this->srcFeature = $srcFeature;
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * Set srcFeature
+     *
+     * @param File|$image
+     *
+     * @return Article_promo
+     */
+    public function setSrcFeature(File $image = null)
+    {
+        $this->srcFeature = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
 
         return $this;
     }
 
     /**
      * Get srcFeature
-     *
-     * @return string
+
+     * @return File|null
      */
     public function getSrcFeature()
     {
         return $this->srcFeature;
     }
+
 
     /**
      * Get promo

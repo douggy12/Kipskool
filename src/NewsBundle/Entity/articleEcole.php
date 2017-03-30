@@ -71,6 +71,12 @@ class articleEcole
     private $auteur;
 
     /**
+     * @var string
+     * @ORM\Column(name="type", type="string", length=255,nullable=false)
+     */
+    private $type;
+
+    /**
      * articleEcole constructor.
      */
     public function __construct()
@@ -237,6 +243,24 @@ class articleEcole
         return (new \ReflectionClass($this))->getShortName();
 
     }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+
 
 
 }

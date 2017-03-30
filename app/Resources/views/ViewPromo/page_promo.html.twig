@@ -1,0 +1,179 @@
+
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}"
+        type="text/javascript"
+        charset="utf-8">
+
+</script>
+
+<div id="page-container" class="header-fixed-top sidebar-visible-lg-full" style="width: 100%">
+
+    <!-- Main Container -->
+    <div id="main-container">
+        <!-- Header -->
+        <!-- In the PHP version you can set the following options from inc/config file -->
+        <!--
+            Available header.navbar classes:
+
+            'navbar-default'            for the default light header
+            'navbar-inverse'            for an alternative dark header
+
+            'navbar-fixed-top'          for a top fixed header (fixed main sidebar with scroll will be auto initialized, functionality can be found in js/app.js - handleSidebar())
+                'header-fixed-top'      has to be added on #page-container only if the class 'navbar-fixed-top' was added
+
+            'navbar-fixed-bottom'       for a bottom fixed header (fixed main sidebar with scroll will be auto initialized, functionality can be found in js/app.js - handleSidebar()))
+                'header-fixed-bottom'   has to be added on #page-container only if the class 'navbar-fixed-bottom' was added
+        -->
+        <header class="navbar navbar-inverse navbar-fixed-top">
+            <!-- Left Header Navigation -->
+            <ul class="nav navbar-nav-custom">
+
+                <!-- END Main Sidebar Toggle Button -->
+
+                <!-- Header Link -->
+                <li class="hidden-xs animation-fadeInQuick">
+                    <a href="{{ path('ecole_show', {'ecole_id': promo.ecole.id}) }}"><strong>{{ promo.ecole.nom }}</strong></a>
+                </li>
+                <li class="hidden-xs animation-fadeInQuick">
+                    <a href="page_promo.html.twig"><strong>{{ promo.nom }}</strong></a>
+                </li>
+                <!-- END Header Link -->
+            </ul>
+            <!-- END Left Header Navigation -->
+        </header>
+        <!-- END Header -->
+
+        <!-- Page content -->
+        <!--
+            Available classes when #page-content-sidebar is used:
+
+            'inner-sidebar-left'      for a left inner sidebar
+            'inner-sidebar-right'     for a right inner sidebar
+        -->
+        <div id="page-content" class="inner-sidebar-right">
+            <!-- Inner Sidebar -->
+            <div id="page-content-sidebar">
+                <!-- Collapsible People List -->
+                <div id="people-nav" class="collapse navbar-collapse remove-padding">
+                    <div class="block-section">
+                        <h4 class="inner-sidebar-header">
+                            <a href="" class="btn btn-effect-ripple btn-xs btn-default pull-right"></a>
+                            Etudiants
+                        </h4>
+                        <ul class="nav-users nav-users-online">
+                            {% for perso in promo.persos %}
+                            <li>
+                                <a href="{{ path('perso_show', {'perso_id': perso.id}) }}">
+                                    {% if perso.avatar != null %}
+                                        <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini') }}" alt="image" class="nav-users-avatar"/>
+                                    {% else %}
+                                        <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}" alt="image" class="nav-users-avatar"/>
+                                    {% endif %}
+                                    <span class="nav-users-heading">{{ perso.prenom }} </span>
+                                    <span class="text-muted"> {{ perso.nom }}</span>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- END Collapsible People List -->
+            </div>
+            <!-- END Inner Sidebar -->
+
+            <!-- Social Net Header -->
+            <!-- For an image header add the class 'content-header-media' and an image as in the following example -->
+            <div class="content-header content-header-media">
+                <div class="header-section">
+                    <div class="row">
+                        <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
+                            <img src="{{ asset('img/placeholders/avatars/avatar9.jpg') }}" alt="User Image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left">
+                            <h1>{{ promo.nom }}</h1>
+                            <h2 class="text-light-op"> {{ promo.description }}</h2>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- For best results use an image with a resolution of 2560x260 pixels (you could use a blurred image for smaller file size) -->
+                <img src="{{ asset('img/LOGO_IMIE_res.jpg') }}" alt="Header Image" class="animation-pulseSlow">
+            </div>
+            <!-- END Social Net Header -->
+
+
+            {% if is_granted('ROLE_STAFF') or (is_granted('ROLE_DELEGUE') and app.user.promo== promo) %}
+                <ul>
+                    <li><a href="{{ path('add_article_promo', {'promo_id': promo.id}) }}">Ecrire un article</a></li>
+                    <li><a href="{{ path('add_code_promo', {'promo_id': promo.id}) }}">Poster du code</a></li>
+
+                </ul>
+            {% endif %}
+
+            <!-- Social Net Content -->
+            <div class="row">
+                <!-- Latest News -->
+                <div class="col-lg-12">
+                    <!-- Story -->
+                    {% for article_promo in promo.articles_promo %}
+                    <div class="widget">
+
+                        <div class="widget-content widget-content-mini themed-background-dark text-light-op">
+                            <span class="pull-right text-muted">{{ article_promo.createdAt|date("d/m/Y") }}</span>
+                            <a href="javascript:void(0)" class="text-light">{{ article_promo.auteur }}</a> posted an Article
+                        </div>
+                        <div class="widget-content">
+                            <h3>{{ article_promo.titre }} </h3>
+                            {% if article_promo.type != 'article' %}
+                                <p>
+                                    <div id="editor{{ loop.index }}" style="width: 500px; height: 100px">{{ article_promo.texte }}</div>
+                                </p>
+                                <script>
+
+                                    var editor{{ loop.index }} = ace.edit("editor{{ loop.index }}");
+                                    editor{{ loop.index }}.setTheme("ace/theme/monokai");
+                                    editor{{ loop.index }}.getSession().setMode("ace/mode/{{ article_promo.type }}");
+                                    editor{{ loop.index }}.setReadOnly(true);  // false to make it editable
+
+                                </script>
+                            {% else %}
+                                <p>{{ article_promo.texte }}</p>
+                            {% endif %}
+                        </div>
+                        <!--
+                                                    <div class="push-bit-top">
+                                                        <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-heart"></i> Love</a>
+                                                        <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-primary" style="overflow: hidden; position: relative;"><i class="fa fa-twitter"></i> Tweet</a>
+                                                    </div>
+                        -->
+                        {#<div class="widget-content themed-background-muted">#}
+                            {#<ul class="media-list push">#}
+                                {#<li class="media">#}
+                                    {#<a href="javascript:void(0)" class="pull-left">#}
+                                        {#<img src="../../../../web/img/placeholders/avatars/avatar13.jpg" alt="Avatar" class="img-circle">#}
+                                    {#</a>#}
+                                    {#<div class="media-body">#}
+                                        {#<a href="javascript:void(0)"><strong>Madison Carr</strong></a>#}
+                                        {#<span class="text-muted"><small><em>50 min ago</em></small></span>#}
+                                        {#<p>Thank you for this, many great tips!</p>#}
+                                    {#</div>#}
+                                {#</li>#}
+                            {#</ul>#}
+                        {#</div>#}
+
+                    </div>
+                    {% endfor %}
+                    <!-- END Story -->
+                </div>
+                <!-- END Latest News -->
+            </div>
+            <!-- END Social Net Content -->
+        </div>
+        <!-- END Page Content -->
+    </div>
+    <!-- END Main Container -->
+</div>
+<!-- END Page Container -->
+{% endblock %}

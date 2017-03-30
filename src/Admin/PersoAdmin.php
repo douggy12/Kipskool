@@ -32,7 +32,7 @@ class PersoAdmin extends AbstractAdmin
             ->with('Promo', array('class' => 'col-md-3'))
             ->add('promo', 'entity', array(
                 'class' => 'NewsBundle\Entity\Promo',
-                'expanded' =>true,
+
                 'multiple' => true,
                 'choice_label' => 'nom'))
             ->end()

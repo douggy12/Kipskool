@@ -17,7 +17,10 @@ class articleEcoleType extends AbstractType
         $builder
             ->add('titre')
             ->add('texte', 'textarea')
-            ->add('srcFeature')
+            ->add('srcFeature', FileType::class, array(
+                'data_class' => null,
+                'required' => false
+            ))
 
 
         ;
