@@ -17,6 +17,7 @@ class Promo
 
     /**
      * @ORM\OneToMany(targetEntity="NewsBundle\Entity\Article_promo", mappedBy="promo", cascade={"remove"})
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $articles_promo;

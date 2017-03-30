@@ -53,12 +53,12 @@ class articleEcole
     /**
      * @var string
      *
-     * @ORM\Column(name="srcFeature", type="string", length=255)
+     * @ORM\Column(name="srcFeature", type="string", length=255,nullable=true)
      */
     private $srcFeature;
 
     /**
-     * @ORM\OneToMany(targetEntity="NewsBundle\Entity\commentaireArticleEcole", mappedBy="articleEcole", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="NewsBundle\Entity\commentaireArticleEcole", mappedBy="article", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $commentaires;
@@ -66,7 +66,7 @@ class articleEcole
     /**
      * @var Perso
      * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $auteur;
 
@@ -227,6 +227,15 @@ class articleEcole
     public function setAuteur($auteur)
     {
         $this->auteur = $auteur;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClassName()
+    {
+        return (new \ReflectionClass($this))->getShortName();
+
     }
 
 

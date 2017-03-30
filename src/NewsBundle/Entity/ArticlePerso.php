@@ -241,6 +241,15 @@ class ArticlePerso
         $this->type = $type;
     }
 
+    /**
+     * @return string
+     */
+    public function getClassName()
+    {
+        return (new \ReflectionClass($this))->getShortName();
+
+    }
+
 
 
 
