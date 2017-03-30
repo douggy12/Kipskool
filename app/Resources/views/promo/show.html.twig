@@ -36,6 +36,7 @@
     {% endif %}
     <table>
         <tr>
+            <th></th>
             <th>Titre</th>
             <th>Crée</th>
             <th>Texte</th>
@@ -43,10 +44,15 @@
         {% for article_promo in promo.articles_promo %}
             <tr>
                 <td>
+                    {% if article_promo.srcFeature != null %}
+                        <img src="{{ vich_uploader_asset(article_promo, 'srcFeature')|imagine_filter('article_thumb') }}" />
+                    {% endif %}
+                </td>
+                <td>
                     <a href="{{ path('article_promo_show', {'promo_id': promo.id,'article_promo_id': article_promo.id}) }}">{{ article_promo.titre }}</a>
                 </td>
                 <td>{{ article_promo.createdAt|date("d/m/Y") }}</td>
-                {% if article_promo.type != null %}
+                {% if article_promo.type != 'article' %}
                     <td>
 
                         <div id="editor{{ loop.index }}" style="width: 500px; height: 100px">{{ article_promo.texte }}</div>
@@ -82,8 +88,14 @@
         </tr>
         {% for perso in promo.persos %}
             <tr>
-                <td><a href="{{ path('perso_show', {'perso_id': perso.id}) }}">{{ perso.prenom }} {{ perso.nom }}</a>
+                <td>{% if perso.avatar != null %}
+                    <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini') }}"/>
+                        {% else %}
+                        <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"/>
+                    {% endif %}
+                    <a href="{{ path('perso_show', {'perso_id': perso.id}) }}">{{ perso.prenom }} {{ perso.nom }}</a>
                 </td>
+
             </tr>
         {% endfor %}
     </table>
