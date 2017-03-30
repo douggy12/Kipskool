@@ -844,12 +844,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "4a6415b1254db6e8ea0886ead5c35888c02ccaf9"
+                "reference": "2e0243e9e8a3ca0dab753fc5f2e79b4b3093ac9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/4a6415b1254db6e8ea0886ead5c35888c02ccaf9",
-                "reference": "4a6415b1254db6e8ea0886ead5c35888c02ccaf9",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/2e0243e9e8a3ca0dab753fc5f2e79b4b3093ac9a",
+                "reference": "2e0243e9e8a3ca0dab753fc5f2e79b4b3093ac9a",
                 "shasum": ""
             },
             "require": {
@@ -913,7 +913,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2017-03-09 15:14:58"
+            "time": "2017-03-29 13:21:34"
         },
         {
             "name": "imagine/imagine",
@@ -1753,16 +1753,16 @@
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v4.0.2",
+            "version": "v4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "56bded66985e22f6eac2cf86735fd21c625bff2f"
+                "reference": "04bb87f5bd28a7d6ce7f4a4d1d6b94b3c1aa8dae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/56bded66985e22f6eac2cf86735fd21c625bff2f",
-                "reference": "56bded66985e22f6eac2cf86735fd21c625bff2f",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/04bb87f5bd28a7d6ce7f4a4d1d6b94b3c1aa8dae",
+                "reference": "04bb87f5bd28a7d6ce7f4a4d1d6b94b3c1aa8dae",
                 "shasum": ""
             },
             "require": {
@@ -1793,20 +1793,20 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2017-03-09T17:33:20+00:00"
+            "time": "2017-03-29T08:08:00+00:00"
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "3.14.0",
+            "version": "3.15.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "dad38b8ee16ed9baed476fff24b6a8ad2ef0f3f4"
+                "reference": "4f978ab83b5454ab4e40295ad89eae47ca7591d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/dad38b8ee16ed9baed476fff24b6a8ad2ef0f3f4",
-                "reference": "dad38b8ee16ed9baed476fff24b6a8ad2ef0f3f4",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/4f978ab83b5454ab4e40295ad89eae47ca7591d5",
+                "reference": "4f978ab83b5454ab4e40295ad89eae47ca7591d5",
                 "shasum": ""
             },
             "require": {
@@ -1816,7 +1816,7 @@
                 "php": "^5.3 || ^7.0",
                 "sonata-project/block-bundle": "^3.2",
                 "sonata-project/core-bundle": "^3.1",
-                "sonata-project/exporter": "^1.0",
+                "sonata-project/exporter": "^1.7",
                 "symfony/class-loader": "^2.3 || ^3.0",
                 "symfony/config": "^2.3.9 || ^3.0",
                 "symfony/console": "^2.3 || ^3.0",
@@ -1845,7 +1845,6 @@
                 "matthiasnoback/symfony-dependency-injection-test": "^0.1 || ^1.0",
                 "sensio/generator-bundle": "^2.3 || ^3.0",
                 "sllh/php-cs-fixer-styleci-bridge": "^2.0",
-                "sonata-project/exporter": "^1.7",
                 "sonata-project/intl-bundle": "^2.2.4",
                 "symfony/phpunit-bridge": "^2.7 || ^3.0",
                 "symfony/yaml": "^2.3 || ^3.0"
@@ -1893,7 +1892,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2017-03-16T09:20:52+00:00"
+            "time": "2017-03-28T15:53:22+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -3144,7 +3143,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-02-27T00:07:03+00:00"
+            "time": "2017-03-22T15:40:09+00:00"
         },
         {
             "name": "vich/uploader-bundle",
