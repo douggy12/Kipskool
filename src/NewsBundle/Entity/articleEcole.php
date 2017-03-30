@@ -5,12 +5,15 @@ namespace NewsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * articleEcole
  *
  * @ORM\Table(name="article_ecole")
  * @ORM\Entity(repositoryClass="NewsBundle\Repository\articleEcoleRepository")
+ * @Vich\Uploadable()
  *
  */
 class articleEcole
@@ -84,6 +87,29 @@ class articleEcole
 
         $this->createdAt = time();
         $this->commentaires = new ArrayCollection();
+    }
+
+    /**
+     * @Assert\Callback
+     * @param ExecutionContextInterface $context
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        if ($this->srcFeature == null){
+
+
+            if (! in_array($this->srcFeature->getMimeType(), array(
+                'image/jpeg',
+                'image/gif',
+                'image/png'
+            ))) {
+                $context
+                    ->buildViolation('Wrong file type (jpg,gif,png)')
+                    ->atPath('fileName')
+                    ->addViolation()
+                ;
+            }
+        }
     }
 
 

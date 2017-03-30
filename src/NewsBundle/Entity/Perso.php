@@ -276,7 +276,7 @@ class Perso extends BaseUser
             'image/jpeg',
             'image/gif',
             'image/png'
-        ))) {
+        ))or $this->getAvatar() == null) {
             $context
                 ->buildViolation('Wrong file type (jpg,gif,png)')
                 ->atPath('fileName')
@@ -295,6 +295,8 @@ class Perso extends BaseUser
     public function setAvatar(File $image = null)
     {
         $this->avatar = $image;
+
+
 
         if ($image) {
             // It is required that at least one field changes if you are using doctrine

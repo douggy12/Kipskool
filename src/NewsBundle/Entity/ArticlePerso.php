@@ -68,6 +68,8 @@ class ArticlePerso
      */
     public function validate(ExecutionContextInterface $context)
     {
+        if ($this->srcFeature != null){
+
         if (! in_array($this->srcFeature->getMimeType(), array(
             'image/jpeg',
             'image/gif',
@@ -79,6 +81,8 @@ class ArticlePerso
                 ->addViolation()
             ;
         }
+        }
+
     }
 
     /**

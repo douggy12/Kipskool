@@ -56,7 +56,8 @@ class AjaxCommentaireController extends Controller
                 "auteur"    => $commentaire->getAuteur()->getPrenom().' '.$commentaire->getAuteur()->getNom(),
                 "texte"     => $commentaire->getTexte(),
                 "id"        => $commentaire->getId(),
-                "avatar"    => $commentaire->getAuteur()->getAvatar()
+                "avatar"    => $commentaire->getAuteur()->getAvatar(),
+                "avatarName"=> $commentaire->getAuteur()->getAvatarName()
             );
         }
 
