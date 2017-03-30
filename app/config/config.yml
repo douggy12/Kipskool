@@ -40,6 +40,10 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         raccourci: "@kipskool_news.raccourci_texte"
+    form_themes:
+            # other form themes
+        - 'VichUploaderBundle:Form:fields.html.twig'
+
 
 # Doctrine Configuration
 doctrine:
@@ -97,3 +101,77 @@ sonata_admin:
     title_logo: img/logo_small.png
     templates:
         layout:     admin_layout.html.twig
+
+vich_uploader:
+    db_driver: orm # or mongodb or propel or phpcr
+    mappings:
+        articlePerso_image:
+            uri_prefix:         /images/articleperso
+            upload_destination: '%kernel.root_dir%/../web/images/articleperso'
+        perso_image:
+            uri_prefix:         /images/avatar
+            upload_destination: '%kernel.root_dir%/../web/images/avatar'
+
+# app/config/config.yml
+
+liip_imagine:
+
+    # configure resolvers
+    resolvers:
+
+        # setup the default resolver
+        default:
+
+            # use the default web path
+            web_path: ~
+
+    # your filter sets are defined here
+    filter_sets:
+
+        # use the default cache configuration
+        cache: ~
+
+        # the name of the "filter set"
+        article_thumb:
+
+            # adjust the image quality to 75%
+            quality: 75
+
+            # list of transformations to apply (the "filters")
+            filters:
+
+                # create a thumbnail: set size to 120x90 and use the "outbound" mode
+                # to crop the image when the size ratio of the input differs
+                thumbnail:
+                    size: [120, 120]
+                    mode: outbound
+                    allow_upscale: yes
+
+
+
+        article_image:
+
+            quality: 75
+            filters:
+                thumbnail:
+                    mode: inset
+                    size: [600,400]
+                    allow_upscale: false
+
+
+        avatar_image:
+
+          quality: 75
+          filters:
+            thumbnail:
+              mode: inset
+              size: [400,400]
+              allow_upscale: true
+
+        avatar_mini:
+          quality : 75
+          filters:
+            thumbnail:
+              mode: outbound
+              size: [40,40]
+              allow_upscale: yes
