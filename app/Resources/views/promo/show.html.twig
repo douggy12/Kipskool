@@ -27,7 +27,7 @@
         </tr>
         </tbody>
     </table>
-    {% if is_granted('ROLE_STAFF') %}
+    {% if is_granted('ROLE_STAFF') or (is_granted('ROLE_DELEGUE') and app.user.promo=== promo) %}
         <ul>
             <li><a href="{{ path('add_article_promo', {'promo_id': promo.id}) }}">Ecrire un article</a></li>
             <li><a href="{{ path('add_code_promo', {'promo_id': promo.id}) }}">Poster du code</a></li>

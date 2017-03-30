@@ -41,7 +41,7 @@
     </table>
 
 
-
+{% if app.user.id==perso.id %}
     <ul>
         <li>
             <a href="{{ path('articleperso_new', { 'perso_id' : perso.id} ) }}">Ajouter un article</a>
@@ -50,7 +50,7 @@
             <a href="{{ path('articleperso_new_code', {'perso_id': perso.id}) }}">Poster du code</a>
         </li>
     </ul>
-
+{% endif %}
     <table>
         <tr>
             <th>créé le :</th>
