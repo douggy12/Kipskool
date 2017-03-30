@@ -2,6 +2,7 @@
 
 namespace NewsBundle\Controller;
 
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use NewsBundle\Entity\Perso;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -51,6 +52,11 @@ class PersoController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            /** @var CacheManager */
+            $imagineCacheManager = $this->get('liip_imagine.cache.manager');
+
+            /** @var string */
+            $resolvedPath = $imagineCacheManager->getBrowserPath($perso->getAvatar(), 'avatar_mini');
 
             return $this->redirectToRoute('perso_show', array('perso_id' => $perso->getId()));
         }
