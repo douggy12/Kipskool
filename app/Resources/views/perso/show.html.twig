@@ -18,7 +18,11 @@
         <tbody>
         <tr>
             <th></th>
-            <td> <img src="{{ vich_uploader_asset(perso, 'avatar')|imagine_filter('avatar_image') }}"></td>
+            <td>
+                {% if perso.avatar != null %}
+                <img src="{{ vich_uploader_asset(perso, 'avatar')|imagine_filter('avatar_image') }}">
+                {% endif %}
+            </td>
         </tr>
         <tr>
             <th>Nom</th>
