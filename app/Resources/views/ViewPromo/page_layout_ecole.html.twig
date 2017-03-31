@@ -1,14 +1,14 @@
-{% extends 'base.html.twig'%}
+{% extends 'base.html.twig' %}
 {% block body %}
     <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}"
             type="text/javascript"
             charset="utf-8">
     </script>
 
-    <div id="page-container" class="header-fixed-top sidebar-visible-lg-full" style="width: 100%">
+    <div id="page-container" class="header-fixed-top " style="width: 100%">
 
         <!-- Main Container -->
-        <div id="main-container" style="margin-left: 0px">
+        <div id="main-container">
             <!-- Header -->
             <header class="navbar navbar-inverse navbar-fixed-top">
                 <!-- Left Header Navigation -->
@@ -96,12 +96,14 @@
                                         <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
                                              alt="image" class="img-circle"/>
                                     {% endif %}
-                                    <h3 class="sub-header text-right" >
-                                        <a href="{{ path('perso_show', {'perso_id': articleEcole.auteur.id}) }}" class="pull-left"><strong>{{ articleEcole.auteur.nom }}</strong></a>
+                                    <h3 class="sub-header text-right">
+                                        <a href="{{ path('perso_show', {'perso_id': articleEcole.auteur.id}) }}"
+                                           class="pull-left"><strong>{{ articleEcole.auteur.nom }}</strong></a>
                                         <small class="text-muted"><em>{{ articleEcole.auteur.born }}</em></small>
                                     </h3>
                                     {% if articleEcole.srcFeature !=null %}
-                                        <img src="{{ vich_uploader_asset(articleEcole.srcFeature, 'srcFeature')|imagine_filter('article_image') }}" alt="image" class="img-responsive center-block">
+                                        <img src="{{ vich_uploader_asset(articleEcole.srcFeature, 'srcFeature')|imagine_filter('article_image') }}"
+                                             alt="image" class="img-responsive center-block">
                                     {% endif %}
                                     <p>{{ articleEcole.texte }}</p>
                                 </div>
