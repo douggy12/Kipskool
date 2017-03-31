@@ -1,15 +1,14 @@
-{% extends base %}
+{% extends 'base.html.twig'%}
 {% block body %}
     <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}"
             type="text/javascript"
             charset="utf-8">
-
     </script>
 
     <div id="page-container" class="header-fixed-top sidebar-visible-lg-full" style="width: 100%">
 
         <!-- Main Container -->
-        <div id="main-container">
+        <div id="main-container" style="margin-left: 0px">
             <!-- Header -->
             <header class="navbar navbar-inverse navbar-fixed-top">
                 <!-- Left Header Navigation -->
@@ -33,29 +32,7 @@
                         </form>
                     </li>
 
-                    {% if app.user %}
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="{{ path('perso_show', {'perso_id': app.user.id}) }}">{{ app.user.username }}</a>
-                        </li>
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="{{ path('perso_edit', {'perso_id': app.user.id}) }}">Editer son profil</a>
-                        </li>
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="/logout">logout </a>
-                        </li>
-                    {% else %}
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="/login">login</a>
-                        </li>
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="/register">Register</a>
-                        </li>
-                    {% endif %}
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="{{ path('sonata_admin_dashboard') }}">interface admin</a>
-                        </li>
-                    {% endif %}
+                    {% include 'login_menu.html.twig' %}
 
                     <!-- END Search Form -->
 
@@ -64,14 +41,31 @@
                 <!-- END Left Header Navigation -->
             </header>
             <!-- END Header -->
+            <div id="page-content" class="inner-sidebar-right">
+                <!-- Inner Sidebar -->
+                <div id="page-content-sidebar">
+                    <!-- Collapsible People List -->
+                    <div id="people-nav" class="collapse navbar-collapse remove-padding">
+                        <div class="block-section">
+                            <h4 class="inner-sidebar-header">
+                                <a href="" class="btn btn-effect-ripple btn-xs btn-default pull-right"></a>
+                                Etudiants
+                            </h4>
+                            <ul class="nav-users nav-users-online">
+                                {% include 'liste_promo.html.twig' %}
+                            </ul>
+                        </div>
 
-            <div id="page-content">
+                    </div>
+                    <!-- END Collapsible People List -->
+                </div>
+                <!-- END Inner Sidebar -->
                 <!-- Static Layout Header -->
                 <div class="content-header">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="header-section">
-                                <h1>Static</h1>
+                                <h1>{{ articleEcole.ecole.nom }}</h1>
                             </div>
                         </div>
                         <div class="col-sm-6 hidden-xs">
@@ -93,16 +87,24 @@
                     </div>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3">
-                            <article>
+                            <article style="min-height: 800px">
                                 <div class="text-center">
-                                    <img src="img/placeholders/avatars/avatar9.jpg" alt="image" class="img-circle">
-                                    <h3 class="sub-header text-right">
-                                        <a href="javascript:void(0)" class="pull-left"><strong>{{ articleEcole.auteur.nom }}</strong></a>
+                                    {% if articleEcole.auteur.avatar != null %}
+                                        <img src="{{ vich_uploader_asset(articleEcole.auteur,'avatar')|imagine_filter('avatar_mini') }}"
+                                             alt="image" class="img-circle"/>
+                                    {% else %}
+                                        <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
+                                             alt="image" class="img-circle"/>
+                                    {% endif %}
+                                    <h3 class="sub-header text-right" >
+                                        <a href="{{ path('perso_show', {'perso_id': articleEcole.auteur.id}) }}" class="pull-left"><strong>{{ articleEcole.auteur.nom }}</strong></a>
                                         <small class="text-muted"><em>{{ articleEcole.auteur.born }}</em></small>
                                     </h3>
-                                    <p></p>
+                                    {% if articleEcole.srcFeature !=null %}
+                                        <img src="{{ vich_uploader_asset(articleEcole.srcFeature, 'srcFeature')|imagine_filter('article_image') }}" alt="image" class="img-responsive center-block">
+                                    {% endif %}
+                                    <p>{{ articleEcole.texte }}</p>
                                 </div>
-
                             </article>
                         </div>
                     </div>

@@ -11,7 +11,7 @@
     <div id="page-container" class="header-fixed-top sidebar-visible-lg-full" style="width: 100%">
 
         <!-- Main Container -->
-        <div id="main-container">
+        <div id="main-container" style="margin-left: 0px">
             <!-- Header -->
             <header class="navbar navbar-inverse navbar-fixed-top">
                 <!-- Left Header Navigation -->
@@ -35,30 +35,7 @@
                                    placeholder="Search..">
                         </form>
                     </li>
-
-                    {% if app.user %}
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="{{ path('perso_show', {'perso_id': app.user.id}) }}">{{ app.user.username }}</a>
-                        </li>
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="{{ path('perso_edit', {'perso_id': app.user.id}) }}">Editer son profil</a>
-                        </li>
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="/logout">logout </a>
-                        </li>
-                    {% else %}
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="/login">login</a>
-                        </li>
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="/register">Register</a>
-                        </li>
-                    {% endif %}
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="{{ path('sonata_admin_dashboard') }}">interface admin</a>
-                        </li>
-                    {% endif %}
+                    {% include 'login_menu.html.twig' %}
                 </ul>
                 <!-- END Left Header Navigation -->
             </header>
@@ -76,20 +53,7 @@
                                 Etudiants
                             </h4>
                             <ul class="nav-users nav-users-online">
-                                {% for promo in ecole.promos %}
-                                    <li>
-                                        <a href="{{ path('promo_show', {'promo_id': promo.id}) }}">
-                                            {% if promo.avatar != null %}
-                                                <img src="{{ vich_uploader_asset(promo,'avatar')|imagine_filter('avatar_mini') }}"
-                                                     alt="image" class="nav-users-avatar"/>
-                                            {% else %}
-                                                <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
-                                                     alt="image" class="nav-users-avatar"/>
-                                            {% endif %}
-                                            <span class="nav-users-heading">{{ promo.nom }} </span>
-                                        </a>
-                                    </li>
-                                {% endfor %}
+                                {% include 'liste_promo.html.twig' %}
                             </ul>
                         </div>
 
