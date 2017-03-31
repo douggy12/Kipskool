@@ -19,12 +19,8 @@
 
                     <!-- Header Link -->
                     <li class="hidden-xs animation-fadeInQuick">
-                        <a href="{{ path('ecole_show', {'ecole_id': promo.ecole.id}) }}"><strong>{{ promo.ecole.nom }}</strong></a>
+                        <a href="{{ path('ecole_show', {'ecole_id': ecole.id}) }}"><strong>{{ ecole.nom }}</strong></a>
                     </li>
-                    <li class="hidden-xs animation-fadeInQuick">
-                        <a href="page_promo.html.twig"><strong>{{ promo.nom }}</strong></a>
-                    </li>
-
                     <!-- END Header Link -->
                 </ul>
 
@@ -82,7 +78,7 @@
                             <div class="header-section">
                                 <ul class="breadcrumb breadcrumb-top">
                                     <li>Article</li>
-                                    <li><a href="">{{ article.nom }}</a></li>
+                                    <li><a href="">{{ articleEcole.titre }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -93,7 +89,7 @@
                 <!-- Demo Article -->
                 <div class="block full">
                     <div class="block-title text-center">
-                        <h2>Demo Article</h2>
+                        <h2>{{ articleEcole.titre }}</h2>
                     </div>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3">
@@ -101,8 +97,8 @@
                                 <div class="text-center">
                                     <img src="img/placeholders/avatars/avatar9.jpg" alt="image" class="img-circle">
                                     <h3 class="sub-header text-right">
-                                        <a href="javascript:void(0)" class="pull-left"><strong>{{ article.autheur.name }}</strong></a>
-                                        <small class="text-muted"><em>{{ article.autheur.born }}</em></small>
+                                        <a href="javascript:void(0)" class="pull-left"><strong>{{ articleEcole.auteur.nom }}</strong></a>
+                                        <small class="text-muted"><em>{{ articleEcole.auteur.born }}</em></small>
                                     </h3>
                                     <p></p>
                                 </div>
