@@ -5,3 +5,4 @@ NewsBundle\Entity\Article_promo:
     titre: <realText($maxNbChars = 20)>
     texte: <realText($maxNbChars = 400)>
     auteur: '@perso*'
+    srcFeature: <articleImg()>

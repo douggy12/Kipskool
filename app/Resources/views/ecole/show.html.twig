@@ -60,7 +60,8 @@
             <tr>
                 <td>
                     {% if article.srcFeature != null %}
-                        <img src="{{ vich_uploader_asset(article, 'srcFeature')|imagine_filter('article_thumb') }}" />
+                        {#<img src="{{ vich_uploader_asset(article, 'srcFeature')|imagine_filter('article_thumb') }}" />#}
+                       {{ article.srcFeature }}
                     {% endif %}
                 </td>
                 <td>

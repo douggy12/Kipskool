@@ -63,7 +63,7 @@ class Article_promo
 
     /**
      * @var File
-     * @Vich\UploadableField(mapping="article_image",fileNameProperty="imageName")
+     * @Vich\UploadableField(mapping="articlePerso_image",fileNameProperty="imageName")
      * @ORM\Column(name="src_feature", type="string", length=255, nullable=true)
      */
     private $srcFeature;
@@ -224,6 +224,7 @@ class Article_promo
     public function setSrcFeature(File $image = null)
     {
         $this->srcFeature = $image;
+        $this->setImageName($image->getFilename());
 
         if ($image) {
             // It is required that at least one field changes if you are using doctrine

@@ -12,7 +12,7 @@ class ImageProvider
 
     }
 
-    public static function articlePersoImg(){
-        return new File(__DIR__.'\..\..\..\web\images\articleperso\article'. rand(1,49) .'.jpg');
+    public static function articleImg(){
+        return new File(__DIR__.'\..\..\..\web\images\articleperso\article'. rand(1,56) .'.jpg');
     }
 }
