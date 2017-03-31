@@ -15,17 +15,24 @@ class PromoImageController extends Controller
     public function load()
     {
         $em = $this->getDoctrine()->getManager();
-        $image1 = new File('C:\Users\dmett\PhpstormProjects\Kipskool\web\images\avatar\jmqdl2016.jpg');
+        $imagePool = array(
+            new File('C:\Users\dmett\PhpstormProjects\Kipskool\web\images\avatar\jmqdl2016.jpg'),
+            new File('C:\Users\dmett\PhpstormProjects\Kipskool\web\images\avatar\IT Start LM 01 2016.jpg'),
+            new File('C:\Users\dmett\PhpstormProjects\Kipskool\web\images\avatar\CDPN LM 02 2016.jpg'),
+            new File('C:\Users\dmett\PhpstormProjects\Kipskool\web\images\avatar\adm2016.jpg'),
+            new File('C:\Users\dmett\PhpstormProjects\Kipskool\web\images\avatar\Staff.jpg'),
+
+        );
 
         $promos = $em->getRepository('NewsBundle:Promo')->findAll();
 
-        foreach ($promos as $promo)
-        {
-            $promo->setAvatar($image1);
-            $promo->setAvatarName('jmqdl2016.jpg');
-            $em->persist($promo);
-            $em->flush();
+        foreach ($promos as $id => $promo) {
+            $promo->setAvatar($imagePool[$id]);
+            $promo->setAvatarName($imagePool[$id]->getFilename());
+
+
         }
+        $em->flush();
 
         return new Response("loading OK !");
     }

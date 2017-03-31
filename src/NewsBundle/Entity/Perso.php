@@ -295,6 +295,7 @@ class Perso extends BaseUser
     public function setAvatar(File $image = null)
     {
         $this->avatar = $image;
+        $this->setAvatarName($image->getFilename());
 
 
 
