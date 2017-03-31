@@ -56,7 +56,7 @@ class articleEcole
 
     /**
      * @var File
-     * @Vich\UploadableField(mapping="article_image",fileNameProperty="imageName")
+     * @Vich\UploadableField(mapping="articlePerso_image",fileNameProperty="imageName")
      * @ORM\Column(name="srcFeature", type="string", length=255,nullable=true)
      */
     private $srcFeature;

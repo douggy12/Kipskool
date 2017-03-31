@@ -108,7 +108,7 @@ vich_uploader:
         articlePerso_image:
             uri_prefix:         /images/articleperso
             upload_destination: '%kernel.root_dir%/../web/images/articleperso'
-            inject_on_load: true
+
 
         perso_image:
             uri_prefix:         /images/avatar
