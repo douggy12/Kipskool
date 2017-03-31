@@ -142,7 +142,7 @@ class Promo
 
     function __toString()
     {
-     return $this->nom;
+        return $this->nom;
     }
 
     /**
@@ -184,16 +184,18 @@ class Promo
      */
     public function validate(ExecutionContextInterface $context)
     {
-        if (! in_array($this->avatar->getMimeType(), array(
-            'image/jpeg',
-            'image/gif',
-            'image/png'
-        ))) {
-            $context
-                ->buildViolation('Wrong file type (jpg,gif,png)')
-                ->atPath('fileName')
-                ->addViolation()
-            ;
+        if ($this->avatar != null) {
+            if (!in_array($this->avatar->getMimeType(), array(
+                'image/jpeg',
+                'image/gif',
+                'image/png'
+            ))
+            ) {
+                $context
+                    ->buildViolation('Wrong file type (jpg,gif,png)')
+                    ->atPath('fileName')
+                    ->addViolation();
+            }
         }
     }
 
@@ -219,7 +221,6 @@ class Promo
 
     /**
      * Get avatar
-
      * @return File|null
      */
     public function getAvatar()
@@ -245,9 +246,6 @@ class Promo
 
         return $this;
     }
-
-
-
 
 
 }

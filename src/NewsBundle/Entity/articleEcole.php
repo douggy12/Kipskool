@@ -95,7 +95,7 @@ class articleEcole
      */
     public function validate(ExecutionContextInterface $context)
     {
-        if ($this->srcFeature == null){
+        if ($this->srcFeature != null){
 
 
             if (! in_array($this->srcFeature->getMimeType(), array(
