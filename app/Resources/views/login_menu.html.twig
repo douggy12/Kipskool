@@ -10,11 +10,11 @@
     </li>
 {% else %}
     <li class="hidden-xs animation-fadeInQuick">
-        <a href="/login">login</a>
+        <a href="/{{ path('fos_user_security_login') }}">login</a>
     </li>
-    <li class="hidden-xs animation-fadeInQuick">
-        <a href="/register">Register</a>
-    </li>
+    {#<li class="hidden-xs animation-fadeInQuick">#}
+        {#<a href="/{{ path('fos_user_registration_register') }}">Register</a>#}
+    {#</li>#}
 {% endif %}
 
 {% if is_granted('ROLE_ADMIN') %}

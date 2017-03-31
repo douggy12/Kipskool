@@ -74,6 +74,13 @@
                     <div class="header-section">
                         <div class="row">
                             <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
+                                {% if perso.avatar != null %}
+                                    <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini') }}"
+                                         alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
+                                {% else %}
+                                    <img src="{{ asset('media/cache/avatar_mini/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
+                                         alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
+                                {% endif %}
                                 <h1>{{ perso.nom }}</h1>
                                 <h2 class="text-light-op"> {{ perso.prenom }}</h2>
                                 <h2 class="text-light-op">{{ perso.born }}</h2>
@@ -83,7 +90,7 @@
                     </div>
                     {% if perso.avatar != null %}
                         <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini') }}"
-                             alt="image" class="nav-users-avatar"/>
+                             alt="Header Image"/>
                     {% else %}
                         <img src="{{ asset('media/cache/avatar_mini/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
                              alt="Header Image"/>
@@ -107,7 +114,7 @@
                 <!-- Social Net Content -->
                 <div class="row">
                     <!-- Latest News -->
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" style="min-height: 900px">
                         <!-- Story -->
                         {% for article_perso in perso.articles %}
                             <div class="widget">

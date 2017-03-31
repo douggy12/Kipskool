@@ -69,6 +69,13 @@
                     <div class="header-section">
                         <div class="row">
                             <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
+                                {% if ecole.avatar != null %}
+                                    <img src="{{ vich_uploader_asset(ecole,'avatar')|imagine_filter('avatar_mini') }}"
+                                         alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
+                                {% else %}
+                                    <img src="{{ asset('img/LOGO_IMIE_res.jpg')|imagine_filter('avatar_mini') }}"
+                                         alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
+                                {% endif %}
                                 <h1>{{ ecole.nom }}</h1>
                                 <h2 class="text-light-op"> {{ ecole.description }}</h2>
                             </div>
@@ -77,7 +84,7 @@
                     </div>
                     {% if ecole.avatar != null %}
                         <img src="{{ vich_uploader_asset(ecole,'avatar')|imagine_filter('avatar_mini') }}"
-                             alt="image" class="nav-users-avatar"/>
+                             alt="Header Image"/>
                     {% else %}
                         <img src="{{ asset('img/LOGO_IMIE_res.jpg')|imagine_filter('avatar_mini') }}"
                              alt="Header Image"/>
