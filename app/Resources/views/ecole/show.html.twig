@@ -54,6 +54,7 @@
             <th>Extrait</th>
             <th>Créé</th>
             <th>Auteur</th>
+            <th>Commentaires</th>
 
         </tr>
         {% for article in ecole.articles %}
@@ -70,6 +71,7 @@
                 <td>{{ article.texte|raccourci }}</td>
                 <td>{{ article.createdAt|date("d/m/Y") }}</td>
                 <td><a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"> {{ article.auteur.nom }}</a></td>
+                <td>{{ article.commentaires.count }}</td>
             </tr>
         {% endfor %}
     </table>
