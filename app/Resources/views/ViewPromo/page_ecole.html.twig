@@ -5,13 +5,12 @@
     <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}"
             type="text/javascript"
             charset="utf-8">
-
     </script>
 
-    <div id="page-container" class="header-fixed-top sidebar-visible-lg-full" style="width: 100%">
+    <div id="page-container" class="header-fixed-top" style="width: 100%">
 
         <!-- Main Container -->
-        <div id="main-container" style="margin-left: 0px">
+        <div id="main-container" >
             <!-- Header -->
             <header class="navbar navbar-inverse navbar-fixed-top">
                 <!-- Left Header Navigation -->
@@ -50,7 +49,7 @@
                         <div class="block-section">
                             <h4 class="inner-sidebar-header">
                                 <a href="" class="btn btn-effect-ripple btn-xs btn-default pull-right"></a>
-                                Etudiants
+                                Promo
                             </h4>
                             <ul class="nav-users nav-users-online">
                                 {% include 'liste_promo.html.twig' %}
