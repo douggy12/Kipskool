@@ -24,7 +24,12 @@
             </tr>
             <tr>
                 <th>Texte</th>
-                <td>{{ articleEcole.texte }}</td>
+                <td>
+                    {% if articleEcole.srcFeature != 'article' %}
+                        <img src="{{ vich_uploader_asset(articleEcole, 'srcFeature')|imagine_filter('article_image') }}">
+                    {% endif %}
+                    {{ articleEcole.texte }}
+                </td>
             </tr>
             <tr>
                 <th>Srcfeature</th>

@@ -2,12 +2,16 @@
 
 namespace NewsBundle\Controller;
 
+use Liip\ImagineBundle\Binary\BinaryInterface;
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use NewsBundle\Entity\Perso;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Perso controller.
@@ -50,6 +54,11 @@ class PersoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            /**
+             * save a mini version of the avatar image on upload
+             */
+            $this->container->get('liip_imagine.controller')->filterAction($request, 'images/avatar/'.$perso->getAvatarName(), 'avatar_mini');
+
             return $this->redirectToRoute('perso_show', array('perso_id' => $perso->getId()));
         }
 
@@ -59,5 +68,7 @@ class PersoController extends Controller
 
         ));
     }
+
+
 
 }

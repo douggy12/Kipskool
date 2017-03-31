@@ -35,7 +35,12 @@
         {% else %}
             <tr>
                 <th>Texte</th>
-                <td>{{ article_promo.texte }}</td>
+                <td>
+                    {% if article_promo.srcFeature != null %}
+                        <img src="{{ vich_uploader_asset(article_promo, 'srcFeature')|imagine_filter('article_image') }}">
+                    {% endif %}
+                    {{ article_promo.texte }}
+                </td>
             </tr>
         {% endif %}
         <tr>

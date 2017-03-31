@@ -36,12 +36,18 @@
     {% endif %}
     <table>
         <tr>
+            <th></th>
             <th>Titre</th>
             <th>Crée</th>
             <th>Texte</th>
         </tr>
         {% for article_promo in promo.articles_promo %}
             <tr>
+                <td>
+                    {% if article_promo.srcFeature != null %}
+                        <img src="{{ vich_uploader_asset(article_promo, 'srcFeature')|imagine_filter('article_thumb') }}" />
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{ path('article_promo_show', {'promo_id': promo.id,'article_promo_id': article_promo.id}) }}">{{ article_promo.titre }}</a>
                 </td>

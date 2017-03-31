@@ -98,6 +98,9 @@ class Article_promo
      */
     public function validate(ExecutionContextInterface $context)
     {
+        if ($this->srcFeature == null){
+
+
         if (! in_array($this->srcFeature->getMimeType(), array(
             'image/jpeg',
             'image/gif',
@@ -108,6 +111,7 @@ class Article_promo
                 ->atPath('fileName')
                 ->addViolation()
             ;
+        }
         }
     }
 

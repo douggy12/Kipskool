@@ -276,7 +276,7 @@ class Perso extends BaseUser
             'image/jpeg',
             'image/gif',
             'image/png'
-        ))) {
+        ))or $this->getAvatar() == null) {
             $context
                 ->buildViolation('Wrong file type (jpg,gif,png)')
                 ->atPath('fileName')
@@ -295,12 +295,17 @@ class Perso extends BaseUser
     public function setAvatar(File $image = null)
     {
         $this->avatar = $image;
+        $this->setAvatarName($image->getFilename());
+
+
 
         if ($image) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
         }
+
+
 
         return $this;
     }
