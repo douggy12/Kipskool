@@ -34,6 +34,7 @@ class Article_promoController extends Controller
         $article_promo = new Article_promo();
         $article_promo->setPromo($promo);
         $article_promo->setAuteur($this->getUser());
+        $article_promo->setType('article');
         $form = $this->createForm('NewsBundle\Form\Article_promoType', $article_promo);
         $form->handleRequest($request);
 
