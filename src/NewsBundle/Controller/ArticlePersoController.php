@@ -127,9 +127,10 @@ class ArticlePersoController extends Controller
             ));
         }
 
-        return $this->render('articleperso/show.html.twig', array(
+        return $this->render(':ViewPromo:page_layout_perso.html.twig', array(
             'article' => $articlePerso,
-            'perso' => $articlePerso->getPerso(),
+            'perso'=> $articlePerso->getPerso(),
+            'promos' => $articlePerso->getPerso()->getPromo(),
             'commentaireArticlePerso' => $commentaireArticlePerso,
             'edit_form' => $form->createView(),
 
