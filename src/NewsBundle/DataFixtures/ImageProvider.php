@@ -4,10 +4,15 @@ namespace NewsBundle\DataFixtures;
 
 use Symfony\Component\HttpFoundation\File\File;
 
-class PortraitProvider
+class ImageProvider
 {
     public static function portrait()
     {
-        return new File('C:\Users\dmett\PhpstormProjects\Kipskool\web\images\avatar\portrait'. rand(1,87) .'.jpg');
+        return new File(__DIR__.'\..\..\..\web\images\avatar\portrait'. rand(1,87) .'.jpg');
+
+    }
+
+    public static function articlePersoImg(){
+        return new File(__DIR__.'\..\..\..\web\images\articleperso\article'. rand(1,49) .'.jpg');
     }
 }

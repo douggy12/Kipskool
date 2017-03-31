@@ -50,7 +50,7 @@ class ArticlePerso
 
     /**
      * @var File
-     * @Vich\UploadableField(mapping="articlePerso_image",fileNameProperty="imageName")
+     * @Vich\UploadableField(mapping="article_image",fileNameProperty="imageName")
      * @ORM\Column(name="src_feature", type="string", length=255, nullable=true)
      */
     private $srcFeature;

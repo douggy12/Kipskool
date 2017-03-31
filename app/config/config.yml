@@ -105,9 +105,9 @@ sonata_admin:
 vich_uploader:
     db_driver: orm # or mongodb or propel or phpcr
     mappings:
-        articlePerso_image:
-            uri_prefix:         /images/articleperso
-            upload_destination: '%kernel.root_dir%/../web/images/articleperso'
+        article_image:
+            uri_prefix:         /images/article
+            upload_destination: '%kernel.root_dir%/../web/images/article'
         perso_image:
             uri_prefix:         /images/avatar
             upload_destination: '%kernel.root_dir%/../web/images/avatar'

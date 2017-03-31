@@ -55,7 +55,7 @@ class articleEcole
 
     /**
      * @var string
-     *
+     * @Vich\UploadableField(mapping="article_image",fileNameProperty="imageName")
      * @ORM\Column(name="srcFeature", type="string", length=255,nullable=true)
      */
     private $srcFeature;
@@ -95,7 +95,7 @@ class articleEcole
      */
     public function validate(ExecutionContextInterface $context)
     {
-        if ($this->srcFeature == null){
+        if ($this->srcFeature != null){
 
 
             if (! in_array($this->srcFeature->getMimeType(), array(

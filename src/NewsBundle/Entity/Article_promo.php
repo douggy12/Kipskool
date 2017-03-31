@@ -63,7 +63,7 @@ class Article_promo
 
     /**
      * @var File
-     * @Vich\UploadableField(mapping="articlePerso_image",fileNameProperty="imageName")
+     * @Vich\UploadableField(mapping="article_image",fileNameProperty="imageName")
      * @ORM\Column(name="src_feature", type="string", length=255, nullable=true)
      */
     private $srcFeature;
@@ -98,7 +98,7 @@ class Article_promo
      */
     public function validate(ExecutionContextInterface $context)
     {
-        if ($this->srcFeature == null){
+        if ($this->srcFeature != null){
 
 
         if (! in_array($this->srcFeature->getMimeType(), array(
