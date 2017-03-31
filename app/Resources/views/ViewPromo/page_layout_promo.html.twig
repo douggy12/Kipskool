@@ -21,13 +21,10 @@
                     <a href="{{ path('ecole_index') }}"><strong>Index</strong></a>
                 </li>
                 <li class="hidden-xs animation-fadeInQuick">
-                    <a href="{{ path('ecole_show', {'ecole_id': promos|first.ecole.id}) }}"><strong>{{ promos|first.ecole.nom }}</strong></a>
+                    <a href="{{ path('ecole_show', {'ecole_id': promo.ecole.id}) }}"><strong>{{ promo.ecole.nom }}</strong></a>
                 </li>
                 <li class="hidden-xs animation-fadeInQuick">
-                    <a href="{{ path('promo_show', {'promo_id': promos|first.id}) }}"><strong>{{ promos|first.nom }}</strong></a>
-                </li>
-                 <li class="hidden-xs animation-fadeInQuick">
-                    <a href="{{ path('perso_show', {'perso_id': article.perso.id}) }}"><strong>{{ article.perso.nom }}</strong></a>
+                    <a href="{{ path('promo_show', {'promo_id': promo.id ) }}"><strong>{{ promo.nom }}</strong></a>
                 </li>
                 <!-- END Header Link -->
             </ul>
@@ -57,7 +54,6 @@
                             Promo
                         </h4>
                         <ul class="nav-users nav-users-online">
-                            {% for promo in promos %}
                             {% for perso in promo.persos %}
                             <li>
                             <a href="">
@@ -85,14 +81,14 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="header-section">
-                            <h1>{{ article.perso.nom }}</h1>
+                            <h1>{{ article_promo.auteur.nom }}</h1>
                         </div>
                     </div>
                     <div class="col-sm-6 hidden-xs">
                         <div class="header-section">
                             <ul class="breadcrumb breadcrumb-top">
-                                <li>Article</li>
-                                <li>{{ article.titre }}</li>
+                                <li>article_promo</li>
+                                <li>{{ article_promo.titre }}</li>
                             </ul>
                         </div>
                     </div>
@@ -100,17 +96,17 @@
             </div>
             <!-- END Static Layout Header -->
 
-            <!-- Demo Article -->
+            <!-- Demo article_promo -->
             <div class="block full">
                 <div class="block-title text-center">
-                    <h2>{{ article.titre }}</h2>
+                    <h2>{{ article_promo.titre }}</h2>
                 </div>
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3">
-                        <article style="min-height: 800px">
+                        <article_promo style="min-height: 800px">
                             <div class="text-center">
-                                {% if article.auteur.avatar != null %}
-                                    <img src="{{ vich_uploader_asset(article.auteur,'avatar')|imagine_filter('avatar_mini') }}"
+                                {% if article_promo.auteur.avatar != null %}
+                                    <img src="{{ vich_uploader_asset(article_promo.auteur,'avatar')|imagine_filter('avatar_mini') }}"
                                          alt="image" class="img-circle"/>
                                 {% else %}
                                     <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
@@ -118,38 +114,38 @@
                                 {% endif %}
 
                                 <h3 class="sub-header text-right">
-                                    <a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"
-                                       class="pull-left"><strong>{{ article.auteur.nom }}</strong></a>
-                                    <small class="text-muted"><em>{{ article.createdAt|date('d-m-Y') }}</em></small>
+                                    <a href="{{ path('perso_show', {'perso_id': article_promo.auteur.id}) }}"
+                                       class="pull-left"><strong>{{ article_promo.auteur.nom }}</strong></a>
+                                    <small class="text-muted"><em>{{ article_promo.createdAt|date('d-m-Y') }}</em></small>
                                 </h3>
 
-                                {% if article.srcFeature !=null %}
-                                    <img src="{{ vich_uploader_asset(article.srcFeature, 'srcFeature')|imagine_filter('article_image') }}"
+                                {% if article_promo.srcFeature !=null %}
+                                    <img src="{{ vich_uploader_asset(article_promo.srcFeature, 'srcFeature')|imagine_filter('article_promo_image') }}"
                                          alt="image" class="img-responsive center-block">
                                 {% endif %}
 
-                                {% if article.type != 'article' %}
+                                {% if article_promo.type != 'article_promo' %}
                                     <p>
                                     <div id="editor{{ loop.index }}"
-                                         style="width: 500px; height: 100px">{{ article.texte }}</div>
+                                         style="width: 500px; height: 100px">{{ article_promo.texte }}</div>
                                     </p>
                                     <script>
 
                                         var editor{{ loop.index }} = ace.edit("editor{{ loop.index }}");
                                         editor{{ loop.index }}.setTheme("ace/theme/monokai");
-                                        editor{{ loop.index }}.getSession().setMode("ace/mode/{{ article.type }}");
+                                        editor{{ loop.index }}.getSession().setMode("ace/mode/{{ article_promo.type }}");
                                         editor{{ loop.index }}.setReadOnly(true);  // false to make it editable
 
                                     </script>
                                 {% else %}
-                                    <p>{{ article.texte }}</p>
+                                    <p>{{ article_promo.texte }}</p>
                                 {% endif %}
                             </div>
-                        </article>
+                        </article_promo>
                     </div>
                 </div>
             </div>
-            <!-- END Demo Article -->
+            <!-- END Demo article_promo -->
         </div>
         <!-- END Page Content -->
         {% endblock %}
@@ -158,7 +154,7 @@
             <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}" type="text/javascript"
                     charset="utf-8"></script>
-            {% if article.type != "article" %}
+            {% if article_promo.type != "article_promo" %}
             <script>
                 var editor = ace.edit("editor");
                 editor.setTheme("ace/theme/monokai");
@@ -167,8 +163,8 @@
             </script>
             {% endif %}
             <script language="JavaScript" type="text/javascript">
-                var article = {{ article.id }};
-                var typeArticle = "{{ article.className }}";
+                var article_promo = {{ article_promo.id }};
+                var typearticle_promo = "{{ article_promo.className }}";
             </script>
 
 
