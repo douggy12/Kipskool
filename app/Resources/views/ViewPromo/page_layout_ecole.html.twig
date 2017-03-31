@@ -96,17 +96,18 @@
                                     <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
                                          alt="image" class="img-circle"/>
                                 {% endif %}
-                                    <h3 class="sub-header text-right">
-                                        <a href="{{ path('perso_show', {'perso_id': articleEcole.auteur.id}) }}"
-                                           class="pull-left"><strong>{{ articleEcole.auteur.nom }}</strong></a>
-                                        <small class="text-muted"><em>{{ article.createdAt|date('d-m-Y') }}</em></small>
-                                    </h3>
+                                <h3 class="sub-header text-right">
+                                    <a href="{{ path('perso_show', {'perso_id': articleEcole.auteur.id}) }}"
+                                       class="pull-left"><strong>{{ articleEcole.auteur.nom }}</strong></a>
+                                    <small class="text-muted"><em>{{ article.createdAt|date('d-m-Y') }}</em></small>
+                                </h3>
                                 {% if articleEcole.srcFeature !=null %}
                                     <img src="{{ vich_uploader_asset(articleEcole.srcFeature, 'srcFeature')|imagine_filter('article_image') }}"
                                          alt="image" class="img-responsive center-block">
                                 {% endif %}
                                 <p>{{ articleEcole.texte }}</p>
                             </div>
+                            {% include ':commentaireAjax:index.html.twig' %}
                         </article>
                     </div>
                 </div>

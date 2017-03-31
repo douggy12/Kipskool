@@ -32,7 +32,7 @@ function showList(commentaires) {
          }
 
         $('#commentaires_list').append(
-            '<tr><td>' + commentaire.createdAt + '</td><td><img src=" '+ avatar +' "/> ' + commentaire.auteur + '</td><td>' + commentaire.texte + '</td><td><input type="button" id="delCom" value="Supprimer" onclick="delCom('+ commentaire.id +')"></td></tr>'
+            '<a class="pull-left"><img src="'+ avatar +'" alt="Avatar" class="img-circle"> </a><div class="media-body"><span class="text-muted"><small><em>' + commentaire.createdAt + '</em></small></span><strong>' + commentaire.auteur + '</strong> ' + commentaire.texte + '<input type="button" id="delCom" value="Supprimer" onclick="delCom('+ commentaire.id +')"></div>'
         );
 
     });

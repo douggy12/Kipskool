@@ -60,7 +60,7 @@
                             {% for promo in promos %}
                             {% for perso in promo.persos %}
                             <li>
-                            <a href="">
+                            <a href="{{ path('perso_show', {'perso_id': perso.id}) }}">
                             {% if perso.avatar != null %}
                             <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini') }}"
                             alt="image" class="nav-users-avatar"/>
@@ -145,6 +145,18 @@
                                     <p>{{ article.texte }}</p>
                                 {% endif %}
                             </div>
+                            <div class="widget-content themed-background-muted">
+                            <ul class="media-list push">
+                                <li class="media">
+                                {% include ':commentaireAjax:index.html.twig' %}
+
+
+
+                                    </div>
+                                </li>
+                            </ul>
+                            </div>
+
                         </article>
                     </div>
                 </div>
