@@ -22,7 +22,10 @@ function getList() {
 }
 function showList(commentaires) {
     $('#commentaires_list').html('');
+
     $.each(commentaires, function (index, commentaire) {
+        comDate = new Date(commentaire.createdAt*1000);
+        comDate = comDate.getDay()+'/'+comDate.getMonth()+'/'+comDate.getFullYear()+' '+comDate.getHours()+ ':'+comDate.getMinutes();
 
          if(commentaire.avatar != null){
          avatar = '../media/cache/avatar_mini/images/avatar/'+commentaire.avatarName;
@@ -32,7 +35,7 @@ function showList(commentaires) {
          }
 
         $('#commentaires_list').append(
-            '<tr><td>' + commentaire.createdAt + '</td><td><img src=" '+ avatar +' "/> ' + commentaire.auteur + '</td><td>' + commentaire.texte + '</td><td><input type="button" id="delCom" value="Supprimer" onclick="delCom('+ commentaire.id +')"></td></tr>'
+            '<tr><td>' + comDate + '</td><td><img src=" '+ avatar +' "/> ' + commentaire.auteur + '</td><td>' + commentaire.texte + '</td><td><input type="button" id="delCom" value="Supprimer" onclick="delCom('+ commentaire.id +')"></td></tr>'
         );
 
     });
