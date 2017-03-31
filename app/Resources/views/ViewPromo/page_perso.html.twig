@@ -5,12 +5,13 @@
     <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}"
             type="text/javascript"
             charset="utf-8">
+
     </script>
 
     <div id="page-container" class="header-fixed-top" style="width: 100%">
 
         <!-- Main Container -->
-        <div id="main-container" >
+        <div id="main-container" style="margin-left: 0px">
             <!-- Header -->
             <header class="navbar navbar-inverse navbar-fixed-top">
                 <!-- Left Header Navigation -->
@@ -23,7 +24,10 @@
                         <a href="{{ path('ecole_index')}}"><strong>Index</strong></a>
                     </li>
                     <li class="hidden-xs animation-fadeInQuick">
-                        <a href="{{ path('ecole_show', {'ecole_id': ecole.id}) }}"><strong>{{ ecole.nom }}</strong></a>
+                        <a href="{{ path('ecole_show', {'ecole_id': promo.ecole.id}) }}"><strong>{{ promo.ecole.nom }}</strong></a>
+                    </li>
+                    <li class="hidden-xs animation-fadeInQuick">
+                        <a href="page_promo.html.twig"><strong>{{ promo.nom }}</strong></a>
                     </li>
 
                     <!-- END Header Link -->
@@ -38,6 +42,7 @@
                         </form>
                     </li>
                     {% include 'login_menu.html.twig' %}
+                    <!-- END Search Form -->
                 </ul>
                 <!-- END Left Header Navigation -->
             </header>
@@ -52,10 +57,10 @@
                         <div class="block-section">
                             <h4 class="inner-sidebar-header">
                                 <a href="" class="btn btn-effect-ripple btn-xs btn-default pull-right"></a>
-                                Promo
+                                Etudiants
                             </h4>
                             <ul class="nav-users nav-users-online">
-                                {% include 'liste_promo.html.twig' %}
+                                {% include 'liste_etudiant_promo.html.twig' %}
                             </ul>
                         </div>
 
@@ -69,28 +74,33 @@
                     <div class="header-section">
                         <div class="row">
                             <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
-                                <h1>{{ ecole.nom }}</h1>
-                                <h2 class="text-light-op"> {{ ecole.description }}</h2>
+                                <h1>{{ perso.nom }}</h1>
+                                <h2 class="text-light-op"> {{ perso.prenom }}</h2>
+                                <h2 class="text-light-op">{{ perso.born }}</h2>
                             </div>
 
                         </div>
                     </div>
-                    {% if ecole.avatar != null %}
-                        <img src="{{ vich_uploader_asset(ecole,'avatar')|imagine_filter('avatar_mini') }}"
+                    {% if perso.avatar != null %}
+                        <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini') }}"
                              alt="image" class="nav-users-avatar"/>
                     {% else %}
-                        <img src="{{ asset('img/LOGO_IMIE_res.jpg')|imagine_filter('avatar_mini') }}"
+                        <img src="{{ asset('media/cache/avatar_mini/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
                              alt="Header Image"/>
                     {% endif %}
                 </div>
                 <!-- END Social Net Header -->
 
 
-                {% if is_granted('ROLE_STAFF') or (is_granted('ROLE_DELEGUE') and app.user.ecole == ecole) %}
+                {% if app.user == perso %}
                     <ul class="nav navbar-nav-custom">
                         <li class="hidden-xs animation-fadeInQuick">
-                            <a href="{{ path('addArticle', {'ecole_id': ecole.id}) }}" class="">Ecrire un article</a>
+                            <a href="{{ path('articleperso_new', {'perso_id': perso.id}) }}" class="">Ecrire un article</a>
                         </li>
+                        <li class="hidden-xs animation-fadeInQuick">
+                            <a href="{{ path('articleperso_new_code', {'perso_id': perso.id}) }}">Poster du code</a>
+                        </li>
+
                     </ul>
                 {% endif %}
 
@@ -99,20 +109,35 @@
                     <!-- Latest News -->
                     <div class="col-lg-12">
                         <!-- Story -->
-                        {% for article_ecole in ecole.articles %}
+                        {% for article_perso in perso.articles %}
                             <div class="widget">
 
                                 <div class="widget-content widget-content-mini themed-background-dark text-light-op">
-                                    <span class="pull-right text-muted">{{ article_ecole.createdAt|date("d/m/Y") }}</span>
-                                    <a href="{{ path('perso_show', {'perso_id': article_ecole.auteur.id}) }}"
-                                       class="text-light">{{ article_ecole.auteur }}</a>
+                                    <span class="pull-right text-muted">{{ article_perso.createdAt|date("d/m/Y") }}</span>
+                                    <a href="{{ path('perso_show', {'perso_id': article_perso.auteur.id}) }}"
+                                       class="text-light">{{ article_perso.auteur }}</a>
                                     posted an Article
                                 </div>
                                 <div class="widget-content">
                                     <h3>
-                                        <a href="{{ path('articleecole_show', {'article_ecole_id': article_ecole.id}) }}">{{ article_ecole.titre }}</a>
+                                        <a href="{{ path('articleperso_show', {'article_perso_id': article_perso.id}) }}">{{ article_perso.titre }}</a>
                                     </h3>
-                                        <p>{{ article_ecole.texte|raccourci }}</p>
+                                    {% if article_perso.type != 'article' %}
+                                        <p>
+                                        <div id="editor{{ loop.index }}"
+                                             style="width: 500px; height: 100px">{{ article_perso.texte|raccourci }}</div>
+                                        </p>
+                                        <script>
+
+                                            var editor{{ loop.index }} = ace.edit("editor{{ loop.index }}");
+                                            editor{{ loop.index }}.setTheme("ace/theme/monokai");
+                                            editor{{ loop.index }}.getSession().setMode("ace/mode/{{ article_perso.type }}");
+                                            editor{{ loop.index }}.setReadOnly(true);  // false to make it editable
+
+                                        </script>
+                                    {% else %}
+                                        <p>{{ article_perso.texte|raccourci }}</p>
+                                    {% endif %}
                                 </div>
 
                             </div>

@@ -18,6 +18,9 @@
 
                     <!-- Header Link -->
                     <li class="hidden-xs animation-fadeInQuick">
+                        <a href="{{ path('ecole_index') }}"><strong>Index</strong></a>
+                    </li>
+                    <li class="hidden-xs animation-fadeInQuick">
                         <a href="{{ path('ecole_show', {'ecole_id': ecole.id}) }}"><strong>{{ ecole.nom }}</strong></a>
                     </li>
                     <!-- END Header Link -->
@@ -31,12 +34,8 @@
                                    placeholder="Search..">
                         </form>
                     </li>
-
                     {% include 'login_menu.html.twig' %}
-
                     <!-- END Search Form -->
-
-
                 </ul>
                 <!-- END Left Header Navigation -->
             </header>
