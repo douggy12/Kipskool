@@ -22,11 +22,23 @@
             <li>
                 <a href="{{ path('sonata_admin_dashboard') }}">interface admin</a>
             </li>
+
         {% endif %}
+        <li>
+            <input type="text" id="rechercher">
+            <div style="border: solid 1px black; position: absolute; background-color: white; z-index: 1000; min-width: 171px">
+                <ul style="list-style: none" id="listeResultat">
+
+                </ul>
+            </div>
+        </li>
 
     </ul>
         {% block body %}{% endblock %}
+    <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
         {% block javascripts %}{% endblock %}
+    <script src="{{ asset('js/rechercher.js') }}"></script>
+
     </body>
 
 </html>
