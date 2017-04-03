@@ -120,7 +120,7 @@
                                 </h3>
 
                                 {% if article_promo.srcFeature !=null %}
-                                    <img src="{{ vich_uploader_asset(article_promo.srcFeature, 'srcFeature')|imagine_filter('article_promo_image') }}"
+                                    <img src="{{ vich_uploader_asset(article_promo, 'srcFeature')|imagine_filter('article_image') }}"
                                          alt="image" class="img-responsive center-block">
                                 {% endif %}
 

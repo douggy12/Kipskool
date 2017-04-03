@@ -1,16 +1,162 @@
 {% extends 'base.html.twig' %}
 
+
 {% block body %}
-    <h1>Article_promo creation</h1>
+    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}"
+            type="text/javascript"
+            charset="utf-8">
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    </script>
 
-    <ul>
-        <li>
-            <a href="{{ path('promo_show', {'ecole_id': promo.ecole.id, 'promo_id': promo.id}) }}">Back to the list</a>
-        </li>
-    </ul>
+    <div id="page-container" class="header-fixed-top" style="width: 100%">
+
+        <!-- Main Container -->
+        <div id="main-container" style="margin-left: 0px">
+            <!-- Header -->
+            <header class="navbar navbar-inverse navbar-fixed-top">
+                <!-- Left Header Navigation -->
+                <ul class="nav navbar-nav-custom">
+
+                    <!-- END Main Sidebar Toggle Button -->
+
+                    <!-- Header Link -->
+                    <li class="hidden-xs animation-fadeInQuick">
+                        <a href="{{ path('ecole_index') }}"><strong>Index</strong></a>
+                    </li>
+                    <li class="hidden-xs animation-fadeInQuick">
+                        <a href="{{ path('ecole_show', {'ecole_id': promo.ecole.id}) }}"><strong>{{ promo.ecole.nom }}</strong></a>
+                    </li>
+                    <li class="hidden-xs animation-fadeInQuick">
+                        <a href="page_promo.html.twig"><strong>{{ promo.nom }}</strong></a>
+                    </li>
+
+                    <!-- END Header Link -->
+                </ul>
+
+                <ul class="nav navbar-nav-custom pull-right">
+                    <!-- Search Form -->
+                    <li>
+                        <form action="" method="post" class="navbar-form-custom">
+                            <input type="text" id="top-search" name="top-search" class="form-control"
+                                   placeholder="Search..">
+                        </form>
+                    </li>
+                    {% include 'login_menu.html.twig' %}
+                    <!-- END Search Form -->
+                </ul>
+                <!-- END Left Header Navigation -->
+            </header>
+            <!-- END Header -->
+
+            <!-- Page content -->
+            <div id="page-content" class="inner-sidebar-right">
+                <!-- Inner Sidebar -->
+                <div id="page-content-sidebar">
+                    <!-- Collapsible People List -->
+                    <div id="people-nav" class="collapse navbar-collapse remove-padding">
+                        <div class="block-section">
+                            <h4 class="inner-sidebar-header">
+                                <a href="" class="btn btn-effect-ripple btn-xs btn-default pull-right"></a>
+                                Etudiants
+                            </h4>
+                            <ul class="nav-users nav-users-online">
+                                {% include 'liste_etudiant_promo.html.twig' %}
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- END Collapsible People List -->
+                </div>
+                <!-- END Inner Sidebar -->
+
+                <!-- Social Net Header -->
+                <div class="content-header content-header-media">
+                    <div class="header-section">
+                        <div class="row">
+                            <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
+                                <h1>{{ promo.nom }}</h1>
+                                <h2 class="text-light-op"> {{ promo.description }}</h2>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% if promo.ecole.avatar != null %}
+                        <img src="{{ vich_uploader_asset(promo.ecole,'avatar')|imagine_filter('avatar_mini') }}"
+                             alt="Header Image"/>
+                    {% else %}
+                        <img src="{{ asset('img/LOGO_IMIE_res.jpg')|imagine_filter('avatar_mini') }}"
+                             alt="Header Image"/>
+                    {% endif %}
+                </div>
+                <!-- END Social Net Header -->
+
+
+                {% if is_granted('ROLE_STAFF') or (is_granted('ROLE_DELEGUE') and app.user.promo == promo) %}
+                    <ul class="nav navbar-nav-custom">
+                        <li class="hidden-xs animation-fadeInQuick">
+                            <a href="{{ path('add_article_promo', {'promo_id': promo.id}) }}" class="">Ecrire un
+                                article</a>
+                        </li>
+                        <li class="hidden-xs animation-fadeInQuick">
+                            <a href="{{ path('add_code_promo', {'promo_id': promo.id}) }}">Poster du code</a>
+                        </li>
+
+                    </ul>
+                {% endif %}
+
+                <!-- Social Net Content -->
+                <div class="row">
+                    <!-- Latest News -->
+                    <div class="col-lg-12">
+                        <!-- Story -->
+                        <div class="block">
+                            <!-- CKEditor Title -->
+                            <div class="block-title">
+                                <!-- END CKEditor Block -->
+                                <h2>Article_promo creation</h2>
+                                <div class="form-group col-xs-12">
+                                    {{ form_start(form) }}
+                                    <div class="form-group">
+                                    {{ form_row(form.titre, {'attr':{'class':'form-control col-md-6'}}) }}
+                                    </div>
+                                    <div class="form-group">
+                                    {{ form_row(form.srcFeature, {'attr':{'class':'form-control col-md-6','type':'file'}}) }}
+                                    </div>
+                                    <div class="form-group">
+                                    {{ form_row(form.texte, {'attr':{'class':'form-control col-md-6', 'id':'example-file-input', 'name':'example-file-input'}}) }}
+                                    </div>
+
+                                        <div class="form-group form-actions">
+                                        <div class="col-xs-12">
+                                            <button type="submit" class="btn btn-effect-ripple btn-primary">Submit
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    {{ form_end(form) }}
+                                    <div class="block-options pull-right">
+                                        <a href="{{ path('promo_show', {'ecole_id': promo.ecole.id, 'promo_id': promo.id}) }}"
+                                           class="btn btn-effect-ripple btn-default toggle-bordered enable-tooltip"
+                                           data-toggle="button" title="Revenir a la liste des articles">Back to list</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Story -->
+                    </div>
+                    <!-- END Latest News -->
+                </div>
+                <!-- END Social Net Content -->
+            </div>
+            <!-- END Page Content -->
+        </div>
+        <!-- END Main Container -->
+    </div>
+    <!-- END Page Container -->
+    <!-- ckeditor.js, load it only in the page you would like to use CKEditor (it's a heavy plugin to include it with the others!) -->
+    <script src="js/plugins/ckeditor/ckeditor.js"></script>
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="js/pages/formsComponents.js"></script>
+    <script>$(function(){ FormsComponents.init(); });</script>
 {% endblock %}
