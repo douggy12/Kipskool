@@ -75,7 +75,6 @@ class Article_promo
     private $imageName;
 
 
-
     /**
      * @var Perso
      * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso")
@@ -98,30 +97,29 @@ class Article_promo
      */
     public function validate(ExecutionContextInterface $context)
     {
-        if ($this->srcFeature != null){
+        if ($this->srcFeature != null) {
 
 
-        if (! in_array($this->srcFeature->getMimeType(), array(
-            'image/jpeg',
-            'image/gif',
-            'image/png'
-        ))) {
-            $context
-                ->buildViolation('Wrong file type (jpg,gif,png)')
-                ->atPath('fileName')
-                ->addViolation()
-            ;
-        }
+            if (!in_array($this->srcFeature->getMimeType(), array(
+                'image/jpeg',
+                'image/gif',
+                'image/png'
+            ))
+            ) {
+                $context
+                    ->buildViolation('Wrong file type (jpg,gif,png)')
+                    ->atPath('fileName')
+                    ->addViolation();
+            }
         }
     }
 
 
-
-
-    public function __construct()
+    public
+    function __construct()
     {
         $this->createdAt = time();
-        $this->comments= new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -129,11 +127,11 @@ class Article_promo
      *
      * @return int
      */
-    public function getId()
+    public
+    function getId()
     {
         return $this->id;
     }
-
 
 
     /**
@@ -141,7 +139,8 @@ class Article_promo
      *
      * @return int
      */
-    public function getCreatedAt()
+    public
+    function getCreatedAt()
     {
         return $this->createdAt;
     }
@@ -153,7 +152,8 @@ class Article_promo
      *
      * @return Article_promo
      */
-    public function setTitre($titre)
+    public
+    function setTitre($titre)
     {
         $this->titre = $titre;
 
@@ -165,7 +165,8 @@ class Article_promo
      *
      * @return string
      */
-    public function getTitre()
+    public
+    function getTitre()
     {
         return $this->titre;
     }
@@ -177,7 +178,8 @@ class Article_promo
      *
      * @return Article_promo
      */
-    public function setTexte($texte)
+    public
+    function setTexte($texte)
     {
         $this->texte = $texte;
 
@@ -189,7 +191,8 @@ class Article_promo
      *
      * @return string
      */
-    public function getTexte()
+    public
+    function getTexte()
     {
         return $this->texte;
     }
@@ -199,7 +202,8 @@ class Article_promo
      *
      * @return Article_promo
      */
-    public function setImageName($imageName)
+    public
+    function setImageName($imageName)
     {
         $this->imageName = $imageName;
 
@@ -209,7 +213,8 @@ class Article_promo
     /**
      * @return string|null
      */
-    public function getImageName()
+    public
+    function getImageName()
     {
         return $this->imageName;
     }
@@ -221,7 +226,8 @@ class Article_promo
      *
      * @return Article_promo
      */
-    public function setSrcFeature(File $image = null)
+    public
+    function setSrcFeature(File $image = null)
     {
         $this->srcFeature = $image;
         $this->setImageName($image->getFilename());
@@ -237,10 +243,10 @@ class Article_promo
 
     /**
      * Get srcFeature
-
      * @return File|null
      */
-    public function getSrcFeature()
+    public
+    function getSrcFeature()
     {
         return $this->srcFeature;
     }
@@ -251,7 +257,8 @@ class Article_promo
      *
      * @return Promo
      */
-    public function getPromo()
+    public
+    function getPromo()
     {
         return $this->promo;
     }
@@ -259,7 +266,8 @@ class Article_promo
     /**
      * @param \NewsBundle\Entity\Promo $promo
      */
-    public function setPromo($promo)
+    public
+    function setPromo($promo)
     {
         $this->promo = $promo;
     }
@@ -272,7 +280,8 @@ class Article_promo
     /**
      * @return ArrayCollection|Commentaire_article_promo[]
      */
-    public function getComments()
+    public
+    function getComments()
     {
         return $this->comments;
     }
@@ -280,7 +289,8 @@ class Article_promo
     /**
      * @return Perso
      */
-    public function getAuteur()
+    public
+    function getAuteur()
     {
         return $this->auteur;
     }
@@ -288,7 +298,8 @@ class Article_promo
     /**
      * @param Perso $auteur
      */
-    public function setAuteur($auteur)
+    public
+    function setAuteur($auteur)
     {
         $this->auteur = $auteur;
     }
@@ -296,7 +307,8 @@ class Article_promo
     /**
      * @return string
      */
-    public function getType()
+    public
+    function getType()
     {
         return $this->type;
     }
@@ -304,7 +316,8 @@ class Article_promo
     /**
      * @param string $type
      */
-    public function setType($type)
+    public
+    function setType($type)
     {
         $this->type = $type;
     }
@@ -312,7 +325,8 @@ class Article_promo
     /**
      * @return string
      */
-    public function getClassName()
+    public
+    function getClassName()
     {
         return (new \ReflectionClass($this))->getShortName();
 

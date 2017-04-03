@@ -27,7 +27,7 @@ class PromoController extends Controller
      */
     public function showAction(Promo $promo)
     {
-        return $this->render('promo/show.html.twig', array(
+        return $this->render('ViewPromo/page_promo.html.twig', array(
             'promo' => $promo,
             'ecole' => $promo->getEcole(),
         ));

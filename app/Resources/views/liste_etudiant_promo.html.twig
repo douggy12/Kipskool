@@ -1,0 +1,15 @@
+{% for perso in promo.persos %}
+    <li>
+        <a href="{{ path('perso_show', {'perso_id': perso.id}) }}">
+            {% if perso.avatar != null %}
+                <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini') }}"
+                     alt="image" class="nav-users-avatar"/>
+            {% else %}
+                <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
+                     alt="image" class="nav-users-avatar"/>
+            {% endif %}
+            <span class="nav-users-heading">{{ perso.prenom }} </span>
+            <span class="text-muted"> {{ perso.nom }}</span>
+        </a>
+    </li>
+{% endfor %}

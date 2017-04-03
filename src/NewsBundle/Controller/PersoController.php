@@ -31,11 +31,9 @@ class PersoController extends Controller
     {
         $promo = $perso->getPromo()->first();
 
-
-        return $this->render('perso/show.html.twig', array(
+        return $this->render(':ViewPromo:page_perso.html.twig', array(
             'promo' => $promo,
             'perso' => $perso,
-
         ));
     }
 

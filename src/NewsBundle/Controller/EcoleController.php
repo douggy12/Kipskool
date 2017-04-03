@@ -29,7 +29,7 @@ class EcoleController extends Controller
 
         $ecoles = $em->getRepository('NewsBundle:Ecole')->findAll();
 
-        return $this->render('ecole/index.html.twig', array(
+        return $this->render(':ViewPromo:page_ecole_index.html.twig', array(
             'ecoles' => $ecoles,
         ));
     }
@@ -42,7 +42,7 @@ class EcoleController extends Controller
      */
     public function showAction(Ecole $ecole)
     {
-        return $this->render('ecole/show.html.twig', array(
+        return $this->render(':ViewPromo:page_ecole.html.twig', array(
             'ecole' => $ecole,
 
         ));
