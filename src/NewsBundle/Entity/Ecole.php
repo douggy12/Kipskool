@@ -329,6 +329,7 @@ class Ecole
     public function setAvatar(File $image = null)
     {
         $this->avatar = $image;
+        $this->setAvatarName($image->getFilename());
 
         if ($image) {
             // It is required that at least one field changes if you are using doctrine

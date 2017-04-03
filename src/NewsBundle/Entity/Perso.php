@@ -272,6 +272,9 @@ class Perso extends BaseUser
      */
     public function validate(ExecutionContextInterface $context)
     {
+        if($this->avatar != null){
+
+
         if (! in_array($this->avatar->getMimeType(), array(
             'image/jpeg',
             'image/gif',
@@ -282,6 +285,7 @@ class Perso extends BaseUser
                 ->atPath('fileName')
                 ->addViolation()
             ;
+        }
         }
     }
 

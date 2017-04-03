@@ -82,5 +82,5 @@ services:
       class: Image\Image
 
     data_fixtures.provider.portrait:
-      class: NewsBundle\DataFixtures\PortraitProvider
+      class: NewsBundle\DataFixtures\ImageProvider
       tags: [ { name: hautelook_alice.faker.provider } ]

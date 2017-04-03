@@ -98,7 +98,7 @@ class Article_promo
      */
     public function validate(ExecutionContextInterface $context)
     {
-        if ($this->srcFeature == null){
+        if ($this->srcFeature != null){
 
 
         if (! in_array($this->srcFeature->getMimeType(), array(
@@ -224,6 +224,7 @@ class Article_promo
     public function setSrcFeature(File $image = null)
     {
         $this->srcFeature = $image;
+        $this->setImageName($image->getFilename());
 
         if ($image) {
             // It is required that at least one field changes if you are using doctrine

@@ -4,6 +4,7 @@ namespace NewsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -54,11 +55,17 @@ class articleEcole
     private $texte;
 
     /**
-     * @var string
-     *
+     * @var File
+     * @Vich\UploadableField(mapping="articlePerso_image",fileNameProperty="imageName")
      * @ORM\Column(name="srcFeature", type="string", length=255,nullable=true)
      */
     private $srcFeature;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageName;
 
     /**
      * @ORM\OneToMany(targetEntity="NewsBundle\Entity\commentaireArticleEcole", mappedBy="article", cascade={"remove"})
@@ -95,7 +102,7 @@ class articleEcole
      */
     public function validate(ExecutionContextInterface $context)
     {
-        if ($this->srcFeature == null){
+        if ($this->srcFeature != null){
 
 
             if (! in_array($this->srcFeature->getMimeType(), array(
@@ -183,23 +190,50 @@ class articleEcole
     }
 
     /**
+     * @param string $imageName
+     *
+     * @return ArticlePerso
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
      * Set srcFeature
      *
-     * @param string $srcFeature
+     * @param File|$image
      *
-     * @return articleEcole
+     * @return ArticleEcole
      */
-    public function setSrcFeature($srcFeature)
+    public function setSrcFeature(File $image = null)
     {
-        $this->srcFeature = $srcFeature;
+        $this->srcFeature = $image;
+        $this->setImageName($image->getFilename());
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
 
         return $this;
     }
 
     /**
      * Get srcFeature
-     *
-     * @return string
+
+     * @return File|null
      */
     public function getSrcFeature()
     {

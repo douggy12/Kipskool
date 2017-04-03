@@ -108,9 +108,15 @@ vich_uploader:
         articlePerso_image:
             uri_prefix:         /images/articleperso
             upload_destination: '%kernel.root_dir%/../web/images/articleperso'
+
+
         perso_image:
             uri_prefix:         /images/avatar
             upload_destination: '%kernel.root_dir%/../web/images/avatar'
+
+        article_image:
+            uri_prefix: /images/article
+            upload_destination: '%kernel.root_dir%/../web/images/article'
 
 # app/config/config.yml
 
