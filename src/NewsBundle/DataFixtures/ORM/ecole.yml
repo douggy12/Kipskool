@@ -3,6 +3,7 @@ NewsBundle\Entity\Ecole:
         nom: IMIE Le Mans
         adresse: <streetAddress()>
         ville: <city()>
+        avatar: <ecoleImg()>
         pays: <country()>
         description: <realText($maxNbChars = 200, $indexSize = 2)>
         link: <url()>
