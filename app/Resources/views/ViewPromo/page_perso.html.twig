@@ -63,31 +63,36 @@
                 <!-- END Inner Sidebar -->
 
                 <!-- Social Net Header -->
-                <div class="content-header content-header-media">
-                    <div class="header-section">
-                        <div class="row">
-                            <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
-                                {% if perso.avatar != null %}
-                                    <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini2') }}"
-                                         alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
-                                {% else %}
-                                    <img src="{{ asset('media/cache/avatar_mini/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"
-                                         alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
-                                {% endif %}
-                                <h1>{{ perso.nom }}</h1>
-                                <h2 class="text-light-op"> {{ perso.prenom }}</h2>
-                                <h2 class="text-light-op">{{ perso.born }}</h2>
+                <div class="content-header content-header-media" style="min-height: 800px;">
+                    <div class="widget">
+                        <div class="widget-content themed-background-passion text-right clearfix">
+                            <a href="javascript:void(0)" class="pull-left">
+                                {% if perso.avatar %}
+                                <img src="{{ vich_uploader_asset(perso, 'avatar')|imagine_filter('avatar_image2') }}" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar-2x">
+                            </a>
+                            <h3 class="widget-heading text-light">{{ perso.prenom }} {{ perso.nom }}</h3>
+                            <h4 class="widget-heading text-light-op">{{ perso.promo.first }}</h4>
+                        </div>
+                        <div class="widget-content themed-background-muted text-center">
+                            <div class="btn-group">
+                                <a href="javascript:void(0)" class="btn btn-effect-ripple btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-share"></i> Follow</a>
+                                <a href="javascript:void(0)" class="btn btn-effect-ripple btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-suitcase"></i> Projects</a>
                             </div>
-
+                        </div>
+                        <div class="widget-content">
+                            <div class="row text-center">
+                                <div class="col-xs-4">
+                                    <h3 class="widget-heading"><small>ARTICLES PUBLIÉS</small><br><a href="javascript:void(0)" class="themed-color-passion">28</a></h3>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h3 class="widget-heading"><small>LIKES</small><br><a href="javascript:void(0)" class="themed-color-passion">28k</a></h3>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h3 class="widget-heading"><small>COMMENTAIRES PUBLIÉS</small><br><a href="javascript:void(0)" class="themed-color-passion">19</a></h3>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    {% if perso.avatar != null %}
-                        <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini2') }}"
-                             alt="Header Image"/>
-                    {% else %}
-                        <img src="{{ asset('media/cache/avatar_mini/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"
-                             alt="Header Image"/>
-                    {% endif %}
                 </div>
                 <!-- END Social Net Header -->
 
