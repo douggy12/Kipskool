@@ -21,7 +21,7 @@
 
                     <!-- Header Link -->
                     <li class="hidden-xs animation-fadeInQuick">
-                        <a href="{{ path('ecole_index')}}"><strong>Index</strong></a>
+                        <a href="{{ path('ecole_index') }}"><strong>Index</strong></a>
                     </li>
                     <li class="hidden-xs animation-fadeInQuick">
                         <a href="{{ path('ecole_show', {'ecole_id': promo.ecole.id}) }}"><strong>{{ promo.ecole.nom }}</strong></a>
@@ -33,17 +33,10 @@
                     <!-- END Header Link -->
                 </ul>
 
-                <ul class="nav navbar-nav-custom pull-right">
-                    <!-- Search Form -->
-                    <li>
-                        <form action="" method="post" class="navbar-form-custom">
-                            <input type="text" id="top-search" name="top-search" class="form-control"
-                                   placeholder="Search..">
-                        </form>
-                    </li>
+
                     {% include 'login_menu.html.twig' %}
-                    <!-- END Search Form -->
-                </ul>
+
+
                 <!-- END Left Header Navigation -->
             </header>
             <!-- END Header -->
@@ -81,10 +74,10 @@
                         </div>
                     </div>
                     {% if promo.ecole.avatar != null %}
-                        <img src="{{ vich_uploader_asset(promo.ecole,'avatar')|imagine_filter('avatar_mini') }}"
+                        <img src="{{ vich_uploader_asset(promo,'avatar')|imagine_filter('avatar_wide2') }}"
                              alt="Header Image"/>
                     {% else %}
-                        <img src="{{ asset('img/LOGO_IMIE_res.jpg')|imagine_filter('avatar_mini') }}"
+                        <img src="{{ asset('img/LOGO_IMIE_res.jpg')|imagine_filter('avatar_mini2') }}"
                              alt="Header Image"/>
                     {% endif %}
                 </div>
@@ -92,15 +85,16 @@
 
 
                 {% if is_granted('ROLE_STAFF') or (is_granted('ROLE_DELEGUE') and app.user.promo == promo) %}
-                    <ul class="nav navbar-nav-custom">
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="{{ path('add_article_promo', {'promo_id': promo.id}) }}" class="">Ecrire un article</a>
-                        </li>
-                        <li class="hidden-xs animation-fadeInQuick">
-                            <a href="{{ path('add_code_promo', {'promo_id': promo.id}) }}">Poster du code</a>
-                        </li>
+                    <div class="block-section">
+                        <a href="{{ path('add_article_promo', {'promo_id': promo.id}) }}"
+                           class="btn btn-lg btn-success"><i
+                                    class="fa fa-plus"></i> Ecrire un article</a>
 
-                    </ul>
+                        <a href="{{ path('add_code_promo', {'promo_id': promo.id}) }}" class="btn btn-lg btn-warning"><i
+                                    class="fa fa-plus"></i> Poster du code</a>
+                    </div>
+
+
                 {% endif %}
 
                 <!-- Social Net Content -->
@@ -112,10 +106,19 @@
                             <div class="widget">
 
                                 <div class="widget-content widget-content-mini themed-background-dark text-light-op">
-                                    <span class="pull-right text-muted">{{ article_promo.createdAt|date("d/m/Y") }}</span>
+
+                                    {% if article_promo.auteur.avatar != null %}
+                                        <img src="{{ vich_uploader_asset(article_promo.auteur, 'avatar')|imagine_filter('avatar_mini2') }}"
+                                             class="img-circle img-thumbnail pull-left">
+                                    {% else %}
+                                        <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg') }}"
+                                             class="img-circle img-thumbnail pull-left">
+                                    {% endif %}
+
+
                                     <a href="{{ path('perso_show', {'perso_id': article_promo.auteur.id}) }}"
                                        class="text-light">{{ article_promo.auteur }}</a>
-                                    posted an Article
+                                    a posté un article le {{ article_promo.createdAt|date("d F Y") }}
                                 </div>
                                 <div class="widget-content">
                                     <h3>
@@ -124,7 +127,9 @@
                                     {% if article_promo.type != 'article' %}
                                         <p>
                                         <div id="editor{{ loop.index }}"
-                                             style="width: 500px; height: 100px">{{ article_promo.texte|raccourci }}</div>
+                                             style="width: 500px; height: 100px">{{ article_promo.texte }}</div>
+                                        <a href="{{ path('article_promo_show', {'article_promo_id': article_promo.id}) }}"
+                                           class="'btn btn-primary btn-sm">lire tout le code</a>
                                         </p>
                                         <script>
 
@@ -135,8 +140,27 @@
 
                                         </script>
                                     {% else %}
-                                        <p>{{ article_promo.texte|raccourci }}</p>
+                                    {% if article_promo.srcFeature != null %}
+                                    <img src="{{ vich_uploader_asset(article_promo, 'srcFeature')|imagine_filter('article_thumb2') }}" class="pull-left">
                                     {% endif %}
+                                        <p>{{ article_promo.texte|raccourci }}</p>
+                                        <a href="{{ path('article_promo_show', {'article_promo_id': article_promo.id}) }}"
+                                           class="'btn btn-primary btn-sm">lire la suite</a>
+                                    {% endif %}
+                                </div>
+                                <div class="widget-content text-dark">
+                                    <div class="row text-center">
+                                        <div class="col-xs-4">
+                                            <i class="fa fa-heart-o"></i> 3.5k
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <i class="fa fa-eye"></i> 35k
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <i class="fa fa-comment"></i> {{ article_promo.comments.count }}
+                                            commentaires
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>

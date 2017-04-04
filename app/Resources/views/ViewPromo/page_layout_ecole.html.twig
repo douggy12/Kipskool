@@ -26,17 +26,10 @@
                 <!-- END Header Link -->
             </ul>
 
-            <ul class="nav navbar-nav-custom pull-right">
-                <!-- Search Form -->
-                <li>
-                    <form action="" method="post" class="navbar-form-custom">
-                        <input type="text" id="top-search" name="top-search" class="form-control"
-                               placeholder="Search..">
-                    </form>
-                </li>
+
                 {% include 'login_menu.html.twig' %}
                 <!-- END Search Form -->
-            </ul>
+
             <!-- END Left Header Navigation -->
         </header>
         <!-- END Header -->
@@ -80,41 +73,53 @@
             </div>
             <!-- END Static Layout Header -->
 
-            <!-- Demo Article -->
-            <div class="block full">
-                <div class="block-title text-center">
-                    <h2>{{ articleEcole.titre }}</h2>
+            <div class="widget">
+                <div class="widget-content widget-content-mini themed-background-dark text-light-op">
+                    <img src="
+{% if articleEcole.auteur.avatar != null %}
+{{ vich_uploader_asset(articleEcole.auteur, 'avatar')|imagine_filter('avatar_mini2') }}
+{% else  %}
+{{ asset('img/LOGO_IMIE_res.jpg')|imagine_filter('avatar_wide2') }}
+{% endif %}
+" class="img-circle img-thumbnail img-thumbnail-avatar pull-left">
+                    <a href="/{{ path('perso_show', {'perso_id': articleEcole.auteur.id}) }}" class="text-light">{{ articleEcole.auteur.prenom }} {{ articleEcole.auteur.nom }}</a> le {{ articleEcole.createdAt|date("d F Y") }}
+                    {% if is_granted('ROLE_STAFF') %}
+                    <div class="btn-group pull-right">
+                        <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default dropdown-toggle enable-tooltip " data-toggle="dropdown" title="" style="overflow: hidden; position: relative;" data-original-title="Options" aria-expanded="false"><span class="btn-ripple animate" style="height: 34px; width: 34px; top: -1px; left: 3px;"></span><i class="fa fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                                <a href="{{ path('articleecole_edit', {'article_ecole_id': articleEcole.id}) }}">
+                                    <i class="fa fa-pencil pull-right"></i>
+                                    Edit
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{{ path('articleecole_delete', {'article_ecole_id': articleEcole.id}) }}">
+                                    <i class="fa fa-trash-o fa-fw pull-right"></i>
+                                    Delete
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    {% endif %}
                 </div>
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3">
-                        <article style="min-height: 800px">
-                            <div class="text-center">
-                                {% if articleEcole.auteur.avatar != null %}
-                                    <img src="{{ vich_uploader_asset(articleEcole.auteur,'avatar')|imagine_filter('avatar_mini') }}"
-                                         alt="image" class="img-circle"/>
-                                {% else %}
-                                    <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
-                                         alt="image" class="img-circle"/>
-                                {% endif %}
-                                <h3 class="sub-header text-right">
-                                    <a href="{{ path('perso_show', {'perso_id': articleEcole.auteur.id}) }}"
-                                       class="pull-left"><strong>{{ articleEcole.auteur.nom }}</strong></a>
-                                    <small class="text-muted"><em>{{ articleEcole.createdAt|date('d-m-Y') }}</em></small>
-                                </h3>
-                                {% if articleEcole.srcFeature !=null %}
-                                    <img src="{{ vich_uploader_asset(articleEcole.srcFeature, 'srcFeature')|imagine_filter('article_image') }}"
-                                         alt="image" class="img-responsive center-block">
-                                {% endif %}
-                                <p>{{ articleEcole.texte }}</p>
-                            </div>
-                            {% include ':commentaireAjax:index.html.twig' %}
-                        </article>
+                <div class="widget-content">
+                    <img src="{{vich_uploader_asset(articleEcole, 'srcFeature')|imagine_filter('article_image2') }}" class="img-responsive center-block">
+                    <h3>{{ articleEcole.titre }}</h3>
+                    <p>{{ articleEcole.texte }}</p>
+                    <div class="push-bit-top">
+                        <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-heart"></i> Love</a>
+                        <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-primary" style="overflow: hidden; position: relative;"><i class="fa fa-twitter"></i> Tweet</a>
                     </div>
                 </div>
+                {% include ':commentaireAjax:index.html.twig' %}
+
             </div>
-            <!-- END Demo Article -->
         </div>
         <!-- END Page Content -->
+    </div>
+</div>
         {% endblock %}
         {% block javascripts %}
 
@@ -130,11 +135,18 @@
             </script>
             {% endif %}
             <script language="JavaScript" type="text/javascript">
-                var articleEcole = {{ articleEcole.id }};
+                var article = {{ articleEcole.id }};
                 var typeArticle = "{{ articleEcole.className }}";
+                var roleStaff = false;
+                var login = false;
+                {%  if is_granted('ROLE_STAFF ') %}
+                roleStaff = true;
+
+                {% endif %}
             </script>
 
 
             <script src="{{ asset('js/commentaire.js') }}"></script>
+
         {% endblock %}
 

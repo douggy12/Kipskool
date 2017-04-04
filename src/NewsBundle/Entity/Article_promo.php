@@ -230,6 +230,7 @@ class Article_promo
     function setSrcFeature(File $image = null)
     {
         $this->srcFeature = $image;
+        $this->setImageName($image->getFilename());
 
         if ($image) {
             // It is required that at least one field changes if you are using doctrine

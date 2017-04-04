@@ -271,6 +271,7 @@ class Perso extends BaseUser
                     ->addViolation();
             }
         }
+
     }
 
     /**

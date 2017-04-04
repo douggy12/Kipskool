@@ -4,8 +4,8 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <meta name="description" content="AppUI is a Web App Bootstrap Admin Template created by pixelcave and published on Themeforest">
-        <meta name="author" content="pixelcave">
+        <meta name="description" content="KipSkool Le réseau social des Ecoles !">
+        <meta name="author" content="KipSkool Team">
         <meta name="robots" content="noindex, nofollow">
 
         <title>{% block title %}Kipskool{% endblock %}</title>
@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
         <link rel="stylesheet" href="{{ asset('css/main.css') }}">
         <link rel="stylesheet" href="{{ asset('css/themes.css') }}">
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Icons -->
@@ -26,6 +27,8 @@
     </head>
     <body>
         {% block body %}{% endblock %}
+    <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/admin-lte/bootstrap/js/bootstrap.js') }}"
         {% block javascripts %}{% endblock %}
 
 
@@ -47,6 +50,10 @@
     <!-- Load and execute javascript code used only in this page -->
            <script src="/web/js/pages/appSocial.js"></script>
            <script>$(function(){ AppSocial.init(); });</script>
+    <script src="{{ asset('js/plugins.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/rechercher.js') }}"></script>
+
 
     </body>
 

@@ -108,9 +108,15 @@ vich_uploader:
         articlePerso_image:
             uri_prefix:         /images/articleperso
             upload_destination: '%kernel.root_dir%/../web/images/articleperso'
+
+
         perso_image:
             uri_prefix:         /images/avatar
             upload_destination: '%kernel.root_dir%/../web/images/avatar'
+
+        article_image:
+            uri_prefix: /images/article
+            upload_destination: '%kernel.root_dir%/../web/images/article'
 
 # app/config/config.yml
 
@@ -132,7 +138,7 @@ liip_imagine:
         cache: ~
 
         # the name of the "filter set"
-        article_thumb:
+        article_thumb2:
 
             # adjust the image quality to 75%
             quality: 75
@@ -149,7 +155,7 @@ liip_imagine:
 
 
 
-        article_image:
+        article_image2:
 
             quality: 75
             filters:
@@ -158,8 +164,18 @@ liip_imagine:
                     size: [600,400]
                     allow_upscale: false
 
+        article_wide3:
+          quality: 50
+          filters:
+            upscale:
+              min: [1643, 0]
+            crop:
+              size: [1643,270]
+              start: [0, 130]
 
-        avatar_image:
+
+
+        avatar_image2:
 
           quality: 75
           filters:
@@ -168,10 +184,18 @@ liip_imagine:
               size: [400,400]
               allow_upscale: true
 
-        avatar_mini:
+        avatar_mini2:
           quality : 75
           filters:
             thumbnail:
               mode: outbound
               size: [40,40]
               allow_upscale: yes
+
+        avatar_wide2:
+          quality : 75
+          filters:
+            thumbnail:
+              mode: outbound
+              size: [2560,260]
+              allow_upscale: true

@@ -1,13 +1,24 @@
-<table id="commentaires_list">
-    <input type="text" id="comment">
-    <input type="button" id="addComment" value="Poster un commentaire">
-    <tr>
-        <th>créé le :</th>
-        <th>avatar</th>
-        <th>par :</th>
-        <th>commentaire :</th>
-        <th>action</th>
-    </tr>
+
+    <div class="widget-content themed-background-muted">
+        <ul class="media-list push" id="commentaires_list">
 
 
-</table>
+
+        </ul>
+
+            {#<a href="{{ path('perso_show', {'perso_id': app.user.id}) }}" class="pull-left">#}
+                {#<img src="{{ vich_uploader_asset(app.user, 'avatar')|imagine_filter('avatar_mini2') }}" alt="Avatar" class="img-circle">#}
+            {#</a>#}
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <div class="media-body">
+
+                    <textarea id="comment" class="form-control" rows="2" placeholder="Ecrire un commentaire.."></textarea>
+                    <button id="addComment" class="btn btn-effect-ripple btn-sm btn-primary" style="overflow: hidden; position: relative;">Publier</button>
+
+            </div>
+        {% endif %}
+
+    </div>
+
+
+
