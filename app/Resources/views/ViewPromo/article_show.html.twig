@@ -23,6 +23,20 @@
                     <li class="hidden-xs animation-fadeInQuick">
                         <a href="{{ path('ecole_show', {'ecole_id': ecole.id}) }}"><strong>{{ ecole.nom }}</strong></a>
                     </li>
+                    {% if article.className == 'Article_promo' %}
+
+                        <li>
+                            <a href="{{ path('promo_show', {'promo_id': promo.id}) }}"><strong>{{ promo.nom }}</strong></a>
+                        </li>
+
+                    {% elseif article.className == 'ArticlePerso' %}
+                        <li>
+                            <a href="{{ path('promo_show', {'promo_id': promos.first.id}) }}"><strong>{{ promos.first.nom }}</strong></a>
+                        </li>
+                    <li>
+                        <a href="{{ path('perso_show', {'perso_id': perso.id}) }}"><strong>{{ perso.prenom }} {{ perso.nom }}</strong></a>
+                    </li>
+                    {% endif %}
                     <!-- END Header Link -->
                 </ul>
 
@@ -44,7 +58,16 @@
                                 Promo
                             </h4>
                             <ul class="nav-users nav-users-online">
-                                {% include 'liste_promo.html.twig' %}
+                                {% if article.className == 'articleEcole' %}
+                                    {% include 'liste_promo.html.twig' %}
+                                {% elseif article.className == 'Article_promo' %}
+                                    {% include 'liste_etudiant_promo.html.twig' %}
+                                {% else %}
+                                    {% for promo in promos %}
+
+                                        {% include 'liste_etudiant_promo.html.twig' %}
+                                    {% endfor %}
+                                {% endif %}
                             </ul>
                         </div>
 
@@ -57,7 +80,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="header-section">
-                                <h1>{{ article.ecole.nom }}</h1>
+                                <h1>{{ article.titre }}</h1>
                             </div>
                         </div>
                         <div class="col-sm-6 hidden-xs">
@@ -95,27 +118,58 @@
                                             class="fa fa-chevron-down"></i></a>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li>
-                                        <a href="{{ path('articleecole_edit', {'article_ecole_id': article.id}) }}">
-                                            <i class="fa fa-pencil pull-right"></i>
-                                            Edit
-                                        </a>
+                                        {% if article.className == 'articleEcole' %}
+                                            <a href="{{ path('articleecole_edit', {'article_ecole_id': article.id}) }}">
+                                                <i class="fa fa-pencil pull-right"></i>
+                                                Edit
+                                            </a>
+                                        {% elseif article.className == 'Article_promo' %}
+                                            <a href="{{ path('article_promo_edit', {'article_promo_id': article.id}) }}">
+                                                <i class="fa fa-pencil pull-right"></i>
+                                                Edit
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path('articleperso_edit', {'article_perso_id': article.id}) }}">
+                                                <i class="fa fa-pencil pull-right"></i>
+                                                Edit
+                                            </a>
+                                        {% endif %}
+
                                     </li>
                                     <li class="divider"></li>
                                     <li>
+                                        {% if article.className == 'articleEcole' %}
                                         <a href="{{ path('articleecole_delete', {'article_ecole_id': article.id}) }}">
                                             <i class="fa fa-trash-o fa-fw pull-right"></i>
                                             Delete
                                         </a>
+                                        {% elseif article.className == 'Article_promo' %}
+                                            <a href="{{ path('article_promo_delete', {'article_promo_id': article.id}) }}">
+                                                <i class="fa fa-trash-o fa-fw pull-right"></i>
+                                                Delete
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path('articleperso_delete', {'article_perso_id': article.id}) }}">
+                                                <i class="fa fa-trash-o fa-fw pull-right"></i>
+                                                Delete
+                                            </a>
+                                        {% endif %}
                                     </li>
                                 </ul>
                             </div>
                         {% endif %}
                     </div>
                     <div class="widget-content">
+                        {% if article.srcFeature %}
                         <img src="{{ vich_uploader_asset(article, 'srcFeature')|imagine_filter('article_image2') }}"
                              class="img-responsive center-block">
+                        {% endif %}
                         <h3>{{ article.titre }}</h3>
+                        {% if article.type != 'article' %}
+                        <div id="editor" style="height: 600px; width: 100%;">{{ article.texte }}</div>
+                        {% else %}
                         <p>{{ article.texte }}</p>
+                        {% endif %}
                         <div class="push-bit-top">
                             <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-danger"
                                style="overflow: hidden; position: relative;"><i class="fa fa-heart"></i> Love</a>
@@ -134,14 +188,14 @@
 {% endblock %}
         {% block javascripts %}
 
-            <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+
             <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}" type="text/javascript"
                     charset="utf-8"></script>
             {% if article.type != "article" %}
                 <script>
                     var editor = ace.edit("editor");
                     editor.setTheme("ace/theme/monokai");
-                    editor.getSession().setMode("ace/mode/java");
+                    editor.getSession().setMode("ace/mode/{{ article.type }}");
                     editor.setReadOnly(true);  // false to make it editable
                 </script>
             {% endif %}

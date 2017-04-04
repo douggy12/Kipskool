@@ -51,20 +51,7 @@
                         </h4>
                         <ul class="nav-users nav-users-online">
                             {% for promo in promos %}
-                            {#{% for perso in promo.persos %}#}
-                            {#<li>#}
-                            {#<a href="{{ path('perso_show', {'perso_id': perso.id}) }}">#}
-                            {#{% if perso.avatar != null %}#}
-                            {#<img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini2') }}"#}
-                            {#alt="image" class="nav-users-avatar"/>#}
-                            {#{% else %}#}
-                            {#<img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"#}
-                            {#alt="image" class="nav-users-avatar"/>#}
-                            {#{% endif %}#}
-                            {#<span class="nav-users-heading">{{ perso.nom }} </span>#}
-                            {#</a>#}
-                            {#</li>#}
-                            {#{% endfor %}#}
+
                             {% include 'liste_etudiant_promo.html.twig' %}
                             {% endfor %}
                         </ul>
@@ -100,7 +87,7 @@
                     <h2>{{ article.titre }}</h2>
                 </div>
                 <div class="row">
-                    <div class="col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3">
+                    <div class="col-md-10 col-md-offset-1   ">
                         <article style="min-height: 800px">
                             <div class="text-center">
                                 {% if article.auteur.avatar != null %}
@@ -121,20 +108,12 @@
                                     <img src="{{ vich_uploader_asset(article, 'srcFeature')|imagine_filter('article_image2') }}"
                                          alt="image" class="img-responsive center-block">
                                 {% endif %}
-
+                            </div>
+                        </article>
                                 {% if article.type != 'article' %}
-                                    <p>
-                                    <div id="editor{{ loop.index }}"
-                                         style="width: 500px; height: 100px">{{ article.texte }}</div>
-                                    </p>
-                                    <script>
 
-                                        var editor{{ loop.index }} = ace.edit("editor{{ loop.index }}");
-                                        editor{{ loop.index }}.setTheme("ace/theme/monokai");
-                                        editor{{ loop.index }}.getSession().setMode("ace/mode/{{ article.type }}");
-                                        editor{{ loop.index }}.setReadOnly(true);  // false to make it editable
+                    <div id="editor" style="height: 600px; width: 100%;">{{ article.texte }}</div>
 
-                                    </script>
                                 {% else %}
                                     <p>{{ article.texte }}</p>
                                 {% endif %}
@@ -146,12 +125,12 @@
 
 
 
-                                    </div>
+
                                 </li>
                             </ul>
                             </div>
 
-                        </article>
+
                     </div>
                 </div>
             </div>

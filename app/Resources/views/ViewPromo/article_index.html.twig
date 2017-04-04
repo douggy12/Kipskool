@@ -1,0 +1,64 @@
+
+    <div class="widget">
+
+        <div class="widget-content widget-content-mini themed-background-dark text-light-op">
+
+            {% if article.auteur.avatar != null %}
+                <img src="{{ vich_uploader_asset(article.auteur, 'avatar')|imagine_filter('avatar_mini2') }}"
+                     class="img-circle img-thumbnail pull-left">
+            {% else %}
+                <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg') }}"
+                     class="img-circle img-thumbnail pull-left">
+            {% endif %}
+
+
+            <a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"
+               class="text-light">{{ article.auteur }}</a>
+            a posté un article le {{ article.createdAt|date("d F Y") }}
+        </div>
+        <div class="widget-content">
+            <h3>
+                {% if article.getClassName == "Article_promo" %}
+                <a href="{{ path('article_promo_show', {'article_promo_id': article.id}) }}">{{ article.titre }}</a>
+                {% endif %}
+            </h3>
+            {% if article.type != 'article' %}
+                <p>
+                <div id="editor{{ loop.index }}"
+                     style="width: 500px; height: 100px">{{ article.texte }}</div>
+                {#<a href="{{ path('article_promo_show', {'article_promo_id': article.id}) }}"#}
+                   {#class="'btn btn-primary btn-sm">lire tout le code</a>#}
+                </p>
+                <script>
+
+                    var editor{{ loop.index }} = ace.edit("editor{{ loop.index }}");
+                    editor{{ loop.index }}.setTheme("ace/theme/monokai");
+                    editor{{ loop.index }}.getSession().setMode("ace/mode/{{ article.type }}");
+                    editor{{ loop.index }}.setReadOnly(true);  // false to make it editable
+
+                </script>
+            {% else %}
+            {% if article.srcFeature != null %}
+            <img src="{{ vich_uploader_asset(article, 'srcFeature')|imagine_filter('article_thumb2') }}" class="pull-left">
+            {% endif %}
+                <p>{{ article.texte|raccourci }}</p>
+                {#<a href="{{ path('article_promo_show', {'article_promo_id': article_promo.id}) }}"#}
+                   {#class="'btn btn-primary btn-sm">lire la suite</a>#}
+            {% endif %}
+        </div>
+        <div class="widget-content text-dark">
+            <div class="row text-center">
+                <div class="col-xs-4">
+                    <i class="fa fa-heart-o"></i> 3.5k
+                </div>
+                <div class="col-xs-4">
+                    <i class="fa fa-eye"></i> 35k
+                </div>
+                <div class="col-xs-4">
+                    <i class="fa fa-comment"></i> {{ article.comments.count }}
+                    commentaires
+                </div>
+            </div>
+        </div>
+
+    </div>

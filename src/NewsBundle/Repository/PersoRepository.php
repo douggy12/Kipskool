@@ -20,4 +20,5 @@ class PersoRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ;
     }
+
 }

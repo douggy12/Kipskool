@@ -79,8 +79,8 @@ class articleEcoleController extends Controller
         }
 
 
-        return $this->render(':ViewPromo:page_layout_ecole.html.twig', array(
-            'articleEcole' => $articleEcole,
+        return $this->render(':ViewPromo:article_show.html.twig', array(
+            'article' => $articleEcole,
             'ecole' => $articleEcole->getEcole(),
             'commentaireArticleEcole' => $commentaireArticleEcole,
             'form' => $form->createView(),

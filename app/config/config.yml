@@ -180,7 +180,7 @@ liip_imagine:
           quality: 75
           filters:
             thumbnail:
-              mode: inset
+              mode: outbound
               size: [400,400]
               allow_upscale: true
 

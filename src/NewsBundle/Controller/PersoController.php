@@ -29,13 +29,27 @@ class PersoController extends Controller
      */
     public function showAction(Perso $perso)
     {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('NewsBundle:ArticlePerso');
+        $pAPe = $repository->findPersoPostedArticle($perso);
+//        $pAPr = $repository->findPromoPostedArticle($perso);
+//        $pAe = $repository->findEcolePostedArticle($perso);
+
+        $countArticles = $pAPe;
+
+
+
+
         $promo = $perso->getPromo()->first();
 
         return $this->render(':ViewPromo:page_perso.html.twig', array(
             'promo' => $promo,
             'perso' => $perso,
+            'nbPAP' => $countArticles
         ));
     }
+
+
 
     /**
      * Displays a form to edit an existing Perso entity.

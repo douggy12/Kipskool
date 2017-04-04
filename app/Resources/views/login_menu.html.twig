@@ -13,7 +13,7 @@
 
     </li>
     <li>
-        <a>Bienvenue {{ app.user.username }} !</a>
+        <a>Bienvenue {% if app.user %}{{ app.user.username }}{% else %}Etranger{% endif %} !</a>
     </li>
 
 
@@ -59,7 +59,7 @@
             <li>
                 <a href="{{ path('sonata_admin_dashboard') }}">
                     <i class="gi gi-lock fa-fw pull-right"></i>
-                    Interface d'administration
+                    Administration
                 </a>
             </li>
             {% endif %}
