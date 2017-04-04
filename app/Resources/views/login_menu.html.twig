@@ -1,0 +1,24 @@
+{% if app.user %}
+    <li class="hidden-xs animation-fadeInQuick">
+        <a href="{{ path('perso_show', {'perso_id': app.user.id}) }}">{{ app.user.username }}</a>
+    </li>
+    <li class="hidden-xs animation-fadeInQuick">
+        <a href="{{ path('perso_edit', {'perso_id': app.user.id}) }}">Editer son profil</a>
+    </li>
+    <li class="hidden-xs animation-fadeInQuick">
+        <a href="/logout">logout </a>
+    </li>
+{% else %}
+    <li class="hidden-xs animation-fadeInQuick">
+        <a href="{{ path('fos_user_security_login') }}">login</a>
+    </li>
+    {#<li class="hidden-xs animation-fadeInQuick">#}
+        {#<a href="/{{ path('fos_user_registration_register') }}">Register</a>#}
+    {#</li>#}
+{% endif %}
+
+{% if is_granted('ROLE_ADMIN') %}
+    <li class="hidden-xs animation-fadeInQuick">
+        <a href="{{ path('sonata_admin_dashboard') }}">interface admin</a>
+    </li>
+{% endif %}

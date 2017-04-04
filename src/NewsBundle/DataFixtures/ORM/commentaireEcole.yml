@@ -1,5 +1,5 @@
 NewsBundle\Entity\commentaireArticleEcole:
   commentaire_ecole{1..50}:
-    articleEcole: '@articleEcole*'
+    article: '@articleEcole*'
     texte: <realtext($maxNbChars = 65)>
     auteur: '@perso*'

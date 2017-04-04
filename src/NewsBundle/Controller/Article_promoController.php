@@ -34,6 +34,7 @@ class Article_promoController extends Controller
         $article_promo = new Article_promo();
         $article_promo->setPromo($promo);
         $article_promo->setAuteur($this->getUser());
+        $article_promo->setType('article');
         $form = $this->createForm('NewsBundle\Form\Article_promoType', $article_promo);
         $form->handleRequest($request);
 
@@ -115,7 +116,7 @@ class Article_promoController extends Controller
             ));
         }
 
-        return $this->render('article_promo/show.html.twig', array(
+        return $this->render(':ViewPromo:page_layout_promo.html.twig', array(
             'article_promo' => $article_promo,
             'promo'=>$article_promo->getPromo(),
             'commentaire_article_promo' => $commentaire_article_promo,

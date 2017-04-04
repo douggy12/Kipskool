@@ -5,12 +5,15 @@ namespace NewsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * articleEcole
  *
  * @ORM\Table(name="article_ecole")
  * @ORM\Entity(repositoryClass="NewsBundle\Repository\articleEcoleRepository")
+ * @Vich\Uploadable()
  *
  */
 class articleEcole
@@ -71,6 +74,12 @@ class articleEcole
     private $auteur;
 
     /**
+     * @var string
+     * @ORM\Column(name="type", type="string", length=255,nullable=false)
+     */
+    private $type;
+
+    /**
      * articleEcole constructor.
      */
     public function __construct()
@@ -78,6 +87,29 @@ class articleEcole
 
         $this->createdAt = time();
         $this->commentaires = new ArrayCollection();
+    }
+
+    /**
+     * @Assert\Callback
+     * @param ExecutionContextInterface $context
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        if ($this->srcFeature != null){
+
+
+            if (! in_array($this->srcFeature->getMimeType(), array(
+                'image/jpeg',
+                'image/gif',
+                'image/png'
+            ))) {
+                $context
+                    ->buildViolation('Wrong file type (jpg,gif,png)')
+                    ->atPath('fileName')
+                    ->addViolation()
+                ;
+            }
+        }
     }
 
 
@@ -237,6 +269,24 @@ class articleEcole
         return (new \ReflectionClass($this))->getShortName();
 
     }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+
 
 
 }

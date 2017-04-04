@@ -30,6 +30,7 @@ class articleEcoleController extends Controller
         $articleEcole = new articleEcole();
         $articleEcole->setEcole($ecole);
         $articleEcole->setAuteur($this->getUser());
+        $articleEcole->setType("article");
 
         $form = $this->createForm('NewsBundle\Form\articleEcoleType', $articleEcole);
         $form->handleRequest($request);
@@ -78,7 +79,7 @@ class articleEcoleController extends Controller
         }
 
 
-        return $this->render('articleecole/show.html.twig', array(
+        return $this->render(':ViewPromo:page_layout_ecole.html.twig', array(
             'articleEcole' => $articleEcole,
             'ecole' => $articleEcole->getEcole(),
             'commentaireArticleEcole' => $commentaireArticleEcole,

@@ -4,12 +4,17 @@ namespace NewsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Article_promo
  *
  * @ORM\Table(name="article_promo")
  * @ORM\Entity(repositoryClass="NewsBundle\Repository\Article_promoRepository")
+ * @Vich\Uploadable()
  */
 class Article_promo
 {
@@ -55,12 +60,20 @@ class Article_promo
      */
     private $texte;
 
+
     /**
-     * @var string
-     *
+     * @var File
+     * @Vich\UploadableField(mapping="articlePerso_image",fileNameProperty="imageName")
      * @ORM\Column(name="src_feature", type="string", length=255, nullable=true)
      */
     private $srcFeature;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageName;
+
 
     /**
      * @var Perso
@@ -78,20 +91,35 @@ class Article_promo
      * Article_promo constructor.
      */
 
-
     /**
-     * @return string
+     * @Assert\Callback
+     * @param ExecutionContextInterface $context
      */
-    public function getImage()
+    public function validate(ExecutionContextInterface $context)
     {
-        return $this->image;
+        if ($this->srcFeature != null) {
+
+
+            if (!in_array($this->srcFeature->getMimeType(), array(
+                'image/jpeg',
+                'image/gif',
+                'image/png'
+            ))
+            ) {
+                $context
+                    ->buildViolation('Wrong file type (jpg,gif,png)')
+                    ->atPath('fileName')
+                    ->addViolation();
+            }
+        }
     }
 
 
-    public function __construct()
+    public
+    function __construct()
     {
         $this->createdAt = time();
-        $this->comments= new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -99,11 +127,11 @@ class Article_promo
      *
      * @return int
      */
-    public function getId()
+    public
+    function getId()
     {
         return $this->id;
     }
-
 
 
     /**
@@ -111,7 +139,8 @@ class Article_promo
      *
      * @return int
      */
-    public function getCreatedAt()
+    public
+    function getCreatedAt()
     {
         return $this->createdAt;
     }
@@ -123,7 +152,8 @@ class Article_promo
      *
      * @return Article_promo
      */
-    public function setTitre($titre)
+    public
+    function setTitre($titre)
     {
         $this->titre = $titre;
 
@@ -135,7 +165,8 @@ class Article_promo
      *
      * @return string
      */
-    public function getTitre()
+    public
+    function getTitre()
     {
         return $this->titre;
     }
@@ -147,7 +178,8 @@ class Article_promo
      *
      * @return Article_promo
      */
-    public function setTexte($texte)
+    public
+    function setTexte($texte)
     {
         $this->texte = $texte;
 
@@ -159,42 +191,73 @@ class Article_promo
      *
      * @return string
      */
-    public function getTexte()
+    public
+    function getTexte()
     {
         return $this->texte;
     }
 
     /**
-     * Set srcFeature
-     *
-     * @param string $srcFeature
-     *
+     * @param string $imageName
      *
      * @return Article_promo
      */
-    public function setSrcFeature($srcFeature)
+    public
+    function setImageName($imageName)
     {
-        $this->srcFeature = $srcFeature;
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public
+    function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * Set srcFeature
+     *
+     * @param File|$image
+     *
+     * @return Article_promo
+     */
+    public
+    function setSrcFeature(File $image = null)
+    {
+        $this->srcFeature = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
 
         return $this;
     }
 
     /**
      * Get srcFeature
-     *
-     * @return string
+     * @return File|null
      */
-    public function getSrcFeature()
+    public
+    function getSrcFeature()
     {
         return $this->srcFeature;
     }
+
 
     /**
      * Get promo
      *
      * @return Promo
      */
-    public function getPromo()
+    public
+    function getPromo()
     {
         return $this->promo;
     }
@@ -202,7 +265,8 @@ class Article_promo
     /**
      * @param \NewsBundle\Entity\Promo $promo
      */
-    public function setPromo($promo)
+    public
+    function setPromo($promo)
     {
         $this->promo = $promo;
     }
@@ -215,7 +279,8 @@ class Article_promo
     /**
      * @return ArrayCollection|Commentaire_article_promo[]
      */
-    public function getComments()
+    public
+    function getComments()
     {
         return $this->comments;
     }
@@ -223,7 +288,8 @@ class Article_promo
     /**
      * @return Perso
      */
-    public function getAuteur()
+    public
+    function getAuteur()
     {
         return $this->auteur;
     }
@@ -231,7 +297,8 @@ class Article_promo
     /**
      * @param Perso $auteur
      */
-    public function setAuteur($auteur)
+    public
+    function setAuteur($auteur)
     {
         $this->auteur = $auteur;
     }
@@ -239,7 +306,8 @@ class Article_promo
     /**
      * @return string
      */
-    public function getType()
+    public
+    function getType()
     {
         return $this->type;
     }
@@ -247,7 +315,8 @@ class Article_promo
     /**
      * @param string $type
      */
-    public function setType($type)
+    public
+    function setType($type)
     {
         $this->type = $type;
     }
@@ -255,7 +324,8 @@ class Article_promo
     /**
      * @return string
      */
-    public function getClassName()
+    public
+    function getClassName()
     {
         return (new \ReflectionClass($this))->getShortName();
 
