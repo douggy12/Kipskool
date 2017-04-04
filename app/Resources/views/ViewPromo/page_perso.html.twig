@@ -162,7 +162,7 @@
                                     {% if article.srcFeature != null %}
                                     <img src="{{ vich_uploader_asset(article, 'srcFeature')|imagine_filter('article_thumb2') }}" class="pull-left">
                                     {% endif %}
-                                        <p>{{ article.texte|raccourci }}</p>
+                                        <p style="min-height: 50px">{{ article.texte|raccourci }}</p>
                                         <a href="{{ path('articleperso_show', {'article_perso_id': article.id}) }}"
                                            class="'btn btn-primary btn-sm">lire la suite</a>
                                     {% endif %}
