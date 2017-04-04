@@ -12,8 +12,13 @@
         </div>
 
     </li>
+
     <li>
+        {% if app.user %}
         <a>Bienvenue {{ app.user.username }} !</a>
+        {% else %}
+        <a>Bienvenue Inviter</a>
+        {% endif %}
     </li>
 
 
