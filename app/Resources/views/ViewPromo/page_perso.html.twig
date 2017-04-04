@@ -68,10 +68,10 @@
                         <div class="row">
                             <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
                                 {% if perso.avatar != null %}
-                                    <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini') }}"
+                                    <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini2') }}"
                                          alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
                                 {% else %}
-                                    <img src="{{ asset('media/cache/avatar_mini/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
+                                    <img src="{{ asset('media/cache/avatar_mini/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"
                                          alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
                                 {% endif %}
                                 <h1>{{ perso.nom }}</h1>
@@ -82,10 +82,10 @@
                         </div>
                     </div>
                     {% if perso.avatar != null %}
-                        <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini') }}"
+                        <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini2') }}"
                              alt="Header Image"/>
                     {% else %}
-                        <img src="{{ asset('media/cache/avatar_mini/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
+                        <img src="{{ asset('media/cache/avatar_mini/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"
                              alt="Header Image"/>
                     {% endif %}
                 </div>

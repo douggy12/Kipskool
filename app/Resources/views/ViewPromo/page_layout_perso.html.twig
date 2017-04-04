@@ -34,7 +34,7 @@
 
 
                 {% include 'login_menu.html.twig' %}
-         h Form -->
+
 
             <!-- END Left Header Navigation -->
         </header>
@@ -51,20 +51,21 @@
                         </h4>
                         <ul class="nav-users nav-users-online">
                             {% for promo in promos %}
-                            {% for perso in promo.persos %}
-                            <li>
-                            <a href="{{ path('perso_show', {'perso_id': perso.id}) }}">
-                            {% if perso.avatar != null %}
-                            <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini') }}"
-                            alt="image" class="nav-users-avatar"/>
-                            {% else %}
-                            <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
-                            alt="image" class="nav-users-avatar"/>
-                            {% endif %}
-                            <span class="nav-users-heading">{{ perso.nom }} </span>
-                            </a>
-                            </li>
-                            {% endfor %}
+                            {#{% for perso in promo.persos %}#}
+                            {#<li>#}
+                            {#<a href="{{ path('perso_show', {'perso_id': perso.id}) }}">#}
+                            {#{% if perso.avatar != null %}#}
+                            {#<img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini2') }}"#}
+                            {#alt="image" class="nav-users-avatar"/>#}
+                            {#{% else %}#}
+                            {#<img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"#}
+                            {#alt="image" class="nav-users-avatar"/>#}
+                            {#{% endif %}#}
+                            {#<span class="nav-users-heading">{{ perso.nom }} </span>#}
+                            {#</a>#}
+                            {#</li>#}
+                            {#{% endfor %}#}
+                            {% include 'liste_etudiant_promo.html.twig' %}
                             {% endfor %}
                         </ul>
                     </div>
@@ -103,10 +104,10 @@
                         <article style="min-height: 800px">
                             <div class="text-center">
                                 {% if article.auteur.avatar != null %}
-                                    <img src="{{ vich_uploader_asset(article.auteur,'avatar')|imagine_filter('avatar_mini') }}"
+                                    <img src="{{ vich_uploader_asset(article.auteur,'avatar')|imagine_filter('avatar_mini2') }}"
                                          alt="image" class="img-circle"/>
                                 {% else %}
-                                    <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
+                                    <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"
                                          alt="image" class="img-circle"/>
                                 {% endif %}
 
@@ -117,7 +118,7 @@
                                 </h3>
 
                                 {% if article.srcFeature !=null %}
-                                    <img src="{{ vich_uploader_asset(article.srcFeature, 'srcFeature')|imagine_filter('article_image') }}"
+                                    <img src="{{ vich_uploader_asset(article, 'srcFeature')|imagine_filter('article_image2') }}"
                                          alt="image" class="img-responsive center-block">
                                 {% endif %}
 

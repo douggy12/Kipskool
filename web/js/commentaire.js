@@ -28,10 +28,10 @@ function showList(commentaires) {
             comDate = comDate.getDay() + '/' + comDate.getMonth() + '/' + comDate.getFullYear() + ' ' + comDate.getHours() + ':' + comDate.getMinutes();
 
             if (commentaire.avatar != null) {
-                avatar = '../media/cache/avatar_mini/images/avatar/' + commentaire.avatarName;
+                avatar = '../media/cache/avatar_mini2/images/avatar/' + commentaire.avatarName;
             }
             else {
-                avatar = '/media/cache/avatar_mini/images/perso/avatar/chaton.jpg';
+                avatar = '/media/cache/avatar_mini2/images/perso/avatar/chaton.jpg';
             }
 
             $('#commentaires_list').append(
