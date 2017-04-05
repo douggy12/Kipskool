@@ -75,13 +75,13 @@
 
                     </div>
                 </div>
-                {% if ecole.avatar != null %}
-                    <img src="{{ vich_uploader_asset(ecole,'avatar')|imagine_filter('avatar_wide2') }}"
+                {#{% if ecole.avatar != null %}#}
+                    {#<img src="{{ vich_uploader_asset(ecole,'avatar')|imagine_filter('avatar_wide2') }}"#}
+                         {#alt="Header Image"/>#}
+                {#{% else %}#}
+                    <img src="{{ asset('img/banderole.jpg')|imagine_filter('avatar_wide2') }}"
                          alt="Header Image"/>
-                {% else %}
-                    <img src="{{ asset('img/LOGO_IMIE_res.jpg')|imagine_filter('avatar_wide2') }}"
-                         alt="Header Image"/>
-                {% endif %}
+                {#{% endif %}#}
             </div>
             <!-- END Social Net Header -->
 
