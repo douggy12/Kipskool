@@ -78,7 +78,7 @@ class PersoController extends Controller
 
         return $this->render('perso/edit.html.twig', array(
             'perso' => $perso,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
 
         ));
     }

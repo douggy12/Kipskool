@@ -16,10 +16,10 @@
 
 {% block body %}
 
-{{ form_start(form) }}
-        {{ form_widget(form) }}
-<input type="submit" value="Poster mon code"/>
-{{ form_end(form) }}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Poster mon code"/>
+    {{ form_end(form) }}
     <div id="editor">
         function foo(items) {
         var x = "All this is syntax highlighted";
@@ -29,24 +29,23 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}" type="text/javascript"
+            charset="utf-8"></script>
     <script>
-        $(document).ready(function(){
-            $("#newsbundle_codepost_texte").val(editor.getValue()) ;
+        $(document).ready(function () {
+            $("#newsbundle_codepost_texte").val(editor.getValue());
         });
         var editor = ace.edit("editor");
         editor.setTheme("ace/theme/monokai");
         editor.getSession().setMode("ace/mode/java");
 
-        editor.getSession().on('change', function(e) {
-            $("#newsbundle_codepost_texte").val(editor.getValue()) ;
+        editor.getSession().on('change', function (e) {
+            $("#newsbundle_codepost_texte").val(editor.getValue());
         });
 
 
-
-
-        $("#newsbundle_codepost_type").change(function(){
-            editor.getSession().setMode("ace/mode/"+$(this).val())
+        $("#newsbundle_codepost_type").change(function () {
+            editor.getSession().setMode("ace/mode/" + $(this).val())
 
         });
 

@@ -45,7 +45,7 @@ class articleEcoleController extends Controller
             return $this->redirectToRoute('ecole_show', array('ecole_id' => $ecole->getId()));
         }
 
-        return $this->render('articleecole/new.html.twig', array(
+        return $this->render('ViewPromo/article_new_edit.html.twig', array(
             'ecole'=>$ecole,
             'articleEcole' => $articleEcole,
             'form' => $form->createView(),
@@ -108,7 +108,7 @@ class articleEcoleController extends Controller
             return $this->redirectToRoute('articleecole_show', array('article_ecole_id' => $articleEcole->getId()));
         }
 
-        return $this->render('articleecole/edit.html.twig', array(
+        return $this->render('ViewPromo/article_new_edit.html.twig', array(
             'articleEcole' => $articleEcole,
             'ecole' => $articleEcole->getEcole(),
             'edit_form' => $editForm->createView(),
