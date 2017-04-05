@@ -1,9 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}"
-            type="text/javascript"
-            charset="utf-8">
-    </script>
+
 
     <div id="page-container" class="header-fixed-top " style="width: 100%">
 
@@ -33,9 +30,9 @@
                         <li>
                             <a href="{{ path('promo_show', {'promo_id': promos.first.id}) }}"><strong>{{ promos.first.nom }}</strong></a>
                         </li>
-                    <li>
-                        <a href="{{ path('perso_show', {'perso_id': perso.id}) }}"><strong>{{ perso.prenom }} {{ perso.nom }}</strong></a>
-                    </li>
+                        <li>
+                            <a href="{{ path('perso_show', {'perso_id': perso.id}) }}"><strong>{{ perso.prenom }} {{ perso.nom }}</strong></a>
+                        </li>
                     {% endif %}
                     <!-- END Header Link -->
                 </ul>
@@ -108,7 +105,7 @@
                         <a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"
                            class="text-light">{{ article.auteur.prenom }} {{ article.auteur.nom }}</a>
                         le {{ article.createdAt|date("d F Y") }}
-                        {% if is_granted('ROLE_STAFF') %}
+                        {% if is_granted('ROLE_STAFF') or app.user == article.auteur %}
                             <div class="btn-group pull-right">
                                 <a href="javascript:void(0)"
                                    class="btn btn-effect-ripple btn-default dropdown-toggle enable-tooltip "
@@ -123,7 +120,8 @@
                                                 <i class="fa fa-pencil pull-right"></i>
                                                 Edit
                                             </a>
-                                        {% elseif article.className == 'Article_promo' %}
+                                        {% elseif article.className == 'Article_promo' and (is_granted('ROLE_DELEGUE')
+                                        and article.promo in app.user.promo ) %}
                                             <a href="{{ path('article_promo_edit', {'article_promo_id': article.id}) }}">
                                                 <i class="fa fa-pencil pull-right"></i>
                                                 Edit
@@ -139,10 +137,10 @@
                                     <li class="divider"></li>
                                     <li>
                                         {% if article.className == 'articleEcole' %}
-                                        <a href="{{ path('articleecole_delete', {'article_ecole_id': article.id}) }}">
-                                            <i class="fa fa-trash-o fa-fw pull-right"></i>
-                                            Delete
-                                        </a>
+                                            <a href="{{ path('articleecole_delete', {'article_ecole_id': article.id}) }}">
+                                                <i class="fa fa-trash-o fa-fw pull-right"></i>
+                                                Delete
+                                            </a>
                                         {% elseif article.className == 'Article_promo' %}
                                             <a href="{{ path('article_promo_delete', {'article_promo_id': article.id}) }}">
                                                 <i class="fa fa-trash-o fa-fw pull-right"></i>
@@ -161,14 +159,14 @@
                     </div>
                     <div class="widget-content">
                         {% if article.srcFeature %}
-                        <img src="{{ vich_uploader_asset(article, 'srcFeature')|imagine_filter('article_image2') }}"
-                             class="img-responsive center-block">
+                            <img src="{{ vich_uploader_asset(article, 'srcFeature')|imagine_filter('article_image2') }}"
+                                 class="img-responsive center-block">
                         {% endif %}
                         <h3>{{ article.titre }}</h3>
                         {% if article.type != 'article' %}
-                        <div id="editor" style="height: 600px; width: 100%;">{{ article.texte }}</div>
+                            <div id="editor" style="height: 600px; width: 100%;">{{ article.texte }}</div>
                         {% else %}
-                        <p>{{ article.texte }}</p>
+                            <p>{{ article.texte }}</p>
                         {% endif %}
                         <div class="push-bit-top">
                             <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-danger"
@@ -186,6 +184,7 @@
         </div>
     </div>
 {% endblock %}
+
         {% block javascripts %}
 
 
