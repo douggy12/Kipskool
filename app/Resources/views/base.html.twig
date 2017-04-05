@@ -1,31 +1,50 @@
 <!DOCTYPE html>
+<!--[if IE 9]>
+<html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Kipskool{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        {% block link %}{% endblock %}
-    </head>
-    <body>
-    <ul>
-        <li>
-            {% if app.user %}
-                Logged in as {{ app.user.username }}
-                <a href="/logout">logout </a>
-                <a href="{{ path('perso_show', {'perso_id': app.user.id}) }}">Page perso</a>
-            {% else %}
-                <a href="/login">login</a> or <a href="/register">Register</a>
-            {% endif %}</li>
-        {% if is_granted('ROLE_ADMIN') %}
-            <li>
-                <a href="{{ path('sonata_admin_dashboard') }}">interface admin</a>
-            </li>
-        {% endif %}
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="KipSkool Le réseau social des Ecoles !">
+    <meta name="author" content="KipSkool Team">
+    <meta name="robots" content="noindex, nofollow">
 
-    </ul>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+    <title>{% block title %}Kipskool{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('iconKip.ico') }}"/>
+    {% block link %}{% endblock %}
+
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/themes.css') }}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Icons -->
+    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+
+</head>
+<body>
+{% block body %}
+
+{% endblock %}
+
+<script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/plugins.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/vendor/modernizr-3.3.1.min.js') }}"></script>
+<script src="{{ asset('js/rechercher.js') }}"></script>
+
+{% block javascripts %}
+
+{% endblock %}
+
+
+
+
+</body>
 
 </html>

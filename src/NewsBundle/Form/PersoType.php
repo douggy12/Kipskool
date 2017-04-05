@@ -5,6 +5,7 @@ namespace NewsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,15 +17,23 @@ class PersoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('avatar', FileType::class, array(
+                'data_class' => null,
+                'required' => false
+            ))
             ->add('nom')
             ->add('prenom')
-            ->add('titre')
-            ->add('mail')
             ->add('born', DateType::class, array(
                 'input' => 'timestamp',
                 'widget' => 'single_text'
             ))
-            ->add('password');
+
+        ;
+    }
+
+    public function getParent()
+    {
+        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
     }
     
     /**

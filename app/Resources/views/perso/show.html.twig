@@ -17,8 +17,14 @@
     <table>
         <tbody>
         <tr>
-            <th>Id</th>
-            <td>{{ perso.id }}</td>
+            <th></th>
+            {% if perso.avatar != null %}
+                <td><img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_image') }}"
+                     alt="image" class="nav-users-avatar"/></td>
+            {% else %}
+               <td> <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_image') }}"
+                     alt="image" class="nav-users-avatar"/></td>
+            {% endif %}
         </tr>
         <tr>
             <th>Nom</th>
@@ -41,18 +47,19 @@
     </table>
 
 
-
-    <ul>
-        <li>
-            <a href="{{ path('articleperso_new', { 'perso_id' : perso.id} ) }}">Ajouter un article</a>
-        </li>
-        <li>
-            <a href="{{ path('articleperso_new_code', {'perso_id': perso.id}) }}">Poster du code</a>
-        </li>
-    </ul>
-
+    {% if app.user.id==perso.id %}
+        <ul>
+            <li>
+                <a href="{{ path('articleperso_new', { 'perso_id' : perso.id} ) }}">Ajouter un article</a>
+            </li>
+            <li>
+                <a href="{{ path('articleperso_new_code', {'perso_id': perso.id}) }}">Poster du code</a>
+            </li>
+        </ul>
+    {% endif %}
     <table>
         <tr>
+            <th></th>
             <th>créé le :</th>
             <th>titre</th>
             <th>texte</th>
@@ -61,21 +68,26 @@
         {% for article in perso.articles %}
 
             <tr>
+                <td>
+                    {% if article.srcFeature != null %}
+                        <img src="{{ vich_uploader_asset(article, 'srcFeature')|imagine_filter('article_thumb') }}"/>
+                    {% endif %}
+                </td>
                 <td>{{ article.createdAt|date("d-m-Y") }}</td>
                 <td>
                     <a href="{{ path('articleperso_show', {'article_perso_id': article.id, 'perso_id': perso.id}) }}">{{ article.titre }}</a>
                 </td>
-                {% if article.type != null %}
+                {% if article.type != "article" %}
                     <td>
 
-                    <div id="editor{{ loop.index }}" style="width: 500px; height: 100px">{{ article.texte }}</div>
+                        <div id="editor{{ loop.index }}" style="width: 500px; height: 100px">{{ article.texte }}</div>
                     </td>
                     <script>
 
-                            var editor{{ loop.index }} = ace.edit("editor{{ loop.index }}");
-                            editor{{ loop.index }}.setTheme("ace/theme/monokai");
-                            editor{{ loop.index }}.getSession().setMode("ace/mode/{{ article.type }}");
-                            editor{{ loop.index }}.setReadOnly(true);  // false to make it editable
+                        var editor{{ loop.index }} = ace.edit("editor{{ loop.index }}");
+                        editor{{ loop.index }}.setTheme("ace/theme/monokai");
+                        editor{{ loop.index }}.getSession().setMode("ace/mode/{{ article.type }}");
+                        editor{{ loop.index }}.setReadOnly(true);  // false to make it editable
 
 
                     </script>

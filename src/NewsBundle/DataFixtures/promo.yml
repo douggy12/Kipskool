@@ -1,0 +1,35 @@
+NewsBundle\Entity\Promo:
+    promo_1:
+        ecole: '@ecole*'
+        nom: JMQDL 2016
+        description: Je Me Qualifie Développeur Logiciel
+        avatar : C:\Users\dmett\PhpstormProjects\Kipskool\web\images\avatar\jmqdl2016.jpg
+        avatarName: jmqdl2016.jpg
+
+    promo_2:
+        ecole: '@ecole*'
+        nom: IT Start LM 01 2016
+        description: Année de Préparation à l'Alternance
+        avatar : C:\Users\dmett\PhpstormProjects\Kipskool\web\images\avatar\IT Start LM 01 2016.jpg
+        avatarName: IT Start LM 01 2016.jpg
+
+    promo_3:
+        ecole: '@ecole*'
+        nom: CDPN LM 02 2016
+        description: 2e année Contrat de Professionnalisation
+        avatar : C:\Users\dmett\PhpstormProjects\Kipskool\web\images\avatar\CDPN LM 02 2016.jpg
+        avatarName: CDPN LM 02 2016.jpg
+
+    promo_4:
+        ecole: '@ecole*'
+        nom: Digital FActory 2016
+        description: Faire des trucs et des bidules
+        avatar : C:\Users\dmett\PhpstormProjects\Kipskool\web\images\avatar\Digital Factory 2016.jpg
+        avatarName: Digital Factory 2016.jpg
+
+    promo_5:
+        ecole: '@ecole*'
+        nom: Staff
+        description: Big Brother is watching YOU
+        avatar : C:\Users\dmett\PhpstormProjects\Kipskool\web\images\avatar\Staff.jpg
+        avatarName: Staff.jpg

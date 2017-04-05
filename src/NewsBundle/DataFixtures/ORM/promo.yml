@@ -1,5 +1,35 @@
 NewsBundle\Entity\Promo:
-    promo_{1..6}:
+    promo_1:
         ecole: '@ecole*'
-        nom: <company()>
-        description: <catchPhrase()>
+        nom: JMQDL 2016
+        description: Je Me Qualifie Développeur Logiciel
+        avatar: <promoImg(1)>
+
+
+    promo_2:
+        ecole: '@ecole*'
+        nom: IT Start LM 01 2016
+        description: Année de Préparation à l'Alternance
+        avatar: <promoImg(3)>
+
+
+    promo_3:
+        ecole: '@ecole*'
+        nom: CDPN LM 02 2016
+        description: 2e année Contrat de Professionnalisation
+        avatar: <promoImg(2)>
+
+
+    promo_4:
+        ecole: '@ecole*'
+        nom: Digital FActory 2016
+        description: Faire des trucs et des bidules
+        avatar: <promoImg(5)>
+
+
+    promo_5:
+        ecole: '@ecole*'
+        nom: Staff
+        description: Big Brother is watching YOU
+        avatar: <promoImg(4)>
+

@@ -10,4 +10,17 @@ namespace NewsBundle\Repository;
  */
 class ArticlePersoRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findPersoPostedArticle($perso){
+        return $this->createQueryBuilder('article')
+
+
+            ->where('article.auteur = :perso')
+            ->setParameter('perso', $perso)
+            ->getQuery()
+            ->getResult()
+
+            ;
+    }
+
 }

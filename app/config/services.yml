@@ -78,3 +78,9 @@ services:
       tags:
           - { name: form.type, alias: app_user_registration }
 
+    Image.image:
+      class: Image\Image
+
+    data_fixtures.provider.portrait:
+      class: NewsBundle\DataFixtures\ImageProvider
+      tags: [ { name: hautelook_alice.faker.provider } ]

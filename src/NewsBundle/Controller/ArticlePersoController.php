@@ -42,18 +42,8 @@ class ArticlePersoController extends Controller
         $form->handleRequest($request);
 
 
-        //
-
         if ($form->isSubmitted() && $form->isValid()) {
-            if($articlePerso->getImage()==!null) {
-                $file = $articlePerso->getImage();
-                $filename = md5(uniqid()) . '.' . $file->guessExtension();
-                $file->move(
-                    $this->getParameter('image_directory'),
-                    $filename
-                );
-                $articlePerso->setImage($filename);
-            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($articlePerso);
             $em->flush($articlePerso);
@@ -125,6 +115,7 @@ class ArticlePersoController extends Controller
         $form = $this->createForm('NewsBundle\Form\CommentaireArticlePersoType', $commentaireArticlePerso);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($commentaireArticlePerso);
@@ -136,9 +127,11 @@ class ArticlePersoController extends Controller
             ));
         }
 
-        return $this->render('articleperso/show.html.twig', array(
+        return $this->render(':ViewPromo:article_show.html.twig', array(
             'article' => $articlePerso,
-            'perso' => $articlePerso->getPerso(),
+            'perso'=> $articlePerso->getPerso(),
+            'promos' => $articlePerso->getPerso()->getPromo(),
+            'ecole' => $articlePerso->getPerso()->getPromo()->first()->getEcole(),
             'commentaireArticlePerso' => $commentaireArticlePerso,
             'edit_form' => $form->createView(),
 

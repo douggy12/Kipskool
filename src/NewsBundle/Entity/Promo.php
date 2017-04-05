@@ -4,12 +4,17 @@ namespace NewsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Promo
  *
  * @ORM\Table(name="promo")
  * @ORM\Entity(repositoryClass="NewsBundle\Repository\PromoRepository")
+ * @Vich\Uploadable()
  *
  */
 class Promo
@@ -56,6 +61,19 @@ class Promo
      * @ORM\ManyToMany(targetEntity="NewsBundle\Entity\Perso", mappedBy="promo", cascade={"persist"})
      */
     private $persos;
+
+    /**
+     * @var File
+     * @Vich\UploadableField(mapping="perso_image",fileNameProperty="avatarName")
+     * @ORM\Column(name="avatar", type="string", length=255, nullable=true)
+     */
+    private $avatar;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $avatarName;
 
 
     public function __construct()
@@ -124,7 +142,7 @@ class Promo
 
     function __toString()
     {
-     return $this->nom;
+        return $this->nom;
     }
 
     /**
@@ -159,7 +177,77 @@ class Promo
         return $this->persos;
     }
 
+//
+//    /**
+//     * @Assert\Callback
+//     * @param ExecutionContextInterface $context
+//     */
+//    public function validate(ExecutionContextInterface $context)
+//    {
+//        if ($this->avatar != null) {
+//            if (!in_array($this->avatar->getMimeType(), array(
+//                'image/jpeg',
+//                'image/gif',
+//                'image/png',
+//                'text'
+//            ))
+//            ) {
+//                $context
+//                    ->buildViolation('Wrong file type (jpg,gif,png)')
+//                    ->atPath('fileName')
+//                    ->addViolation();
+//            }
+//        }
+//    }
 
+    /**
+     * Set avatar
+     *
+     * @param File|$image
+     *
+     * @return Promo
+     */
+    public function setAvatar(File $image = null)
+    {
+        $this->avatar = $image;
+        $this->setAvatarName($image->getFilename());
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     * @return File|null
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAvatarName()
+    {
+        return $this->avatarName;
+    }
+
+    /**
+     * @param string $avatarName
+     * @return Promo
+     */
+    public function setAvatarName($avatarName)
+    {
+        $this->avatarName = $avatarName;
+
+        return $this;
+    }
 
 
 }

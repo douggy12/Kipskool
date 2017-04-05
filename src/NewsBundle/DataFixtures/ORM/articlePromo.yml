@@ -1,7 +1,8 @@
 NewsBundle\Entity\Article_promo:
   Article_promo_{1..100}:
     promo: '@promo*'
+    type: article
     titre: <realText($maxNbChars = 20)>
     texte: <realText($maxNbChars = 400)>
-    srcFeature: <imageUrl()>
     auteur: '@perso*'
+    srcFeature: <articleImg()>

@@ -1,0 +1,179 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}"
+            type="text/javascript"
+            charset="utf-8">
+
+    </script>
+
+    <div id="page-container" class="header-fixed-top" style="width: 100%">
+
+        <!-- Main Container -->
+        <div id="main-container" style="margin-left: 0px">
+            <!-- Header -->
+            <header class="navbar navbar-inverse navbar-fixed-top">
+                <!-- Left Header Navigation -->
+                <ul class="nav navbar-nav-custom">
+
+                    <!-- END Main Sidebar Toggle Button -->
+
+                    <!-- Header Link -->
+                    <li class="hidden-xs animation-fadeInQuick">
+                        <a href="{{ path('ecole_index') }}"><strong>Index</strong></a>
+                    </li>
+                    <li class="hidden-xs animation-fadeInQuick">
+                        <a href="{{ path('ecole_show', {'ecole_id': promo.ecole.id}) }}"><strong>{{ promo.ecole.nom }}</strong></a>
+                    </li>
+                    <li class="hidden-xs animation-fadeInQuick">
+                        <a href="page_promo.html.twig"><strong>{{ promo.nom }}</strong></a>
+                    </li>
+
+                    <!-- END Header Link -->
+                </ul>
+
+
+                    {% include 'login_menu.html.twig' %}
+
+
+                <!-- END Left Header Navigation -->
+            </header>
+            <!-- END Header -->
+
+            <!-- Page content -->
+            <div id="page-content" class="inner-sidebar-right">
+                <!-- Inner Sidebar -->
+                <div id="page-content-sidebar">
+                    <!-- Collapsible People List -->
+                    <div id="people-nav" class="collapse navbar-collapse remove-padding">
+                        <div class="block-section">
+                            <h4 class="inner-sidebar-header">
+                                <a href="" class="btn btn-effect-ripple btn-xs btn-default pull-right"></a>
+                                Etudiants
+                            </h4>
+                            <ul class="nav-users nav-users-online">
+                                {% include 'liste_etudiant_promo.html.twig' %}
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- END Collapsible People List -->
+                </div>
+                <!-- END Inner Sidebar -->
+
+                <!-- Social Net Header -->
+                <div class="content-header content-header-media">
+                    <div class="header-section">
+                        <div class="row">
+                            <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
+                                <h1>{{ promo.nom }}</h1>
+                                <h2 class="text-light-op"> {{ promo.description }}</h2>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% if promo.ecole.avatar != null %}
+                        <img src="{{ vich_uploader_asset(promo,'avatar')|imagine_filter('avatar_wide2') }}"
+                             alt="Header Image"/>
+                    {% else %}
+                        <img src="{{ asset('img/LOGO_IMIE_res.jpg')|imagine_filter('avatar_mini2') }}"
+                             alt="Header Image"/>
+                    {% endif %}
+                </div>
+                <!-- END Social Net Header -->
+
+
+                {% if is_granted('ROLE_STAFF') or (is_granted('ROLE_DELEGUE') and app.user.promo == promo) %}
+                    <div class="block-section">
+                        <a href="{{ path('add_article_promo', {'promo_id': promo.id}) }}"
+                           class="btn btn-lg btn-success"><i
+                                    class="fa fa-plus"></i> Ecrire un article</a>
+
+                        <a href="{{ path('add_code_promo', {'promo_id': promo.id}) }}" class="btn btn-lg btn-warning"><i
+                                    class="fa fa-plus"></i> Poster du code</a>
+                    </div>
+
+
+                {% endif %}
+
+                <!-- Social Net Content -->
+                <div class="row">
+                    <!-- Latest News -->
+                    <div class="col-lg-12">
+                        <!-- Story -->
+                        {% for article_promo in promo.articles_promo %}
+                            <div class="widget">
+
+                                <div class="widget-content widget-content-mini themed-background-dark text-light-op">
+
+                                    {% if article_promo.auteur.avatar != null %}
+                                        <img src="{{ vich_uploader_asset(article_promo.auteur, 'avatar')|imagine_filter('avatar_mini2') }}"
+                                             class="img-circle img-thumbnail pull-left">
+                                    {% else %}
+                                        <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg') }}"
+                                             class="img-circle img-thumbnail pull-left">
+                                    {% endif %}
+
+
+                                    <a href="{{ path('perso_show', {'perso_id': article_promo.auteur.id}) }}"
+                                       class="text-light">{{ article_promo.auteur }}</a>
+                                    a posté un article le {{ article_promo.createdAt|date("d F Y") }}
+                                </div>
+                                <div class="widget-content">
+                                    <h3>
+                                        <a href="{{ path('article_promo_show', {'article_promo_id': article_promo.id}) }}">{{ article_promo.titre }}</a>
+                                    </h3>
+                                    {% if article_promo.type != 'article' %}
+                                        <p>
+                                        <div id="editor{{ loop.index }}"
+                                             style="width: 500px; height: 100px">{{ article_promo.texte }}</div>
+                                        <a href="{{ path('article_promo_show', {'article_promo_id': article_promo.id}) }}"
+                                           class="'btn btn-primary btn-sm">lire tout le code</a>
+                                        </p>
+                                        <script>
+
+                                            var editor{{ loop.index }} = ace.edit("editor{{ loop.index }}");
+                                            editor{{ loop.index }}.setTheme("ace/theme/monokai");
+                                            editor{{ loop.index }}.getSession().setMode("ace/mode/{{ article_promo.type }}");
+                                            editor{{ loop.index }}.setReadOnly(true);  // false to make it editable
+
+                                        </script>
+                                    {% else %}
+                                    {% if article_promo.srcFeature != null %}
+                                    <img src="{{ vich_uploader_asset(article_promo, 'srcFeature')|imagine_filter('article_thumb2') }}" class="pull-left">
+                                    {% endif %}
+                                        <p style="min-height: 50px">{{ article_promo.texte|raccourci }}</p>
+                                        <a href="{{ path('article_promo_show', {'article_promo_id': article_promo.id}) }}"
+                                           class="'btn btn-primary btn-sm">lire la suite</a>
+                                    {% endif %}
+                                </div>
+                                <div class="widget-content text-dark">
+                                    <div class="row text-center">
+                                        <div class="col-xs-4">
+                                            <i class="fa fa-heart-o"></i> 3.5k
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <i class="fa fa-eye"></i> 35k
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <i class="fa fa-comment"></i> {{ article_promo.comments.count }}
+                                            commentaires
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                        <!-- END Story -->
+                    </div>
+                    <!-- END Latest News -->
+                </div>
+                <!-- END Social Net Content -->
+            </div>
+            <!-- END Page Content -->
+        </div>
+        <!-- END Main Container -->
+    </div>
+    <!-- END Page Container -->
+{% endblock %}

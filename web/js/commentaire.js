@@ -1,7 +1,7 @@
 $(document).ready(init);
 
 
-function init(){
+function init() {
 
     getList();
     $('#addComment').click(addComment);
@@ -22,12 +22,40 @@ function getList() {
 }
 function showList(commentaires) {
     $('#commentaires_list').html('');
+
     $.each(commentaires, function (index, commentaire) {
+            comDate = new Date(commentaire.createdAt * 1000);
+            comDate = comDate.getDay() + '/' + comDate.getMonth() + '/' + comDate.getFullYear() + ' ' + comDate.getHours() + ':' + comDate.getMinutes();
 
-        $('#commentaires_list').append('<tr><td>' + commentaire.createdAt
-            + '</td><td> ' + commentaire.auteur + '</td><td>' + commentaire.texte + '</td><td><input type="button" id="delCom" value="Supprimer" onclick="delCom('+ commentaire.id +')"></td></tr>');
+            if (commentaire.avatar != null) {
+                avatar = '../media/cache/avatar_mini2/images/avatar/' + commentaire.avatarName;
+            }
+            else {
+                avatar = '/media/cache/avatar_mini2/images/perso/avatar/chaton.jpg';
+            }
 
-    });
+            $('#commentaires_list').append(
+                // '<a class="pull-left"><img src="'+ avatar +'" alt="Avatar" class="img-circle"> </a><div class="media-body"><span class="text-muted"><small><em>' + commentaire.createdAt + '</em></small></span><strong>' + commentaire.auteur + '</strong> ' + commentaire.texte + '<input type="button" id="delCom" value="Supprimer" onclick="delCom('+ commentaire.id +')"></div>'
+                '<li class="media">'
+                + '<a href="/perso/' + commentaire.id + '" class="pull-left">'
+                + '<img src="' + avatar + '" alt="Avatar" class="img-circle">'
+                + '</a>'
+                + '<div class="media-body">'
+                + '<a href="/perso/' + commentaire.id + '"><strong>' + commentaire.auteur + '</strong></a>'
+                + '<span class="text-muted"><small><em>' + comDate + '</em></small></span>'
+                + '<p>' + commentaire.texte + '</p>'
+            );
+            if (roleStaff) {
+                $('#commentaires_list').append(
+                    '<input type="button" id="delCom" value="Supprimer" onclick="delCom(' + commentaire.id + ')" class="btn btn-danger">'
+                    + '</div>'
+                    + '</li>');
+            }
+
+
+        }
+    )
+    ;
 }
 function addComment() {
     $.ajax({
@@ -45,7 +73,7 @@ function addComment() {
 
 function delCom(id) {
     $.ajax({
-        url:"/delcom",
+        url: "/delcom",
         method: "POST",
         data: {
             commentaire: id,

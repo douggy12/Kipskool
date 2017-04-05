@@ -1,7 +1,8 @@
 NewsBundle\Entity\ArticlePerso:
   articlePerso_{1..100}:
     perso: '@perso*'
+    type : article
     titre: <realText($maxNbChars = 20)>
     texte: <realText($maxNbChars = 400)>
-    srcFeature: <imageUrl()>
     auteur: '@perso*'
+    srcFeature: <articleImg()>

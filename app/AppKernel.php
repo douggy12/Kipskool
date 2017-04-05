@@ -16,6 +16,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new NewsBundle\NewsBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
 
 
 
@@ -30,6 +31,9 @@ class AppKernel extends Kernel
 
             //FOS
             new FOS\UserBundle\FOSUserBundle(),
+
+            //Vichuploader
+            new Vich\UploaderBundle\VichUploaderBundle(),
 
 
 
