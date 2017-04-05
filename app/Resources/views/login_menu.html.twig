@@ -1,4 +1,4 @@
-<ul class="nav navbar-nav-custom pull-right" >
+<ul class="nav navbar-nav-custom pull-right">
     <!-- Search Form -->
     <li>
         <div class="navbar-form-custom">
@@ -33,36 +33,37 @@
         <ul class="dropdown-menu dropdown-menu-right">
             <li class="dropdown-header">
                 {% if is_granted('ROLE_ADMIN') %}
-                <strong>ADMINISTRATEUR</strong>
-                {%  elseif is_granted('ROLE_STAFF') %}
-                <strong>STAFF</strong>
-                {%  elseif is_granted('ROLE_FORMATEUR') %}
-                <strong>FORMATEUR</strong>
+                    <strong>ADMINISTRATEUR</strong>
+                {% elseif is_granted('ROLE_STAFF') %}
+                    <strong>STAFF</strong>
+                {% elseif is_granted('ROLE_FORMATEUR') %}
+                    <strong>FORMATEUR</strong>
                 {% elseif is_granted('ROLE_DELEGUE') %}
-                <strong>ETUDIANT DELEGUE</strong>
+                    <strong>ETUDIANT DELEGUE</strong>
                 {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <strong>ETUDIANT</strong>
+                    <strong>ETUDIANT</strong>
                 {% else %}
-                <strong>INVITE</strong>
+                    <strong>INVITE</strong>
                 {% endif %}
             </li>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <li>
+                <li>
 
-                <a href="{{ path('perso_edit', {'perso_id': app.user.id}) }}" onclick="App.sidebar('toggle-sidebar-alt');">
-                    <i class="gi gi-settings fa-fw pull-right"></i>
-                    Editer son profil
-                </a>
+                    <a href="{{ path('perso_edit', {'perso_id': app.user.id}) }}"
+                       onclick="App.sidebar('toggle-sidebar-alt');">
+                        <i class="gi gi-settings fa-fw pull-right"></i>
+                        Editer son profil
+                    </a>
 
-            </li>
+                </li>
             {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
-            <li>
-                <a href="{{ path('sonata_admin_dashboard') }}">
-                    <i class="gi gi-lock fa-fw pull-right"></i>
-                    Administration
-                </a>
-            </li>
+                <li>
+                    <a href="{{ path('sonata_admin_dashboard') }}">
+                        <i class="gi gi-lock fa-fw pull-right"></i>
+                        Administration
+                    </a>
+                </li>
             {% endif %}
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <li>

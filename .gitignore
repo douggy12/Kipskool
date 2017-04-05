@@ -22,3 +22,4 @@
 /web/images/
 /web/media/
 composer\.lock
+!/vendor/friendsofsymfony/user-bundle/Resources/views/Security/*
