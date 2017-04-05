@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-
-
     <div id="page-container" class="header-fixed-top " style="width: 100%">
 
         <!-- Main Container -->
@@ -44,17 +42,12 @@
                 <!-- END Left Header Navigation -->
             </header>
             <!-- END Header -->
+            <!-- Page content -->
             <div id="page-content" class="inner-sidebar-right">
                 <!-- Inner Sidebar -->
                 <div id="page-content-sidebar">
                     <!-- Collapsible People List -->
-                    <div id="people-nav" class="collapse navbar-collapse remove-padding">
-                        <div class="block-section">
-                            <h4 class="inner-sidebar-header">
-                                <a href="" class="btn btn-effect-ripple btn-xs btn-default pull-right"></a>
-                                Promo
-                            </h4>
-                            <ul class="nav-users nav-users-online">
+
                                 {% if article.className == 'articleEcole' %}
                                     {% include 'liste_promo.html.twig' %}
                                 {% elseif article.className == 'Article_promo' %}
@@ -65,13 +58,10 @@
                                         {% include 'liste_etudiant_promo.html.twig' %}
                                     {% endfor %}
                                 {% endif %}
-                            </ul>
-                        </div>
-
-                    </div>
                     <!-- END Collapsible People List -->
                 </div>
                 <!-- END Inner Sidebar -->
+
                 <!-- Static Layout Header -->
                 <div class="content-header">
                     <div class="row">
