@@ -3,7 +3,7 @@
  */
 var timer = null;
 
-$("#rechercher").keyup(function () {
+$("#rechercher").keypress(function () {
 
     clearTimeout(timer);
     if($('#rechercher').val() != ''){
