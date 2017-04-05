@@ -29,8 +29,6 @@ class Article_promoController extends Controller
      */
     public function newArtcicleAction(Request $request, Promo $promo )
     {
-
-
         $article_promo = new Article_promo();
         $article_promo->setPromo($promo);
         $article_promo->setAuteur($this->getUser());
@@ -48,10 +46,10 @@ class Article_promoController extends Controller
                 'promo_id' => $promo->getId()));
         }
 
-        return $this->render('article_promo/new.html.twig', array(
+        return $this->render('ViewPromo/article_new_edit.html.twig', array(
             'ecole' => $promo->getEcole()->getId(),
             'promo'=>$promo,
-            'article_promo' => $article_promo,
+            'article' => $article_promo,
             'form' => $form->createView(),
         ));
     }
@@ -141,10 +139,10 @@ class Article_promoController extends Controller
             return $this->redirectToRoute('article_promo_show', array('article_promo_id' => $article_promo->getId()));
         }
 
-        return $this->render('article_promo/edit.html.twig', array(
+        return $this->render('ViewPromo/article_new_edit.html.twig', array(
             'promo'=>$article_promo->getPromo(),
-            'article_promo' => $article_promo,
-            'edit_form' => $editForm->createView(),
+            'article' => $article_promo,
+            'form' => $editForm->createView(),
         ));
     }
 
