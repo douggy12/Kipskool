@@ -21,7 +21,7 @@ class EcoleController extends Controller
      * Lists all ecole entities.
      *
      * @Route("/", name="ecole_index")
-     * @Method("GET")
+     * @Method( {"GET","POST"} )
      */
     public function indexAction()
     {

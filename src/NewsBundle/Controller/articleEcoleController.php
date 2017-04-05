@@ -46,6 +46,7 @@ class articleEcoleController extends Controller
         }
 
         return $this->render('articleecole/new.html.twig', array(
+            'ecole'=>$ecole,
             'articleEcole' => $articleEcole,
             'form' => $form->createView(),
         ));

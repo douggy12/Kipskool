@@ -18,18 +18,14 @@ class ArticlePersoType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('texte')
+            ->add('texte', 'textarea')
             ->add('srcFeature', FileType::class, array(
                 'data_class' => null,
                 'required' => false
-            ))
-//            ->add('srcFeature', VichImageType::class, array(
-//            'required' => false,
-//            'data_class' => null))
-        ;
+            ));
 
     }
-    
+
     /**
      * {@inheritdoc}
      */
