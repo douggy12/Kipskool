@@ -22,4 +22,4 @@
 /web/images/
 /web/media/
 composer\.lock
-!/vendor/friendsofsymfony/user-bundle/Resources/views/Security/login_content.html.twig
+!/vendor/friendsofsymfony/user-bundle/Resources/views/Security/*
