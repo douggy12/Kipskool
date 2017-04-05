@@ -14,34 +14,6 @@
         <div id="main-container" style="margin-left: 0px">
             <!-- Header -->
             <header class="navbar navbar-inverse navbar-fixed-top">
-                <!-- Left Header Navigation -->
-                <ul class="nav navbar-nav-custom">
-
-                    <!-- END Main Sidebar Toggle Button -->
-
-                    <!-- Header Link -->
-                    <li class="hidden-xs animation-fadeInQuick">
-                        <a href="{{ path('ecole_index') }}"><strong>Index</strong></a>
-                    </li>
-                    <li class="hidden-xs animation-fadeInQuick">
-                        <a href="{{ path('ecole_show', {'ecole_id': ecole.id}) }}"><strong>{{ ecole.nom }}</strong></a>
-                    </li>
-                    {% if article.className == 'Article_promo' %}
-
-                        <li>
-                            <a href="{{ path('promo_show', {'promo_id': promo.id}) }}"><strong>{{ promo.nom }}</strong></a>
-                        </li>
-
-                    {% elseif article.className == 'ArticlePerso' %}
-                        <li>
-                            <a href="{{ path('promo_show', {'promo_id': promos.first.id}) }}"><strong>{{ promos.first.nom }}</strong></a>
-                        </li>
-                        <li>
-                            <a href="{{ path('perso_show', {'perso_id': perso.id}) }}"><strong>{{ perso.prenom }} {{ perso.nom }}</strong></a>
-                        </li>
-                    {% endif %}
-                    <!-- END Header Link -->
-                </ul>
 
                 <ul class="nav navbar-nav-custom pull-right">
                     <!-- Search Form -->
@@ -57,103 +29,72 @@
                 <!-- END Left Header Navigation -->
             </header>
             <!-- END Header -->
-
-            <!-- Page content -->
-            <div id="page-content" class="inner-sidebar-right">
-                <!-- Inner Sidebar -->
-                <div id="page-content-sidebar">
-                    <!-- Collapsible People List -->
-                    <div id="people-nav" class="collapse navbar-collapse remove-padding">
-                        <div class="block-section">
-                            <h4 class="inner-sidebar-header">
-                                <a href="" class="btn btn-effect-ripple btn-xs btn-default pull-right"></a>
-                                Etudiants
-                            </h4>
-                            <ul class="nav-users nav-users-online">
-                                {% if article.className == 'articleEcole' %}
-                                    {% include 'liste_promo.html.twig' %}
-                                {% elseif article.className == 'Article_promo' %}
-                                    {% include 'liste_etudiant_promo.html.twig' %}
-                                {% else %}
-                                    {% for promo in promos %}
-
-                                        {% include 'liste_etudiant_promo.html.twig' %}
-                                    {% endfor %}
-                                {% endif %}
-                            </ul>
+            <!-- Social Net Header -->
+            <div class="content-header content-header-media">
+                <div class="header-section">
+                    <div class="row">
+                        <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
+                            {% if article.auteur.avatar != null %}
+                                <img src="{{ vich_uploader_asset(article.auteur,'avatar')|imagine_filter('avatar_mini2') }}"
+                                     alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
+                            {% else %}
+                                <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"
+                                     alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
+                            {% endif %}
+                            <h1>{{ article.auteur.nom }}</h1>
+                            <h2 class="text-light-op"> {{ article.auteur.prenom }}</h2>
+                            <h2 class="text-light-op">{{ article.auteur.born }}</h2>
                         </div>
 
                     </div>
-                    <!-- END Collapsible People List -->
                 </div>
-                <!-- END Inner Sidebar -->
-
-                <!-- Social Net Header -->
-                <div class="content-header content-header-media">
-                    <div class="header-section">
-                        <div class="row">
-                            <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
-                                {% if perso.avatar != null %}
-                                    <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini') }}"
-                                         alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
-                                {% else %}
-                                    <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
-                                         alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
-                                {% endif %}
-                                <h1>{{ perso.nom }}</h1>
-                                <h2 class="text-light-op"> {{ perso.prenom }}</h2>
-                                <h2 class="text-light-op">{{ perso.born }}</h2>
-                            </div>
-
-                        </div>
-                    </div>
-                    {% if perso.avatar != null %}
-                        <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini') }}"
-                             alt="Header Image"/>
-                    {% else %}
-                        <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini') }}"
-                             alt="Header Image"/>
-                    {% endif %}
-                </div>
-                <!-- Story -->
-                <div class="block col-xs-offset-3 col-xs-6">
-                    <div class="block-title">
-                        <h2>Article_perso creation</h2>
-                    </div>
-                    {{ form_start(form, {'attr':{'class':'form-horizontal form-bordered', 'enctype':'multipart/form-data'}}) }}
-                    <div class="form-group col-xs-12">
-                        <div class="form-group">
-                            {{ form_row(form.titre, {'attr':{'class':'form-control col-md-6','name':'titre'}}) }}
-                        </div>
-
-                        <div class="form-group">
-                            {{ form_row(form.srcFeature, {'attr':{'class':'form-control col-md-6','type':'file','id':'example-file-input', 'name':'example-file-input'}}) }}
-                        </div>
-
-                        <div class="form-group">
-                            {{ form_row(form.texte, {'attr':{'class':'form-control col-md-6','type':'textearea','name':'texte', 'rows':'7' }}) }}
-                        </div>
-
-                        <div class="form-actions">
-                            <div class="col-xs-12">
-                                <button type="submit" class="btn btn-effect-ripple btn-primary">Submit
-                                </button>
-                            </div>
-                        </div>
-                        <div class="block-options pull-right">
-                            <a href="{{ path('perso_show', {'perso_id': perso.id}) }}"
-                               class="btn btn-effect-ripple btn-default toggle-bordered enable-tooltip"
-                               data-toggle="button" title="Revenir a la liste des articles">Back to list</a>
-                        </div>
-                    </div>
-                    {{ form_end(form) }}
-                </div>
-                <!-- END Story -->
+                {% if article.auteur.avatar != null %}
+                    <img src="{{ vich_uploader_asset(article.auteur,'avatar')|imagine_filter('avatar_mini2') }}"
+                         alt="Header Image"/>
+                {% else %}
+                    <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"
+                         alt="Header Image"/>
+                {% endif %}
             </div>
-            <!-- END Latest News -->
-            <!-- END Page Content -->
+            <!-- Story -->
+            <div class="block col-xs-offset-3 col-xs-6">
+                <div class="block-title">
+                    <h2>Article_perso creation</h2>
+                </div>
+                {{ form_start(form, {'attr':{'class':'form-horizontal form-bordered', 'enctype':'multipart/form-data'}}) }}
+                <div class="form-group col-xs-12">
+                    <div class="form-group">
+                        {{ form_row(form.titre, {'attr':{'class':'form-control col-md-6','name':'titre'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_row(form.srcFeature, {'attr':{'class':'form-control col-md-6','type':'file','id':'example-file-input', 'name':'example-file-input'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_row(form.texte, {'attr':{'class':'form-control col-md-6','type':'textearea','name':'texte', 'rows':'7' }}) }}
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="col-xs-12">
+                            <button type="submit" class="btn btn-effect-ripple btn-primary">Submit
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-options pull-right">
+                        <a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"
+                           class="btn btn-effect-ripple btn-default toggle-bordered enable-tooltip"
+                           data-toggle="button" title="Revenir a la liste des articles">Back to list</a>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+            <!-- END Story -->
         </div>
-        <!-- END Main Container -->
+        <!-- END Latest News -->
+        <!-- END Page Content -->
+    </div>
+    <!-- END Main Container -->
     </div>
     <!-- END Page Container -->
     <!-- ckeditor.js, load it only in the page you would like to use CKEditor (it's a heavy plugin to include it with the others!) -->
