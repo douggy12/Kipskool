@@ -22,6 +22,12 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
 $loader = require __DIR__.'/../app/autoload.php';
 Debug::enable();
 
+//// Use APC for autoloading to improve performance
+//// Change 'sf2' by the prefix you want in order
+//// to prevent key conflict with another application
+//$loader = new \Symfony\Component\ClassLoader\ApcClassLoader('sf2', $loader);
+//$loader->register(true);
+
 $kernel = new AppKernel('dev', true);
 $kernel->loadClassCache();
 $request = Request::createFromGlobals();

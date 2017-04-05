@@ -116,8 +116,9 @@ class Article_promoController extends Controller
             ));
         }
 
-        return $this->render(':ViewPromo:page_layout_promo.html.twig', array(
-            'article_promo' => $article_promo,
+        return $this->render(':ViewPromo:article_show.html.twig', array(
+            'ecole' => $article_promo->getPromo()->getEcole(),
+            'article' => $article_promo,
             'promo'=>$article_promo->getPromo(),
             'commentaire_article_promo' => $commentaire_article_promo,
             'form' => $form->createView(),

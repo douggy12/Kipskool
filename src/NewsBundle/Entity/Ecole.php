@@ -302,27 +302,27 @@ class Ecole
         return $this->nom;
     }
 
-
-    /**
-     * @Assert\Callback
-     * @param ExecutionContextInterface $context
-     */
-    public function validate(ExecutionContextInterface $context)
-    {
-        if ($this->avatar != null) {
-            if (!in_array($this->avatar->getMimeType(), array(
-                'image/jpeg',
-                'image/gif',
-                'image/png'
-            ))
-            ) {
-                $context
-                    ->buildViolation('Wrong file type (jpg,gif,png)')
-                    ->atPath('fileName')
-                    ->addViolation();
-            }
-        }
-    }
+//
+//    /**
+//     * @Assert\Callback
+//     * @param ExecutionContextInterface $context
+//     */
+//    public function validate(ExecutionContextInterface $context)
+//    {
+//        if ($this->avatar != null) {
+//            if (!in_array($this->avatar->getMimeType(), array(
+//                'image/jpeg',
+//                'image/gif',
+//                'image/png'
+//            ))
+//            ) {
+//                $context
+//                    ->buildViolation('Wrong file type (jpg,gif,png)')
+//                    ->atPath('fileName')
+//                    ->addViolation();
+//            }
+//        }
+//    }
 
     /**
      * Set avatar
