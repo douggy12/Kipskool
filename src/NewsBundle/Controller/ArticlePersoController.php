@@ -51,7 +51,7 @@ class ArticlePersoController extends Controller
             return $this->redirectToRoute('perso_show', array('perso_id' => $perso->getId()));
         }
 
-        return $this->render('articleperso/new.html.twig', array(
+        return $this->render('ViewPromo/article_new_edit.html.twig', array(
             'perso' => $perso,
             'form' => $form->createView(),
         ));
@@ -158,7 +158,7 @@ class ArticlePersoController extends Controller
             return $this->redirectToRoute('articleperso_show', array('article_perso_id' => $articlePerso->getId()));
         }
 
-        return $this->render('articleperso/edit.html.twig', array(
+        return $this->render('ViewPromo/article_new_edit.html.twig', array(
             'article' => $articlePerso,
             'perso' => $articlePerso->getPerso(),
             'edit_form' => $editForm->createView(),
