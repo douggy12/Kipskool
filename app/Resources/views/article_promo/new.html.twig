@@ -81,10 +81,10 @@
                         </div>
                     </div>
                     {% if promo.ecole.avatar != null %}
-                        <img src="{{ vich_uploader_asset(promo.ecole,'avatar')|imagine_filter('avatar_mini') }}"
+                        <img src="{{ vich_uploader_asset(promo.ecole,'avatar')|imagine_filter('avatar_wide2') }}"
                              alt="Header Image"/>
                     {% else %}
-                        <img src="{{ asset('img/LOGO_IMIE_res.jpg')|imagine_filter('avatar_mini') }}"
+                        <img src="{{ asset('img/LOGO_IMIE_res.jpg')|imagine_filter('avatar_wide2') }}"
                              alt="Header Image"/>
                     {% endif %}
                 </div>
