@@ -41,27 +41,25 @@
             <div class="widget">
                 <div class="widget-content themed-background-social text-right clearfix">
                     <a href="javascript:void(0)" class="pull-left">
-                        {% if article.avatar %}
-                            <img src="{{ vich_uploader_asset(perso, 'avatar')|imagine_filter('avatar_image2') }}" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar-2x">
-                        {% else %}
-                            <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_image2') }}" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar-2x">
-                        {% endif %}
-
+                        <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_image2') }}"
+                             alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar-2x">
                     </a>
-                    <h3 class="widget-heading text-light">{{ perso.prenom }} {{ perso.nom }}</h3>
-                    <h4 class="widget-heading text-light-op">{{ perso.promo.first }}</h4>
+                    <h3 class="widget-heading text-light">{{ app.user.prenom }} {{ app.user.nom }}</h3>
+                    <h4 class="widget-heading text-light-op">{{ app.user.promo.first }}</h4>
                 </div>
                 <div class="widget-content themed-background-muted text-center">
                     <div class="btn-group">
-                        <a href="javascript:void(0)" class="btn btn-effect-ripple btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-share"></i> Follow</a>
-                        <a href="javascript:void(0)" class="btn btn-effect-ripple btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-suitcase"></i> Projects</a>
+                        <a href="javascript:void(0)" class="btn btn-effect-ripple btn-danger"
+                           style="overflow: hidden; position: relative;"><i class="fa fa-share"></i> Follow</a>
+                        <a href="javascript:void(0)" class="btn btn-effect-ripple btn-danger"
+                           style="overflow: hidden; position: relative;"><i class="fa fa-suitcase"></i> Projects</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="widget col-xs-offset-3 col-xs-6">
             <div class="widget-title">
-                <h2>Création d'article</h2>
+                <h2>Création de Code</h2>
             </div>
             {{ form_start(form, {'attr':{'class':'form-horizontal form-bordered', 'enctype':'multipart/form-data'}}) }}
             <div class="form-group col-xs-12">
@@ -74,6 +72,11 @@
                 <div class="form-group">
                     {{ form_row(form.type, {'attr':{'class':'form-control col-md-6','name':'type'}}) }}
                 </div>
+                <div id="editor">
+                    function foo(items) {
+                    var x = "All this is syntax highlighted";
+                    return x;
+                </div>
                 <div class="form-actions">
                     <div class="col-xs-12">
                         <button type="submit" class="btn btn-effect-ripple btn-primary">Submit
@@ -81,43 +84,39 @@
                     </div>
                 </div>
                 <div class="block-options pull-right">
-                    <a href="{{ path('perso_show', {'perso_id': perso.id}) }}"
+                    <a href="{{ path('perso_show', {'perso_id': app.user.id}) }}"
                        class="btn btn-effect-ripple btn-default toggle-bordered enable-tooltip"
                        data-toggle="button" title="Revenir a la liste des articles">Back to list</a>
                 </div>
             </div>
             {{ form_end(form) }}
-            <div id="editor">
-                function foo(items) {
-                var x = "All this is syntax highlighted";
-                return x;
-            </div>
+
         </div>
 
 
-{% endblock %}
+        {% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}" type="text/javascript"
-            charset="utf-8"></script>
-    <script>
-        $(document).ready(function () {
-            $("#newsbundle_codepost_texte").val(editor.getValue());
-        });
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
-        editor.getSession().setMode("ace/mode/java");
+        {% block javascripts %}
+            <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}" type="text/javascript"
+                    charset="utf-8"></script>
+            <script>
+                $(document).ready(function () {
+                    $("#newsbundle_codepost_texte").val(editor.getValue());
+                });
+                var editor = ace.edit("editor");
+                editor.setTheme("ace/theme/monokai");
+                editor.getSession().setMode("ace/mode/java");
 
-        editor.getSession().on('change', function (e) {
-            $("#newsbundle_codepost_texte").val(editor.getValue());
-        });
+                editor.getSession().on('change', function (e) {
+                    $("#newsbundle_codepost_texte").val(editor.getValue());
+                });
 
 
-        $("#newsbundle_codepost_type").change(function () {
-            editor.getSession().setMode("ace/mode/" + $(this).val())
+                $("#newsbundle_codepost_type").change(function () {
+                    editor.getSession().setMode("ace/mode/" + $(this).val())
 
-        });
+                });
 
-    </script>
+            </script>
 
-{% endblock %}
+        {% endblock %}
