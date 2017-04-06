@@ -111,7 +111,7 @@
                                                 Edit
                                             </a>
                                         {% elseif article.className == 'Article_promo' and (is_granted('ROLE_DELEGUE')
-                                        and article.auteur.promo in app.user.promo ) %}
+                                        or article.auteur.promo in app.user.promo ) %}
                                             <a href="{{ path('article_promo_edit', {'article_promo_id': article.id}) }}">
                                                 <i class="fa fa-pencil pull-right"></i>
                                                 Edit
