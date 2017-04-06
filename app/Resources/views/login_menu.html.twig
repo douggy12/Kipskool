@@ -14,18 +14,19 @@
     </li>
 
     <li>
-        <a>Bienvenue {% if app.user %}{{ app.user.username }}{% else %}Etranger{% endif %} !</a>
+        <a href="{{ path('perso_show', {'perso_id': app.user.id}) }}">
+            Bienvenue {% if app.user %}{{ app.user.username }}{% else %}Etranger{% endif %} !</a>
     </li>
 
 
     <li class="dropdown">
         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                {% if app.user.avatar  %}
-            <img src="{{ vich_uploader_asset(app.user, 'avatar')|imagine_filter('avatar_mini2') }}">
-                    {% else %}
-                        <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg') }}">
-                    {% endif %}
+                {% if app.user.avatar %}
+                    <img src="{{ vich_uploader_asset(app.user, 'avatar')|imagine_filter('avatar_mini2') }}">
+                {% else %}
+                    <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg') }}">
+                {% endif %}
             {% else %}
                 <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg') }}">
             {% endif %}
@@ -72,19 +73,19 @@
                         Voir sa page
                     </a>
                 </li>
-            <li>
-                <a href="/logout">
-                    <i class="fa fa-power-off fa-fw pull-right"></i>
-                    Log out
-                </a>
-            </li>
-                {% else %}
-                    <li>
-                        <a href="{{ path('fos_user_security_login') }}">
-                            <i class="fa fa-power-off fa-fw pull-right"></i>
-                            Log in
-                        </a>
-                    </li>
+                <li>
+                    <a href="/logout">
+                        <i class="fa fa-power-off fa-fw pull-right"></i>
+                        Log out
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ path('fos_user_security_login') }}">
+                        <i class="fa fa-power-off fa-fw pull-right"></i>
+                        Log in
+                    </a>
+                </li>
             {% endif %}
         </ul>
     </li>
