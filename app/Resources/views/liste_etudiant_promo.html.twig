@@ -1,0 +1,58 @@
+
+        <div id="people-nav" class="collapse navbar-collapse remove-padding">
+            <div class="block-section">
+
+                <h4 class="inner-sidebar-header">
+                    Formateurs
+                </h4>
+                <ul class="nav-users nav-users-away">
+
+                    {% for perso in promo.persos %}
+                    {% if 'ROLE_FORMATEUR' in perso.roles %}
+                        <li>
+                            <a href="{{ path('perso_show', {'perso_id': perso.id}) }}">
+                                {% if perso.avatar != null %}
+                                    <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini2') }}"
+                                         alt="image" class="nav-users-avatar"/>
+                                {% else %}
+                                    <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"
+                                         alt="image" class="nav-users-avatar"/>
+                                {% endif %}
+                                <span class="nav-users-heading">{{ perso.prenom }} </span>
+                                <span class="text-muted"> {{ perso.nom }}</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% endfor %}
+
+                </ul>
+
+
+                    <h4 class="inner-sidebar-header">
+                        Etudiants
+                    </h4>
+                    <ul class="nav-users nav-users-online">
+
+                        {% for perso in promo.persos %}
+                        {% if  perso.roles|length == 1 %}
+                            <li>
+                                <a href="{{ path('perso_show', {'perso_id': perso.id}) }}">
+                                    {% if perso.avatar != null %}
+                                        <img src="{{ vich_uploader_asset(perso,'avatar')|imagine_filter('avatar_mini2') }}"
+                                             alt="image" class="nav-users-avatar"/>
+                                    {% else %}
+                                        <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"
+                                             alt="image" class="nav-users-avatar"/>
+                                    {% endif %}
+                                    <span class="nav-users-heading">{{ perso.prenom }} </span>
+                                    <span class="text-muted"> {{ perso.nom }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% endfor %}
+
+                    </ul>
+
+            </div>
+
+        </div>

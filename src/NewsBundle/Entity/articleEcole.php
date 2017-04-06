@@ -71,7 +71,7 @@ class articleEcole
      * @ORM\OneToMany(targetEntity="NewsBundle\Entity\commentaireArticleEcole", mappedBy="article", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
-    private $commentaires;
+    private $comments;
 
     /**
      * @var Perso
@@ -96,28 +96,28 @@ class articleEcole
         $this->commentaires = new ArrayCollection();
     }
 
-    /**
-     * @Assert\Callback
-     * @param ExecutionContextInterface $context
-     */
-    public function validate(ExecutionContextInterface $context)
-    {
-        if ($this->srcFeature != null){
-
-
-            if (! in_array($this->srcFeature->getMimeType(), array(
-                'image/jpeg',
-                'image/gif',
-                'image/png'
-            ))) {
-                $context
-                    ->buildViolation('Wrong file type (jpg,gif,png)')
-                    ->atPath('fileName')
-                    ->addViolation()
-                ;
-            }
-        }
-    }
+//    /**
+//     * @Assert\Callback
+//     * @param ExecutionContextInterface $context
+//     */
+//    public function validate(ExecutionContextInterface $context)
+//    {
+//        if ($this->srcFeature != null){
+//
+//
+//            if (! in_array($this->srcFeature->getMimeType(), array(
+//                'image/jpeg',
+//                'image/gif',
+//                'image/png'
+//            ))) {
+//                $context
+//                    ->buildViolation('Wrong file type (jpg,gif,png)')
+//                    ->atPath('fileName')
+//                    ->addViolation()
+//                ;
+//            }
+//        }
+//    }
 
 
     /**
@@ -218,10 +218,11 @@ class articleEcole
      */
     public function setSrcFeature(File $image = null)
     {
-        $this->srcFeature = $image;
-        $this->setImageName($image->getFilename());
+
 
         if ($image) {
+            $this->srcFeature = $image;
+            $this->setImageName($image->getFilename());
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
@@ -257,9 +258,9 @@ class articleEcole
     /**
      * @return ArrayCollection|commentaireArticleEcole[]
      */
-    public function getCommentaires()
+    public function getComments()
     {
-        return $this->commentaires;
+        return $this->comments;
     }
 
 

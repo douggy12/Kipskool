@@ -1,3 +1,4 @@
+
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
@@ -41,8 +42,8 @@ twig:
     globals:
         raccourci: "@kipskool_news.raccourci_texte"
     form_themes:
-            # other form themes
-        - 'VichUploaderBundle:Form:fields.html.twig'
+      - 'VichUploaderBundle:Form:fields.html.twig'
+
 
 
 # Doctrine Configuration
@@ -138,7 +139,7 @@ liip_imagine:
         cache: ~
 
         # the name of the "filter set"
-        article_thumb:
+        article_thumb2:
 
             # adjust the image quality to 75%
             quality: 75
@@ -155,7 +156,7 @@ liip_imagine:
 
 
 
-        article_image:
+        article_image2:
 
             quality: 75
             filters:
@@ -164,20 +165,38 @@ liip_imagine:
                     size: [600,400]
                     allow_upscale: false
 
+        article_wide3:
+          quality: 50
+          filters:
+            upscale:
+              min: [1643, 0]
+            crop:
+              size: [1643,270]
+              start: [0, 0]
 
-        avatar_image:
+
+
+        avatar_image2:
 
           quality: 75
           filters:
             thumbnail:
-              mode: inset
+              mode: outbound
               size: [400,400]
               allow_upscale: true
 
-        avatar_mini:
+        avatar_mini2:
           quality : 75
           filters:
             thumbnail:
               mode: outbound
               size: [40,40]
               allow_upscale: yes
+
+        avatar_wide2:
+          quality : 75
+          filters:
+            thumbnail:
+              mode: outbound
+              size: [1643,270]
+              allow_upscale: true

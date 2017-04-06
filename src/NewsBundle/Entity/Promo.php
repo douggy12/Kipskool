@@ -142,7 +142,7 @@ class Promo
 
     function __toString()
     {
-     return $this->nom;
+        return $this->nom;
     }
 
     /**
@@ -177,25 +177,28 @@ class Promo
         return $this->persos;
     }
 
-
-    /**
-     * @Assert\Callback
-     * @param ExecutionContextInterface $context
-     */
-    public function validate(ExecutionContextInterface $context)
-    {
-        if (! in_array($this->avatar->getMimeType(), array(
-            'image/jpeg',
-            'image/gif',
-            'image/png'
-        ))) {
-            $context
-                ->buildViolation('Wrong file type (jpg,gif,png)')
-                ->atPath('fileName')
-                ->addViolation()
-            ;
-        }
-    }
+//
+//    /**
+//     * @Assert\Callback
+//     * @param ExecutionContextInterface $context
+//     */
+//    public function validate(ExecutionContextInterface $context)
+//    {
+//        if ($this->avatar != null) {
+//            if (!in_array($this->avatar->getMimeType(), array(
+//                'image/jpeg',
+//                'image/gif',
+//                'image/png',
+//                'text'
+//            ))
+//            ) {
+//                $context
+//                    ->buildViolation('Wrong file type (jpg,gif,png)')
+//                    ->atPath('fileName')
+//                    ->addViolation();
+//            }
+//        }
+//    }
 
     /**
      * Set avatar
@@ -206,10 +209,11 @@ class Promo
      */
     public function setAvatar(File $image = null)
     {
-        $this->avatar = $image;
-        $this->setAvatarName($image->getFilename());
+
 
         if ($image) {
+            $this->avatar = $image;
+            $this->setAvatarName($image->getFilename());
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
@@ -220,7 +224,6 @@ class Promo
 
     /**
      * Get avatar
-
      * @return File|null
      */
     public function getAvatar()
@@ -246,9 +249,6 @@ class Promo
 
         return $this;
     }
-
-
-
 
 
 }

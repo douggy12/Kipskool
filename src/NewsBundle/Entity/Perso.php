@@ -50,7 +50,6 @@ class Perso extends BaseUser
     private $born;
 
 
-
     /**
      * @ORM\OneToMany(targetEntity="NewsBundle\Entity\ArticlePerso", mappedBy="perso", cascade={"remove"})
      * @ORM\OrderBy({"createdAt" = "DESC"})
@@ -78,7 +77,6 @@ class Perso extends BaseUser
     private $avatarName;
 
 
-
     /**
      * Perso constructor
      */
@@ -90,8 +88,6 @@ class Perso extends BaseUser
     }
 
 
-
-
     /**
      * @return ArrayCollection|ArticlePerso[]
      */
@@ -99,8 +95,6 @@ class Perso extends BaseUser
     {
         return $this->articles;
     }
-
-
 
 
     /**
@@ -162,8 +156,6 @@ class Perso extends BaseUser
     }
 
 
-
-
     /**
      * Set born
      *
@@ -189,10 +181,9 @@ class Perso extends BaseUser
     }
 
 
-
     function __toString()
     {
-        return $this->getPrenom().' '.$this->getNom();
+        return $this->getPrenom() . ' ' . $this->getNom();
     }
 
 
@@ -211,11 +202,6 @@ class Perso extends BaseUser
     {
         $this->promo = $promo;
     }
-
-
-
-
-
 
 
     /**
@@ -266,28 +252,27 @@ class Perso extends BaseUser
         $this->promo->removeElement($promo);
     }
 
-    /**
-     * @Assert\Callback
-     * @param ExecutionContextInterface $context
-     */
-    public function validate(ExecutionContextInterface $context)
-    {
-        if($this->avatar != null){
-
-
-        if (! in_array($this->avatar->getMimeType(), array(
-            'image/jpeg',
-            'image/gif',
-            'image/png'
-        ))or $this->getAvatar() == null) {
-            $context
-                ->buildViolation('Wrong file type (jpg,gif,png)')
-                ->atPath('fileName')
-                ->addViolation()
-            ;
-        }
-        }
-    }
+//    /**
+//     * @Assert\Callback
+//     * @param ExecutionContextInterface $context
+//     */
+//    public function validate(ExecutionContextInterface $context)
+//    {
+//        if ($this->avatar != null) {
+//            if (!in_array($this->avatar->getMimeType(), array(
+//                    'image/jpeg',
+//                    'image/gif',
+//                    'image/png'
+//                )) or $this->getAvatar() == null
+//            ) {
+//                $context
+//                    ->buildViolation('Wrong file type (jpg,gif,png)')
+//                    ->atPath('fileName')
+//                    ->addViolation();
+//            }
+//        }
+//
+//    }
 
     /**
      * Set avatar
@@ -298,17 +283,16 @@ class Perso extends BaseUser
      */
     public function setAvatar(File $image = null)
     {
-        $this->avatar = $image;
-        $this->setAvatarName($image->getFilename());
 
 
 
         if ($image) {
+            $this->avatar = $image;
+            $this->setAvatarName($image->getFilename());
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
         }
-
 
 
         return $this;
@@ -316,7 +300,6 @@ class Perso extends BaseUser
 
     /**
      * Get avatar
-
      * @return File|null
      */
     public function getAvatar()

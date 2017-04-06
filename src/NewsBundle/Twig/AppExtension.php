@@ -31,13 +31,13 @@ class AppExtension extends \Twig_Extension
     public function textFilter($chaine)
     {
         $positionDernierEspace = 0;
-        if( strlen($chaine) >= 50)
+        if( strlen($chaine) >= 1000)
         {
-            $chaine = substr($chaine,0,50);
+            $chaine = substr($chaine,0,1000);
             $positionDernierEspace = strrpos($chaine,' ');
-            $chaine = substr($chaine,0,$positionDernierEspace).'...';
+            $chaine = substr($chaine,0,$positionDernierEspace).' ...';
         }
-        $chaine= '['.$chaine.']';
+        $chaine= $chaine.'...';
         return $chaine;
     }
 //}

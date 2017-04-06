@@ -1,0 +1,223 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}"
+            type="text/javascript"
+            charset="utf-8">
+
+    </script>
+
+    <div id="page-container" class="header-fixed-top" style="width: 100%">
+
+        <!-- Main Container -->
+        <div id="main-container" style="margin-left: 0px">
+            <!-- Header -->
+            <header class="navbar navbar-inverse navbar-fixed-top">
+                <!-- Left Header Navigation -->
+                <ul class="nav navbar-nav-custom">
+
+                    <!-- END Main Sidebar Toggle Button -->
+
+                    <!-- Header Link -->
+                    <li class="hidden-xs animation-fadeInQuick">
+                        <a href="{{ path('ecole_index')}}"><strong>Index</strong></a>
+                    </li>
+                    <li class="hidden-xs animation-fadeInQuick">
+                        <a href="{{ path('ecole_show', {'ecole_id': promo.ecole.id}) }}"><strong>{{ promo.ecole.nom }}</strong></a>
+                    </li>
+                    <li class="hidden-xs animation-fadeInQuick">
+                        <a href="{{ path('promo_show', {'promo_id': promo.id}) }}"><strong>{{ promo.nom }}</strong></a>
+                    </li>
+
+                    <!-- END Header Link -->
+                </ul>
+
+
+                    {% include 'login_menu.html.twig' %}
+
+
+                <!-- END Left Header Navigation -->
+            </header>
+            <!-- END Header -->
+
+            <!-- Page content -->
+            <div id="page-content" class="inner-sidebar-right">
+                <!-- Inner Sidebar -->
+                <div id="page-content-sidebar">
+                    <!-- Collapsible People List -->
+
+                                {% include 'liste_etudiant_promo.html.twig' %}
+
+                    <!-- END Collapsible People List -->
+                </div>
+                <!-- END Inner Sidebar -->
+
+                <!-- Social Net Header -->
+                <div class="content-header content-header-media" style="min-height: 320px;">
+                    <div class="widget">
+                        <div class="widget-content themed-background-social text-right clearfix">
+                            <a href="javascript:void(0)" class="pull-left">
+                                {% if perso.avatar %}
+                                <img src="{{ vich_uploader_asset(perso, 'avatar')|imagine_filter('avatar_image2') }}" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar-2x">
+                                {% else %}
+                                <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_image2') }}" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar-2x">
+                                {% endif %}
+
+                            </a>
+                            <h3 class="widget-heading text-light">{{ perso.prenom }} {{ perso.nom }}</h3>
+                            <h4 class="widget-heading text-light-op">{{ perso.promo.first }}</h4>
+                        </div>
+                        <div class="widget-content themed-background-muted text-center">
+                            <div class="btn-group">
+                                <a href="javascript:void(0)" class="btn btn-effect-ripple btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-share"></i> Follow</a>
+                                <a href="javascript:void(0)" class="btn btn-effect-ripple btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-suitcase"></i> Projects</a>
+                            </div>
+                        </div>
+                        <div class="widget-content">
+                            <div class="row text-center">
+                                <div class="col-xs-4">
+                                    <h3 class="widget-heading"><small>ARTICLES PUBLIÉS</small><br><a href="javascript:void(0)" class="themed-color-passion">{{ nbPAP|length }}</a></h3>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h3 class="widget-heading"><small>LIKES</small><br><a href="javascript:void(0)" class="themed-color-passion">28k</a></h3>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h3 class="widget-heading"><small>COMMENTAIRES PUBLIÉS</small><br><a href="javascript:void(0)" class="themed-color-passion">19</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Social Net Header -->
+
+
+                {% if app.user == perso %}
+
+                    <div class="block-section">
+                        <a href="{{ path('articleperso_new', {'perso_id': perso.id}) }}"
+                           class="btn btn-lg btn-success"><i
+                                    class="fa fa-plus"></i> Ecrire un article</a>
+
+                        <a href="{{ path('articleperso_new_code', {'perso_id': perso.id}) }}" class="btn btn-lg btn-warning"><i
+                                    class="fa fa-plus"></i> Poster du code</a>
+                    </div>
+                {% endif %}
+
+                <!-- Social Net Content -->
+                <div class="row">
+                    <!-- Latest News -->
+                    <div class="col-lg-12" style="min-height: 900px">
+                        <!-- Story -->
+                        {% for article in perso.articles %}
+
+                        {#{% include 'article_index.html.twig' %}#}
+
+                            <div class="widget">
+
+                                <div class="widget-content widget-content-mini themed-background-dark text-light-op">
+
+                                    {% if article.auteur.avatar != null %}
+                                        <img src="{{ vich_uploader_asset(article.auteur, 'avatar')|imagine_filter('avatar_mini2') }}"
+                                             class="img-circle img-thumbnail pull-left">
+                                    {% else %}
+                                        <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg') }}"
+                                             class="img-circle img-thumbnail pull-left">
+                                    {% endif %}
+
+
+                                    <a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"
+                                       class="text-light">{{ article.auteur }}</a>
+                                    a posté un article le {{ article.createdAt|date("d F Y") }}
+                                </div>
+                                <div class="widget-content">
+                                    <h3>
+                                        <a href="{{ path('articleperso_show', {'article_perso_id': article.id}) }}">{{ article.titre }}</a>
+                                    </h3>
+                                    {% if article.type != 'article' %}
+                                        <p>
+                                        <div id="editor{{ loop.index }}"
+                                             style="width: 500px; height: 100px">{{ article.texte }}</div>
+                                        <a href="{{ path('articleperso_show', {'article_perso_id': article.id}) }}"
+                                           class="'btn btn-primary btn-sm">lire tout le code</a>
+                                        </p>
+                                        <script>
+
+                                            var editor{{ loop.index }} = ace.edit("editor{{ loop.index }}");
+                                            editor{{ loop.index }}.setTheme("ace/theme/monokai");
+                                            editor{{ loop.index }}.getSession().setMode("ace/mode/{{ article.type }}");
+                                            editor{{ loop.index }}.setReadOnly(true);  // false to make it editable
+
+                                        </script>
+                                    {% else %}
+                                    {% if article.srcFeature != null %}
+                                    <img src="{{ vich_uploader_asset(article, 'srcFeature')|imagine_filter('article_thumb2') }}" class="pull-left">
+                                    {% endif %}
+                                        <p style="min-height: 50px">{{ article.texte|raccourci }}</p>
+                                        <a href="{{ path('articleperso_show', {'article_perso_id': article.id}) }}"
+                                           class="'btn btn-primary btn-sm">lire la suite</a>
+                                    {% endif %}
+                                </div>
+                                <div class="widget-content text-dark">
+                                    <div class="row text-center">
+                                        <div class="col-xs-4">
+                                            <i class="fa fa-heart-o"></i> 3.5k
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <i class="fa fa-eye"></i> 35k
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <i class="fa fa-comment"></i> {{ article.comments.count }}
+                                            commentaires
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+                        {#{% for article_perso in perso.articles %}#}
+                            {#<div class="widget">#}
+
+                                {#<div class="widget-content widget-content-mini themed-background-dark text-light-op">#}
+                                    {#<span class="pull-right text-muted">{{ article_perso.createdAt|date("d/m/Y") }}</span>#}
+                                    {#<a href="{{ path('perso_show', {'perso_id': article_perso.auteur.id}) }}"#}
+                                       {#class="text-light">{{ article_perso.auteur }}</a>#}
+                                    {#posted an Article#}
+                                {#</div>#}
+                                {#<div class="widget-content">#}
+                                    {#<h3>#}
+                                        {#<a href="{{ path('articleperso_show', {'article_perso_id': article_perso.id}) }}">{{ article_perso.titre }}</a>#}
+                                    {#</h3>#}
+                                    {#{% if article_perso.type != 'article' %}#}
+                                        {#<p>#}
+                                        {#<div id="editor{{ loop.index }}"#}
+                                             {#style="width: 500px; height: 100px">{{ article_perso.texte|raccourci }}</div>#}
+                                        {#</p>#}
+                                        {#<script>#}
+
+                                            {#var editor{{ loop.index }} = ace.edit("editor{{ loop.index }}");#}
+                                            {#editor{{ loop.index }}.setTheme("ace/theme/monokai");#}
+                                            {#editor{{ loop.index }}.getSession().setMode("ace/mode/{{ article_perso.type }}");#}
+                                            {#editor{{ loop.index }}.setReadOnly(true);  // false to make it editable#}
+
+                                        {#</script>#}
+                                    {#{% else %}#}
+                                        {#<p>{{ article_perso.texte|raccourci }}</p>#}
+                                    {#{% endif %}#}
+                                {#</div>#}
+
+                            {#</div>#}
+                        {#{% endfor %}#}
+                        <!-- END Story -->
+                    </div>
+                    <!-- END Latest News -->
+                </div>
+                <!-- END Social Net Content -->
+            </div>
+            <!-- END Page Content -->
+        </div>
+        <!-- END Main Container -->
+    </div>
+    <!-- END Page Container -->
+{% endblock %}

@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}"
+        type="text/javascript"
+        charset="utf-8">
+</script>
+
+<div id="page-container" class="header-fixed-top" style="width: 100%">
+
+    <!-- Main Container -->
+    <div id="main-container">
+        <!-- Header -->
+        <header class="navbar navbar-inverse navbar-fixed-top">
+            <!-- Left Header Navigation -->
+            <ul class="nav navbar-nav-custom">
+
+                <!-- END Main Sidebar Toggle Button -->
+
+                <!-- Header Link -->
+                <li class="hidden-xs animation-fadeInQuick">
+                    <a href="{{ path('ecole_index') }}"><strong>Index</strong></a>
+                </li>
+                <li class="hidden-xs animation-fadeInQuick">
+                    <a href="{{ path('ecole_show', {'ecole_id': ecole.id}) }}"><strong>{{ ecole.nom }}</strong></a>
+                </li>
+
+                <!-- END Header Link -->
+            </ul>
+
+
+                {% include 'login_menu.html.twig' %}
+
+            <!-- END Left Header Navigation -->
+        </header>
+        <!-- END Header -->
+
+        <!-- Page content -->
+        <div id="page-content" class="inner-sidebar-right">
+            <!-- Inner Sidebar -->
+            <div id="page-content-sidebar">
+
+                            {% include 'liste_promo.html.twig' %}
+
+            </div>
+            <!-- END Inner Sidebar -->
+
+            <!-- Social Net Header -->
+            <div class="content-header content-header-media">
+                <div class="header-section">
+                    <div class="row">
+                        <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
+                            {% if ecole.avatar != null %}
+                                <img src="{{ vich_uploader_asset(ecole,'avatar')|imagine_filter('avatar_mini2') }}"
+                                     alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
+                            {% else %}
+                                <img src="{{ asset('img/LOGO_IMIE_res.jpg')|imagine_filter('avatar_mini2') }}"
+                                     alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
+                            {% endif %}
+                            <h1>{{ ecole.nom }}</h1>
+                            <h2 class="text-light-op"> {{ ecole.description }}</h2>
+                        </div>
+
+                    </div>
+                </div>
+                {#{% if ecole.avatar != null %}#}
+                    {#<img src="{{ vich_uploader_asset(ecole,'avatar')|imagine_filter('avatar_wide2') }}"#}
+                         {#alt="Header Image"/>#}
+                {#{% else %}#}
+                    <img src="{{ asset('img/banderole.jpg')|imagine_filter('avatar_wide2') }}"
+                         alt="Header Image"/>
+                {#{% endif %}#}
+            </div>
+            <!-- END Social Net Header -->
+
+
+            {% if is_granted('ROLE_STAFF') or (is_granted('ROLE_DELEGUE') and app.user.ecole == ecole) %}
+                <div class="block-section">
+                    <a href="{{ path('addArticle', {'ecole_id': ecole.id}) }}" class="btn btn-lg btn-success"><i
+                                class="fa fa-plus"></i> Ecrire un article</a>
+                </div>
+
+            {% endif %}
+
+            <!-- Social Net Content -->
+            <div class="row">
+                <!-- Latest News -->
+                <div class="col-lg-12">
+                    <!-- Story -->
+                    {% for article_ecole in ecole.articles %}
+                        <div class="col-lg-6">
+
+                            <div class="widget-content widget-content-mini themed-background-dark text-light-op">
+                                {% if article_ecole.auteur.avatar != null %}
+                                <img src="{{ vich_uploader_asset(article_ecole.auteur, 'avatar')|imagine_filter('avatar_mini2') }}" class="img-circle img-thumbnail">
+                                {% else %}
+                                <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg') }}" class="img-circle img-thumbnail">
+                                {% endif %}
+                                <a href="{{ path('perso_show', {'perso_id': article_ecole.auteur.id}) }}"
+                                   class="text-light">{{ article_ecole.auteur }}</a>
+                                a posté cet article le {{ article_ecole.createdAt|date("d F Y") }}
+
+
+                            </div>
+                            <div class="">
+                                <a href="{{ path('articleecole_show', {'article_ecole_id': article_ecole.id}) }}"
+                                   class="widget">
+
+                                    <div class="widget-image widget-image-sm">
+                                        <img src="{{ vich_uploader_asset(article_ecole, 'srcFeature')|imagine_filter('article_wide3') }}"
+                                             alt="image">
+                                        <div class="widget-image-content">
+                                            <h2 class="widget-heading text-light">
+                                                <strong>{{ article_ecole.titre }}</strong></h2>
+                                            <h3 class="widget-heading text-light-op h4">
+                                                <em>{{ article_ecole.texte|raccourci }}</em></h3>
+                                        </div>
+
+                                    </div>
+                                    <div class="widget-content text-dark">
+                                        <div class="row text-center">
+                                            <div class="col-xs-4">
+                                                <i class="fa fa-heart-o"></i> 3.5k
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <i class="fa fa-eye"></i> 35k
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <i class="fa fa-comment"></i> {{ article_ecole.comments.count }}
+                                                commentaires
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+
+                        </div>
+                    {% endfor %}
+                    <!-- END Story -->
+
+                    <!-- END Latest News -->
+                </div>
+                <!-- END Social Net Content -->
+            </div>
+            <!-- END Page Content -->
+        </div>
+        <!-- END Main Container -->
+    </div>
+    <!-- END Page Container -->
+</div>
+    {% endblock %}

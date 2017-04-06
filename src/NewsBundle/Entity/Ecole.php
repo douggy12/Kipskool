@@ -94,7 +94,6 @@ class Ecole
     private $avatarName;
 
 
-
     /**
      * Ecole constructor.
      */
@@ -103,6 +102,7 @@ class Ecole
         $this->articles = new ArrayCollection();
         $this->promos = new ArrayCollection();
     }
+
     /**
      * @return ArrayCollection|articleEcole[]
      */
@@ -110,6 +110,7 @@ class Ecole
     {
         return $this->articles;
     }
+
     /**
      * @return mixed
      */
@@ -295,29 +296,33 @@ class Ecole
     {
         return $this->mail;
     }
-    public function __toString() {
+
+    public function __toString()
+    {
         return $this->nom;
     }
 
-
-    /**
-     * @Assert\Callback
-     * @param ExecutionContextInterface $context
-     */
-    public function validate(ExecutionContextInterface $context)
-    {
-        if (! in_array($this->avatar->getMimeType(), array(
-            'image/jpeg',
-            'image/gif',
-            'image/png'
-        ))) {
-            $context
-                ->buildViolation('Wrong file type (jpg,gif,png)')
-                ->atPath('fileName')
-                ->addViolation()
-            ;
-        }
-    }
+//
+//    /**
+//     * @Assert\Callback
+//     * @param ExecutionContextInterface $context
+//     */
+//    public function validate(ExecutionContextInterface $context)
+//    {
+//        if ($this->avatar != null) {
+//            if (!in_array($this->avatar->getMimeType(), array(
+//                'image/jpeg',
+//                'image/gif',
+//                'image/png'
+//            ))
+//            ) {
+//                $context
+//                    ->buildViolation('Wrong file type (jpg,gif,png)')
+//                    ->atPath('fileName')
+//                    ->addViolation();
+//            }
+//        }
+//    }
 
     /**
      * Set avatar
@@ -328,10 +333,11 @@ class Ecole
      */
     public function setAvatar(File $image = null)
     {
-        $this->avatar = $image;
-        $this->setAvatarName($image->getFilename());
+
 
         if ($image) {
+            $this->avatar = $image;
+            $this->setAvatarName($image->getFilename());
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
@@ -342,7 +348,6 @@ class Ecole
 
     /**
      * Get avatar
-
      * @return File|null
      */
     public function getAvatar()

@@ -1,0 +1,24 @@
+<div id="people-nav" class="collapse navbar-collapse remove-padding">
+    <div class="block-section">
+
+        <h4 class="inner-sidebar-header">
+            Promos
+        </h4>
+        <ul class="nav-users nav-users-online">
+            {% for promo in ecole.promos %}
+                <li>
+                    <a href="{{ path('promo_show', {'promo_id': promo.id}) }}">
+                        {% if promo.avatar != null %}
+                            <img src="{{ vich_uploader_asset(promo,'avatar')|imagine_filter('avatar_mini2') }}"
+                                 alt="image" class="nav-users-avatar"/>
+                        {% else %}
+                            <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"
+                                 alt="image" class="nav-users-avatar"/>
+                        {% endif %}
+                        <span class="nav-users-heading">{{ promo.nom }} </span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

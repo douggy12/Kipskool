@@ -38,7 +38,11 @@ class AjaxRechercherController extends Controller
             $jsonList[] = array(
                "prenom" => $resultat->getPrenom(),
                "nom" => $resultat->getNom(),
-                "link" => '/perso/'.$resultat->getId()
+                "link" => '/perso/'.$resultat->getId(),
+                "promo" => $resultat->getPromo()->first()->getNom(),
+                "avatar" => $resultat->getAvatarName()
+
+
 
             );
         }

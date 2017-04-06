@@ -62,28 +62,28 @@ class ArticlePerso
     private $imageName;
 
 
-    /**
-     * @Assert\Callback
-     * @param ExecutionContextInterface $context
-     */
-    public function validate(ExecutionContextInterface $context)
-    {
-        if ($this->srcFeature != null){
-
-        if (! in_array($this->srcFeature->getMimeType(), array(
-            'image/jpeg',
-            'image/gif',
-            'image/png'
-        ))) {
-            $context
-                ->buildViolation('Wrong file type (jpg,gif,png)')
-                ->atPath('fileName')
-                ->addViolation()
-            ;
-        }
-        }
-
-    }
+//    /**
+//     * @Assert\Callback
+//     * @param ExecutionContextInterface $context
+//     */
+//    public function validate(ExecutionContextInterface $context)
+//    {
+//        if ($this->srcFeature != null){
+//
+//        if (! in_array($this->srcFeature->getMimeType(), array(
+//            'image/jpeg',
+//            'image/gif',
+//            'image/png'
+//        ))) {
+//            $context
+//                ->buildViolation('Wrong file type (jpg,gif,png)')
+//                ->atPath('fileName')
+//                ->addViolation()
+//            ;
+//        }
+//        }
+//
+//    }
 
     /**
      * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso", inversedBy="articles")
@@ -95,7 +95,7 @@ class ArticlePerso
      * @ORM\OneToMany(targetEntity="NewsBundle\Entity\CommentaireArticlePerso", mappedBy="article", cascade={"remove"})
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
-    private $commentaires;
+    private $comments;
 
     /**
      * @ORM\ManyToOne(targetEntity="NewsBundle\Entity\Perso")
@@ -200,9 +200,9 @@ class ArticlePerso
     /**
      * @return ArrayCollection|CommentaireArticlePerso[]
      */
-    public function getCommentaires()
+    public function getComments()
     {
-        return $this->commentaires;
+        return $this->comments;
     }
 
     /**
@@ -292,10 +292,11 @@ class ArticlePerso
      */
     public function setSrcFeature(File $image = null)
     {
-        $this->srcFeature = $image;
-        $this->setImageName($image->getFilename());
+
 
         if ($image) {
+            $this->srcFeature = $image;
+            $this->setImageName($image->getFilename());
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();

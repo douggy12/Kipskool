@@ -15,4 +15,12 @@ class ImageProvider
     public static function articleImg(){
         return new File(__DIR__.'\..\..\..\web\images\articleperso\article'. rand(1,56) .'.jpg');
     }
+
+    public static function ecoleImg(){
+        return new File(__DIR__.'\..\..\..\web\images\imie.png');
+    }
+
+    public static function promoImg($int){
+        return new File(__DIR__.'\..\..\..\web\images\avatar\promo'. $int .'.jpg');
+    }
 }

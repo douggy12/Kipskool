@@ -20,12 +20,9 @@ class articleEcoleType extends AbstractType
             ->add('srcFeature', FileType::class, array(
                 'data_class' => null,
                 'required' => false
-            ))
-
-
-        ;
+            ));
     }
-    
+
     /**
      * {@inheritdoc}
      */

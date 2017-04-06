@@ -1,17 +1,109 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Perso edit</h1>
+    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}"
+            type="text/javascript"
+            charset="utf-8">
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+    </script>
 
-    <ul>
-        <li>
-            <a href="{{ path('perso_show', {'perso_id': app.user.id}) }}">Back to the list</a>
-        </li>
+    <div id="page-container" class="header-fixed-top" style="width: 100%">
 
-    </ul>
+        <!-- Main Container -->
+        <div id="main-container" style="margin-left: 0px">
+            <!-- Header -->
+            <header class="navbar navbar-inverse navbar-fixed-top">
+
+                <ul class="nav navbar-nav-custom pull-right">
+                    <!-- Search Form -->
+                    {% include 'login_menu.html.twig' %}
+                    <!-- END Search Form -->
+                </ul>
+                <!-- END Left Header Navigation -->
+            </header>
+            <!-- END Header -->
+            <!-- Social Net Header -->
+            <div class="content-header content-header-media" style="min-height: 320px;">
+                <div class="widget">
+                    <div class="widget-content themed-background-social text-right clearfix">
+                        <a href="javascript:void(0)" class="pull-left">
+                            {% if perso.avatar %}
+                                <img src="{{ vich_uploader_asset(perso, 'avatar')|imagine_filter('avatar_image2') }}" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar-2x">
+                            {% else %}
+                                <img src="{{ asset('images/perso/avatar/chaton.jpg')|imagine_filter('avatar_image2') }}" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar-2x">
+                            {% endif %}
+
+                        </a>
+                        <h3 class="widget-heading text-light">{{ perso.prenom }} {{ perso.nom }}</h3>
+                        <h4 class="widget-heading text-light-op">{{ perso.promo.first }}</h4>
+                    </div>
+                    <div class="widget-content themed-background-muted text-center">
+                        <div class="btn-group">
+                            <a href="javascript:void(0)" class="btn btn-effect-ripple btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-share"></i> Follow</a>
+                            <a href="javascript:void(0)" class="btn btn-effect-ripple btn-danger" style="overflow: hidden; position: relative;"><i class="fa fa-suitcase"></i> Projects</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Story -->
+            <div class="widget col-xs-offset-3 col-xs-6">
+                <div class="widget-title">
+                    <h2>Création d'article</h2>
+                </div>
+                {{ form_start(form, {'attr':{'class':'form-horizontal form-bordered', 'enctype':'multipart/form-data'}}) }}
+                <div class="form-group col-xs-12">
+                    <div class="form-group">
+                        {{ form_row(form.nom, {'attr':{'class':'form-control col-md-6','name':'nom'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.email, {'attr':{'class':'form-control col-md-6','name':'password'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.prenom, {'attr':{'class':'form-control col-md-6','name':'prenom'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.username, {'attr':{'class':'form-control col-md-6','name':'username'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.plainPassword, {'attr':{'class':'form-control col-md-6','type':'secret','name':'password'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.born, {'attr':{'class':'form-control col-md-6','type':'timestamp','name':'born'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_row(form.avatar, {'attr':{'class':'form-control col-md-6','type':'file','id':'example-file-input', 'name':'example-file-input'}}) }}
+                    </div>
+
+
+                    <div class="form-actions">
+                        <div class="col-xs-12">
+                            <button type="submit" class="btn btn-effect-ripple btn-primary">Submit
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-options pull-right">
+                        <a href="{{ path('perso_show', {'perso_id': perso.id}) }}"
+                           class="btn btn-effect-ripple btn-default toggle-bordered enable-tooltip"
+                           data-toggle="button" title="Revenir a la liste des articles">Back to list</a>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+            <!-- END Story -->
+        </div>
+        <!-- END Latest News -->
+        <!-- END Page Content -->
+    </div>
+    <!-- END Main Container -->
+    </div>
+    <!-- END Page Container -->
+    <!-- ckeditor.js, load it only in the page you would like to use CKEditor (it's a heavy plugin to include it with the others!) -->
+    <script src="{{ asset('js/plugins/ckeditor/ckeditor.js') }}"></script>
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{{ asset('js/pages/formsComponents.js') }}"></script>
+    <script>$(function () {
+            FormsComponents.init();
+        });</script>
 {% endblock %}

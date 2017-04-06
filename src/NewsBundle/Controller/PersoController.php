@@ -29,15 +29,27 @@ class PersoController extends Controller
      */
     public function showAction(Perso $perso)
     {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('NewsBundle:ArticlePerso');
+        $pAPe = $repository->findPersoPostedArticle($perso);
+//        $pAPr = $repository->findPromoPostedArticle($perso);
+//        $pAe = $repository->findEcolePostedArticle($perso);
+
+        $countArticles = $pAPe;
+
+
+
+
         $promo = $perso->getPromo()->first();
 
-
-        return $this->render('perso/show.html.twig', array(
+        return $this->render(':ViewPromo:page_perso.html.twig', array(
             'promo' => $promo,
             'perso' => $perso,
-
+            'nbPAP' => $countArticles
         ));
     }
+
+
 
     /**
      * Displays a form to edit an existing Perso entity.
@@ -56,17 +68,17 @@ class PersoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            /**
-             * save a mini version of the avatar image on upload
-             */
-            $this->container->get('liip_imagine.controller')->filterAction($request, 'images/avatar/'.$perso->getAvatarName(), 'avatar_mini');
+//            /**
+//             * save a mini version of the avatar image on upload
+//             */
+//            $this->container->get('liip_imagine.controller')->filterAction($request, 'images/avatar/'.$perso->getAvatarName(), 'avatar_mini2');
 
             return $this->redirectToRoute('perso_show', array('perso_id' => $perso->getId()));
         }
 
         return $this->render('perso/edit.html.twig', array(
             'perso' => $perso,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
 
         ));
     }

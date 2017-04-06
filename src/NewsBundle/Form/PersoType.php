@@ -23,6 +23,8 @@ class PersoType extends AbstractType
             ))
             ->add('nom')
             ->add('prenom')
+            ->add('email')
+            ->add('username')
             ->add('born', DateType::class, array(
                 'input' => 'timestamp',
                 'widget' => 'single_text'
