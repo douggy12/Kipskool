@@ -75,7 +75,7 @@
                 <!-- END Social Net Header -->
 
 
-                {% if is_granted('ROLE_STAFF') or (is_granted('ROLE_DELEGUE') and app.user.promo == promo) %}
+                {% if is_granted('ROLE_STAFF') or ((is_granted('ROLE_DELEGUE') and app.user.promo == promo)) %}
                     <div class="block-section">
                         <a href="{{ path('add_article_promo', {'promo_id': promo.id}) }}"
                            class="btn btn-lg btn-success"><i

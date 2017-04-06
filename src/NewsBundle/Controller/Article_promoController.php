@@ -85,7 +85,8 @@ class Article_promoController extends Controller
 
         return $this->render('ace_editor.html.twig', array(
             'promo' => $promo,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'bool' => true
         ));
 
     }
@@ -148,6 +149,7 @@ class Article_promoController extends Controller
                 'article' => $article_promo,
                 'promo' => $article_promo->getPromo(),
                 'form' => $editForm->createView(),
+                'bool' => false,
             ));
         } else {
             return $this->render('ViewPromo/article_new_edit.html.twig', array(

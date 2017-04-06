@@ -67,9 +67,9 @@ class ArticlePersoController extends Controller
     {
         $codePerso = new ArticlePerso();
         $codePerso->setPerso($perso);
+        $bool = true;
 
-
-        $codePerso->setAuteur($this->getUser());
+            $codePerso->setAuteur($this->getUser());
 
         $form = $this->createForm('NewsBundle\Form\CodeType', $codePerso);
         $form->handleRequest($request);
@@ -96,7 +96,8 @@ class ArticlePersoController extends Controller
 
         return $this->render('ace_editor.html.twig', array(
             'perso' => $perso,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'bool' => $bool
         ));
 
     }
@@ -166,6 +167,7 @@ class ArticlePersoController extends Controller
                 'article' => $articlePerso,
                 'perso' => $articlePerso->getPerso(),
                 'form' => $editForm->createView(),
+                'bool' => false,
             ));
         } else {
             return $this->render('ViewPromo/article_new_edit.html.twig', array(

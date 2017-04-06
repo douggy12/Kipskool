@@ -44,7 +44,7 @@ class ArticlePerso
     /**
      * @var string
      *
-     * @ORM\Column(name="texte", type="string", length=10000)
+     * @ORM\Column(name="texte", type="string", length=999999999)
      */
     private $texte;
 
