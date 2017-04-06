@@ -28,21 +28,21 @@
                 <div class="header-section">
                     <div class="row">
                         <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
-                            {% if article.auteur.avatar != null %}
+                            {% if app.user.avatar != null %}
                                 <img src="{{ vich_uploader_asset(article.auteur,'avatar')|imagine_filter('avatar_wide2') }}"
                                      alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
                             {% else %}
                                 <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_wide2') }}"
                                      alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
                             {% endif %}
-                            <h1>{{ article.auteur.nom }}</h1>
-                            <h2 class="text-light-op"> {{ article.auteur.prenom }}</h2>
-                            <h2 class="text-light-op">{{ article.auteur.born }}</h2>
+                            <h1>{{ app.user.nom }}</h1>
+                            <h2 class="text-light-op"> {{ app.user.prenom }}</h2>
+                            <h2 class="text-light-op">{{ app.user.born }}</h2>
                         </div>
 
                     </div>
                 </div>
-                {% if article.auteur.avatar != null %}
+                {% if app.user.avatar != null %}
                     <img src="{{ vich_uploader_asset(article.auteur,'avatar')|imagine_filter('avatar_mini2') }}"
                          alt="Header Image"/>
                 {% else %}
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="block-options pull-right">
-                        <a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"
+                        <a href="{{ path('perso_show', {'perso_id': app.user.id}) }}"
                            class="btn btn-effect-ripple btn-default toggle-bordered enable-tooltip"
                            data-toggle="button" title="Revenir a la liste des articles">Back to list</a>
                     </div>
