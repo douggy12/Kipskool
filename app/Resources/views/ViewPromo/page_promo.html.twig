@@ -46,18 +46,9 @@
                 <!-- Inner Sidebar -->
                 <div id="page-content-sidebar">
                     <!-- Collapsible People List -->
-                    <div id="people-nav" class="collapse navbar-collapse remove-padding">
-                        <div class="block-section">
-                            <h4 class="inner-sidebar-header">
-                                <a href="" class="btn btn-effect-ripple btn-xs btn-default pull-right"></a>
-                                Etudiants
-                            </h4>
-                            <ul class="nav-users nav-users-online">
-                                {% include 'liste_etudiant_promo.html.twig' %}
-                            </ul>
-                        </div>
 
-                    </div>
+                                {% include 'liste_etudiant_promo.html.twig' %}
+
                     <!-- END Collapsible People List -->
                 </div>
                 <!-- END Inner Sidebar -->
@@ -84,7 +75,7 @@
                 <!-- END Social Net Header -->
 
 
-                {% if is_granted('ROLE_STAFF') or (is_granted('ROLE_DELEGUE') and app.user.promo == promo) %}
+                {% if is_granted('ROLE_STAFF') or ((is_granted('ROLE_DELEGUE') and app.user.promo == promo)) %}
                     <div class="block-section">
                         <a href="{{ path('add_article_promo', {'promo_id': promo.id}) }}"
                            class="btn btn-lg btn-success"><i

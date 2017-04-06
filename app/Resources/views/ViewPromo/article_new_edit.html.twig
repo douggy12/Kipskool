@@ -17,12 +17,6 @@
 
                 <ul class="nav navbar-nav-custom pull-right">
                     <!-- Search Form -->
-                    <li>
-                        <form action="" method="post" class="navbar-form-custom">
-                            <input type="text" id="top-search" name="top-search" class="form-control"
-                                   placeholder="Search..">
-                        </form>
-                    </li>
                     {% include 'login_menu.html.twig' %}
                     <!-- END Search Form -->
                 </ul>
@@ -34,32 +28,35 @@
                 <div class="header-section">
                     <div class="row">
                         <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
-                            {% if article.auteur.avatar != null %}
-                                <img src="{{ vich_uploader_asset(article.auteur,'avatar')|imagine_filter('avatar_mini2') }}"
+                            {% if app.user.avatar != null %}
+                                <img src="{{ vich_uploader_asset(app.user,'avatar')|imagine_filter('avatar_wide2') }}"
                                      alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
                             {% else %}
-                                <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"
+                                <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_wide2') }}"
                                      alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
                             {% endif %}
-                            <h1>{{ article.auteur.nom }}</h1>
-                            <h2 class="text-light-op"> {{ article.auteur.prenom }}</h2>
-                            <h2 class="text-light-op">{{ article.auteur.born }}</h2>
+                            <h1>{{ app.user.nom }}</h1>
+                            <h2 class="text-light-op"> {{ app.user.prenom }}</h2>
+                            <h2 class="text-light-op">{{ app.user.born }}</h2>
                         </div>
 
                     </div>
                 </div>
-                {% if article.auteur.avatar != null %}
-                    <img src="{{ vich_uploader_asset(article.auteur,'avatar')|imagine_filter('avatar_mini2') }}"
+                {% if is_granted('ROLE_ADMIN') %}
+                <img src="{{ asset('img/placeholders/layout/socialnet_header.jpg')}}"
+                     alt="Header Image"/>
+                {% elseif app.user.avatar != null %}
+                    <img src="{{ vich_uploader_asset(app.user,'avatar')|imagine_filter('avatar_wide2') }}"
                          alt="Header Image"/>
                 {% else %}
-                    <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"
+                    <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_wide2') }}"
                          alt="Header Image"/>
                 {% endif %}
             </div>
             <!-- Story -->
-            <div class="block col-xs-offset-3 col-xs-6">
-                <div class="block-title">
-                    <h2>Article_perso creation</h2>
+            <div class="widget col-xs-offset-3 col-xs-6">
+                <div class="widget-title">
+                    <h2>Création d'article</h2>
                 </div>
                 {{ form_start(form, {'attr':{'class':'form-horizontal form-bordered', 'enctype':'multipart/form-data'}}) }}
                 <div class="form-group col-xs-12">
@@ -72,8 +69,11 @@
                     </div>
 
                     <div class="form-group">
-                        {{ form_row(form.texte, {'attr':{'class':'form-control col-md-6','type':'textearea','name':'texte', 'rows':'7' }}) }}
+                        {{ form_row(form.texte, {'attr':{'class':'form-control col-md-6 ','type':'textearea','name':'texte', 'rows':'7' }}) }}
+                        <!-- CKEditor -->
+                        {#{{ form_row(form.texte, {'attr':{'class':'ckeditor','type':'textearea','name':'texte', 'rows':'7', 'id':'textarea-ckeditor', 'style':'visibility: hidden; display: none' }}) }}#}
                     </div>
+
 
                     <div class="form-actions">
                         <div class="col-xs-12">
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                     <div class="block-options pull-right">
-                        <a href="{{ path('perso_show', {'perso_id': article.auteur.id}) }}"
+                        <a href="{{ path('perso_show', {'perso_id': app.user.id}) }}"
                            class="btn btn-effect-ripple btn-default toggle-bordered enable-tooltip"
                            data-toggle="button" title="Revenir a la liste des articles">Back to list</a>
                     </div>
@@ -105,4 +105,28 @@
     <script>$(function () {
             FormsComponents.init();
         });</script>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}" type="text/javascript"
+            charset="utf-8"></script>
+    <script>
+        $(document).ready(function () {
+            $("#newsbundle_codepost_texte").val(editor.getValue());
+        });
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/java");
+
+        editor.getSession().on('change', function (e) {
+            $("#newsbundle_codepost_texte").val(editor.getValue());
+        });
+
+
+        $("#newsbundle_codepost_type").change(function () {
+            editor.getSession().setMode("ace/mode/" + $(this).val())
+
+        });
+
+    </script>
+
 {% endblock %}

@@ -68,17 +68,17 @@ class PersoController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            /**
-             * save a mini version of the avatar image on upload
-             */
-            $this->container->get('liip_imagine.controller')->filterAction($request, 'images/avatar/'.$perso->getAvatarName(), 'avatar_mini');
+//            /**
+//             * save a mini version of the avatar image on upload
+//             */
+//            $this->container->get('liip_imagine.controller')->filterAction($request, 'images/avatar/'.$perso->getAvatarName(), 'avatar_mini2');
 
             return $this->redirectToRoute('perso_show', array('perso_id' => $perso->getId()));
         }
 
         return $this->render('perso/edit.html.twig', array(
             'perso' => $perso,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
 
         ));
     }

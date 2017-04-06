@@ -85,7 +85,8 @@ class Article_promoController extends Controller
 
         return $this->render('ace_editor.html.twig', array(
             'promo' => $promo,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'bool' => true
         ));
 
     }
@@ -130,7 +131,12 @@ class Article_promoController extends Controller
      */
     public function editArticleAction(Request $request, Article_promo $article_promo)
     {
-        $editForm = $this->createForm('NewsBundle\Form\Article_promoType', $article_promo);
+        if ($article_promo->getType() != 'article') {
+            $editForm = $this->createForm('NewsBundle\Form\CodeType', $article_promo);
+        } else {
+            $editForm = $this->createForm('NewsBundle\Form\Article_promoType', $article_promo);
+        }
+        
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -138,12 +144,20 @@ class Article_promoController extends Controller
 
             return $this->redirectToRoute('article_promo_show', array('article_promo_id' => $article_promo->getId()));
         }
-
-        return $this->render('ViewPromo/article_new_edit.html.twig', array(
-            'promo'=>$article_promo->getPromo(),
-            'article' => $article_promo,
-            'form' => $editForm->createView(),
-        ));
+        if ($article_promo->getType() != 'article') {
+            return $this->render('ace_editor.html.twig', array(
+                'article' => $article_promo,
+                'promo' => $article_promo->getPromo(),
+                'form' => $editForm->createView(),
+                'bool' => false,
+            ));
+        } else {
+            return $this->render('ViewPromo/article_new_edit.html.twig', array(
+                'promo' => $article_promo->getPromo(),
+                'article' => $article_promo,
+                'form' => $editForm->createView(),
+            ));
+        }
     }
 
     /**

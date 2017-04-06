@@ -56,7 +56,7 @@ class Article_promo
     /**
      * @var string
      *
-     * @ORM\Column(name="texte", type="string", length=10000)
+     * @ORM\Column(name="texte", type="string", length=999999999)
      */
     private $texte;
 
@@ -229,10 +229,11 @@ class Article_promo
     public
     function setSrcFeature(File $image = null)
     {
-        $this->srcFeature = $image;
-        $this->setImageName($image->getFilename());
+
 
         if ($image) {
+            $this->srcFeature = $image;
+            $this->setImageName($image->getFilename());
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();

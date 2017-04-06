@@ -20,6 +20,7 @@
 /bower_components/
 /web/assets/
 /web/images/
+/web/img/
 /web/media/
 composer\.lock
 !/vendor/friendsofsymfony/user-bundle/Resources/views/Security/*

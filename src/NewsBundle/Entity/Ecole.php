@@ -21,6 +21,7 @@ class Ecole
     /**
      * @ORM\OneToMany(targetEntity="NewsBundle\Entity\articleEcole", mappedBy="ecole", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     * @ORM\OrderBy({"createdAt"="DESC"})
      */
     private $articles;
     /**
@@ -333,10 +334,11 @@ class Ecole
      */
     public function setAvatar(File $image = null)
     {
-        $this->avatar = $image;
-        $this->setAvatarName($image->getFilename());
+
 
         if ($image) {
+            $this->avatar = $image;
+            $this->setAvatarName($image->getFilename());
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();

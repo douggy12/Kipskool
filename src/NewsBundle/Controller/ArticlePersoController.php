@@ -51,11 +51,12 @@ class ArticlePersoController extends Controller
             return $this->redirectToRoute('perso_show', array('perso_id' => $perso->getId()));
         }
 
-        return $this->render('articleperso/new.html.twig', array(
+        return $this->render('ViewPromo/article_new_edit.html.twig', array(
             'perso' => $perso,
             'form' => $form->createView(),
         ));
     }
+
     /**
      * Creates a new articlePerso entity.
      * @ParamConverter("perso", options={"mapping" : {"perso_id" : "id"}})
@@ -66,16 +67,15 @@ class ArticlePersoController extends Controller
     {
         $codePerso = new ArticlePerso();
         $codePerso->setPerso($perso);
+        $bool = true;
 
-
-        $codePerso->setAuteur($this->getUser());
+            $codePerso->setAuteur($this->getUser());
 
         $form = $this->createForm('NewsBundle\Form\CodeType', $codePerso);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $codePerso->setTitre("[".strtoupper($form->get('type')->getData())."]".$form->get('titre')->getData());
+        if ($form->isSubmitted() && $form->isValid()) {
+            $codePerso->setTitre("[" . strtoupper($form->get('type')->getData()) . "]" . $form->get('titre')->getData());
             $em = $this->getDoctrine()->getManager();
             $em->persist($codePerso);
             $em->flush($codePerso);
@@ -96,7 +96,8 @@ class ArticlePersoController extends Controller
 
         return $this->render('ace_editor.html.twig', array(
             'perso' => $perso,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'bool' => $bool
         ));
 
     }
@@ -129,11 +130,11 @@ class ArticlePersoController extends Controller
 
         return $this->render(':ViewPromo:article_show.html.twig', array(
             'article' => $articlePerso,
-            'perso'=> $articlePerso->getPerso(),
+            'perso' => $articlePerso->getPerso(),
             'promos' => $articlePerso->getPerso()->getPromo(),
             'ecole' => $articlePerso->getPerso()->getPromo()->first()->getEcole(),
             'commentaireArticlePerso' => $commentaireArticlePerso,
-            'edit_form' => $form->createView(),
+            'form' => $form->createView(),
 
         ));
     }
@@ -141,7 +142,6 @@ class ArticlePersoController extends Controller
     /**
      * Displays a form to edit an existing articlePerso entity.
      *
-
      * @Route("/{article_perso_id}/edit", name="articleperso_edit")
      *
      * @Method({"GET", "POST"})
@@ -149,7 +149,11 @@ class ArticlePersoController extends Controller
     public function editAction(Request $request, ArticlePerso $articlePerso)
     {
 
-        $editForm = $this->createForm('NewsBundle\Form\ArticlePersoType', $articlePerso);
+        if ($articlePerso->getType() != 'article') {
+            $editForm = $this->createForm('NewsBundle\Form\CodeType', $articlePerso);
+        } else {
+            $editForm = $this->createForm('NewsBundle\Form\ArticlePersoType', $articlePerso);
+        }
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -158,12 +162,21 @@ class ArticlePersoController extends Controller
             return $this->redirectToRoute('articleperso_show', array('article_perso_id' => $articlePerso->getId()));
         }
 
-        return $this->render('articleperso/edit.html.twig', array(
-            'article' => $articlePerso,
-            'perso' => $articlePerso->getPerso(),
-            'edit_form' => $editForm->createView(),
+        if ($articlePerso->getType() != 'article') {
+            return $this->render('ace_editor.html.twig', array(
+                'article' => $articlePerso,
+                'perso' => $articlePerso->getPerso(),
+                'form' => $editForm->createView(),
+                'bool' => false,
+            ));
+        } else {
+            return $this->render('ViewPromo/article_new_edit.html.twig', array(
+                'article' => $articlePerso,
+                'perso' => $articlePerso->getPerso(),
+                'form' => $editForm->createView(),
 
-        ));
+            ));
+        }
     }
 
     /**
@@ -176,18 +189,15 @@ class ArticlePersoController extends Controller
     {
 
 
-
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($articlePerso);
-            $em->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($articlePerso);
+        $em->flush();
 
 
         return $this->redirectToRoute('perso_show', array(
             "perso_id" => $articlePerso->getPerso()->getId()
         ));
     }
-
-
 
 
 }

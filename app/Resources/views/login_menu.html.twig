@@ -14,7 +14,8 @@
     </li>
 
     <li>
-        <a>Bienvenue {% if app.user %}{{ app.user.username }}{% else %}Etranger{% endif %} !</a>
+        <a href="">
+            Bienvenue {% if app.user %}{{ app.user.username }}{% else %}Etranger{% endif %} !</a>
     </li>
 
 
@@ -27,7 +28,7 @@
                     <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg') }}">
                 {% endif %}
             {% else %}
-                <img src="{{ asset('img/placeholders/avatars/avatar1.jpg') }}" alt="avatar">
+                <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg') }}">
             {% endif %}
         </a>
         <ul class="dropdown-menu dropdown-menu-right">
@@ -66,6 +67,12 @@
                 </li>
             {% endif %}
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <li>
+                    <a href="{{ path('perso_show', {'perso_id': app.user.id}) }}">
+                        <i class="fa fa-picture-o fa-fw pull-right"></i>
+                        Voir sa page
+                    </a>
+                </li>
                 <li>
                     <a href="/logout">
                         <i class="fa fa-power-off fa-fw pull-right"></i>
