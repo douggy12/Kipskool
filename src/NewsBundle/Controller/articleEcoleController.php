@@ -47,7 +47,7 @@ class articleEcoleController extends Controller
 
         return $this->render('ViewPromo/article_new_edit.html.twig', array(
             'ecole'=>$ecole,
-            'articleEcole' => $articleEcole,
+            'article' => $articleEcole,
             'form' => $form->createView(),
         ));
     }
@@ -109,9 +109,9 @@ class articleEcoleController extends Controller
         }
 
         return $this->render('ViewPromo/article_new_edit.html.twig', array(
-            'articleEcole' => $articleEcole,
+            'article' => $articleEcole,
             'ecole' => $articleEcole->getEcole(),
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
 
         ));
     }

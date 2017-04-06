@@ -133,7 +133,7 @@ class ArticlePersoController extends Controller
             'promos' => $articlePerso->getPerso()->getPromo(),
             'ecole' => $articlePerso->getPerso()->getPromo()->first()->getEcole(),
             'commentaireArticlePerso' => $commentaireArticlePerso,
-            'edit_form' => $form->createView(),
+            'form' => $form->createView(),
 
         ));
     }
@@ -161,7 +161,7 @@ class ArticlePersoController extends Controller
         return $this->render('ViewPromo/article_new_edit.html.twig', array(
             'article' => $articlePerso,
             'perso' => $articlePerso->getPerso(),
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
 
         ));
     }
