@@ -21,6 +21,7 @@ class Ecole
     /**
      * @ORM\OneToMany(targetEntity="NewsBundle\Entity\articleEcole", mappedBy="ecole", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     * @ORM\OrderBy({"createdAt"="DESC"})
      */
     private $articles;
     /**
