@@ -72,11 +72,18 @@
                 <div class="form-group">
                     {{ form_row(form.type, {'attr':{'class':'form-control col-md-6','name':'type'}}) }}
                 </div>
+                {% if form.texte == null %}
                 <div id="editor">
                     function foo(items) {
                     var x = "All this is syntax highlighted";
                     return x;
                 </div>
+                {% else %}
+                <div id="editor">
+                {{ article.texte }}
+                </div>
+                {% endif %}
+
                 <div class="form-actions">
                     <div class="col-xs-12">
                         <button type="submit" class="btn btn-effect-ripple btn-primary">Submit

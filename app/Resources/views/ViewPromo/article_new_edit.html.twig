@@ -29,7 +29,7 @@
                     <div class="row">
                         <div class="col-sm-7 col-md-8 col-lg-9 content-float-hor push-bit-top-bottom clearfix">
                             {% if app.user.avatar != null %}
-                                <img src="{{ vich_uploader_asset(article.auteur,'avatar')|imagine_filter('avatar_wide2') }}"
+                                <img src="{{ vich_uploader_asset(app.user,'avatar')|imagine_filter('avatar_wide2') }}"
                                      alt="image" class="img-circle img-thumbnail img-thumbnail-avatar pull-left"/>
                             {% else %}
                                 <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_wide2') }}"
@@ -42,11 +42,14 @@
 
                     </div>
                 </div>
-                {% if app.user.avatar != null %}
-                    <img src="{{ vich_uploader_asset(article.auteur,'avatar')|imagine_filter('avatar_mini2') }}"
+                {% if is_granted('ROLE_ADMIN') %}
+                <img src="{{ asset('img/placeholders/layout/socialnet_header.jpg')}}"
+                     alt="Header Image"/>
+                {% elseif app.user.avatar != null %}
+                    <img src="{{ vich_uploader_asset(app.user,'avatar')|imagine_filter('avatar_wide2') }}"
                          alt="Header Image"/>
                 {% else %}
-                    <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_mini2') }}"
+                    <img src="{{ asset('media/cache/avatar_mini2/images/perso/avatar/chaton.jpg')|imagine_filter('avatar_wide2') }}"
                          alt="Header Image"/>
                 {% endif %}
             </div>
@@ -102,4 +105,28 @@
     <script>$(function () {
             FormsComponents.init();
         });</script>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/vendor/ace-builds/src-min-noconflict/ace.js') }}" type="text/javascript"
+            charset="utf-8"></script>
+    <script>
+        $(document).ready(function () {
+            $("#newsbundle_codepost_texte").val(editor.getValue());
+        });
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/java");
+
+        editor.getSession().on('change', function (e) {
+            $("#newsbundle_codepost_texte").val(editor.getValue());
+        });
+
+
+        $("#newsbundle_codepost_type").change(function () {
+            editor.getSession().setMode("ace/mode/" + $(this).val())
+
+        });
+
+    </script>
+
 {% endblock %}
